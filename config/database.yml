@@ -1,0 +1,14 @@
+default: &default
+  encoding: utf8
+  adapter: postgresql
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+
+development:
+  <<: *default
+  database: medicine_songs_development
+
+test:
+  <<: *default
+  database: medicine_songs_test
+
