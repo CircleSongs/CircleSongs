@@ -2,6 +2,12 @@ ActiveAdmin.register Song do
 
   permit_params :name, :author, song_links_attributes: [:source, :url]
 
+  index do
+    column :name
+    column :author
+    actions
+  end
+
   form do |f|
     f.inputs 'Details' do
       f.input :name
@@ -28,7 +34,6 @@ ActiveAdmin.register Song do
       table_for song.song_links do
         column :source
         column :url
-        # ...
       end
     end
   end

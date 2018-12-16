@@ -6,9 +6,9 @@ default: &default
 
 development:
   <<: *default
-  database: medicine_songs_development
+  database: circle_songs_development
 
 test:
   <<: *default
-  database: medicine_songs_test
+  database: circle_songs_test
 
