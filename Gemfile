@@ -5,6 +5,7 @@ ruby '2.5.3'
 
 gem 'bootstrap', '~> 4.1.3'
 gem 'activeadmin'
+gem 'arctic_admin'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
