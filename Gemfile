@@ -37,7 +37,11 @@ group :test do
   gem 'database_cleaner'
   gem 'ffaker'
   gem 'rspec-rails', '~> 3.8'
+  gem 'rspec_junit_formatter'
+  gem 'rubocop', '0.50.0', require: false
+  gem 'rubocop-rspec', '0.18.0', require: false
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '4.0.0.rc1'
+  gem 'simplecov', require: false
 end
 
