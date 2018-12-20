@@ -1,0 +1,5 @@
+admin:
+  first_name: Admin
+  last_name: User
+  email: admin@example.com
+  encrypted_password: <%= PasswordHelper.encrypted_password %>

@@ -1,23 +1,23 @@
 ActiveAdmin.register Song do
 
-  permit_params :name, :author, song_links_attributes: [:source, :url]
+  permit_params :title, :composer, song_links_attributes: [:title, :url]
 
   index do
-    column :name
-    column :author
+    column :title
+    column :composer
     actions
   end
 
   form do |f|
     f.inputs 'Details' do
-      f.input :name
-      f.input :author
+      f.input :title
+      f.input :composer
     end
     f.inputs do
       f.has_many :song_links, heading: 'Links',
         allow_destroy: true,
       new_record: true do |a|
-        a.input :source
+        a.input :title
         a.input :url
       end
     end
@@ -27,12 +27,12 @@ ActiveAdmin.register Song do
 
   show do
     attributes_table do
-      row :name
-      row :author
+      row :title
+      row :composer
     end
     panel "Links" do
       table_for song.song_links do
-        column :source
+        column :title
         column :url
       end
     end

@@ -1,7 +1,7 @@
 .row
   .col
     %h1 Songs!
-    %ul
+    %ul.songs
       - @songs.each do |song|
         %li
           = song.name
