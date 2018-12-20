@@ -38,9 +38,6 @@ jobs:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      - run:
-          name: Set App Config
-          command: "cat config/application.yml.example | sed -e 's/^/export /' | sed -e 's/: */=/' >> $BASH_ENV"
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
       # test
