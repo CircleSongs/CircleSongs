@@ -1,5 +1,6 @@
 example_id                                | status | run_time        |
 ----------------------------------------- | ------ | --------------- |
 ./spec/features/create_songs_spec.rb[1:1] | passed | 1.06 seconds    |
+./spec/features/songs_spec.rb[1:1]        | passed | 0.47619 seconds |
 ./spec/models/song_spec.rb[1:1:1]         | passed | 0.07951 seconds |
 ./spec/models/song_spec.rb[1:1:2]         | passed | 0.08666 seconds |

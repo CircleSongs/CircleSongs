@@ -4,8 +4,4 @@
     %ul.songs
       - @songs.each do |song|
         %li
-          = song.name
-          %ul
-            - song.song_links.each do |song_link|
-              %li= link_to song_link.source, song_link.url
-
+          = song.title
