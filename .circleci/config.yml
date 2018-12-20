@@ -63,6 +63,8 @@ jobs:
           path: /tmp/test-results
           destination: test-results
   deploy:
+    docker:
+      - image: buildpack-deps:trusty
     steps:
       - checkout
       - run:
