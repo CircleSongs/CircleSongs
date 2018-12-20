@@ -60,9 +60,9 @@ jobs:
       - image: buildpack-deps:trusty
     steps:
       - run: bash .circleci/setup-heroku.sh
-        - add_ssh_keys:
-            fingerprints:
-              - "bd:7f:12:a8:5d:88:6f:9f:ef:3d:91:49:ce:a9:f0:ca"
+      - add_ssh_keys:
+          fingerprints:
+            - "bd:7f:12:a8:5d:88:6f:9f:ef:3d:91:49:ce:a9:f0:ca"
       - checkout
       - run:
           name: Deploy Master to Heroku
