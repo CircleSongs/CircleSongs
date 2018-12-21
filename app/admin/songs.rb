@@ -42,7 +42,9 @@ ActiveAdmin.register Song do
         simple_format song.translation
       end
       row :chords do
-        raw song.formatted_chords
+        div class: :chordpro do
+          raw song.formatted_chords
+        end
       end
     end
     panel "Links" do
