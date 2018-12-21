@@ -12,6 +12,7 @@
 $primary-color: #2dbb43;
 @import "arctic_admin/base";
 
+@import "chordpro";
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
 //
