@@ -18,11 +18,10 @@ ActiveRecord::Schema.define(version: 2018_12_20_010913) do
 
   create_table "comments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "body"
-    t.string "comentable_type"
-    t.bigint "comentable_id"
+    t.string "commentable_type"
+    t.uuid "commentable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["comentable_type", "comentable_id"], name: "index_comments_on_comentable_type_and_comentable_id"
   end
 
   create_table "song_links", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
