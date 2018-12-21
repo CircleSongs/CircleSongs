@@ -4,4 +4,4 @@
     %ul.songs
       - @songs.each do |song|
         %li
-          = song.title
+          = link_to song.title, song

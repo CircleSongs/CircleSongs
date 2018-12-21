@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   root to: 'songs#index'
+
+  resources :songs
 end
