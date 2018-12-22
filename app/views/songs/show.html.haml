@@ -1,6 +1,29 @@
 %h1= @song.title
+- if @song.alternate_title.present?
+  %p
+    %strong Alternate Title
+    = @song.alternate_title
+- if @song.composer.present?
+  %p
+    %strong Composer
+    = @song.composer
 
-%pre
-  #song-chords{ data: @song.chords.to_json }
 
-= javascript_pack_tag 'SongChords'
+- if @song.lyrics.present?
+  %p
+    %strong Lyrics
+    = simple_format @song.lyrics
+
+- if @song.lyrics.present?
+  %p
+    %strong Translation
+    = simple_format @song.lyrics
+
+- if @song.chords.present?
+  %p
+    %strong Chords
+
+  %pre
+    #song-chords{ data: @song.chords.to_json }
+
+  = javascript_pack_tag 'SongChords'
