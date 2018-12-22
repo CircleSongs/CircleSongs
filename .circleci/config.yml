@@ -61,6 +61,7 @@ jobs:
       - image: buildpack-deps:trusty
     steps:
       - checkout
+      - run: sudo apt-get update
       - run: bash .circleci/setup-heroku.sh
       - add_ssh_keys:
           fingerprints:
