@@ -1,7 +1,7 @@
 ActiveAdmin.register Song do
 
   permit_params :title, :alternate_title, :composer, :lyrics, :translation,
-                :chords, song_links_attributes: [:title, :url]
+                :chords, song_links_attributes: [:description, :title, :url]
 
   index do
     column :title
@@ -24,6 +24,7 @@ ActiveAdmin.register Song do
       new_record: true do |a|
         a.input :title
         a.input :url
+        a.input :description
       end
     end
 
@@ -51,6 +52,7 @@ ActiveAdmin.register Song do
       table_for song.song_links do
         column :title
         column :url
+        column :description
       end
     end
   end
