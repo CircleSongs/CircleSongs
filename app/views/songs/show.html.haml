@@ -1,4 +1,8 @@
-%h1= @song.title
+%h1
+  = @song.title
+  - if user_signed_in?
+    %span.float-right
+      %small= link_to fa_icon('pencil'), edit_admin_song_path(@song)
 - if @song.alternate_title.present?
   %p
     %strong Alternate Title
