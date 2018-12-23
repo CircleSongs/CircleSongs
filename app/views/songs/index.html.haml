@@ -1,8 +1,10 @@
-.row
-  .col-6
-    = search_form_for @q do |f|
+= search_form_for @q do |f|
+  .row
+    .col-6.offset-3
       .inline-form
-        = f.input :categories_id_in, as: :check_boxes, collection: Category.all, label: 'Category', required: false
+        = f.input :categories_id_in, as: :check_boxes, collection: Category.all, label: false
+  .row
+    .col-6.offset-3
       .input-group
         = f.input_field :title_cont, class: 'form-control', placeholder: 'Search titles...'
         .input-group-append
