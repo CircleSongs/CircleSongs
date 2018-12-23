@@ -1,12 +1,17 @@
-example_id                                     | status | run_time        |
----------------------------------------------- | ------ | --------------- |
-./spec/features/create_songs_spec.rb[1:1]      | passed | 2.5 seconds     |
-./spec/features/songs_index_spec.rb[1:1]       | passed | 1.96 seconds    |
-./spec/features/songs_index_spec.rb[1:2]       | passed | 1.9 seconds     |
-./spec/features/songs_spec.rb[1:1]             | passed | 0.47619 seconds |
-./spec/models/song_collection_spec.rb[1:1:1:1] | passed | 0.04722 seconds |
-./spec/models/song_collection_spec.rb[1:1:2:1] | passed | 0.05645 seconds |
-./spec/models/song_collection_spec.rb[1:1:3:1] | passed | 0.08991 seconds |
-./spec/models/song_link_spec.rb[1:1]           | passed | 0.08142 seconds |
-./spec/models/song_spec.rb[1:1:1]              | passed | 0.07951 seconds |
-./spec/models/song_spec.rb[1:1:2]              | passed | 0.08666 seconds |
+example_id                                     | status  | run_time        |
+---------------------------------------------- | ------- | --------------- |
+./spec/features/create_songs_spec.rb[1:1]      | passed  | 0.58488 seconds |
+./spec/features/songs_index_spec.rb[1:1]       | passed  | 0.09531 seconds |
+./spec/features/songs_index_spec.rb[1:2]       | passed  | 0.12182 seconds |
+./spec/features/songs_spec.rb[1:1]             | passed  | 1.85 seconds    |
+./spec/helpers/home_helper_spec.rb[1:1]        | pending | 0.00001 seconds |
+./spec/models/category_spec.rb[1:1]            | passed  | 0.1342 seconds  |
+./spec/models/comment_spec.rb[1:1]             | pending | 0 seconds       |
+./spec/models/song_collection_spec.rb[1:1:1:1] | passed  | 0.03869 seconds |
+./spec/models/song_collection_spec.rb[1:1:2:1] | passed  | 0.05945 seconds |
+./spec/models/song_collection_spec.rb[1:1:3:1] | passed  | 0.0459 seconds  |
+./spec/models/song_link_spec.rb[1:1]           | passed  | 0.04672 seconds |
+./spec/models/song_spec.rb[1:1:1]              | passed  | 0.12172 seconds |
+./spec/models/song_spec.rb[1:1:2]              | passed  | 0.06424 seconds |
+./spec/models/user_spec.rb[1:1]                | pending | 0.00002 seconds |
+./spec/views/home/index.html.erb_spec.rb[1:1]  | pending | 0.00001 seconds |

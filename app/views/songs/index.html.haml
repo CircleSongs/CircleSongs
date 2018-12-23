@@ -1,10 +1,13 @@
 .row
   .col-6
     = search_form_for @q do |f|
+      .inline-form
+        = f.input :categories_id_in, as: :check_boxes, collection: Category.all, label: 'Category', required: false
       .input-group
         = f.input_field :title_cont, class: 'form-control', placeholder: 'Search titles...'
         .input-group-append
           = f.button :submit, class: 'btn btn-primary'
+          = link_to 'Clear', songs_path, class: 'btn btn-secondary'
 .row
   .col
     %h1 Songs!

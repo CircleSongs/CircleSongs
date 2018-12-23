@@ -5,10 +5,11 @@ hotel_california:
  lyrics: On a dark desert highway, cool wind in my hair...
  translation: En un calle oscuro...
  chords: '[Dm]On a dark desert [A]highway, [Em]cool wind in my hair...'
- categories: traditional
+ categories: popular
 
 el_condor_pasa:
  title: El Condor Pasa
+ categories: traditional
 
 taki_taki:
   title: Taki Taki Muyki
