@@ -31,3 +31,10 @@
     #song-chords{ data: @song.chords.to_json }
 
   = javascript_pack_tag 'SongChords'
+
+- if @song.categories.present?
+  %p Categories
+  %ul
+    - @song.categories.each do |category|
+      %li= category.name
+    %li

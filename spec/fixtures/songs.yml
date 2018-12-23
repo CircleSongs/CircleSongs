@@ -3,5 +3,14 @@ hotel_california:
  alternate_title: Most Popular Song In The World
  composer: The Eagles
  lyrics: On a dark desert highway, cool wind in my hair...
- translation:
+ translation: En un calle oscuro...
  chords: '[Dm]On a dark desert [A]highway, [Em]cool wind in my hair...'
+ categories: popular
+
+el_condor_pasa:
+ title: El Condor Pasa
+ categories: traditional
+
+taki_taki:
+  title: Taki Taki Muyki
+  categories: sacred

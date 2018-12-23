@@ -10,7 +10,6 @@ const disp = formatter.format(song);
 
 node.innerHTML = disp
 
-
 const SongChords = {
   initialize() {
   }
