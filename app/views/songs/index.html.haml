@@ -1,4 +1,11 @@
 .row
+  .col-6
+    = search_form_for @q do |f|
+      .input-group
+        = f.input_field :title_cont, class: 'form-control', placeholder: 'Search titles...'
+        .input-group-append
+          = f.button :submit, class: 'btn btn-primary'
+.row
   .col
     %h1 Songs!
     %ul.songs

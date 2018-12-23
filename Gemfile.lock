@@ -300,6 +300,9 @@ GEM
     sexp_processor (4.11.0)
     shoulda-matchers (4.0.0.rc1)
       activesupport (>= 4.2.0)
+    simple_form (4.1.0)
+      actionpack (>= 5.0)
+      activemodel (>= 5.0)
     simplecov (0.16.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
@@ -368,6 +371,7 @@ DEPENDENCIES
   pg
   puma (~> 3.11)
   rails (~> 5.2.2)
+  ransack
   rspec-rails (~> 3.8)
   rspec_junit_formatter
   rubocop (= 0.50.0)
@@ -375,6 +379,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   selenium-webdriver
   shoulda-matchers (= 4.0.0.rc1)
+  simple_form
   simplecov
   spring
   spring-watcher-listen (~> 2.0.0)
