@@ -12,7 +12,7 @@ class SongsController < ApplicationController
   private
   def search_params
     params.has_key?(:q) ? params.require(:q).permit(
-      :title_cont, categories_id_in: []
+      :title_cont, :title_start, categories_id_in: []
     ) : {}
   end
 end

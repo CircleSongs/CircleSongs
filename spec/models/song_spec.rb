@@ -1,4 +1,7 @@
 RSpec.describe Song do
+  it { is_expected.to have_and_belong_to_many(:languages) }
+  it { is_expected.to have_and_belong_to_many(:categories) }
+
   let(:song) { described_class.new(params) }
   let(:params) do
     {}

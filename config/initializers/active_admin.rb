@@ -294,3 +294,23 @@ ActiveAdmin.setup do |config|
   #
   # config.order_clause = MyOrderClause
 end
+
+module AdminPageLayoutOverride
+  def build(*args)
+    # you can move the call to super at the end, if you wish
+    # to insert things at the begining of the page
+    super
+
+    # this will be added at the end of <body>
+    # within @body do
+    #   render partial: '...'
+    # end
+
+    # this will be added at the end of <head>
+    within head do
+      text_node(javascript_pack_tag('SongChords'))
+    end
+  end
+end
+
+ActiveAdmin::Views::Pages::Base.send :prepend, AdminPageLayoutOverride
