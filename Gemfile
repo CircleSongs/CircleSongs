@@ -37,9 +37,9 @@ end
 group :test do
   gem 'capybara', '>= 2.15'
   gem 'capybara-webkit'
-  gem 'chromedriver-helper'
   gem 'database_cleaner'
   gem 'ffaker'
+  gem 'geckodriver-helper'
   gem 'rspec-rails', '~> 3.8'
   gem 'rspec_junit_formatter'
   gem 'rubocop', '0.50.0', require: false

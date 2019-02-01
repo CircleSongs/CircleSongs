@@ -6,11 +6,14 @@ hotel_california:
  translation: En un calle oscuro...
  chords: '[Dm]On a dark desert [A]highway, [Em]cool wind in my hair...'
  categories: popular
+ languages: english
 
 el_condor_pasa:
  title: El Condor Pasa
  categories: traditional
+ languages: spanish, katchwa
 
 taki_taki:
   title: Taki Taki Muyki
   categories: sacred
+  languages: katchwa

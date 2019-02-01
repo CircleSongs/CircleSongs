@@ -1,8 +1,8 @@
 ActiveAdmin.register Song do
 
   permit_params :title, :alternate_title, :composer, :lyrics, :translation,
-    :chords, song_links_attributes: [:description, :title, :url],
-    category_ids: []
+    :chords, recordings_attributes: [:description, :title, :url],
+    category_ids: [], language_ids: []
 
   index do
     column :title
@@ -18,10 +18,11 @@ ActiveAdmin.register Song do
       f.input :lyrics
       f.input :translation
       f.input :chords
+      f.input :languages, as: :check_boxes
       f.input :categories, as: :check_boxes
     end
     f.inputs do
-      f.has_many :song_links, heading: 'Links',
+      f.has_many :recordings, heading: 'Links',
         allow_destroy: true,
       new_record: true do |a|
         a.input :title
@@ -49,15 +50,17 @@ ActiveAdmin.register Song do
           pre do
             div id: 'song-chords', data: song.chords.to_json
           end
-          script src: "/packs/SongChords-b465b000c351588b9ed1.js"
         end
       end
       row :categories do |song|
         song.categories.map(&:name).to_sentence
       end
+      row :languages do |song|
+        song.languages.map(&:name).to_sentence
+      end
     end
-    panel "Links" do
-      table_for song.song_links do
+    panel "Recordings" do
+      table_for song.recordings do
         column :title
         column :url
         column :description

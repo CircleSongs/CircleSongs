@@ -37,4 +37,9 @@
   %ul
     - @song.categories.each do |category|
       %li= category.name
-    %li
+
+- if @song.categories.present?
+  %p Languages
+  %ul
+    - @song.languages.each do |language|
+      %li= language.name

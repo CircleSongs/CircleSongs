@@ -13,7 +13,7 @@ RSpec.feature 'As an admin user' do
     visit admin_songs_path
   end
 
-  scenario 'I can create CmsPages' do
+  scenario 'I can create a Song', :selenium do
     click_on 'New Song'
     fill_in 'Title', with: title
     fill_in 'Alternate title', with: alternate_title
@@ -22,6 +22,8 @@ RSpec.feature 'As an admin user' do
     fill_in 'Translation', with: translation
     fill_in 'Chords', with: chords
     check 'Traditional'
+    check 'English'
+    check 'Spanish'
     click_on 'Create Song'
     expect(page).to have_content 'Song was successfully created.'
     expect(page).to have_content title
@@ -30,7 +32,8 @@ RSpec.feature 'As an admin user' do
     expect(page).to have_content lyrics
     expect(page).to have_content translation
     expect(page).to have_content 'Traditional'
-    # expect(page).not_to have_content chords
-    # expect(page).to have_content formatted_chords
+    expect(page).to have_content 'English and Spanish'
+    expect(page).not_to have_content chords
+    expect(page).to have_content formatted_chords
   end
 end

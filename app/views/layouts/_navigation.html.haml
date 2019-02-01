@@ -9,8 +9,5 @@
 
     %ul.navbar-nav
       %li.nav-item
-        - if user_signed_in?
-          = link_to fa_icon('sign-out'), destroy_user_session_path, method: :delete, class: 'nav-link'
-        - else
-          %a.nav-link{ href: admin_dashboard_path }= fa_icon('sign-in')
+        %a.nav-link{ href: admin_dashboard_path }= fa_icon('sign-in')
 
