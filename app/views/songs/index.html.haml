@@ -1,11 +1,12 @@
 = search_form_for @q do |f|
   .row
     .col-4.offset-2
-      %strong Category
+      %strong Categories
       = f.input :categories_id_in, as: :check_boxes, collection: Category.all, label: false
     .col-5
-      %strong Language
+      %strong Languages
       = f.input :languages_id_in, as: :check_boxes, collection: Language.all, label: false
+
   .row
     .col-8.offset-2
       .input-group
@@ -13,14 +14,15 @@
         .input-group-append
           = f.button :submit, class: 'btn btn-primary'
           = link_to 'Clear', songs_path, class: 'btn btn-secondary'
+  .row
+    .col-8.offset-2
+      = f.input :s, collection: [['Title', 'title asc'], ['Created at', 'created_at desc']], label: 'Sort by', required: false, include_blank: false, selected: songs_sort_value
 
-  .row.alpha-search
-    .col-8.offset-2.d-flex.flex-row.justify-content-between
-      - ('A'..'Z').each do |letter|
-        = link_to letter, songs_path(q: { title_start: letter })
+  .row
+    .col-8.offset-2
+      = paginate @songs
 .row
   .col
-    %h1 Songs!
     %ul.songs
       - @songs.each do |song|
         %li
