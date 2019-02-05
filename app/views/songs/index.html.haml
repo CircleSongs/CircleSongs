@@ -7,9 +7,9 @@
       Languages
       = f.input :languages_id_in, as: :check_boxes, collection: Language.all, label: false
     .col-2
-      = f.input :chords_present, as: :boolean, label: 'Has Chords'
+      = f.input :chords_present, collection: [['Yes', true], ['No', false]], include_blank: 'All', label: 'Has Chords', required: false, input_html: { class: 'custom-select' }
     .col-2
-      = f.input :s, collection: [['Title', 'title asc'], ['Created at', 'created_at desc']], label: 'Sort by', required: false, include_blank: false, selected: songs_sort_value, input_html: { class: 'custom-select' }
+      = f.input :s, collection: [['Title', 'title asc'], ['Date Added', 'created_at desc']], label: 'Sort by', required: false, include_blank: false, selected: songs_sort_value, input_html: { class: 'custom-select' }
 
   .row
     .col-8.offset-2
