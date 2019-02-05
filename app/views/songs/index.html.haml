@@ -1,11 +1,13 @@
 = search_form_for @q do |f|
   .row
-    .col-4.offset-2
+    .col-3.offset-2
       %strong Categories
       = f.input :categories_id_in, as: :check_boxes, collection: Category.all, label: false
-    .col-5
+    .col-3
       %strong Languages
       = f.input :languages_id_in, as: :check_boxes, collection: Language.all, label: false
+    .col-2
+      = f.input :s, collection: [['Title', 'title asc'], ['Created at', 'created_at desc']], label: 'Sort by', required: false, include_blank: false, selected: songs_sort_value, input_html: { class: 'custom-select' }
 
   .row
     .col-8.offset-2
@@ -14,9 +16,6 @@
         .input-group-append
           = f.button :submit, class: 'btn btn-primary'
           = link_to 'Clear', songs_path, class: 'btn btn-secondary'
-  .row
-    .col-8.offset-2
-      = f.input :s, collection: [['Title', 'title asc'], ['Created at', 'created_at desc']], label: 'Sort by', required: false, include_blank: false, selected: songs_sort_value
 
   .row
     .col-8.offset-2
