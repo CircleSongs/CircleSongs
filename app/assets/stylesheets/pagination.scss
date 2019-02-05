@@ -1,0 +1,8 @@
+nav.pagination {
+  margin-top: 1rem;
+  float: right;
+  span {
+    margin-right: 0.4rem;
+    &:last-child { margin-right: 0 }
+  }
+}
