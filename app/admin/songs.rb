@@ -1,7 +1,7 @@
 ActiveAdmin.register Song do
 
   permit_params :title, :alternate_title, :composer, :lyrics, :translation,
-    :chords, recordings_attributes: [:description, :title, :url],
+    :chords, recordings_attributes: [:description, :title, :url, :id, :_destroy],
     category_ids: [], language_ids: []
 
   index do
@@ -22,9 +22,7 @@ ActiveAdmin.register Song do
       f.input :categories, as: :check_boxes
     end
     f.inputs do
-      f.has_many :recordings, heading: 'Links',
-        allow_destroy: true,
-      new_record: true do |a|
+      f.has_many :recordings, heading: 'Recordings', allow_destroy: true, new_record: true do |a|
         a.input :title
         a.input :url
         a.input :description
@@ -59,8 +57,8 @@ ActiveAdmin.register Song do
         song.languages.map(&:name).to_sentence
       end
     end
-    panel "Recordings" do
-      table_for song.recordings do
+    panel 'Recordings' do
+      table_for song.recordings, class: :recordings do
         column :title
         column :url
         column :description
