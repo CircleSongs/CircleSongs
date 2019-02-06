@@ -1,3 +1,13 @@
+ul.songs {
+  margin-top: 1rem;
+  li {
+    padding: 0.5rem;
+    &:nth-child(even){
+      background-color: #eee;
+    }
+  }
+}
+
 h1 small {
   font-size: 1.2rem;
 }
