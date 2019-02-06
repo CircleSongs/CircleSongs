@@ -43,3 +43,19 @@
   %ul
     - @song.languages.each do |language|
       %li= language.name
+
+%p Recordings
+%ul
+  - @song.recordings.each do |recording|
+    %li
+      %ul.recording-details
+        - if recording.title.present?
+          %li= recording.title
+        - if recording.url.present?
+          %li= recording.url
+        - if recording.description.present?
+          %li= recording.description
+        - if recording.embedded_player.present?
+          %li= raw(recording.embedded_player)
+
+

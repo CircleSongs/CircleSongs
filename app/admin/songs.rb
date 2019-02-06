@@ -1,7 +1,7 @@
 ActiveAdmin.register Song do
 
   permit_params :title, :alternate_title, :composer, :lyrics, :translation,
-    :chords, recordings_attributes: [:description, :title, :url, :id, :_destroy],
+    :chords, recordings_attributes: [:description, :embedded_player, :title, :url, :id, :_destroy],
     category_ids: [], language_ids: []
 
   index do
@@ -25,6 +25,7 @@ ActiveAdmin.register Song do
       f.has_many :recordings, heading: 'Recordings', allow_destroy: true, new_record: true do |a|
         a.input :title
         a.input :url
+        a.input :embedded_player
         a.input :description
       end
     end
@@ -61,6 +62,7 @@ ActiveAdmin.register Song do
       table_for song.recordings, class: :recordings do
         column :title
         column :url
+        column :embedded_player do |song| raw(song.embedded_player) end
         column :description
       end
     end
