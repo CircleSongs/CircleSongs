@@ -1,18 +1,18 @@
 = search_form_for @q do |f|
   .row
-    .col-2.offset-2
+    .col-sm-2.offset-sm-2
       Categories
       = f.input :categories_id_in, as: :check_boxes, collection: Category.all, label: false
-    .col-2
+    .col-sm-2
       Languages
       = f.input :languages_id_in, as: :check_boxes, collection: Language.all, label: false
-    .col-2
+    .col-sm-2
       = f.input :chords_present, collection: [['Yes', true], ['No', false]], include_blank: 'All', label: 'Has Chords', required: false, input_html: { class: 'custom-select' }
-    .col-2
+    .col-sm-2
       = f.input :s, collection: [['Title', 'title asc'], ['Date Added', 'created_at desc']], label: 'Sort by', required: false, include_blank: false, selected: songs_sort_value, input_html: { class: 'custom-select' }
 
   .row
-    .col-8.offset-2
+    .col-sm-8.offset-sm-2
       .input-group
         = f.input_field :title_cont, class: 'form-control', placeholder: 'Search titles...'
         .input-group-append
@@ -20,10 +20,10 @@
           = link_to 'Clear', songs_path, class: 'btn btn-secondary'
 
   .row
-    .col-8.offset-2
+    .col-sm-8.offset-sm-2
       = paginate @songs
 .row
-  .col
+  .col-sm-12
     %ul.songs
       - @songs.each do |song|
         %li
