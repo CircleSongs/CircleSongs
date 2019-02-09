@@ -1,61 +1,52 @@
-%h1
+%h2
   = @song.title
   - if user_signed_in?
     %span.float-right
       %small= link_to fa_icon('pencil'), edit_admin_song_path(@song)
 - if @song.alternate_title.present?
-  %p
-    %strong Alternate Title
-    = @song.alternate_title
+  %p= "[#{@song.alternate_title}]"
 - if @song.composer.present?
   %p
-    %strong Composer
-    = @song.composer
+    By
+    = link_to @song.composer, @song.composer_url, target: :_blank
+- if @song.description.present?
+  = simple_format @song.description
 
-
-- if @song.lyrics.present?
-  %p
-    %strong Lyrics
-    = simple_format @song.lyrics
-
-- if @song.lyrics.present?
-  %p
-    %strong Translation
-    = simple_format @song.translation
-
-- if @song.chords.present?
-  %p
-    %strong Chords
-
-  %pre
-    #song-chords{ data: @song.chords.to_json }
-
-  = javascript_pack_tag 'SongChords'
-
-- if @song.categories.present?
-  %p Categories
-  %ul
-    - @song.categories.each do |category|
-      %li= category.name
-
-- if @song.categories.present?
-  %p Languages
-  %ul
-    - @song.languages.each do |language|
-      %li= language.name
-
-%p Recordings
-%ul
+.row
   - @song.recordings.each do |recording|
-    %li
-      %ul.recording-details
+    .col-sm-6
+      .card.song
         - if recording.title.present?
-          %li= recording.title
-        - if recording.url.present?
-          %li= recording.url
-        - if recording.description.present?
-          %li= recording.description
+          %h5.card-header= recording.title
         - if recording.embedded_player.present?
-          %li= raw(recording.embedded_player)
+          .embed-responsive.embed-responsive-4by3
+            = raw(recording.embedded_player)
+        .card-body
+          - if recording.url.present?
+            %p= link_to recording.url, recording.url, class: 'card-link'
+          - if recording.description.present?
+            .card-text= simple_format recording.description
 
+.row
+  - if @song.lyrics.present?
+    .col-sm-4
+      %p
+        %strong Lyrics
+        = simple_format @song.lyrics
+
+  - if @song.translation.present?
+    .col-sm-4
+      %p
+        %strong Translation
+        = simple_format @song.translation
+
+  - if @song.chords.present?
+    .col-sm-4
+      %p
+        %strong Chords
+
+      %pre
+        #song-chords{ data: @song.chords.to_json }
+
+      = javascript_pack_tag 'SongChords'
 

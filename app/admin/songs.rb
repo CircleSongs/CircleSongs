@@ -1,8 +1,9 @@
 ActiveAdmin.register Song do
-
-  permit_params :title, :alternate_title, :composer, :lyrics, :translation,
-    :chords, recordings_attributes: [:description, :embedded_player, :title, :url, :id, :_destroy],
-    category_ids: [], language_ids: []
+  permit_params :alternate_title, :composer, :composer_url,
+                :description, :lyrics, :title, :translation,
+                :chords, recordings_attributes: [
+                  :description, :embedded_player, :title, :url, :id, :_destroy
+                ], category_ids: [], language_ids: []
 
   index do
     column :title
@@ -15,6 +16,8 @@ ActiveAdmin.register Song do
       f.input :title
       f.input :alternate_title
       f.input :composer
+      f.input :composer_url
+      f.input :description
       f.input :lyrics
       f.input :translation
       f.input :chords
@@ -37,7 +40,12 @@ ActiveAdmin.register Song do
     attributes_table do
       row :title
       row :alternate_title
-      row :composer
+      row :composer do |song|
+        link_to song.composer, song.composer_url, target: :_blank
+      end
+      row :description do
+        simple_format song.description
+      end
       row :lyrics do
         simple_format song.lyrics
       end
@@ -61,8 +69,12 @@ ActiveAdmin.register Song do
     panel 'Recordings' do
       table_for song.recordings, class: :recordings do
         column :title
-        column :url
-        column :embedded_player do |song| raw(song.embedded_player) end
+        column :url do |recording|
+          link_to recording.url, recording.url, target: :_blank
+        end
+        column :embedded_player do |recording|
+          raw recording.embedded_player
+        end
         column :description
       end
     end
