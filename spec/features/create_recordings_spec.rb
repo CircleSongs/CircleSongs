@@ -19,7 +19,7 @@ RSpec.feature 'As an admin user' do
     fill_in 'Url', with: youtube_link
     click_on 'Update Song'
     within 'table.recordings tbody' do
-      expect(page).to have_selector('tr', count: 1)
+      expect(page).to have_link(youtube_link, href: youtube_link)
     end
     click_on 'Edit Song'
     within 'li.recordings' do
