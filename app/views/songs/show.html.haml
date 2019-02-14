@@ -23,7 +23,7 @@
             = raw(recording.embedded_player)
         .card-body
           - if recording.url.present?
-            %p= link_to recording.url, recording.url, class: 'card-link'
+            %p= link_to recording.url, recording.url, class: 'card-link', target: :_blank
           - if recording.description.present?
             .card-text= simple_format recording.description
 
