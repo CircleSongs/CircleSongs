@@ -32,19 +32,19 @@
 
 .row
   - if @song.lyrics.present?
-    .col-sm-4
+    .col
       %p
         %strong Lyrics
         = simple_format @song.lyrics
 
   - if @song.translation.present?
-    .col-sm-4
+    .col
       %p
         %strong Translation
         = simple_format @song.translation
 
   - if @song.chords.present?
-    .col-sm-4
+    .col
       %p
         %strong Chords
 
