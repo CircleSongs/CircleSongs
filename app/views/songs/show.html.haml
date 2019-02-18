@@ -8,7 +8,10 @@
 - if @song.composer.present?
   %p
     By
-    = link_to @song.composer, @song.composer_url, target: :_blank
+    - if @song.composer_url.present?
+      = link_to @song.composer, @song.composer_url, target: :_blank
+    - else
+      = @song.composer
 - if @song.description.present?
   = simple_format @song.description
 
