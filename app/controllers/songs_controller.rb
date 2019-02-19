@@ -16,8 +16,8 @@ class SongsController < ApplicationController
       :title_start,
       :s,
       :chords_present,
-      languages_id_in: [],
-      categories_id_in: []
+      :languages_id_in,
+      :categories_id_in
     ) : {}
   end
 end

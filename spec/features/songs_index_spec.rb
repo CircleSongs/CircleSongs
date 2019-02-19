@@ -21,21 +21,31 @@ RSpec.feature 'As a guest'  do
     expect(page).to have_content formatted_chords
   end
 
-  scenario 'I can search for songs', :selenium do
+  scenario 'I can search for songs' do
+    fill_in 'Search titles...', with: 'Foo'
+    click_on 'Search'
+    expect(page).to have_content I18n.t('songs.no_songs')
+
     fill_in 'Search titles...', with: 'California'
     click_on 'Search'
-
     expect(page).to have_content hotel_california.title
     expect(page).not_to have_content taki_taki.title
     expect(page).not_to have_content el_condor_pasa.title
+
     click_on 'Clear'
-    check 'Traditional'
-    check 'Spanish'
-    check 'Katchwa'
-    check 'Sacred'
+
+    select 'Traditional'
+    click_on 'Search'
+    expect(page).to have_content el_condor_pasa.title
+    expect(page).not_to have_content taki_taki.title
+    expect(page).not_to have_content hotel_california.title
+
+    click_on 'Clear'
+
+    select 'Spanish'
     click_on 'Search'
     expect(page).not_to have_content hotel_california.title
-    expect(page).to have_content taki_taki.title
+    expect(page).not_to have_content taki_taki.title
     expect(page).to have_content el_condor_pasa.title
   end
 

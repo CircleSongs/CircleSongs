@@ -1,11 +1,9 @@
 = search_form_for @q do |f|
   .row
     .col-sm-2.offset-sm-2
-      Categories
-      = f.input :categories_id_in, as: :check_boxes, collection: Category.all, label: false
+      = f.input :categories_id_in, collection: Category.all, input_html: { class: 'custom-select' }, prompt: 'All', label: 'Category', required: false
     .col-sm-2
-      Languages
-      = f.input :languages_id_in, as: :check_boxes, collection: Language.all, label: false
+      = f.input :languages_id_in, collection: Language.all, input_html: { class: 'custom-select' }, prompt: 'All', label: 'Language', required: false
     .col-sm-2
       = f.input :chords_present, collection: [['Yes', true], ['No', false]], include_blank: 'All', label: 'Has Chords', required: false, input_html: { class: 'custom-select' }
     .col-sm-2
@@ -25,6 +23,9 @@
 .row
   .col-sm-12
     %ul.songs
-      - @songs.each do |song|
-        %li
-          = link_to song.title, song
+      - if @songs.empty?
+        %li= t 'songs.no_songs'
+      - else
+        - @songs.each do |song|
+          %li
+            = link_to song.title, song
