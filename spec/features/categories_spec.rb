@@ -6,5 +6,4 @@ RSpec.feature 'As a guest' do
   scenario 'I can see category counts beside the category name' do
     select 'Traditional (1)'
   end
-
 end
