@@ -1,0 +1,5 @@
+- flash.each do |name, msg|
+  - if msg.is_a?(String)
+    .alert.alert-dismissible{class: "alert-#{bootstrap_alert_class(name)}"}
+      %button.close{ data: { dismiss: :alert } }= fa_icon 'times'
+      = content_tag :div, msg

@@ -7,14 +7,14 @@ RSpec.describe SongCollection do
   describe '.call' do
     context 'with no params' do
       it 'returns all Songs' do
-        expect(results.count).to eq 3
+        expect(results.count).to eq 4
       end
     end
 
     context 'with a good string' do
       let(:params) do
         {
-          title_cont: 'california'
+          title_cont: 'California'
         }
       end
 

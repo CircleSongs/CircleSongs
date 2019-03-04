@@ -1,7 +1,7 @@
 = search_form_for @q do |f|
   .row
     .col-sm-2.offset-sm-2
-      = f.input :categories_id_in, collection: Category.all, input_html: { class: 'custom-select' }, prompt: 'All', label: 'Category', required: false, label_method: :name_and_count
+      = f.input :categories_id_in, collection: @categories, input_html: { class: 'custom-select' }, prompt: 'All', label: 'Category', required: false, label_method: :name_and_count
     .col-sm-2
       = f.input :languages_id_in, collection: Language.all, input_html: { class: 'custom-select' }, prompt: 'All', label: 'Language', required: false
     .col-sm-2
