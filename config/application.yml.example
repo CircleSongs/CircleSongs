@@ -1,0 +1,7 @@
+aws_access_key_id:          'aaa'
+aws_s3_bucket_name:         'fff'
+aws_region:                 'us-east-1'
+aws_secret_access_key:      'bbb'
+ROLLBAR_ACCESS_TOKEN: 123
+restricted_category_username: username
+restricted_category_password: password

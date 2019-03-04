@@ -1,5 +1,6 @@
 RSpec.describe Category do
   it { is_expected.to have_and_belong_to_many(:songs) }
+  it { is_expected.to validate_uniqueness_of(:name) }
 
   let(:category) { categories(:traditional) }
 

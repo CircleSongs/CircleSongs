@@ -17,3 +17,8 @@ taki_taki:
   title: Taki Taki Muyki
   categories: sacred
   languages: katchwa
+
+restricted:
+  title: Restricted Song
+  categories: restricted
+  languages: english

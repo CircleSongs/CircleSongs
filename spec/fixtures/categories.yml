@@ -4,6 +4,6 @@ traditional:
   name: Traditional
 sacred:
   name: Sacred
-protected:
-  name: Protected
-  protected: true
+restricted:
+  name: Restricted
+  restricted: true
