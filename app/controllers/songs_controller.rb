@@ -1,4 +1,6 @@
 class SongsController < ApplicationController
+  before_action :set_categories, only: :index
+
   def index
     @q = SongCollection.new(params: search_params).q
     @q.sorts = 'title asc' if @q.sorts.empty?
@@ -10,14 +12,31 @@ class SongsController < ApplicationController
   end
 
   private
+
   def search_params
-    params.has_key?(:q) ? params.require(:q).permit(
-      :title_cont,
-      :title_start,
-      :s,
-      :chords_present,
-      :languages_id_in,
-      :categories_id_in
-    ) : {}
+    p = if params.has_key?(:q)
+      params.require(:q).permit(
+        :title_cont,
+        :title_start,
+        :s,
+        :chords_present,
+        :languages_id_in,
+        :categories_id_in
+      )
+    else
+      {}
+    end
+    unless session[:restricted_categories] == true
+      p[:categories_id_not_in] = Category.restricted.map(&:id)
+    end
+    p
+  end
+
+  def set_categories
+    @categories ||= if session[:restricted_categories]
+      Category.all
+    else
+      Category.unrestricted
+    end
   end
 end

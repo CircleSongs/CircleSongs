@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   root to: 'songs#index'
 
   resources :songs
+  resources :restricted_category_sessions
 end

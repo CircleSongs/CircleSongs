@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2019_02_28_182736) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "protected", default: false
+    t.boolean "restricted", default: false
   end
 
   create_table "categories_songs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

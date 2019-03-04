@@ -1,0 +1,3 @@
+ROLLBAR_ACCESS_TOKEN: 123
+restricted_category_username: username
+restricted_category_password: password
