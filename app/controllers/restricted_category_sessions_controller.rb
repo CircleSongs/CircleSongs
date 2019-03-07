@@ -14,15 +14,11 @@ class RestrictedCategorySessionsController < ApplicationController
 
   private
   def auth_params
-    params.require(:restricted_category_session).permit(:username, :password)
+    params.require(:restricted_category_session).permit :password
   end
 
   def authorized?
-    auth_params[:username] == username && auth_params[:password] == password
-  end
-
-  def username
-    @username ||= ENV['restricted_category_username']
+    auth_params[:password] == password
   end
 
   def password

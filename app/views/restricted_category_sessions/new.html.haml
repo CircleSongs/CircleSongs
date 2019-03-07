@@ -1,11 +1,9 @@
 .row.restricted-category-session-form
   .col-sm-4.offset-sm-4
-    %h3.text-center Sacred
     - if flash
       .row
         .col-12
           = render 'layouts/messages'
     = simple_form_for :restricted_category_session, method: :post, url: '/restricted_category_sessions' do |f|
-      = f.input :username, label: false, placeholder: 'Username...'
-      = f.input :password, label: false, placeholder: 'Password...'
+      = f.input :password, label: I18n.t('restricted_categories.password_label'), required: false
       = f.submit 'Submit', class: 'btn btn-block btn-primary'
