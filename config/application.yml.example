@@ -1,3 +1,8 @@
+aws_access_key_id:          '123'
+aws_region:                 'us-east-1'
+aws_secret_access_key:      'abc'
+aws_s3_bucket_name:         'medicinesongs.net'
+base_domain:                'medicinesongs.net'
 ROLLBAR_ACCESS_TOKEN: 123
 restricted_category_username: username
 restricted_category_password: password
