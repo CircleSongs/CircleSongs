@@ -1,7 +1,19 @@
 footer {
   background-color: $gray-200;
+  padding: 3rem;
+  color: $gray-600;
   p {
+    &:last-of-type {
+      margin: 0;
+    }
     text-align: center;
+    a {
+      color: $gray-600;
+      &.gratitude:hover {
+        text-decoration: none;
+        color: $gray-600;
+      }
+    }
   }
 
 }
