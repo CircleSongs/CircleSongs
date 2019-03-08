@@ -18,27 +18,23 @@ RSpec.feature 'As an' do
   end
 
   context 'trying to login' do
-    context 'with bad credentials' do
-      let(:username) { 'foo' }
+    context 'with a bad password' do
       let(:password) { 'bar' }
 
       scenario 'I see an error' do
         visit new_restricted_category_session_path
-        fill_in 'Username...', with: username
-        fill_in 'Password...', with: password
+        fill_in I18n.t('restricted_categories.password_label'), with: password
         click_on 'Submit'
         expect(page).to have_content 'Invalid credentials.'
       end
     end
 
     context 'with good credentials' do
-      let(:username) { ENV['restricted_category_username'] }
       let(:password) { ENV['restricted_category_password'] }
 
       scenario 'I am redirected to Songs#index' do
         visit new_restricted_category_session_path
-        fill_in 'Username...', with: username
-        fill_in 'Password...', with: password
+        fill_in I18n.t('restricted_categories.password_label'), with: password
         click_on 'Submit'
         expect(page).to have_current_path '/songs'
       end
@@ -56,7 +52,5 @@ RSpec.feature 'As an' do
       )
       expect(page).to have_content restricted_song.title
     end
-
-
   end
 end

@@ -17,6 +17,7 @@ class SongsController < ApplicationController
     p = if params.has_key?(:q)
       params.require(:q).permit(
         :title_cont,
+        :composer_cont,
         :title_start,
         :s,
         :chords_present,

@@ -48,10 +48,4 @@ RSpec.feature 'As a guest'  do
     expect(page).not_to have_content taki_taki.title
     expect(page).to have_content el_condor_pasa.title
   end
-
-  scenario 'I can search for songs alphabetically' do
-    click_on 'T'
-    expect(page).to have_content taki_taki.title
-    expect(page).not_to have_content el_condor_pasa.title
-  end
 end
