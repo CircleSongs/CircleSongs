@@ -3,3 +3,5 @@ en:
     no_songs: Sorry! No songs matched your search...
   restricted_categories:
     password_label: Please enter the secret password to continue.
+  contact_forms:
+    success: Thank you for your message.

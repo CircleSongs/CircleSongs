@@ -1,0 +1,15 @@
+%h1 Contact Us
+
+- unless flash.empty?
+  .row
+    .col-sm-6.offset-sm-3
+      = render 'layouts/messages'
+.row
+  .col-sm-6.offset-sm-3
+    = simple_form_for @contact_form do |f|
+      = f.input :name, required: false
+      = f.input :email, required: false
+      = f.input :subject, required: false
+      = f.input :message, as: :text
+      = f.input :nickname, as: :hidden
+      = f.submit 'Submit', class: 'btn btn-primary'

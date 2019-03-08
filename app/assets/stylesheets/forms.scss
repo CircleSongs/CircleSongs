@@ -4,6 +4,10 @@
   }
 }
 
-select {
-  // color: black !important;
+.invalid-feedback {
+  display: block;
+}
+
+.form-group-invalid input {
+  border: 1px solid $danger;
 }

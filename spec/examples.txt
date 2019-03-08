@@ -3,6 +3,8 @@ example_id                                           | status | run_time        
 ./spec/features/admin/categories_spec.rb[1:1]        | passed | 0.24558 seconds |
 ./spec/features/admin/categories_spec.rb[1:2]        | passed | 0.14312 seconds |
 ./spec/features/categories_spec.rb[1:1]              | passed | 0.09136 seconds |
+./spec/features/contact_form_spec.rb[1:1]            | passed | 0.30776 seconds |
+./spec/features/contact_form_spec.rb[1:2]            | passed | 2.16 seconds    |
 ./spec/features/create_recordings_spec.rb[1:1]       | passed | 5.01 seconds    |
 ./spec/features/create_songs_spec.rb[1:1]            | passed | 9.27 seconds    |
 ./spec/features/restricted_category_spec.rb[1:1:1]   | passed | 9.46 seconds    |
