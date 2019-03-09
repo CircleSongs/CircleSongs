@@ -4,12 +4,12 @@
   .row
     .col-sm-6.offset-sm-3
       = render 'layouts/messages'
-.row
+.row.contact-form
   .col-sm-6.offset-sm-3
     = simple_form_for @contact_form do |f|
-      = f.input :name, required: false
-      = f.input :email, required: false
-      = f.input :subject, required: false
-      = f.input :message, as: :text
+      = f.input :name, required: false, label: false, placeholder: 'Name (optional)...'
+      = f.input :email, required: false, label: false, placeholder: 'Email (optional)...'
+      = f.input :subject, label: false, placeholder: 'Subject...'
+      = f.input :message, as: :text, label: false, placeholder: 'Message...'
       = f.input :nickname, as: :hidden
-      = f.submit 'Submit', class: 'btn btn-primary'
+      = f.submit 'Submit', class: 'btn btn-primary btn-block'

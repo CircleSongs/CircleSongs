@@ -1,0 +1,12 @@
+{
+  "name": "circle-songs",
+  "scripts": {
+    "postdeploy": "bundle exec rake db:schema:load db:seed"
+  },
+  "env": {
+
+  },
+  "addons": [
+    "heroku-postgresql",
+  ]
+}
