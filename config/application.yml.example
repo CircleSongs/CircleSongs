@@ -3,5 +3,6 @@ aws_s3_bucket_name:         'medicinesongs.net'
 aws_region:                 'us-east-1'
 aws_secret_access_key:      'abc'
 base_domain:                'medicinesongs.net'
+contact_form_email:         'contact@example.com'
 ROLLBAR_ACCESS_TOKEN: 123
 restricted_category_password: password
