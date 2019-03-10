@@ -11,8 +11,10 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require activestorage
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
 //= require fontawesome-all
+//= require ajax-csrf-fix
+//= require broken_link_form
+//= require tooltips
