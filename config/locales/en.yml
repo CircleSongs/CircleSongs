@@ -5,3 +5,7 @@ en:
     password_label: Please enter the secret password to continue.
   contact_forms:
     success: Thank you for your message.
+  broken_link_forms:
+    success: Thank you for reporting the problem. We will look into it.
+    email:
+      subject: Broken link reported for %{title}

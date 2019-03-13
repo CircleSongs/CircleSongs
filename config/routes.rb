@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root to: 'songs#index'
 
   resources :contact_forms, only: [:new, :create]
+  resources :broken_link_forms, only: :create
   resources :songs
   resources :restricted_category_sessions
 end

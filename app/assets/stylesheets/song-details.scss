@@ -15,6 +15,20 @@ ul {
   max-height: 200px;
 }
 
-.card.song {
+.card.recording {
   margin-bottom: 3rem;
+  .card-body {
+    form {
+      float: right;
+      button {
+        padding: 0;
+        color: $warning;
+        font-size: 0.8rem;
+      }
+      small {
+        color: $danger;
+      }
+    }
+  }
 }
+
