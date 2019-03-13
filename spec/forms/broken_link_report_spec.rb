@@ -1,4 +1,4 @@
-RSpec.describe BrokenLinkForm do
+RSpec.describe BrokenLinkReport do
   let(:song) { songs(:hotel_california) }
   let(:recording) { song.recordings.first }
   let(:params) do
@@ -16,7 +16,9 @@ RSpec.describe BrokenLinkForm do
     end
 
     it 'has the recording link' do
-      expect(broken_link_form.headers[:message]).to match recording.url
+      expect(broken_link_form.headers[:message]).to match(
+        Rails.application.routes.url_helpers.song_path(song)
+      )
     end
   end
 

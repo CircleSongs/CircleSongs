@@ -1,4 +1,4 @@
-class BrokenLinkForm < MailForm::Base
+class BrokenLinkReport < MailForm::Base
   DEFAULT_FROM = "Broken Links <contact@#{ENV['base_domain']}>".freeze
 
   attribute :recording_id, validate: true
@@ -13,11 +13,15 @@ class BrokenLinkForm < MailForm::Base
     }
   end
 
-  private
+  def notify
+    valid? || spam? ? deliver : false
+  end
 
   def recording
     @recording ||= Recording.find(recording_id)
   end
+
+  private
 
   def subject_text
     I18n.t('broken_link_forms.email.subject', title: song.title)
@@ -27,7 +31,7 @@ class BrokenLinkForm < MailForm::Base
     <<~EOS
       Broken link reported for #{song.title}:
       #{recording.title}
-      #{recording.url}
+      #{Rails.application.routes.url_helpers.song_path(song)}
     EOS
   end
 

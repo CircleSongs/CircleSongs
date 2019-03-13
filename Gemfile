@@ -14,13 +14,14 @@ gem 'devise'
 gem 'figaro'
 gem 'haml-rails', '~> 1.0'
 gem 'image_processing', '~> 1.0'
+gem 'jbuilder'
 gem 'jquery-rails'
 gem 'kaminari'
 gem 'mail_form'
 gem 'newrelic_rpm'
 gem 'oj'
 gem 'pg'
-gem 'puma', '~> 3.11'
+gem 'puma'
 gem 'rails', '~> 5.2.2'
 gem 'ransack'
 gem 'recaptcha'
@@ -42,6 +43,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
 end
+  gem 'rails_12factor'
 
 group :test do
   gem 'capybara', '>= 2.15'

@@ -1,5 +1,5 @@
 $ ->
-  $(".new_broken_link_form").submit ->
+  $(".new_broken_link_report").submit ->
     if confirm('Report Broken Link?')
       $this = $(this);
       $.ajax
@@ -8,10 +8,7 @@ $ ->
         data: $this.serialize(),
         dataType: 'json',
         success: (json) ->
-          $el = $this.find('.report-broken-link').first();
-          $el.attr("disabled", "disabled");
-          $el.addClass('disabled');
-          $el.replaceWith('<small>Reported</small>');
+          $this.closest('.recording').replaceWith(json.recording.html);
         error: () ->
           alert 'Error.'
 
