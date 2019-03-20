@@ -1,3 +1,14 @@
+
 textarea {
-  height: 10rem;
+  height: 5rem;
+}
+
+li.choice.restricted {
+  label {
+    @extend %fa-icon;
+    @extend .fa;
+    &::after {
+      content: "\00a0" fa-content($fa-var-lock);
+    }
+  }
 }

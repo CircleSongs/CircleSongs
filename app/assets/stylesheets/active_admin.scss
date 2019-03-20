@@ -11,6 +11,11 @@
 @import "active_admin/mixins";
 $primary-color: #2dbb43;
 @import "arctic_admin/base";
+@import "fontawesome/fontawesome.scss";
+@import "fontawesome/solid.scss";
+@import "fontawesome/regular.scss";
+@import "fontawesome/brands.scss";
+@import "fontawesome/light.scss";
 
 @import "chordpro";
 @import "admin-forms";
