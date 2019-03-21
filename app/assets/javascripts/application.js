@@ -15,5 +15,5 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require ajax-csrf-fix
-//= require broken_link_form
+//= require broken_link_report
 //= require tooltips

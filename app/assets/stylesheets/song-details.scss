@@ -15,18 +15,19 @@ ul {
   max-height: 200px;
 }
 
-.card.recording {
+
+.recording .card {
   margin-bottom: 3rem;
   .card-body {
-    form {
+    .broken-link {
       float: right;
-      button {
-        padding: 0;
-        color: $warning;
-        font-size: 0.8rem;
-      }
-      small {
-        color: $danger;
+      small { color: $danger; }
+      form {
+        button {
+          padding: 0;
+          color: $warning;
+          font-size: 0.8rem;
+        }
       }
     }
   }
