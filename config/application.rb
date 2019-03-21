@@ -24,9 +24,7 @@ module CircleSongs
       g.view_specs false
       g.orm :active_record, primary_key_type: :uuid
     end
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration can go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded after loading
-    # the framework and any gems in your application.
+
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
   end
 end

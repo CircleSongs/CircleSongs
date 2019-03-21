@@ -23,8 +23,22 @@ ActiveAdmin.register Song do
       f.input :translation
       f.input :chords
       f.input :languages, as: :check_boxes
-      f.input :categories, as: :check_boxes
+      li class: 'check_boxes input optional', id: :song_categories_input do
+        fieldset class: :choices do
+          legend class: :label do
+            'Categories'
+          end
+          ol class: 'choices-group' do
+            f.collection_check_boxes :category_ids, Category.all, :id, :name do |c|
+              li class: "choice #{'restricted' if c.object.restricted? }" do
+                c.label { c.check_box + c.text}
+              end
+            end
+          end
+        end
+      end
     end
+
     f.inputs do
       f.has_many :recordings, heading: 'Recordings', allow_destroy: true, new_record: true do |a|
         a.input :title

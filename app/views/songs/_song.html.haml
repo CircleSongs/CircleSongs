@@ -1,0 +1,5 @@
+%li.song
+  = link_to song.title, song
+  %small
+    \-
+    = link_to song.composer, songs_path(q: { composer_cont: song.composer })
