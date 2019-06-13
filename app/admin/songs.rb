@@ -53,6 +53,9 @@ ActiveAdmin.register Song do
 
   show do
     attributes_table do
+      row 'Preview Link' do |song|
+        link_to 'Preview', song_path(song), target: :_blank
+      end
       row :image do |song|
         image_tag song.image[:thumb].url if song.image.present?
       end
