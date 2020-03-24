@@ -4,7 +4,7 @@ class SongsController < ApplicationController
   def index
     @q = SongCollection.new(params: search_params).q
     @q.sorts = 'title asc' if @q.sorts.empty?
-    @songs = @q.result(distinct: true).page(params[:page] || 1)
+    @songs = @q.result(distinct: true)
   end
 
   def show

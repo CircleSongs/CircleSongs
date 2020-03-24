@@ -1,32 +1,42 @@
 'use strict'
 
-const BB = require('bluebird')
+const util = require('util')
 
+const figgyPudding = require('figgy-pudding')
 const fixOwner = require('./fix-owner')
 const path = require('path')
-const rimraf = BB.promisify(require('rimraf'))
+const rimraf = util.promisify(require('rimraf'))
 const uniqueFilename = require('unique-filename')
+const { disposer } = require('./disposer')
+
+const TmpOpts = figgyPudding({
+  tmpPrefix: {}
+})
 
 module.exports.mkdir = mktmpdir
+
 function mktmpdir (cache, opts) {
-  opts = opts || {}
+  opts = TmpOpts(opts)
   const tmpTarget = uniqueFilename(path.join(cache, 'tmp'), opts.tmpPrefix)
-  return fixOwner.mkdirfix(tmpTarget, opts.uid, opts.gid).then(() => {
+  return fixOwner.mkdirfix(cache, tmpTarget).then(() => {
     return tmpTarget
   })
 }
 
 module.exports.withTmp = withTmp
+
 function withTmp (cache, opts, cb) {
   if (!cb) {
     cb = opts
     opts = null
   }
-  opts = opts || {}
-  return BB.using(mktmpdir(cache, opts).disposer(rimraf), cb)
+  opts = TmpOpts(opts)
+
+  return disposer(mktmpdir(cache, opts), rimraf, cb)
 }
 
 module.exports.fix = fixtmpdir
-function fixtmpdir (cache, opts) {
-  return fixOwner(path.join(cache, 'tmp'), opts.uid, opts.gid)
+
+function fixtmpdir (cache) {
+  return fixOwner(cache, path.join(cache, 'tmp'))
 }

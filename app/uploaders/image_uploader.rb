@@ -1,9 +1,8 @@
 require 'image_processing/mini_magick'
 
 class ImageUploader < Shrine
-  plugin :processing # allows hooking into promoting
-  plugin :versions   # enable Shrine to handle a hash of files
-  plugin :delete_raw # delete processed files after uploading
+  plugin :derivatives
+  plugin :versions
 
   process(:store) do |io, _context|
     versions = { original: io } # retain original
