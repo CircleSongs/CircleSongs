@@ -1,0 +1,90 @@
+require: rubocop-rspec
+
+Documentation:
+  Enabled: false
+
+AllCops:
+  TargetRubyVersion: 2.4
+  Exclude:
+    - "db/**/*"
+    - "bin/**/*"
+    - "spec/features/**/*"
+    - "tmp/**/*"
+    - "vendor/**/*"
+    - "spec/support/chosenjs.rb"
+    - "config/initializers/simple_form_bootstrap.rb"
+
+Metrics/BlockLength:
+  Exclude:
+    - "app/admin/**/*"
+    - "app/mailers/**/*"
+    - "spec/**/*.rb"
+    - "config/environments/*"
+    - "config/routes.rb"
+
+Metrics/MethodLength:
+  Exclude:
+    - "app/mailers/**/*"
+    - "spec/mailers/**/*"
+
+Style/SymbolArray:
+  Enabled: false
+
+RSpec/ReturnFromStub:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Max: 3
+  Exclude:
+    - "spec/**/*"
+
+RSpec/RepeatedDescription:
+  Enabled: false
+
+RSpec/DescribeClass:
+  Exclude:
+    - "spec/requests/**/*"
+
+RSpec/ExampleLength:
+  Exclude:
+    - "spec/mailers/**/*"
+    - "spec/models/account_spec.rb"
+
+Style/Encoding:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+  EnforcedStyle: always
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/RegexpLiteral:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Style/Lambda:
+  Enabled: false
+
+Lint/AmbiguousRegexpLiteral:
+  Enabled: false
+
+Style/NestedParenthesizedCalls:
+  Enabled: false
+
+Style/WordArray:
+  Exclude:
+    - "spec/**/*"
+
+Metrics/ClassLength:
+  Max: 150
+
+Metrics/LineLength:
+  Max: 100
+  IgnoredPatterns: ['\s?#']
+
+Style/ModuleFunction:
+  Enabled: false

@@ -2,7 +2,13 @@ ActiveAdmin.register Song do
   permit_params :alternate_title, :composer, :composer_url, :image,
                 :description, :lyrics, :title, :translation,
                 :chords, recordings_attributes: [
-                  :description, :embedded_player, :title, :url, :id, :position, :_destroy
+                  :description,
+                  :embedded_player,
+                  :title,
+                  :url,
+                  :id,
+                  :position,
+                  :_destroy
                 ], category_ids: [], language_ids: []
 
   index do
@@ -30,8 +36,8 @@ ActiveAdmin.register Song do
           end
           ol class: 'choices-group' do
             f.collection_check_boxes :category_ids, Category.all, :id, :name do |c|
-              li class: "choice #{'restricted' if c.object.restricted? }" do
-                c.label { c.check_box + c.text}
+              li class: "choice #{'restricted' if c.object.restricted?}" do
+                c.label { c.check_box + c.text }
               end
             end
           end
