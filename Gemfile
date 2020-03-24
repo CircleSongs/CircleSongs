@@ -52,7 +52,7 @@ group :test do
   gem 'geckodriver-helper'
   gem 'rspec-rails', '~> 3.8'
   gem 'rspec_junit_formatter'
-  gem 'rubocop', '0.50.0', require: false
+  gem 'rubocop', '~> 0.62.0', require: false
   gem 'rubocop-rspec', '0.18.0', require: false
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '4.0.0.rc1'
