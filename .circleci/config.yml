@@ -37,9 +37,6 @@ jobs:
           command: |
             bundle config set path 'vendor/bundle'
             bundle install --jobs=4 --retry=3
-      - run:
-          name: Build assets
-          command: bundle exec rails assets:precompile
       - save_cache:
           paths:
             - ./vendor/bundle

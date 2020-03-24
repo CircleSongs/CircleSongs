@@ -78,6 +78,9 @@ plugins:
   rubocop:
     enabled: true
     channel: rubocop-0-79
+    checks:
+      Rubocop/Style/FrozenStringLiteralComment:
+        enabled: false
 exclude_patterns:
 - "**/node_modules/"
 - "**/vendor/"
