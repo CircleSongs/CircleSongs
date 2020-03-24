@@ -1,5 +1,4 @@
 ActiveAdmin.register Category do
-
   permit_params :name, :restricted
 
   index do
@@ -11,7 +10,6 @@ ActiveAdmin.register Category do
         end
       end
     end
-
     actions
   end
 end

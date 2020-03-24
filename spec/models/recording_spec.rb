@@ -10,12 +10,13 @@ RSpec.describe Recording do
       embedded_player: embedded_player
     }
   end
+
   it { is_expected.to belong_to(:song) }
 
   context 'with a url and no embeded player' do
     let(:embedded_player) { nil }
 
-    it 'it is valid' do
+    it 'is valid' do
       expect(recording).to be_valid
     end
   end
@@ -23,7 +24,7 @@ RSpec.describe Recording do
   context 'with no url and an embeded player' do
     let(:url) { nil }
 
-    it 'it is valid' do
+    it 'is valid' do
       expect(recording).to be_valid
     end
   end
@@ -32,7 +33,7 @@ RSpec.describe Recording do
     let(:embedded_player) { nil }
     let(:url) { nil }
 
-    it 'it is NOT valid' do
+    it 'is NOT valid' do
       expect(recording).not_to be_valid
     end
   end

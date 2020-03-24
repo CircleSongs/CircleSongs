@@ -2,8 +2,14 @@ ul.songs {
   margin-top: 1rem;
   li {
     padding: 0.5rem;
+
     &:nth-child(even){
       background-color: #eee;
+    }
+
+    .has-recording {
+      color: $gray-500;
+      margin-left: $margin;
     }
   }
 }

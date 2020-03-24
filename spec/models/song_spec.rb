@@ -1,16 +1,16 @@
 RSpec.describe Song do
-  it { is_expected.to have_and_belong_to_many(:languages) }
-  it { is_expected.to have_and_belong_to_many(:categories) }
-
   let(:song) { described_class.new(params) }
   let(:params) do
     {}
   end
 
+  it { is_expected.to have_and_belong_to_many(:languages) }
+  it { is_expected.to have_and_belong_to_many(:categories) }
+
   describe 'formatted_chords' do
     let(:params) do
       {
-        chords: <<-EOS
+        chords: <<-TEXT
           {title: You Are My Sunshine}
 
           {c:Verse 1}
@@ -26,17 +26,21 @@ RSpec.describe Song do
           [G7]You'll never [C]know dear how much I [G]love you
           Please don't take [D7]my sunshine a[G]way
           {eoc}
-        EOS
+        TEXT
       }
     end
 
+    before do
+      allow(Chordpro).to receive(:html).and_call_original
+    end
+
     it 'calls Chordpro' do
-      expect(Chordpro).to receive(:html)
       song.formatted_chords
+      expect(Chordpro).to have_received(:html)
     end
 
     it 'returns formatted stuff' do
-      expect(song.formatted_chords).to match "<table>"
+      expect(song.formatted_chords).to match '<table>'
     end
   end
 end

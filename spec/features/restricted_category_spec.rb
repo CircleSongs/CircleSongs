@@ -30,7 +30,7 @@ RSpec.feature 'As an' do
     end
 
     context 'with good credentials' do
-      let(:password) { ENV['restricted_category_password'] }
+      let(:password) { Rails.application.credentials.restricted_category_password }
 
       scenario 'I am redirected to Songs#index' do
         visit new_restricted_category_session_path

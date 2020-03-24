@@ -9,6 +9,6 @@ module MailerMacros
 end
 
 RSpec.configure do |config|
-  config.include(MailerMacros)
-  config.before(:each) { reset_email }
+  config.include MailerMacros
+  config.before { reset_email }
 end

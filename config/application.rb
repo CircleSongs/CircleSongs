@@ -20,7 +20,5 @@ module CircleSongs
       g.view_specs false
       g.orm :active_record, primary_key_type: :uuid
     end
-
-    config.assets.paths << Rails.root.join("app", "assets", "fonts")
   end
 end

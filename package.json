@@ -2,8 +2,13 @@
   "name": "circle_songs",
   "private": true,
   "dependencies": {
+    "@rails/ujs": "^6.0.2-2",
     "@rails/webpacker": "5.0.1",
-    "chordsheetjs": "^2.8.1"
+    "bootstrap": "^4.4.1",
+    "chordsheetjs": "^2.9.1",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.16.1",
+    "turbolinks": "^5.2.0"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.10.3"

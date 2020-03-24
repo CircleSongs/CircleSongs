@@ -1,7 +1,7 @@
 class Song < ApplicationRecord
   include ImageUploader::Attachment.new(:image)
 
-  has_many :recordings
+  has_many :recordings, -> { order :created_at }
   accepts_nested_attributes_for :recordings, reject_if: proc { |attributes|
     attributes['url'].blank? && attributes['embedded_player'].blank?
   }, allow_destroy: true

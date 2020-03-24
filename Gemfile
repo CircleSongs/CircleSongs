@@ -2,17 +2,14 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| 'https://github.com/#{repo}.git' }
 
 ruby '2.6.5'
-gem 'rails', '~> 6.0.2'
-
+gem 'aws-sdk-s3'
 gem 'activeadmin'
-gem "aws-sdk-s3"
 gem 'arctic_admin'
 gem 'bootsnap'
 gem 'bootstrap'
 gem 'chordpro'
 gem 'coffee-rails'
 gem 'devise'
-gem 'figaro'
 gem 'haml-rails'
 gem 'image_processing'
 gem 'jbuilder'
@@ -23,8 +20,8 @@ gem 'newrelic_rpm'
 gem 'oj'
 gem 'pg'
 gem 'puma'
+gem 'rails', '~> 6.0.2'
 gem 'ransack'
-gem 'recaptcha'
 gem 'rollbar'
 gem 'sass-rails'
 gem 'shrine'
@@ -37,6 +34,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'brakeman'
   gem 'foreman'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
@@ -45,17 +43,14 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', '>= 2.15'
+  gem 'capybara'
   gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'ffaker'
-  gem 'geckodriver-helper'
-  gem 'rspec-rails', '~> 3.8'
+  gem 'rspec-rails'
   gem 'rspec_junit_formatter'
-  gem 'rubocop', '0.50.0', require: false
-  gem 'rubocop-rspec', '0.18.0', require: false
   gem 'selenium-webdriver'
-  gem 'shoulda-matchers', '4.0.0.rc1'
+  gem 'shoulda-matchers'
   gem 'simplecov', require: false
+  gem 'webdrivers'
 end
-

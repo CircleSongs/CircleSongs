@@ -1,14 +1,14 @@
 RSpec.describe ContactForm do
   let(:contact_form) { described_class.new(params) }
   let(:params) do
-    {
-      name: name
-    }
+    { name: name }
   end
 
   describe '::DEFAULT_FROM_EMAIL' do
     it 'returns a sensible default' do
-      expect(described_class::DEFAULT_FROM_EMAIL).to eq "contact_form@#{ENV['base_domain']}"
+      expect(described_class::DEFAULT_FROM_EMAIL).to eq(
+        "contact_form@#{Rails.application.credentials.base_domain}"
+      )
     end
   end
 
@@ -18,11 +18,10 @@ RSpec.describe ContactForm do
     end
   end
 
-
   describe '::DEFAULT_SUBJECT' do
     it 'returns a sensible default' do
       expect(described_class::DEFAULT_SUBJECT).to eq <<~SUBJECT.strip
-        Hi from #{ENV['base_domain']}!
+        Hi from #{Rails.application.credentials.base_domain}!
       SUBJECT
     end
   end
