@@ -1,0 +1,95 @@
+---
+version: "2"
+checks:
+  complex-logic:
+    enabled: true
+  method-complexity:
+    enabled: false
+  argument-count:
+    enabled: true
+  file-lines:
+    enabled: true
+    config:
+      threshold: 300
+  method-count:
+    enabled: true
+  method-lines:
+    enabled: false
+  nested-control-flow:
+    enabled: true
+  return-statements:
+    enabled: true
+  similar-code:
+    enabled: true
+  identical-code:
+    enabled: true
+
+plugins:
+  brakeman:
+    enabled: true
+    checks:
+      dynamic_render_path:
+        enabled: false
+      dangerous_permit_key:
+        enabled: false
+  bundler-audit:
+    enabled: true
+  csslint:
+    enabled: true
+  coffeelint:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+        ruby:
+        javascript:
+          mass_threshold: 60
+    exclude_patterns:
+    - app/controllers/
+    - config/initializers/simple_form_bootstrap.rb
+    - db/
+    - spec/
+  eslint:
+    enabled: true
+    checks:
+      global-require:
+        enabled: false
+  fixme:
+    enabled: true
+  grep:
+    enabled: true
+    config:
+      patterns:
+        long-press-disabled:
+          pattern: "//"
+          annotation: "Make sure the long-press disable css is not commented out."
+          severity: blocker
+          categories: Security
+          path_patterns:
+            - "**/long-press.scss"
+        no-console-log:
+          pattern: "console.log"
+          annotation: "Don't commit console.log in .coffeescript"
+          severity: blocker
+          categories: Security
+          path_patterns:
+            - "**/*.coffee"
+  rubocop:
+    enabled: true
+    channel: rubocop-0-50
+exclude_patterns:
+- "**/node_modules/"
+- "**/vendor/"
+- "app/javascript/"
+- "db/"
+- "public/"
+- "script/"
+- "config/initializers/simple_form.rb"
+- "config/initializers/simple_form_bootstrap.rb"
+- "coverage/"
+- "log/"
+- "spec/support/chosenjs.rb"
+- "tmp/"
+- "vendor/"
+- ".babble.config.js"
