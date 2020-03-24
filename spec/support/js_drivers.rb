@@ -1,21 +1,25 @@
 require 'capybara/rails'
+require 'capybara/rspec'
+require 'webdrivers'
+Webdrivers.cache_time = 86_400
+Webdrivers::Chromedriver.required_version = '79.0.3945.36'
 
 RSpec.configure do |config|
   config.before do |example|
     if example.metadata[:js]
-      Capybara.current_driver = :webkit
-    elsif example.metadata[:selenium]
-      Capybara.current_driver = :selenium
+      Capybara.current_driver = :selenium_chrome_headless
+    elsif example.metadata[:chrome]
+      Capybara.current_driver = :selenium_chrome
     end
   end
 
-  config.after do
-    Capybara.reset_sessions!
-    Capybara.use_default_driver
+  def screenshot_filename(meta)
+    "#{File.basename(meta[:file_path])}-#{meta[:line_number]}.png"
   end
 
-  config.before(:each, :selenium) do
-    Capybara.page.driver.browser.manage.window.maximize
+  config.after do |example|
+    Capybara.reset_sessions!
+    Capybara.use_default_driver
   end
 end
 

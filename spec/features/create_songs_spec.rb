@@ -15,7 +15,7 @@ RSpec.feature 'As an admin user' do
     visit admin_songs_path
   end
 
-  scenario 'I can create a Song', :selenium do
+  scenario 'I can create a Song', :chrome do
     click_on 'New Song'
     fill_in 'Title', with: title
     fill_in 'Alternate title', with: alternate_title

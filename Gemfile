@@ -45,17 +45,15 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', '>= 2.15'
+  gem 'capybara'
   gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'ffaker'
-  gem 'geckodriver-helper'
-  gem 'rspec-rails', '~> 3.8'
+  gem 'webdrivers'
+  gem 'rspec-rails'
   gem 'rspec_junit_formatter'
-  gem 'rubocop', '~> 0.62.0', require: false
-  gem 'rubocop-rspec', '0.18.0', require: false
   gem 'selenium-webdriver'
-  gem 'shoulda-matchers', '4.0.0.rc1'
+  gem 'shoulda-matchers'
   gem 'simplecov', require: false
 end
 
