@@ -77,7 +77,7 @@ plugins:
             - "**/*.coffee"
   rubocop:
     enabled: true
-    channel: rubocop-0-50
+    channel: rubocop-0-79
 exclude_patterns:
 - "**/node_modules/"
 - "**/vendor/"
