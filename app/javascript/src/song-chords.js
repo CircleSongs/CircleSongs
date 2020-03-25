@@ -13,9 +13,3 @@ if (node) {
   node.innerHTML = disp
 }
 
-const SongChords = {
-  initialize() {
-  }
-}
-
-export default SongChords;
