@@ -1,1 +1,1 @@
-import 'src/song-chords.js';
+import 'src/song-chords';

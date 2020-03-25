@@ -1,15 +1,17 @@
 import ChordSheetJS from "chordsheetjs";
-const node = document.getElementById("song-chords");
 
-if (node) {
-  const data = JSON.parse(node.getAttribute("data"));
-  const chordSheet = data;
+$(function() {
+  const node = $('#song-chords');
 
-  const parser = new ChordSheetJS.ChordProParser();
-  const song = parser.parse(chordSheet);
-  const formatter = new ChordSheetJS.TextFormatter();
-  const disp = formatter.format(song);
+  if (node.length > 0) {
+    const data = JSON.parse(node.attr('data'));
+    const chordSheet = data;
 
-  node.innerHTML = disp
-}
+    const parser = new ChordSheetJS.ChordProParser();
+    const song = parser.parse(chordSheet);
+    const formatter = new ChordSheetJS.TextFormatter();
+    const disp = formatter.format(song);
 
+    node.html(disp)
+  }
+});
