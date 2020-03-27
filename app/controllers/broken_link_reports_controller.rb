@@ -6,4 +6,3 @@ class BrokenLinkReportsController < ApplicationController
     @recording.update! reported: true
   end
 end
-

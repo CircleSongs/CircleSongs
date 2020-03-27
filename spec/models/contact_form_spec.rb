@@ -1,9 +1,7 @@
 RSpec.describe ContactForm do
   let(:contact_form) { described_class.new(params) }
   let(:params) do
-    {
-      name: name
-    }
+    { name: name }
   end
 
   describe '::DEFAULT_FROM_EMAIL' do
@@ -19,7 +17,6 @@ RSpec.describe ContactForm do
       expect(described_class::DEFAULT_FROM_NAME).to eq 'Contact Form'
     end
   end
-
 
   describe '::DEFAULT_SUBJECT' do
     it 'returns a sensible default' do

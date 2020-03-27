@@ -13,6 +13,7 @@ AllCops:
     - "vendor/**/*"
     - "spec/support/chosenjs.rb"
     - "config/initializers/simple_form_bootstrap.rb"
+    - "config/initializers/active_admin.rb"
 
 Metrics/BlockLength:
   Exclude:

@@ -10,6 +10,7 @@ RSpec.describe Recording do
       embedded_player: embedded_player
     }
   end
+
   it { is_expected.to belong_to(:song) }
 
   context 'with a url and no embeded player' do
