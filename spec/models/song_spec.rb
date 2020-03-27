@@ -30,9 +30,13 @@ RSpec.describe Song do
       }
     end
 
+    before do
+      allow(Chordpro).to receive(:html).and_call_original
+    end
+
     it 'calls Chordpro' do
-      expect(Chordpro).to receive(:html)
       song.formatted_chords
+      expect(Chordpro).to have_received(:html)
     end
 
     it 'returns formatted stuff' do
