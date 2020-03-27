@@ -7,12 +7,12 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title = "Medicine Songs"
+  config.site_title = 'Medicine Songs'
 
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
   #
-  config.site_title_link = "/"
+  config.site_title_link = '/'
 
   # Set an optional image to be displayed for the header
   # instead of a string (overrides :site_title)
@@ -313,4 +313,4 @@ module AdminPageLayoutOverride
   end
 end
 
-ActiveAdmin::Views::Pages::Base.send :prepend, AdminPageLayoutOverride
+ActiveAdmin::Views::Pages::Base.prepend AdminPageLayoutOverride
