@@ -74,10 +74,10 @@ ActiveAdmin.register Song do
         simple_format song.description
       end
       row :lyrics do
-        simple_format song.lyrics
+        simple_format song.lyrics, {}, sanitize: false
       end
       row :translation do
-        simple_format song.translation
+        simple_format song.translation, {}, sanitize: false
       end
       row :chords do |song|
         div do

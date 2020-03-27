@@ -25,16 +25,16 @@
 
 .row
   - if @song.lyrics.present?
-    .col
+    .col.lyrics
       %p
         %strong Lyrics
-        = simple_format @song.lyrics
+        = simple_format @song.lyrics, {}, sanitize: false
 
   - if @song.translation.present?
-    .col
+    .col.translation
       %p
         %strong Translation
-        = simple_format @song.translation
+        = simple_format @song.translation, {}, sanitize: false
 
   - if @song.chords.present?
     .col
