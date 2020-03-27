@@ -11,5 +11,4 @@ module ApplicationHelper
       'success'
     end
   end
-
 end

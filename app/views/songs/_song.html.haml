@@ -3,3 +3,5 @@
   %small
     \-
     = link_to song.composer, songs_path(q: { composer_cont: song.composer })
+    - song.recordings.each do |_|
+      = fa_icon 'music', class: 'fas has-recording'

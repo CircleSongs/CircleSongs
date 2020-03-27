@@ -7,6 +7,6 @@ class Category < ApplicationRecord
   scope :restricted, -> { where restricted: true }
 
   def name_and_count
-    str = "#{name} (#{songs.count})"
+    "#{name} (#{songs.count})"
   end
 end

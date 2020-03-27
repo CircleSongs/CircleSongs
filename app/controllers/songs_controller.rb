@@ -4,7 +4,7 @@ class SongsController < ApplicationController
   def index
     @q = SongCollection.new(params: search_params).q
     @q.sorts = 'title asc' if @q.sorts.empty?
-    @songs = @q.result(distinct: true).page(params[:page] || 1)
+    @songs = @q.result(distinct: true).page(params[:page])
   end
 
   def show
@@ -13,31 +13,34 @@ class SongsController < ApplicationController
 
   private
 
+  def raw_search_params
+    return {} unless params[:q]
+
+    params.require(:q).permit(
+      :title_cont,
+      :composer_cont,
+      :title_start,
+      :s,
+      :chords_present,
+      :languages_id_in,
+      :categories_id_in
+    )
+  end
+
   def search_params
-    p = if params.has_key?(:q)
-      params.require(:q).permit(
-        :title_cont,
-        :composer_cont,
-        :title_start,
-        :s,
-        :chords_present,
-        :languages_id_in,
-        :categories_id_in
-      )
+    if session[:restricted_categories] == true
+      raw_search_params
     else
-      {}
+      raw_search_params.merge categories_id_not_in: Category.restricted.map(&:id)
     end
-    unless session[:restricted_categories] == true
-      p[:categories_id_not_in] = Category.restricted.map(&:id)
-    end
-    p
   end
 
   def set_categories
-    @categories ||= if session[:restricted_categories]
-      Category.all
-    else
-      Category.unrestricted
-    end
+    @categories =
+      if session[:restricted_categories]
+        Category.all
+      else
+        Category.unrestricted
+      end
   end
 end

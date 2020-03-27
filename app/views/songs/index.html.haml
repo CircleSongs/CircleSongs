@@ -27,9 +27,4 @@
       - if @songs.empty?
         %li= t 'songs.no_songs'
       - else
-        - @songs.each do |song|
-          %li
-            = link_to song.title, song
-            %small
-              \-
-              = link_to song.composer, songs_path(q: { composer_cont: song.composer })
+        = render @songs

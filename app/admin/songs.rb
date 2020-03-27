@@ -2,7 +2,13 @@ ActiveAdmin.register Song do
   permit_params :alternate_title, :composer, :composer_url, :image,
                 :description, :lyrics, :title, :translation,
                 :chords, recordings_attributes: [
-                  :description, :embedded_player, :title, :url, :id, :position, :_destroy
+                  :description,
+                  :embedded_player,
+                  :title,
+                  :url,
+                  :id,
+                  :position,
+                  :_destroy
                 ], category_ids: [], language_ids: []
 
   index do
@@ -30,8 +36,8 @@ ActiveAdmin.register Song do
           end
           ol class: 'choices-group' do
             f.collection_check_boxes :category_ids, Category.all, :id, :name do |c|
-              li class: "choice #{'restricted' if c.object.restricted? }" do
-                c.label { c.check_box + c.text}
+              li class: "choice #{'restricted' if c.object.restricted?}" do
+                c.label { c.check_box + c.text }
               end
             end
           end
@@ -40,7 +46,13 @@ ActiveAdmin.register Song do
     end
 
     f.inputs do
-      f.has_many :recordings, heading: 'Recordings', allow_destroy: true, new_record: true, sortable: :position do |a|
+      f.has_many(
+        :recordings,
+        heading: 'Recordings',
+        allow_destroy: true,
+        new_record: true,
+        sortable: :position
+      ) do |a|
         a.input :title
         a.input :url
         a.input :embedded_player
@@ -68,10 +80,10 @@ ActiveAdmin.register Song do
         simple_format song.description
       end
       row :lyrics do
-        simple_format song.lyrics
+        simple_format song.lyrics, {}, sanitize: false
       end
       row :translation do
-        simple_format song.translation
+        simple_format song.translation, {}, sanitize: false
       end
       row :chords do |song|
         div do
@@ -100,5 +112,4 @@ ActiveAdmin.register Song do
       end
     end
   end
-
 end

@@ -8,7 +8,7 @@ RSpec.feature 'As an admin user' do
     visit admin_songs_path
   end
 
-  scenario 'I can create Recordings while creating a Song', :selenium do
+  scenario 'I can create Recordings while creating a Song', :chrome do
     click_on 'New Song'
     fill_in 'Title', with: title
     click_on 'Add New Recording'

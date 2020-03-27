@@ -1,5 +1,5 @@
 class BrokenLinkReport < MailForm::Base
-  DEFAULT_FROM = "Broken Links <contact@#{ENV['base_domain']}>".freeze
+  DEFAULT_FROM = "Broken Links <contact@#{Rails.application.credentials.base_domain}>".freeze
 
   attribute :recording_id, validate: true
   attribute :nickname, captcha: true
@@ -7,14 +7,10 @@ class BrokenLinkReport < MailForm::Base
   def headers
     {
       subject: subject_text,
-      to: ENV['contact_form_email'],
+      to: Rails.application.credentials.contact_form_email,
       from: DEFAULT_FROM,
       message: message
     }
-  end
-
-  def notify
-    valid? || spam? ? deliver : false
   end
 
   def recording
@@ -28,11 +24,11 @@ class BrokenLinkReport < MailForm::Base
   end
 
   def message
-    <<~EOS
+    <<~TEXT
       Broken link reported for #{song.title}:
       #{recording.title}
       #{Rails.application.routes.url_helpers.song_path(song)}
-    EOS
+    TEXT
   end
 
   def song

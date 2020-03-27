@@ -13,6 +13,7 @@ class RestrictedCategorySessionsController < ApplicationController
   end
 
   private
+
   def auth_params
     params.require(:restricted_category_session).permit :password
   end
@@ -22,6 +23,6 @@ class RestrictedCategorySessionsController < ApplicationController
   end
 
   def password
-    @password ||= ENV['restricted_category_password']
+    @password ||= Rails.application.credentials.restricted_category_password
   end
 end
