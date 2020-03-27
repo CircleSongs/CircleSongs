@@ -46,7 +46,9 @@ ActiveAdmin.register Song do
     end
 
     f.inputs do
-      f.has_many :recordings, heading: 'Recordings', allow_destroy: true, new_record: true, sortable: :position do |a|
+      f.has_many(
+        :recordings, heading: 'Recordings', allow_destroy: true,
+        new_record: true, sortable: :position) do |a|
         a.input :title
         a.input :url
         a.input :embedded_player
@@ -106,5 +108,4 @@ ActiveAdmin.register Song do
       end
     end
   end
-
 end

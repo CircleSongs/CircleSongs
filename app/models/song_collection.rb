@@ -8,5 +8,6 @@ class SongCollection
   end
 
   private
+
   attr_reader :params
 end

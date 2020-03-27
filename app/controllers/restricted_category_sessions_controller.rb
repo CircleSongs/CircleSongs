@@ -13,6 +13,7 @@ class RestrictedCategorySessionsController < ApplicationController
   end
 
   private
+
   def auth_params
     params.require(:restricted_category_session).permit :password
   end

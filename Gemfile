@@ -2,10 +2,8 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| 'https://github.com/#{repo}.git' }
 
 ruby '2.6.5'
-gem 'rails', '~> 6.0.2'
-
+gem 'aws-sdk-s3'
 gem 'activeadmin'
-gem "aws-sdk-s3"
 gem 'arctic_admin'
 gem 'bootsnap'
 gem 'bootstrap'
@@ -22,6 +20,7 @@ gem 'newrelic_rpm'
 gem 'oj'
 gem 'pg'
 gem 'puma'
+gem 'rails', '~> 6.0.2'
 gem 'ransack'
 gem 'rollbar'
 gem 'sass-rails'
@@ -48,11 +47,10 @@ group :test do
   gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'ffaker'
-  gem 'webdrivers'
   gem 'rspec-rails'
   gem 'rspec_junit_formatter'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
+  gem 'webdrivers'
 end
-

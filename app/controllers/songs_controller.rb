@@ -34,10 +34,7 @@ class SongsController < ApplicationController
   end
 
   def set_categories
-    @categories ||= if session[:restricted_categories]
-      Category.all
-    else
-      Category.unrestricted
-    end
+    @categories ||=
+      session[:restricted_categories] ? Category.all : Category.unrestricted
   end
 end

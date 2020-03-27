@@ -32,6 +32,8 @@ plugins:
         enabled: false
       dangerous_permit_key:
         enabled: false
+      xss_link_to_href:
+        enabled: false
   bundler-audit:
     enabled: true
   csslint:
@@ -96,3 +98,4 @@ exclude_patterns:
 - "tmp/"
 - "vendor/"
 - ".babble.config.js"
+- "Gemfile"

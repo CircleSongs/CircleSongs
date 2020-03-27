@@ -4,6 +4,7 @@ class ContactFormsController < ApplicationController
     render :new
   end
 
+  # rubocop:disable Metrics/MethodLength
   def create
     @contact_form = ContactForm.new(contact_form_params)
     @contact_form.request = request
