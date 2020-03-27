@@ -17,7 +17,7 @@ RSpec.configure do |config|
     "#{File.basename(meta[:file_path])}-#{meta[:line_number]}.png"
   end
 
-  config.after do |example|
+  config.after do
     Capybara.reset_sessions!
     Capybara.use_default_driver
   end

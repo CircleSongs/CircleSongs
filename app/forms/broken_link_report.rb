@@ -24,11 +24,11 @@ class BrokenLinkReport < MailForm::Base
   end
 
   def message
-    <<~EOS
+    <<~TEXT
       Broken link reported for #{song.title}:
       #{recording.title}
       #{Rails.application.routes.url_helpers.song_path(song)}
-    EOS
+    TEXT
   end
 
   def song

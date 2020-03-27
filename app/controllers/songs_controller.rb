@@ -15,6 +15,7 @@ class SongsController < ApplicationController
 
   def raw_search_params
     return {} unless params[:q]
+
     params.require(:q).permit(
       :title_cont,
       :composer_cont,
@@ -35,10 +36,11 @@ class SongsController < ApplicationController
   end
 
   def set_categories
-    @categories ||= if session[:restricted_categories]
-      Category.all
-    else
-      Category.unrestricted
-    end
+    @categories =
+      if session[:restricted_categories]
+        Category.all
+      else
+        Category.unrestricted
+      end
   end
 end

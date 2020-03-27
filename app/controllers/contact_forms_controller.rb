@@ -20,6 +20,7 @@ class ContactFormsController < ApplicationController
       render :new
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   private
 

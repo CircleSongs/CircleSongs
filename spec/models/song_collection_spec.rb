@@ -13,9 +13,7 @@ RSpec.describe SongCollection do
 
     context 'with a good string' do
       let(:params) do
-        {
-          title_cont: 'California'
-        }
+        { title_cont: 'California' }
       end
 
       it 'returns songs matching the title' do
@@ -25,10 +23,9 @@ RSpec.describe SongCollection do
 
     context 'with a bad string' do
       let(:params) do
-        {
-          title_cont: 'foo'
-        }
+        { title_cont: 'foo' }
       end
+
       it 'returns no songs' do
         expect(results.count).to eq 0
       end
