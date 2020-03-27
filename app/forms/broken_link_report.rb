@@ -13,10 +13,6 @@ class BrokenLinkReport < MailForm::Base
     }
   end
 
-  def notify
-    valid? || spam? ? deliver : false
-  end
-
   def recording
     @recording ||= Recording.find(recording_id)
   end

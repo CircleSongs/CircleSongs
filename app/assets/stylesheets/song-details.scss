@@ -32,9 +32,8 @@ ul {
           color: $warning;
           font-size: 0.8rem;
         }
-        .captcha {
-          visibility: hidden;
-          position: absolute;
+        .hidden {
+          display: none;
         }
       }
     }
