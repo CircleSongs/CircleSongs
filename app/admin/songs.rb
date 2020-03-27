@@ -8,6 +8,7 @@ ActiveAdmin.register Song do
                   :url,
                   :id,
                   :position,
+                  :reported,
                   :_destroy
                 ], category_ids: [], language_ids: []
 
@@ -57,6 +58,7 @@ ActiveAdmin.register Song do
         a.input :url
         a.input :embedded_player
         a.input :description
+        a.input :reported
       end
     end
 
@@ -109,6 +111,7 @@ ActiveAdmin.register Song do
           raw recording.embedded_player
         end
         column :description
+        column :reported
       end
     end
   end
