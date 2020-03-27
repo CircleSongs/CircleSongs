@@ -10,7 +10,7 @@
         - if recording.reported
           %small Reported
         - else
-          = simple_form_for :broken_link_report, url: broken_link_reports_path, method: :post, remote: true, data: { confirm: 'Report broken link?' } do |f|
+          = simple_form_for :broken_link_report, url: broken_link_reports_path, method: :post, remote: true, data: { confirm: 'Report broken link?', type: :json } do |f|
             = button_tag type: :submit, class: 'btn report-broken-link' do
               = fa_icon('unlink')
             .hidden
