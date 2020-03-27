@@ -1,6 +1,6 @@
 import ChordSheetJS from "chordsheetjs";
 
-$(document).on('turbolinks:load', function() {
+$(function() {
   const node = $('#song-chords');
 
   if (node.length > 0) {
