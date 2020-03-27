@@ -5,9 +5,6 @@ class BrokenLinkFormsController < ApplicationController
     if @broken_link_form.valid? || @broken_link_form.spam?
       @broken_link_form.deliver
 
-      session[:reported_broken_links] ||= {}
-      session[:reported_broken_links][broken_link_form_params[:recording_id]] = true
-
       render json: { message: t('.success') }, status: :ok
     else
       render json: { message: t('.error') }, status: :not_modified

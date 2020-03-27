@@ -22,6 +22,6 @@ class RestrictedCategorySessionsController < ApplicationController
   end
 
   def password
-    @password ||= ENV['restricted_category_password']
+    @password ||= Rails.application.credentials.restricted_category_password
   end
 end

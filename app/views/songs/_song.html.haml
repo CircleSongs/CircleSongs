@@ -3,3 +3,5 @@
   %small
     \-
     = link_to song.composer, songs_path(q: { composer_cont: song.composer })
+    - unless song.recordings.empty?
+      = fa_icon 'music', class: 'fas has-recording'

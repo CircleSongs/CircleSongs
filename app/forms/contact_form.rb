@@ -1,7 +1,7 @@
 class ContactForm < MailForm::Base
   DEFAULT_FROM_NAME = 'Contact Form'.freeze
-  DEFAULT_FROM_EMAIL = "contact_form@#{ENV['base_domain']}".freeze
-  DEFAULT_SUBJECT = "Hi from #{ENV['base_domain']}!".freeze
+  DEFAULT_FROM_EMAIL = "contact_form@#{Rails.application.credentials.base_domain}".freeze
+  DEFAULT_SUBJECT = "Hi from #{Rails.application.credentials.base_domain}!".freeze
 
   attribute :name
   attribute :email, validate: /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i, allow_blank: true
@@ -12,7 +12,7 @@ class ContactForm < MailForm::Base
   def headers
     {
       subject: subject_text,
-      to: ENV['contact_form_email'],
+      to: Rails.application.credentials.contact_form_email,
       from: "#{from_name} <#{from_email}>"
     }
   end

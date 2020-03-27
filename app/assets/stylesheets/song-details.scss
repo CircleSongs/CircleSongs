@@ -2,8 +2,13 @@ img.thumb {
   float: left;
   margin: 0 1rem 1rem 0;
 }
-h2 small {
-  font-size: 1.2rem;
+h2 {
+  small {
+    font-size: 1.2rem;
+  }
+  a.back-to-songs {
+    font-size: 0.8rem;
+  }
 }
 
 ul {
@@ -14,7 +19,6 @@ ul {
 .embed-responsive {
   max-height: 200px;
 }
-
 
 .recording .card {
   margin-bottom: 3rem;
@@ -28,8 +32,13 @@ ul {
           color: $warning;
           font-size: 0.8rem;
         }
+        .captcha {
+          visibility: hidden;
+          position: absolute;
+        }
       }
     }
+    p { margin: 0; }
   }
 }
 

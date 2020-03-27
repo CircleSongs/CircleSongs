@@ -2,8 +2,11 @@
   = image_tag @song.image[:thumb].url, class: :thumb
 %h2
   = @song.title
-  - if user_signed_in?
-    %span.float-right
+  %span.float-right
+    %a.back-to-songs{ href: songs_path }
+      = fa_icon('arrow-left')
+      Songs
+    - if user_signed_in?
       %small= link_to fa_icon('pencil'), edit_admin_song_path(@song)
 - if @song.alternate_title.present?
   %p= "[#{@song.alternate_title}]"
