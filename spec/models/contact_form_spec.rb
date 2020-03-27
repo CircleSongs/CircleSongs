@@ -7,7 +7,7 @@ RSpec.describe ContactForm do
   describe '::DEFAULT_FROM_EMAIL' do
     it 'returns a sensible default' do
       expect(described_class::DEFAULT_FROM_EMAIL).to eq(
-        "contact_form@#{Rails.application.credentials.base_domain}"
+        Rails.application.credentials.from_email
       )
     end
   end

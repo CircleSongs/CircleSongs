@@ -1,6 +1,6 @@
 class ContactForm < MailForm::Base
   DEFAULT_FROM_NAME = 'Contact Form'.freeze
-  DEFAULT_FROM_EMAIL = "contact_form@#{Rails.application.credentials.base_domain}".freeze
+  DEFAULT_FROM_EMAIL = Rails.application.credentials.from_email
   DEFAULT_SUBJECT = "Hi from #{Rails.application.credentials.base_domain}!".freeze
 
   attribute :name

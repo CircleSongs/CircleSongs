@@ -26,6 +26,7 @@ gem 'rollbar'
 gem 'sass-rails'
 gem 'shrine'
 gem 'simple_form'
+gem 'sprockets'
 gem 'uglifier'
 gem 'webpacker'
 

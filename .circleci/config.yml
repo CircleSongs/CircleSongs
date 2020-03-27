@@ -1,31 +1,37 @@
-version: 2
+---
+version: 2.1
+orbs:
+  heroku: circleci/heroku@0.0.10
+workflows:
+  version: 2
+  build-test-and-deploy:
+    jobs:
+      - build_and_test
+      - deploy:
+          requires:
+            - build_and_test
 jobs:
-  build:
-    working_directory: ~/repo
+  build_and_test:
+    working_directory: ~/circle-songs
     docker:
       - image: circleci/ruby:2.6.5-node-browsers
         environment:
-          BUNDLE_JOBS: 3
-          BUNDLE_RETRY: 3
-          BUNDLE_PATH: vendor/bundle
-          PGHOST: 127.0.0.1
+          PGHOST: localhost
           PGUSER: circleci
           RAILS_ENV: test
       - image: circleci/postgres:9.5-alpine
         environment:
-          - POSTGRES_USER: circleci
-          - POSTGRES_DB: circle_songs_test
-          - POSTGRES_PASSWORD: ""
+          POSTGRES_USER: circleci
+          POSTGRES_DB: circle-songs_test
+          POSTGRES_PASSWORD: ""
+      - image: redis
     steps:
       - checkout
       - run: sudo apt-get update
-      - run:
-          name: Install CapybaraWebkit Dependencies
-          command: sudo apt-get install qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "Gemfile.lock" }}
-          - v1-dependencies-
+          - circle-songs-{{ checksum "Gemfile.lock" }}
+          - circle-songs-
       - run:
           name: Configure Bundler
           command: |
@@ -33,38 +39,35 @@ jobs:
             source $BASH_ENV
             gem install bundler
       - run:
-          name: install dependencies
+          name: Install Dependencies
           command: |
-            bundle config set path 'vendor/bundle'
-            bundle install --jobs=4 --retry=3
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+            bin/yarn
       - save_cache:
           paths:
             - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      - restore_cache:
-          keys:
-            - rails-demo-yarn-{{ checksum "yarn.lock" }}
-            - rails-demo-yarn-
-      - run:
-          name: Yarn Install
-          command: yarn install --cache-folder ~/.cache/yarn
-      # Store yarn / webpacker cache
-      - save_cache:
-          key: rails-demo-yarn-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
+          key: circle-songs-{{ checksum "Gemfile.lock" }}
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
+
       # test
       - run:
-          name: run tests
+          name: Install JUnit coverage reporter
+          command: yarn add --dev jest-junit
+      - run:
+          name: Run Javascript tests with JUnit as reporter
+          command: npm test app/javascript --ci --runInBand --reporters=default --reporters=jest-junit
+          environment:
+            JEST_JUNIT_OUTPUT: "/tmp/test-results/jest/results.xml"
+      - run:
+          name: run ruby tests
           command: |
             mkdir /tmp/test-results
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings --timings-type=classname)"
 
              xvfb-run -a bundle exec rspec --format progress \
                             --format RspecJunitFormatter \
-                            --out /tmp/test-results/rspec.xml \
+                            --out /tmp/test-results/rspec/results.xml \
                             --format progress \
                             $TEST_FILES
 
@@ -74,33 +77,17 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
+      - store_artifacts:
+          path: /tmp/capybara
   deploy:
-    working_directory: ~/repo
-    docker:
-      - image: buildpack-deps:trusty
+    executor: heroku/default # Uses the basic buildpack-deps image, which has the prerequisites for installing heroku's CLI.
     steps:
       - checkout
-      - run: sudo apt-get update
-      - run: bash .circleci/setup-heroku.sh
-      - add_ssh_keys:
-          fingerprints:
-            - $HEROKU_SSH_FINGERPRINT
+      - heroku/install
+      - heroku/deploy-via-git:
+          only-branch: master
       - run:
-          name: Deploy Master to Heroku
+          name: Heroku post-deploy steps
           command: |
-            git push --force git@heroku.com:$HEROKU_APP_NAME.git HEAD:refs/heads/master
-            heroku run rails db:migrate -a $HEROKU_APP_NAME
-            heroku restart -a $HEROKU_APP_NAME
-
-workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      - build
-      - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
-
+            heroku run rails db:migrate -a circle-songs
+            heroku restart -a circle-songs
