@@ -19,13 +19,9 @@ RSpec.feature 'As an Admin user' do
     expect(page).to have_content value
     expect(page).not_to have_content 'Delete'
     expect(page).not_to have_content 'Show'
-<<<<<<< HEAD
-    click_on 'Edit'
-=======
     within '#index_table_passwords tbody tr:nth-child(2)' do
       click_on 'Edit'
     end
->>>>>>> password-edit
     expect(page).to have_field 'Name', with: name, disabled: true
     expect(page).to have_field 'Value', with: value
     fill_in 'Value', with: new_value
