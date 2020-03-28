@@ -13,7 +13,7 @@ RSpec.feature 'As an admin user' do
   let(:formatted_chords) { 'Swing low, sweet chariot' }
 
   before do
-    login
+    login_as user
     visit admin_songs_path
   end
 

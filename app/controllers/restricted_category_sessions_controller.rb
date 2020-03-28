@@ -19,10 +19,6 @@ class RestrictedCategorySessionsController < ApplicationController
   end
 
   def authorized?
-    auth_params[:password] == password
-  end
-
-  def password
-    @password ||= Rails.application.credentials.restricted_category_password
+    auth_params[:password] == Password.restricted_songs
   end
 end
