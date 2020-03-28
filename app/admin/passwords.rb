@@ -1,5 +1,6 @@
 ActiveAdmin.register Password do
-  actions :all, :except => [:destroy, :show]
+  config.sort_order = :created_at_asc
+  actions :all, except: [:destroy, :show]
   permit_params :name, :value
 
   index do

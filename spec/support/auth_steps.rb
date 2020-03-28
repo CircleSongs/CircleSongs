@@ -1,9 +1,9 @@
-def authorize_restricted_categories
+def authorize_restricted_categories(password)
   visit root_path
   click_on 'traditions of healing'
   fill_in(
     I18n.t('restricted_categories.password_label'),
-    with: Rails.application.credentials.restricted_category_password
+    with: password
   )
   click_on 'Submit'
 end

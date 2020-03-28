@@ -3,6 +3,7 @@ RSpec.feature 'As an' do
   let(:restricted_categories) { Category.restricted }
   let(:all_categories) { Category.all }
   let(:restricted_song) { songs(:restricted) }
+  let(:password) { passwords(:restricted_songs).value }
 
   before do
     visit root_path
@@ -11,7 +12,8 @@ RSpec.feature 'As an' do
   context 'unauthenticated guest' do
     scenario 'I cannot see restricted Categories or Songs' do
       expect(page).to have_select(
-        'Category', options: unrestricted_categories.map(&:name_and_count).unshift('All')
+        'Category',
+        options: unrestricted_categories.map(&:name_and_count).unshift('All')
       )
       expect(page).not_to have_content restricted_song.title
     end
@@ -30,8 +32,6 @@ RSpec.feature 'As an' do
     end
 
     context 'with good credentials' do
-      let(:password) { Rails.application.credentials.restricted_category_password }
-
       scenario 'I am redirected to Songs#index' do
         visit new_restricted_category_session_path
         fill_in I18n.t('restricted_categories.password_label'), with: password
@@ -43,7 +43,7 @@ RSpec.feature 'As an' do
 
   context 'an authenticated guest' do
     before do
-      authorize_restricted_categories
+      authorize_restricted_categories(password)
     end
 
     scenario 'I can see all the categories and songs' do
