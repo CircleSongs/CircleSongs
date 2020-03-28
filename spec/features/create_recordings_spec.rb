@@ -4,7 +4,7 @@ RSpec.feature 'As an admin user' do
   let(:youtube_link) { 'https://www.youtube.com/watch?v=yCjJyiqpAuU' }
 
   before do
-    login
+    login_as user
     visit admin_songs_path
   end
 
