@@ -5,7 +5,7 @@ RSpec.feature 'As an admin user' do
   let(:name) { FFaker::Lorem.word }
 
   before do
-    login
+    login_as user
     visit admin_categories_path
   end
 
