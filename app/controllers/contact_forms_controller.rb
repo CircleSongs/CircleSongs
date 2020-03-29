@@ -14,7 +14,7 @@ class ContactFormsController < ApplicationController
     elsif @contact_form.valid?
       @contact_form.deliver
       flash[:success] = t('.success')
-      redirect_to new_contact_form_path
+      redirect_to songs_path
     else
       flash.now[:error] = 'Please correct the errors below'
       render :new

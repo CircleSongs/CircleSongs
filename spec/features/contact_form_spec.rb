@@ -17,6 +17,7 @@ RSpec.describe 'As a guest' do
     expect(page).to have_content I18n.t('contact_forms.success')
     expect(last_email.to).to include Rails.application.credentials.contact_email
     expect(last_email.from).to include email
+    expect(page).to have_current_path songs_path
   end
 
   scenario 'with incomplete ContactForm data' do
