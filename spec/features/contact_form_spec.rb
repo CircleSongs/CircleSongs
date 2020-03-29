@@ -15,7 +15,7 @@ RSpec.describe 'As a guest' do
     fill_in 'Message...', with: message
     click_on 'Submit'
     expect(page).to have_content I18n.t('contact_forms.success')
-    expect(last_email.to).to include Rails.application.credentials.contact_form_email
+    expect(last_email.to).to include Rails.application.credentials.contact_email
     expect(last_email.from).to include email
   end
 

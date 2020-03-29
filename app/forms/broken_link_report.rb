@@ -1,5 +1,5 @@
 class BrokenLinkReport < MailForm::Base
-  DEFAULT_FROM = "Broken Links <contact@#{Rails.application.credentials.base_domain}>".freeze
+  DEFAULT_FROM = "Broken Links <#{Rails.application.credentials.contact_email}>".freeze
 
   attribute :recording_id, validate: true
   attribute :nickname, captcha: true
@@ -7,7 +7,7 @@ class BrokenLinkReport < MailForm::Base
   def headers
     {
       subject: subject_text,
-      to: Rails.application.credentials.contact_form_email,
+      to: Rails.application.credentials.contact_email,
       from: DEFAULT_FROM,
       message: message
     }

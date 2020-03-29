@@ -17,7 +17,7 @@ RSpec.feature 'As an admin user' do
     click_on 'Create User'
     expect(page).to have_content 'User was successfully created.'
     expect(page).to have_content email
-    within 'tbody tr:nth-child(2)' do
+    within 'tbody tr:nth-child(1)' do
       click_on 'Edit'
     end
     fill_in 'Email', with: new_email
