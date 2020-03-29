@@ -12,6 +12,11 @@
 
   %body
     = render 'layouts/navigation'
+    - unless flash.empty?
+      .row
+        .col
+          = render 'layouts/messages'
+
     .container.main
       = yield
 

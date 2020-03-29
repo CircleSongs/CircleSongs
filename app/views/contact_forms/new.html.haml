@@ -1,9 +1,4 @@
 %h1 Contact Us
-
-- unless flash.empty?
-  .row
-    .col-sm-6.offset-sm-3
-      = render 'layouts/messages'
 .row.contact-form
   .col-sm-6.offset-sm-3
     = simple_form_for @contact_form do |f|

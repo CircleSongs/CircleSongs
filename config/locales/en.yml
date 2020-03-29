@@ -4,7 +4,7 @@ en:
   restricted_categories:
     password_label: Please enter the secret password to continue.
   contact_forms:
-    success: Thank you for your message.
+    success: Thank you, your message has been sent!
   broken_link_forms:
     success: Thank you for reporting the problem. We will look into it.
     email:

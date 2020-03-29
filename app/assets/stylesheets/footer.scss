@@ -1,12 +1,13 @@
-footer {
+.footer {
+  padding: $margin;
   background-color: $gray-200;
-  padding: 3rem;
   color: $gray-600;
+  text-align: center;
   p {
+    line-height: 1.3rem;
     &:last-of-type {
       margin: 0;
     }
-    text-align: center;
     a {
       color: $gray-600;
       &.gratitude:hover {
