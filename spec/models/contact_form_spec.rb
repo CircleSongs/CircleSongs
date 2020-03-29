@@ -21,7 +21,7 @@ RSpec.describe ContactForm do
   describe '::DEFAULT_SUBJECT' do
     it 'returns a sensible default' do
       expect(described_class::DEFAULT_SUBJECT).to eq <<~SUBJECT.strip
-        Hi from #{Rails.application.credentials.base_domain}!
+        Medicine Songs - Contact Form
       SUBJECT
     end
   end
