@@ -3,12 +3,12 @@ example_id                                           | status | run_time        
 ./spec/features/admin/categories_spec.rb[1:1]        | passed | 0.27613 seconds |
 ./spec/features/admin/categories_spec.rb[1:2]        | passed | 0.1519 seconds  |
 ./spec/features/admin/passwords_spec.rb[1:1]         | passed | 0.63042 seconds |
-./spec/features/admin/users_spec.rb[1:1]             | failed | 18.86 seconds   |
+./spec/features/admin/users_spec.rb[1:1]             | passed | 11.16 seconds   |
 ./spec/features/broken_link_report_spec.rb[1:1]      | passed | 4.21 seconds    |
 ./spec/features/categories_spec.rb[1:1]              | passed | 0.09147 seconds |
-./spec/features/contact_form_spec.rb[1:1]            | failed | 9.71 seconds    |
-./spec/features/contact_form_spec.rb[1:2]            | passed | 0.24842 seconds |
-./spec/features/contact_form_spec.rb[1:3]            | passed | 0.13886 seconds |
+./spec/features/contact_form_spec.rb[1:1]            | passed | 3.54 seconds    |
+./spec/features/contact_form_spec.rb[1:2]            | passed | 0.15329 seconds |
+./spec/features/contact_form_spec.rb[1:3]            | passed | 0.10726 seconds |
 ./spec/features/create_recordings_spec.rb[1:1]       | passed | 50.98 seconds   |
 ./spec/features/create_songs_spec.rb[1:1]            | passed | 29.86 seconds   |
 ./spec/features/create_songs_spec.rb[1:2]            | passed | 3.13 seconds    |
