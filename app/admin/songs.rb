@@ -1,7 +1,7 @@
 ActiveAdmin.register Song do
   permit_params :alternate_title, :composer, :composer_url, :image,
                 :description, :lyrics, :title, :translation,
-                :chords, recordings_attributes: [
+                :chords, :chord_forms, recordings_attributes: [
                   :description,
                   :embedded_player,
                   :title,
@@ -29,6 +29,7 @@ ActiveAdmin.register Song do
       f.input :lyrics
       f.input :translation
       f.input :chords
+      f.input :chord_forms
       f.input :languages, as: :check_boxes
       li class: 'check_boxes input optional', id: :song_categories_input do
         fieldset class: :choices do
@@ -94,6 +95,7 @@ ActiveAdmin.register Song do
           end
         end
       end
+      row :chord_forms
       row :categories do |song|
         song.categories.map(&:name).to_sentence
       end

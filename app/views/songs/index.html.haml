@@ -19,7 +19,7 @@
           = link_to 'Clear', songs_path, class: 'btn btn-secondary'
 
   .row
-    .col-sm-8.offset-sm-2
+    .col
       = paginate @songs
 .row
   .col-sm-12
@@ -28,3 +28,7 @@
         %li= t 'songs.no_songs'
       - else
         = render @songs
+
+.row
+  .col
+    = paginate @songs

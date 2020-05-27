@@ -53,4 +53,11 @@ RSpec.feature 'As an' do
       expect(page).to have_content restricted_song.title
     end
   end
+
+  scenario 'I can use a pretty url to access the sacred password' do
+    visit sacred_password_path
+    fill_in I18n.t('restricted_categories.password_label'), with: password
+    click_on 'Submit'
+    expect(page).to have_current_path '/songs'
+  end
 end
