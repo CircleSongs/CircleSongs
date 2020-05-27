@@ -26,7 +26,7 @@ gem 'rollbar'
 gem 'sassc-rails'
 gem 'shrine'
 gem 'simple_form'
-gem 'sprockets'
+gem 'sprockets', '3.7.2'
 gem 'uglifier'
 gem 'webpacker'
 
