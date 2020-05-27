@@ -9,3 +9,6 @@ en:
     success: Thank you for reporting the problem. We will look into it.
     email:
       subject: Broken link reported for %{title}
+  thank_you:
+    donation: Thank you so much for your generosity! You make it possible to keep this site growing and thriving. Thanks for feeding what feeds you. May these songs open your heart and inspire you.
+    purchase: Thank you so much for your purchase! You make it possible to keep this site growing and thriving. Thanks for feeding what feeds you. May these songs open your heart and inspire you.

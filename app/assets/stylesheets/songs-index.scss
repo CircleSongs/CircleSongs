@@ -3,12 +3,17 @@ ul.songs {
   li {
     padding: 0.5rem;
 
-    &:nth-child(even){
+    &:nth-child(even) {
       background-color: #eee;
     }
 
-    .has-recording {
+    .has-recording,
+    .has-chords {
       color: $gray-500;
+      margin-left: $margin;
+    }
+
+    .edit {
       margin-left: $margin;
     }
   }

@@ -48,4 +48,9 @@ RSpec.feature 'As a guest'  do
     expect(page).not_to have_content taki_taki.title
     expect(page).to have_content el_condor_pasa.title
   end
+
+  scenario 'I do not see an edit link' do
+    expect(page).not_to have_selector 'a.edit'
+    expect(page).not_to have_selector '.has_recording'
+  end
 end
