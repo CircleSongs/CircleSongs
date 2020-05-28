@@ -1,6 +1,6 @@
 module ApplicationHelper
   def fa_icon(icon, opts = {})
-    content_tag :i, nil, class: ([:far, "fa-#{icon}"] << opts[:class])
+    content_tag :i, nil, class: ([:far, "fa-#{icon}"] << opts[:class]), data: opts[:data]
   end
 
   def bootstrap_alert_class(str)
