@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   get 'purchase_thank_you', to: 'thank_you#purchase'
   get 'sacred', to: 'restricted_category_sessions#new', as: :sacred_password
   get 'donations', to: 'donations#new'
+  get 'purchase', to: 'downloads#new'
 end
