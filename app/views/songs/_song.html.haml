@@ -5,8 +5,8 @@
     = link_to song.composer, songs_path(q: { composer_cont: song.composer })
     - if user_signed_in?
       - if song.recordings.exists?
-        = fa_icon 'waveform', class: 'fas has-recording'
+        = fa_icon 'waveform', class: 'fas has-recording', data: { toggle: :tooltip, title: "Has #{song.recordings.count} Recordings" }
         = "(#{song.recordings.count})"
       - if song.chords.present?
-        = fa_icon 'music', class: 'fas has-chords'
+        = fa_icon 'music', class: 'fas has-chords', data: { toggle: :tooltip, title: 'Has Chords' }
       = link_to fa_icon('pencil'), edit_admin_song_path(song), class: :edit
