@@ -1,7 +1,8 @@
 ActiveAdmin.register Song do
   permit_params :alternate_title, :composer, :composer_url, :image,
                 :description, :lyrics, :title, :translation,
-                :chords, :chord_forms, recordings_attributes: [
+                :chords,
+                recordings_attributes: [
                   :description,
                   :embedded_player,
                   :title,
@@ -10,7 +11,10 @@ ActiveAdmin.register Song do
                   :position,
                   :reported,
                   :_destroy
-                ], category_ids: [], language_ids: []
+                ],
+                song_chord_forms_attributes: [:chord_form_id],
+                category_ids: [],
+                language_ids: []
 
   index do
     column :title
@@ -29,7 +33,18 @@ ActiveAdmin.register Song do
       f.input :lyrics
       f.input :translation
       f.input :chords
-      f.input :chord_forms
+      f.inputs do
+        f.has_many(
+          :song_chord_forms,
+          sortable: :position,
+          sortable_start: 1,
+          new_record: 'Add new chord form'
+        ) do |cf|
+          cf.input :chord_form, collection: ChordForm.all.map { |chord_form|
+            [chord_form.chord, chord_form.id]
+          }, allow_blank: true
+        end
+      end
       f.input :languages, as: :check_boxes
       li class: 'check_boxes input optional', id: :song_categories_input do
         fieldset class: :choices do
@@ -95,7 +110,12 @@ ActiveAdmin.register Song do
           end
         end
       end
-      row :chord_forms
+      table_for song.chord_forms do
+        column :chord
+        column :fingering do |chord_form|
+          div class: 'chord-form', 'data-fingering': chord_form.fingering
+        end
+      end
       row :categories do |song|
         song.categories.map(&:name).to_sentence
       end

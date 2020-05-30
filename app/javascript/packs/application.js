@@ -4,8 +4,8 @@ import "jquery";
 import "popper.js";
 import "bootstrap";
 import "src/song-chords";
-import "src/tooltips";
 import "src/broken-link-report";
+import "src/chord-forms";
 
 $(document).on("turbolinks:load", () => {
   $('[data-toggle="tooltip"]').tooltip();
