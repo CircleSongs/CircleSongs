@@ -8,7 +8,7 @@ RSpec.feature 'As an admin user' do
     login_as user
   end
 
-  scenario 'I can create a user', :chrome do
+  scenario 'I can create a user', :js do
     visit admin_users_path
     click_on 'New User'
     fill_in 'Email', with: email

@@ -45,7 +45,5 @@
       %pre
         #song-chords{ data: @song.chords.to_json }
 
-      - if @song.chord_forms.present?
-        .chord_forms
-          =simple_format @song.chord_forms
-
+      - @song.chord_forms.each do |chord_form|
+        .chord-form{ data: { id: chord_form.id, chord: chord_form.chord, fingering: chord_form.fingering }}

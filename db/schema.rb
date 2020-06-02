@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_27_203121) do
+ActiveRecord::Schema.define(version: 2020_05_31_031520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -26,6 +26,11 @@ ActiveRecord::Schema.define(version: 2020_05_27_203121) do
   create_table "categories_songs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "category_id"
     t.uuid "song_id"
+  end
+
+  create_table "chord_forms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "chord"
+    t.text "fingering"
   end
 
   create_table "languages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -58,6 +63,12 @@ ActiveRecord::Schema.define(version: 2020_05_27_203121) do
     t.integer "position"
   end
 
+  create_table "song_chord_forms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "song_id"
+    t.uuid "chord_form_id"
+    t.integer "position"
+  end
+
   create_table "songs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.string "alternate_title"
@@ -70,7 +81,6 @@ ActiveRecord::Schema.define(version: 2020_05_27_203121) do
     t.text "description"
     t.string "composer_url"
     t.text "image_data"
-    t.text "chord_forms"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
