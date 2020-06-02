@@ -12,7 +12,7 @@ ActiveAdmin.register Song do
                   :reported,
                   :_destroy
                 ],
-                song_chord_forms_attributes: [:chord_form_id],
+                song_chord_forms_attributes: [:id, :chord_form_id, :_destroy, :position],
                 category_ids: [],
                 language_ids: []
 
@@ -38,7 +38,8 @@ ActiveAdmin.register Song do
           :song_chord_forms,
           sortable: :position,
           sortable_start: 1,
-          new_record: 'Add new chord form'
+          new_record: 'Add new chord form',
+          allow_destroy: true
         ) do |cf|
           cf.input :chord_form, collection: ChordForm.all.map { |chord_form|
             [chord_form.chord, chord_form.id]
@@ -110,7 +111,7 @@ ActiveAdmin.register Song do
           end
         end
       end
-      table_for song.chord_forms do
+      table_for song.chord_forms.order(:position) do
         column :chord
         column :fingering do |chord_form|
           div class: 'chord-form', 'data-fingering': chord_form.fingering
