@@ -6,6 +6,14 @@
     %span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.navbar-nav.mr-auto
+      %li.nav-item
+        = link_to 'Icaros', '/icaros', class: 'nav-link'
+      %li.nav-item
+        = link_to 'Quechua', '/quechua', class: 'nav-link'
+      %li.nav-item
+        = link_to 'Integration', '/integration', class: 'nav-link'
+      %li.nav-item
+        = link_to 'Learning Music', '/learning_music', class: 'nav-link'
 
     %ul.navbar-nav
       %li.nav-item
@@ -13,4 +21,3 @@
         = link_to 'Make a Donation!', donations_path, class: 'btn btn-warning'
       %li.nav-item
         %a.nav-link{ href: admin_dashboard_path }= fa_icon('sign-in')
-
