@@ -19,5 +19,4 @@ Rails.application.routes.draw do
   get 'icaros', to: 'site#icaros'
   get 'integration', to: 'site#integration'
   get 'learning_music', to: 'site#learning_music'
-
 end

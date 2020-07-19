@@ -3,12 +3,9 @@ class SiteController < ApplicationController
     @vocabularies = Vocabulary.all
   end
 
-  def icaros
-  end
+  def icaros; end
 
-  def integration
-  end
+  def integration; end
 
-  def learning_music
-  end
+  def learning_music; end
 end

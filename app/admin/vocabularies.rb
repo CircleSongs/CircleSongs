@@ -1,5 +1,5 @@
 ActiveAdmin.register Vocabulary do
-  menu label: "Quechua"
+  menu label: 'Quechua'
 
   permit_params :text, :translation
 
