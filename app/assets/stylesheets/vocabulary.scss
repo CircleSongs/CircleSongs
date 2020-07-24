@@ -1,0 +1,6 @@
+ul.vocabulary {
+  columns: 3;
+  li {
+    break-inside: avoid-column;
+  }
+}

@@ -1,12 +1,13 @@
 {
+  "stack": "heroku-18",
   "name": "circle-songs",
   "scripts": {
     "postdeploy": "bundle exec rake db:schema:load db:seed"
   },
   "env": {
-
+    "RAILS_MASTER_KEY": { "required": true }
   },
   "addons": [
-    "heroku-postgresql",
+    "heroku-postgresql"
   ]
 }

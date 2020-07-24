@@ -1,0 +1,7 @@
+%h2#vocabulary Vocabulary
+%ul.vocabulary
+  - @vocabularies.each do |vocabulary|
+    %li
+      %dl
+        %dt= vocabulary.text
+        %dd= vocabulary.translation

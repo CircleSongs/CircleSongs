@@ -6,9 +6,8 @@ default: &default
 
 development:
   <<: *default
-  database: circle_songs_development
+  database: circle_songs_data
 
 test:
   <<: *default
   database: circle_songs_test
-
