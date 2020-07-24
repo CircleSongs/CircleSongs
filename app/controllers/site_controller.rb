@@ -1,6 +1,6 @@
 class SiteController < ApplicationController
   def quechua
-    @vocabularies = Vocabulary.all
+    @vocabularies = Vocabulary.alphabetical
   end
 
   def icaros; end
