@@ -1,93 +1,86 @@
 ---
-version: 2.1
-orbs:
-  heroku: circleci/heroku@0.0.10
-workflows:
-  version: 2
-  build-test-and-deploy:
-    jobs:
-      - build_and_test
-      - deploy:
-          requires:
-            - build_and_test
 jobs:
-  build_and_test:
-    working_directory: ~/circle-songs
+  build:
     docker:
-      - image: circleci/ruby:2.6.5-node-browsers
-        environment:
-          PGHOST: localhost
-          PGUSER: circleci
-          RAILS_ENV: test
-      - image: circleci/postgres:9.5-alpine
-        environment:
-          POSTGRES_USER: circleci
-          POSTGRES_DB: circle-songs_test
-          POSTGRES_PASSWORD: ""
-      - image: redis
+      - image: "cimg/ruby:2.6.6-node"
     steps:
       - checkout
-      - run: sudo apt-get update
-      - restore_cache:
-          keys:
-          - circle-songs-{{ checksum "Gemfile.lock" }}
-          - circle-songs-
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - run:
-          name: Configure Bundler
+          name: Install ImageMagic
           command: |
-            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
-            source $BASH_ENV
-            gem install bundler
+            sudo apt-get update
+            sudo apt-get install build-essential
+            sudo apt-get install imagemagick
+  test:
+    docker:
+      - image: "cimg/ruby:2.6.6-node"
+      - environment:
+          POSTGRES_DB: circle_songs_test
+          POSTGRES_PASSWORD: ""
+          POSTGRES_USER: circleci
+        image: "circleci/postgres:9.5-alpine"
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      PGHOST: "127.0.0.1"
+      PGPASSWORD: ""
+      PGUSER: circleci
+      RAILS_ENV: test
+    parallelism: 3
+    steps:
+      - checkout
+      - ruby/install-deps
       - run:
-          name: Install Dependencies
+          name: Install ImageMagic
           command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
-            bin/yarn
-      - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: circle-songs-{{ checksum "Gemfile.lock" }}
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load
-
-      # test
+            sudo apt-get update
+            sudo apt-get install build-essential
+            sudo apt-get install imagemagick
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
+      - node/install-packages:
+          pkg-manager: yarn
       - run:
-          name: Install JUnit coverage reporter
-          command: yarn add --dev jest-junit
+          command: "dockerize -wait tcp://localhost:5432 -timeout 1m"
+          name: "Wait for DB"
       - run:
-          name: Run Javascript tests with JUnit as reporter
-          command: npm test app/javascript --ci --runInBand --reporters=default --reporters=jest-junit
-          environment:
-            JEST_JUNIT_OUTPUT: "/tmp/test-results/jest/results.xml"
-      - run:
-          name: run ruby tests
-          command: |
-            mkdir /tmp/test-results
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings --timings-type=classname)"
-
-             xvfb-run -a bundle exec rspec --format progress \
-                            --format RspecJunitFormatter \
-                            --out /tmp/test-results/rspec/results.xml \
-                            --format progress \
-                            $TEST_FILES
-
-      # collect reports
+          command: "bundle exec rails db:schema:load --trace"
+          name: "Database setup"
+      - ruby/rspec-test
       - store_test_results:
-          path: /tmp/test-results
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: test-results
-      - store_artifacts:
-          path: /tmp/capybara
+          path: test-results
   deploy:
-    executor: heroku/default # Uses the basic buildpack-deps image, which has the prerequisites for installing heroku's CLI.
+    executor: heroku/default
     steps:
       - checkout
       - heroku/install
       - heroku/deploy-via-git:
           only-branch: master
       - run:
-          name: Heroku post-deploy steps
           command: |
-            heroku run rails db:migrate -a circle-songs
-            heroku restart -a circle-songs
+            heroku run rails db:migrate -a ${HEROKU_APP_NAME}
+            heroku restart -a ${HEROKU_APP_NAME}
+          name: "Heroku post-deploy steps"
+orbs:
+  heroku: circleci/heroku@0.0.10
+  node: circleci/node@3.0.1
+  ruby: circleci/ruby@1.0.7
+  browser-tools: circleci/browser-tools@1.0.1
+
+version: 2.1
+
+workflows:
+  build-test-deploy:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - test
