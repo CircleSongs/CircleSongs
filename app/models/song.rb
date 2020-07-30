@@ -1,4 +1,7 @@
 class Song < ApplicationRecord
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   include ImageUploader::Attachment.new(:image)
 
   has_many :recordings, -> { order :created_at }

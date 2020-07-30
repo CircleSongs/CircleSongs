@@ -15,4 +15,12 @@ RSpec.feature 'As a guest' do
       expect(page).to have_content song.composer
     end
   end
+
+  scenario 'I can visit a song via its slug' do
+    visit "/songs/#{song.slug}"
+    expect(page).to have_content song.title
+    visit songs_path
+    click_on song.title
+    expect(current_path).to match Regexp.new(song.slug.to_s)
+  end
 end
