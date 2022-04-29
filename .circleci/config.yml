@@ -1,13 +1,22 @@
----
+version: "2.1"
+
+orbs:
+  heroku: circleci/heroku@0.0.10
+  node: circleci/node@5.0.2
+  ruby: circleci/ruby@1.0.7
+  browser-tools: circleci/browser-tools@1.0.1
+
 jobs:
   build:
     docker:
       - image: "cimg/ruby:3.1.2-node"
     steps:
       - checkout
+      - node/install:
+          install-yarn: true
+          node-version: "14.19.1"
+      - run: node --version
       - ruby/install-deps
-      - node/install-packages:
-          pkg-manager: yarn
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
       - run:
@@ -34,6 +43,9 @@ jobs:
     parallelism: 3
     steps:
       - checkout
+      - node/install:
+          install-yarn: true
+          node-version: "14.19.1"
       - ruby/install-deps
       - run:
           name: Install ImageMagic
@@ -43,8 +55,6 @@ jobs:
             sudo apt-get install imagemagick
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
-      - node/install-packages:
-          pkg-manager: yarn
       - run:
           command: "dockerize -wait tcp://localhost:5432 -timeout 1m"
           name: "Wait for DB"
@@ -66,13 +76,6 @@ jobs:
             heroku run rails db:migrate -a ${HEROKU_APP_NAME}
             heroku restart -a ${HEROKU_APP_NAME}
           name: "Heroku post-deploy steps"
-orbs:
-  heroku: circleci/heroku@0.0.10
-  node: circleci/node@3.0.1
-  ruby: circleci/ruby@1.0.7
-  browser-tools: circleci/browser-tools@1.0.1
-
-version: 2.1
 
 workflows:
   build-test-deploy:
