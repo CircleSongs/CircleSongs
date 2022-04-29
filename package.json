@@ -1,6 +1,9 @@
 {
   "name": "circle_songs",
   "private": true,
+  "engines": {
+    "node": "14.x"
+  },
   "dependencies": {
     "@rails/ujs": "^6.0.2-2",
     "@rails/webpacker": "5.0.1",
