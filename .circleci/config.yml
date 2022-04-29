@@ -61,6 +61,7 @@ jobs:
       - run:
           command: "bundle exec rails db:schema:load --trace"
           name: "Database setup"
+      - run: yarn install
       - run: NODE_ENV=test bundle exec rails webpacker:compile
       - ruby/rspec-test
       - store_test_results:
