@@ -308,7 +308,8 @@ module AdminPageLayoutOverride
 
     # this will be added at the end of <head>
     within head do
-      text_node(javascript_pack_tag('admin-song-chords'))
+      # text_node(javascript_pack_tag('admin-song-chords'))
+      text_node(javascript_importmap_tags)
     end
   end
 end

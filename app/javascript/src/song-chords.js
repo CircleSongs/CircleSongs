@@ -2,8 +2,8 @@ import ChordSheetJS from "chordsheetjs";
 
 document.addEventListener("DOMContentLoaded", function () {
   const node = document.getElementById("song-chords");
+
   if (node) {
-    console.log(node.getAttribute("data"));
     const data = JSON.parse(node.getAttribute("data"));
     const chordSheet = data;
 
