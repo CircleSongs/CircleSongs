@@ -1,3 +1,3 @@
-$(document).on('turbolinks:load', function() {
+document.addEventListener("DOMContentLoaded", function () {
   $('[data-toggle="tooltip"]').tooltip();
 });

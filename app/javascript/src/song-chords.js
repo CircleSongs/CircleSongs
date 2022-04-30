@@ -1,10 +1,10 @@
 import ChordSheetJS from "chordsheetjs";
 
-$(document).on('turbolinks:load', function() {
-  const node = $('#song-chords');
-
-  if (node.length > 0) {
-    const data = JSON.parse(node.attr('data'));
+document.addEventListener("DOMContentLoaded", function () {
+  const node = document.getElementById("song-chords");
+  if (node) {
+    console.log(node.getAttribute("data"));
+    const data = JSON.parse(node.getAttribute("data"));
     const chordSheet = data;
 
     const parser = new ChordSheetJS.ChordProParser();
@@ -12,6 +12,6 @@ $(document).on('turbolinks:load', function() {
     const formatter = new ChordSheetJS.TextFormatter();
     const disp = formatter.format(song);
 
-    node.html(disp)
+    node.replaceWith(disp);
   }
 });

@@ -1,7 +1,7 @@
 //import "./styles.css";
 import * as vexchords from "vexchords";
 
-$(function () {
+document.addEventListener("DOMContentLoaded", function () {
   $(".chord-form").each((index, chord_form) => {
     chord_form = $(chord_form);
     let sel = chord_form[0];
