@@ -10,6 +10,7 @@ ActiveAdmin.register Song do
   filter :description
   filter :composer_url
   filter :slug
+  filter :recordings_reported, as: :boolean, label: "Broken Link Reported"
 
 
   controller do
