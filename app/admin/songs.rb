@@ -1,4 +1,17 @@
 ActiveAdmin.register Song do
+  filter :title
+  filter :alternate_title
+  filter :languages, multiple: true
+  filter :categories, multiple: true
+  filter :chords_present, as: :boolean
+  filter :chord_forms_id_not_null, label: "With Chord forms", as: :boolean
+  filter :lyrics
+  filter :translation
+  filter :description
+  filter :composer_url
+  filter :slug
+
+
   controller do
     def find_resource
       scoped_collection.friendly.find(params[:id])

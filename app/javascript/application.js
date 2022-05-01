@@ -1,11 +1,10 @@
-import "popper.js";
-
-import * as bootstrap from "bootstrap";
-window.bootstrap = bootstrap;
-
+import "popper";
+import "bootstrap";
 import "src/song-chords";
 import "src/broken-link-report";
 import "src/chord-forms";
+// import "src/admin-song-chords";
+// import "src/admin-chord-forms";
 
 document.addEventListener("DOMContentLoaded", function () {
   var popoverTriggerList = [].slice.call(

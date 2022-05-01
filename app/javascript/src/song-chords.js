@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
   if (node) {
     const data = JSON.parse(node.getAttribute("data"));
     const chordSheet = data;
-
     const parser = new ChordSheetJS.ChordProParser();
     const song = parser.parse(chordSheet);
     const formatter = new ChordSheetJS.TextFormatter();
