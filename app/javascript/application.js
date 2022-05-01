@@ -1,10 +1,12 @@
+import "@hotwired/turbo-rails";
+import { Turbo } from "@hotwired/turbo-rails";
+Turbo.session.drive = false;
+
 import "popper";
 import "bootstrap";
 import "src/song-chords";
 import "src/broken-link-report";
 import "src/chord-forms";
-// import "src/admin-song-chords";
-// import "src/admin-chord-forms";
 
 document.addEventListener("DOMContentLoaded", function () {
   var popoverTriggerList = [].slice.call(
@@ -21,3 +23,4 @@ document.addEventListener("DOMContentLoaded", function () {
     return new bootstrap.Tooltip(tooltipTriggerEl);
   });
 });
+import "@hotwired/turbo-rails";

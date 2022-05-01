@@ -26,3 +26,4 @@ pin "string_decoder", to: "https://ga.jspm.io/npm:@jspm/core@2.0.0-beta.24/nodel
 pin "url", to: "https://ga.jspm.io/npm:@jspm/core@2.0.0-beta.24/nodelibs/browser/url.js"
 pin "util", to: "https://ga.jspm.io/npm:@jspm/core@2.0.0-beta.24/nodelibs/browser/util.js"
 pin "zlib", to: "https://ga.jspm.io/npm:@jspm/core@2.0.0-beta.24/nodelibs/browser/zlib.js"
+pin "@hotwired/turbo-rails", to: "turbo.min.js", preload: true
