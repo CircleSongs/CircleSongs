@@ -64,7 +64,7 @@ jobs:
       - checkout
       - heroku/install
       - heroku/deploy-via-git:
-          only-branch: master
+          only-branch: main
       - run:
           command: |
             heroku run rails db:migrate -a ${HEROKU_APP_NAME}
