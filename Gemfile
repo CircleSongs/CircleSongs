@@ -57,3 +57,8 @@ group :test do
 end
 
 gem "importmap-rails", "~> 1.0"
+
+gem "turbo-rails", "~> 1.0"
+
+# Use Redis for Action Cable
+gem "redis", "~> 4.0"
