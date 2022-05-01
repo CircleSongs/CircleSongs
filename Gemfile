@@ -13,6 +13,7 @@ gem "coffee-rails", "~> 5.0"
 gem "devise", "~> 4.8"
 gem "friendly_id", "~> 5.4"
 gem "haml-rails", "~> 2.0"
+gem "importmap-rails", "~> 1.0"
 gem "image_processing", "~> 1.12"
 gem "jbuilder", "~> 2.11"
 gem "jquery-rails", "~> 4.4"
@@ -25,10 +26,12 @@ gem "pg", "~> 1.3"
 gem "puma", "~> 5.6"
 gem "rails"
 gem "ransack", "~> 3.1"
+gem "redis", "~> 4.0"
 gem "rollbar", "~> 3.3"
 gem "sassc-rails", "~> 2.1"
 gem "shrine", "~> 3.4"
 gem "simple_form", "~> 5.1"
+gem "turbo-rails", "~> 1.0"
 gem "uglifier", "~> 4.2"
 
 group :development, :test do
@@ -55,10 +58,3 @@ group :test do
   gem "simplecov", "~> 0.21"
   gem "webdrivers", "~> 5.0"
 end
-
-gem "importmap-rails", "~> 1.0"
-
-gem "turbo-rails", "~> 1.0"
-
-# Use Redis for Action Cable
-gem "redis", "~> 4.0"
