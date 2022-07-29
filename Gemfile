@@ -7,7 +7,7 @@ gem "aws-sdk-s3", "~> 1.113"
 gem "activeadmin", "~> 2.12"
 gem "arctic_admin", "~> 3.3"
 gem "bootsnap", "~> 1.11"
-gem "bootstrap"
+gem "bootstrap", "~> 5.1.3"
 gem "chordpro", "~> 1.0"
 gem "coffee-rails", "~> 5.0"
 gem "devise", "~> 4.8"
@@ -24,7 +24,7 @@ gem "newrelic_rpm", "~> 8.6"
 gem "oj", "~> 3.13"
 gem "pg", "~> 1.3"
 gem "puma", "~> 5.6"
-gem "rails"
+gem "rails", "~> 7.0.2"
 gem "ransack", "~> 3.1"
 gem "redis", "~> 4.0"
 gem "rollbar", "~> 3.3"
@@ -58,3 +58,9 @@ group :test do
   gem "simplecov", "~> 0.21"
   gem "webdrivers", "~> 5.0"
 end
+
+gem "rubocop", "~> 1.32"
+
+gem "rubocop-rspec", "~> 2.12"
+
+gem "rubocop-rails", "~> 2.15"

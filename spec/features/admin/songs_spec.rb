@@ -11,9 +11,12 @@ RSpec.describe 'As an admin user' do
     visit admin_songs_path
     click_on 'New Song'
     fill_in 'Title', with: title
+
+    attach_file "Image", Rails.root.join("spec/fixtures/files/image.jpeg")
     click_on 'Add new chord form'
     select chord_form.chord, from: 'Chord form'
     click_on 'Create Song'
+    expect(find('img')['src']).to eq Song.find_by(title: title).image_url(:thumb)
     expect(page).to have_content 'Song was successfully created.'
     expect(page).to have_content chord_form.chord
     expect(page).to have_selector 'div.chord-form svg'

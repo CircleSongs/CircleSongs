@@ -1,6 +1,7 @@
 require 'shrine'
 require 'shrine/storage/s3'
 require 'shrine/storage/file_system'
+require "shrine/storage/memory"
 
 s3_options = {
   bucket: Rails.application.credentials.aws[:s3_bucket_name],
@@ -13,6 +14,12 @@ if Rails.env.production?
   Shrine.storages = {
     cache: Shrine::Storage::S3.new(prefix: 'uploads/cache', **s3_options),
     store: Shrine::Storage::S3.new(prefix: 'uploads', **s3_options)
+  }
+
+elsif Rails.env.test?
+  Shrine.storages = {
+    cache: Shrine::Storage::Memory.new,
+    store: Shrine::Storage::Memory.new,
   }
 else
   Shrine.storages = {

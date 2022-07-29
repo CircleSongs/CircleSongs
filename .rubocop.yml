@@ -1,3 +1,5 @@
+inherit_from: .rubocop_todo.yml
+
 require: rubocop-rspec
 
 Documentation:
@@ -14,6 +16,15 @@ AllCops:
     - "spec/support/chosenjs.rb"
     - "config/initializers/simple_form_bootstrap.rb"
     - "config/initializers/active_admin.rb"
+    - "node_modules/**/*"
+    - "config/importmap.rb"
+
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: double_quotes
+  # If `true`, strings which span multiple lines using `\` for continuation must
+  # use the same type of quotes on each line.
+  ConsistentQuotesInMultiline: false
 
 Metrics/BlockLength:
   Exclude:
