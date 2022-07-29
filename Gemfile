@@ -61,9 +61,3 @@ group :test do
   gem "simplecov", "~> 0.21"
   gem "webdrivers", "~> 5.0"
 end
-
-gem "rubocop", "~> 1.32"
-
-gem "rubocop-rspec", "~> 2.12"
-
-gem "rubocop-rails", "~> 2.15"
