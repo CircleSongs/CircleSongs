@@ -27,3 +27,4 @@ pin "url", to: "https://ga.jspm.io/npm:@jspm/core@2.0.0-beta.24/nodelibs/browser
 pin "util", to: "https://ga.jspm.io/npm:@jspm/core@2.0.0-beta.24/nodelibs/browser/util.js"
 pin "zlib", to: "https://ga.jspm.io/npm:@jspm/core@2.0.0-beta.24/nodelibs/browser/zlib.js"
 pin "@hotwired/turbo-rails", to: "turbo.min.js", preload: true
+pin "lodash", to: "https://ga.jspm.io/npm:lodash@4.17.21/lodash.js"
