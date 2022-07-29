@@ -17,9 +17,9 @@ class ImageUploader < Shrine
     versions # return the hash of processed files
   end
 
-  def generate_location(io, context = {})
-    if context[:record]
-      "#{context[:record].id}/#{context[:version]}/#{super}"
+  def generate_location(io, record: nil, derivative: nil, **)
+    if record
+      "#{record.id}/#{derivative}/#{super}"
     else
       super
     end
