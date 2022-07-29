@@ -42,6 +42,9 @@ group :development do
   gem "brakeman", "~> 5.2"
   gem "foreman", "~> 0.87"
   gem "listen", "~> 3.7"
+  gem "rubocop", "~> 1.32"
+  gem "rubocop-rspec", "~> 2.12"
+  gem "rubocop-rails", "~> 2.15"
   gem "spring", "~> 2.1"
   gem "spring-watcher-listen", "~> 2.0"
   gem "web-console", "~> 4.2"
@@ -58,9 +61,3 @@ group :test do
   gem "simplecov", "~> 0.21"
   gem "webdrivers", "~> 5.0"
 end
-
-gem "rubocop", "~> 1.32"
-
-gem "rubocop-rspec", "~> 2.12"
-
-gem "rubocop-rails", "~> 2.15"
