@@ -21,7 +21,7 @@ ActiveAdmin.register Song do
 
   permit_params :alternate_title, :composer, :composer_url, :image,
                 :description, :lyrics, :title, :translation,
-                :chords,
+                :chords, :remove_image,
                 recordings_attributes: [
                   :description,
                   :embedded_player,
@@ -44,7 +44,8 @@ ActiveAdmin.register Song do
 
   form do |f|
     f.inputs 'Details' do
-      f.input :image, as: :file
+      f.input :image, as: :file, hint: (image_tag f.object.image[:thumb].url if f.object.image.present?)
+      f.input :remove_image, as: :boolean
       f.input :title
       f.input :alternate_title
       f.input :composer

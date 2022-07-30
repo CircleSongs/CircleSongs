@@ -3,6 +3,7 @@ require 'image_processing/mini_magick'
 class ImageUploader < Shrine
   plugin :derivatives
   plugin :versions
+  plugin :remove_attachment
 
   process(:store) do |io, _context|
     versions = { original: io } # retain original
