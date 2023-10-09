@@ -58,6 +58,8 @@ jobs:
       - ruby/rspec-test
       - store_test_results:
           path: test-results
+      - store_artifacts:
+          path: tmp/capybara
   deploy:
     executor: heroku/default
     steps:
