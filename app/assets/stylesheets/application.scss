@@ -1,8 +1,9 @@
 @import "fontawesome/fontawesome.scss";
 @import "fontawesome/light.scss";
-@import "bootstrap";
 @import "vars";
-@import "bootswatch-cosmo";
+@import "bootswatch/dist/cosmo/variables";
+@import "bootstrap";
+@import "bootswatch/dist/cosmo/bootswatch";
 @import "layout";
 @import "navigation";
 @import "footer";

@@ -33,6 +33,7 @@ gem "shrine"
 gem "simple_form"
 gem "turbo-rails"
 gem "uglifier"
+gem "vite_rails"
 
 group :development, :test do
   gem "byebug"
