@@ -1,4 +1,4 @@
-RSpec.describe 'As a guest' do
+RSpec.describe 'As a guest', type: :system do
   let(:name) { FFaker::Name.name }
   let(:email) { FFaker::Internet.email }
   let(:subject_text) { FFaker::Lorem.sentence }

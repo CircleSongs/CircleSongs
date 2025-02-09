@@ -1,4 +1,4 @@
-RSpec.feature 'As a guest' do
+RSpec.feature 'As a guest', type: :system do
   let(:song) { songs(:hotel_california) }
   let(:recording) { song.recordings.first }
 

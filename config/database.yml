@@ -1,13 +1,23 @@
 default: &default
-  encoding: utf8
   adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
+  encoding: utf8
 
 development:
   <<: *default
-  database: circle_songs_data
+  database: circle-songs-development
+  host: localhost
+  username: circle-songs
+  port: 5434
 
 test:
   <<: *default
-  database: circle_songs_test
+  database: circle-songs-test
+  host: localhost
+  username: circle-songs
+  port: 5434
+
+production:
+  <<: *default
+  database: circle-songs

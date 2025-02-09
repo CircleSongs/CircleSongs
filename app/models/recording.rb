@@ -5,4 +5,8 @@ class Recording < ApplicationRecord
   validates :embedded_player, presence: { unless: proc { |recording| recording.url.present? } }
 
   default_scope { order(:position) }
+
+    def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "description", "embedded_player", "id", "position", "reported", "song_id", "title", "updated_at", "url"]
+  end
 end

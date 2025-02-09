@@ -1,4 +1,4 @@
-RSpec.feature 'As an admin user' do
+RSpec.feature 'As an admin user', type: :system do
   let(:user) { users(:admin) }
   let(:title) { FFaker::Music.song }
   let(:description) { FFaker::Lorem.paragraphs.join("\n") }

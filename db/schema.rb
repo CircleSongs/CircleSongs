@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema[7.0].define(version: 2022_04_30_034109) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -44,19 +45,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_30_034109) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "categories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.boolean "restricted", default: false
   end
 
-  create_table "categories_songs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "categories_songs", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "category_id"
     t.uuid "song_id"
   end
 
-  create_table "chord_forms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "chord_forms", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "chord"
     t.text "fingering"
   end
@@ -66,31 +67,31 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_30_034109) do
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
     t.string "scope"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
-  create_table "languages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "languages", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
   end
 
-  create_table "languages_songs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "languages_songs", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "language_id"
     t.uuid "song_id"
   end
 
-  create_table "passwords", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "passwords", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "recordings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "recordings", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.text "description"
     t.string "url"
@@ -102,13 +103,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_30_034109) do
     t.integer "position"
   end
 
-  create_table "song_chord_forms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "song_chord_forms", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "song_id"
     t.uuid "chord_form_id"
     t.integer "position"
   end
 
-  create_table "songs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "songs", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.string "alternate_title"
     t.string "composer"
@@ -124,7 +125,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_30_034109) do
     t.index ["slug"], name: "index_songs_on_slug", unique: true
   end
 
-  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -138,7 +139,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_30_034109) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "vocabularies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "vocabularies", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "text"
     t.string "translation"
     t.datetime "created_at", null: false

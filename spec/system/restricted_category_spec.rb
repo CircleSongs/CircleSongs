@@ -1,4 +1,4 @@
-RSpec.feature 'As an' do
+RSpec.feature 'As an', type: :system do
   let(:unrestricted_categories) { Category.unrestricted }
   let(:restricted_categories) { Category.restricted }
   let(:all_categories) { Category.all }

@@ -1,4 +1,4 @@
-RSpec.feature 'As a guest' do
+RSpec.feature 'As a guest', type: :system do
   before do
     visit root_path
   end
