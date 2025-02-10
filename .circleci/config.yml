@@ -9,13 +9,21 @@ orbs:
 jobs:
   build:
     docker:
-      - image: "cimg/ruby:3.1.2-node"
+      - image: "cimg/ruby:3.3.0-browsers"
+    resource_class: large
     steps:
       - checkout
       - run: node --version
       - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
+      - run:
+          command: |
+            google-chrome --version
+            chromedriver --version
+          name: Check install
       - run:
           name: Install ImageMagic
           command: |
@@ -24,7 +32,7 @@ jobs:
             sudo apt-get install imagemagick
   test:
     docker:
-      - image: "cimg/ruby:3.1.2-node"
+      - image: "cimg/ruby:3.3.0-browsers"
       - environment:
           POSTGRES_DB: circle_songs_test
           POSTGRES_PASSWORD: ""
