@@ -1,22 +1,23 @@
-.col-sm-6.recording{ id: "recording-#{recording.id}"}
-  .card
+.col-sm-6.recording.h-100{ id: "recording-#{recording.id}" }
+  .card.h-100
     - if recording.title.present?
       %h5.card-header= recording.title
     - if recording.embedded_player.present?
-      .embed-responsive.embed-responsive-4by3
+      .ratio.ratio-4x3
         = raw recording.embedded_player
     .card-body
-      .broken-link
+      .broken-link.float-end
         - if recording.reported
           %small Reported
         - else
           = simple_form_for :broken_link_report, url: broken_link_reports_path, method: :post, data: { turbo_confirm: 'Report broken link?', type: :json, turbo: true } do |f|
             = button_tag type: :submit, class: 'btn report-broken-link' do
-              = fa_icon('unlink')
+              %i.fa.fa-chain-broken
             .hidden
               = f.input :nickname
             = f.input_field :recording_id, as: :hidden, value: recording.id
       - if recording.url.present?
         %p= link_to recording.url, recording.url, class: 'card-link', target: :_blank
       - if recording.description.present?
-        = simple_format recording.description
+        .flex-grow-1.overflow-auto
+          = simple_format recording.description

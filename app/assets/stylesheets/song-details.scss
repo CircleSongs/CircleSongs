@@ -24,7 +24,6 @@ ul {
   margin-bottom: 3rem;
   .card-body {
     .broken-link {
-      float: right;
       small { color: $danger; }
       form {
         button {
@@ -40,4 +39,3 @@ ul {
     p { margin: 0; }
   }
 }
-

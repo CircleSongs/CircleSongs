@@ -13,6 +13,10 @@ body {
     margin-top: $margin;
     padding-bottom: $margin;
   }
+
+  a {
+    text-decoration: none;
+  }
 }
 
 .footer {

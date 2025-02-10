@@ -1,19 +1,22 @@
-%nav.navbar.navbar-expand.navbar-light.bg-light
-  %a.navbar-brand{ href: '/'}
-    = image_tag 'medicine-songs-logo.svg', size: '100x100'
-    Medicine Songs
-  %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
-    %span.navbar-toggler-icon
-  #navbarSupportedContent.collapse.navbar-collapse
-    %ul.navbar-nav.mr-auto
-      %li.nav-item
-        = link_to 'Icaros', '/icaros', class: 'nav-link'
-      %li.nav-item
-        = link_to 'Quechua', '/quechua', class: 'nav-link'
+%nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  .container-fluid
+    %a.navbar-brand{ href: '/'}
+      = image_tag 'medicine-songs-logo.svg', width: 100, height: 100
+      Medicine Songs
+    %button.navbar-toggler{"aria-controls" => "navbarContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-toggle" => "collapse", "data-bs-target" => "#navbarContent", :type => "button"}
+      %span.navbar-toggler-icon
+    #navbarContent.collapse.navbar-collapse
+      %ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        %li.nav-item
+          = link_to 'Icaros', '/icaros', class: 'nav-link'
+        %li.nav-item
+          = link_to 'Quechua', '/quechua', class: 'nav-link'
 
-    %ul.navbar-nav
-      %li.nav-item
-        = link_to 'Buy Songbook PDF', '/purchase', class: 'btn btn-primary'
-        = link_to 'Make a Donation!', " https://www.paypal.com/ncp/payment/LGW7WS7S2NYHQ", class: 'btn btn-warning'
-      %li.nav-item
-        %a.nav-link{ href: admin_dashboard_path }= fa_icon('sign-in')
+      %ul.navbar-nav.d-flex.gap-2
+        %li.nav-item
+          = link_to 'Buy Songbook PDF', '/purchase', class: 'btn btn-primary'
+        %li.nav-item
+          = link_to 'Make a Donation!', "https://www.paypal.com/ncp/payment/LGW7WS7S2NYHQ", class: 'btn btn-warning'
+        %li.nav-item
+          = link_to admin_dashboard_path, class: 'nav-link' do
+            %i.fa-solid.fa-right-to-bracket

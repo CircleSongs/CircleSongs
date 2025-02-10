@@ -31,6 +31,17 @@
 // import '~/index.css'
 
 // import "../src/broken-link-report";
+
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "@fortawesome/fontawesome-free/css/regular.min.css";
+import "@popperjs/core";
+import * as bootstrap from "bootstrap";
 import "~/src/chord-forms";
 import "~/src/song-chords";
-import "~/src/tooltips";
+
+const tooltipTriggerList = document.querySelectorAll(
+  '[data-bs-toggle="tooltip"]'
+);
+const tooltipList = [...tooltipTriggerList].map(
+  (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+);
