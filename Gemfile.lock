@@ -136,13 +136,6 @@ GEM
     chordpro (1.0.2)
       builder
       parslet
-    coffee-rails (5.0.0)
-      coffee-script (>= 2.2.0)
-      railties (>= 5.2.0)
-    coffee-script (2.4.1)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.12.2)
     concurrent-ruby (1.3.5)
     connection_pool (2.5.0)
     content_disposition (1.0.0)
@@ -205,10 +198,6 @@ GEM
     image_processing (1.13.0)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
-    importmap-rails (2.1.0)
-      actionpack (>= 6.0.0)
-      activesupport (>= 6.0.0)
-      railties (>= 6.0.0)
     inherited_resources (1.14.0)
       actionpack (>= 6.0)
       has_scope (>= 0.6)
@@ -463,13 +452,8 @@ GEM
     thor (1.3.2)
     tilt (2.6.0)
     timeout (0.4.3)
-    turbo-rails (2.0.11)
-      actionpack (>= 6.0.0)
-      railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    uglifier (4.2.1)
-      execjs (>= 0.3.0, < 3)
     unicode-display_width (3.1.4)
       unicode-emoji (~> 4.0, >= 4.0.4)
     unicode-emoji (4.0.4)
@@ -520,7 +504,6 @@ DEPENDENCIES
   byebug
   capybara
   chordpro
-  coffee-rails
   database_cleaner
   devise
   ffaker
@@ -528,7 +511,6 @@ DEPENDENCIES
   friendly_id
   haml-rails
   image_processing
-  importmap-rails
   jbuilder
   jquery-rails
   kaminari
@@ -556,8 +538,6 @@ DEPENDENCIES
   simplecov
   spring
   spring-watcher-listen
-  turbo-rails
-  uglifier
   vite_rails
   web-console
 
