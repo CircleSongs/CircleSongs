@@ -1,9 +1,4 @@
-$primary-color: #2dbb43;
-$margin: 1rem;
-
-:root {
-  // --primary-color: #{$primary-color};
-}
-
-
-@import "../../../node_modules/arctic_admin/src/scss/main";
+@import "@activeadmin/activeadmin/src/scss/mixins";
+@import "@activeadmin/activeadmin/src/scss/base";
+@import "../styles/admin/active_admin_theme";
+@import "../styles/admin/has_many_layout";

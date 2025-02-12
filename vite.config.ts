@@ -6,8 +6,8 @@ export default defineConfig({
   plugins: [
     RubyPlugin(),
     inject({   // => that should be first under plugins array
-         $: 'jquery',
-         jQuery: 'jquery',
-       }),
+      $: 'jquery',
+      jQuery: 'jquery',
+    }),
   ],
 })

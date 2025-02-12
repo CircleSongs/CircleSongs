@@ -1,4 +1,5 @@
 ActiveAdmin.register Song do
+  # Filters for index page
   filter :title
   filter :alternate_title
   filter :languages, multiple: true
@@ -12,13 +13,14 @@ ActiveAdmin.register Song do
   filter :slug
   filter :recordings_reported, as: :boolean, label: "Broken Link Reported"
 
-
+  # Controller customization
   controller do
     def find_resource
       scoped_collection.friendly.find(params[:id])
     end
   end
 
+  # Permitted parameters
   permit_params :alternate_title, :composer, :composer_url, :image,
                 :description, :lyrics, :title, :translation,
                 :chords, :remove_image,
@@ -36,15 +38,18 @@ ActiveAdmin.register Song do
                 category_ids: [],
                 language_ids: []
 
+  # Index page configuration
   index do
     column :title
     column :composer
     actions
   end
 
+  # Form configuration
   form do |f|
-    f.inputs 'Details' do
-      f.input :image, as: :file, hint: (image_tag f.object.image[:thumb].url if f.object.image.present?)
+    f.inputs "Details" do
+      f.input :image, as: :file,
+                      hint: (image_tag f.object.image[:thumb].url if f.object.image.present?)
       f.input :remove_image, as: :boolean
       f.input :title
       f.input :alternate_title
@@ -54,26 +59,35 @@ ActiveAdmin.register Song do
       f.input :lyrics
       f.input :translation
       f.input :chords
-      f.inputs do
+
+      # Chord Forms Section
+      f.inputs "Chord Forms", class: "chord-forms-section" do
         f.has_many(
           :song_chord_forms,
           sortable: :position,
           sortable_start: 1,
-          new_record: 'Add new chord form',
-          allow_destroy: true
+          new_record: "Add new chord form",
+          allow_destroy: true,
+          class: "chord-forms-container",
+          heading: false
         ) do |cf|
-          cf.input :chord_form, collection: ChordForm.all.map { |chord_form|
-            [chord_form.chord, chord_form.id]
-          }, allow_blank: true
+          cf.input :chord_form,
+                   collection: ChordForm.all.map { |chord_form| [chord_form.chord, chord_form.id] },
+                   label: false,
+                   allow_blank: false,
+                   input_html: { class: "chord-form-select" }
         end
       end
+
       f.input :languages, as: :check_boxes
-      li class: 'check_boxes input optional', id: :song_categories_input do
+
+      # Categories Section
+      li class: "check_boxes input optional", id: :song_categories_input do
         fieldset class: :choices do
           legend class: :label do
-            'Categories'
+            "Categories"
           end
-          ol class: 'choices-group' do
+          ol class: "choices-group" do
             f.collection_check_boxes :category_ids, Category.all, :id, :name do |c|
               li class: "choice #{'restricted' if c.object.restricted?}" do
                 c.label { c.check_box + c.text }
@@ -84,10 +98,11 @@ ActiveAdmin.register Song do
       end
     end
 
+    # Recordings Section
     f.inputs do
       f.has_many(
         :recordings,
-        heading: 'Recordings',
+        heading: "Recordings",
         allow_destroy: true,
         new_record: true,
         sortable: :position
@@ -103,10 +118,11 @@ ActiveAdmin.register Song do
     f.actions
   end
 
+  # Show page configuration
   show do
     attributes_table do
-      row 'Preview Link' do |song|
-        link_to 'Preview', song_path(song), target: :_blank
+      row "Preview Link" do |song|
+        link_to "Preview", song_path(song), target: :_blank
       end
       row :image do |song|
         image_tag song.image[:thumb].url if song.image.present?
@@ -128,16 +144,18 @@ ActiveAdmin.register Song do
       row :chords do |song|
         div do
           pre do
-            div id: 'song-chords', data: song.chords.to_json
+            div id: "song-chords", data: song.chords.to_json
           end
         end
       end
+
       table_for song.chord_forms.order(:position) do
         column :chord
         column :fingering do |chord_form|
-          div class: 'chord-form', 'data-fingering': chord_form.fingering
+          div class: "chord-form", 'data-fingering': chord_form.fingering
         end
       end
+
       row :categories do |song|
         song.categories.map(&:name).to_sentence
       end
@@ -145,7 +163,8 @@ ActiveAdmin.register Song do
         song.languages.map(&:name).to_sentence
       end
     end
-    panel 'Recordings' do
+
+    panel "Recordings" do
       table_for song.recordings, class: :recordings do
         column :title
         column :url do |recording|

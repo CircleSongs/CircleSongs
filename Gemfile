@@ -5,6 +5,7 @@ ruby "3.3.0"
 
 gem "aws-sdk-s3"
 gem "activeadmin"
+gem "active_admin_flat_skin"
 gem "bootsnap"
 gem "chordpro"
 gem "devise"

@@ -1,9 +1,88 @@
 @import "active_admin/mixins";
 $primary-color: #2dbb43;
-@import "arctic_admin/base";
+// @import "arctic_admin/base";
 @import "fontawesome/fontawesome";
 @import "fontawesome/light";
 
 @import "chordpro";
 @import "admin/forms";
-@import "admin/songs";
+
+.chord-forms-section {
+  margin-top: 20px;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 4px;
+
+  .has_many_container {
+    padding: 10px;
+
+    fieldset {
+      background: white;
+      padding: 15px;
+      margin-bottom: 10px;
+      border: 1px solid #e8e8e8;
+      border-radius: 4px;
+      position: relative;
+
+      &:hover {
+        border-color: #ccc;
+      }
+    }
+
+    .chord-form-select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      font-size: 14px;
+
+      &:focus {
+        border-color: #5C6BC0;
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(92, 107, 192, 0.2);
+      }
+    }
+
+    .handle {
+      cursor: move;
+      color: #666;
+      padding: 5px 10px;
+      display: inline-block;
+      margin-left: 10px;
+
+      &:hover {
+        color: #333;
+      }
+    }
+
+    .has_many_remove {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      background: #ff5252;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 3px;
+      text-decoration: none;
+      font-size: 12px;
+
+      &:hover {
+        background: #ff1744;
+      }
+    }
+  }
+
+  .has_many_add {
+    margin-top: 10px;
+    display: inline-block;
+    background: #4CAF50;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 3px;
+    text-decoration: none;
+
+    &:hover {
+      background: #43A047;
+    }
+  }
+}
