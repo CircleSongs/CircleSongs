@@ -35,7 +35,7 @@
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "@fortawesome/fontawesome-free/css/regular.min.css";
 import "@popperjs/core";
-import * as bootstrap from "bootstrap";
+import "bootstrap";
 import "~/js/chord-forms";
 import "~/js/song-chords";
 

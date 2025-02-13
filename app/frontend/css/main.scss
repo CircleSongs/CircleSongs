@@ -1,7 +1,7 @@
-@import "vars";
-@import "bootswatch/dist/cosmo/variables";
-@import "bootstrap";
-@import "bootswatch/dist/cosmo/bootswatch";
+@import "bootswatch/dist/cosmo/_variables.scss";
+@import "bootswatch/dist/cosmo/bootstrap.min.css";
+$primary-color: #2dbb43;
+$margin: 1rem;
 @import "layout";
 @import "navigation";
 @import "footer";
