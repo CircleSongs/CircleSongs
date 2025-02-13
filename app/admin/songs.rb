@@ -55,10 +55,10 @@ ActiveAdmin.register Song do
       f.input :alternate_title
       f.input :composer
       f.input :composer_url
-      f.input :description
-      f.input :lyrics
-      f.input :translation
-      f.input :chords
+      f.input :description, input_html: { rows: 5 }
+      f.input :lyrics, input_html: { rows: 5 }
+      f.input :translation, input_html: { rows: 5 }
+      f.input :chords, input_html: { rows: 5 }
 
       # Chord Forms Section
       f.inputs "Chord Forms", class: "chord-forms-section" do
