@@ -36,8 +36,8 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "@fortawesome/fontawesome-free/css/regular.min.css";
 import "@popperjs/core";
 import * as bootstrap from "bootstrap";
-import "~/src/chord-forms";
-import "~/src/song-chords";
+import "~/js/chord-forms";
+import "~/js/song-chords";
 
 const tooltipTriggerList = document.querySelectorAll(
   '[data-bs-toggle="tooltip"]'
