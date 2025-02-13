@@ -18,6 +18,10 @@ ActiveAdmin.register Song do
     def find_resource
       scoped_collection.friendly.find(params[:id])
     end
+
+    def scoped_collection
+      super.left_joins(:chord_forms).select("songs.*, COUNT(chord_forms.id) as chord_forms_count").group("songs.id")
+    end
   end
 
   # Permitted parameters
@@ -40,8 +44,14 @@ ActiveAdmin.register Song do
 
   # Index page configuration
   index do
-    column :title
-    column :composer
+    column :title, sortable: true
+    column :composer, sortable: true
+    column "Has Chords", sortable: :chords do |song|
+      song.chords.present? ? "Yes" : "No"
+    end
+    column "Has Chord Forms", :chord_forms, sortable: :chord_forms_count do |song|
+      song.chord_forms.exists? ? "Yes" : "No"
+    end
     actions
   end
 
@@ -149,7 +159,7 @@ ActiveAdmin.register Song do
         end
       end
 
-      table_for song.chord_forms.order(:position) do
+      table_for song.chord_forms.order(:position), id: "chord-forms" do
         column :chord
         column :fingering do |chord_form|
           div class: "chord-form", 'data-fingering': chord_form.fingering
