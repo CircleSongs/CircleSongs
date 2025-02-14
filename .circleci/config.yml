@@ -1,15 +1,15 @@
-version: "2.1"
+version: 2.1
 
 orbs:
-  heroku: circleci/heroku@0.0.10
-  node: circleci/node@5.0.2
-  ruby: circleci/ruby@1.0.7
-  browser-tools: circleci/browser-tools@1.0.1
+  heroku: circleci/heroku@2.0.0
+  node: circleci/node@7.1.0
+  ruby: circleci/ruby@2.5.0
+  browser-tools: circleci/browser-tools@1.5.2
 
 jobs:
   build:
     docker:
-      - image: "cimg/ruby:3.3.0-browsers"
+      - image: cimg/ruby:3.3.0-browsers
     resource_class: large
     steps:
       - checkout
@@ -32,19 +32,19 @@ jobs:
             sudo apt-get install imagemagick
   test:
     docker:
-      - image: "cimg/ruby:3.3.0-browsers"
-      - environment:
+      - image: cimg/ruby:3.3.0-browsers
+        environment:
+          BUNDLE_JOBS: 3
+          PGPASSWORD: ""
+          BUNDLE_RETRY: 3
+          RAILS_ENV: test
+          PGHOST: 127.0.0.1
+          PGUSER: testuser
+      - image: cimg/postgres:14.0
+        environment:
+          POSTGRES_USER: testuser
           POSTGRES_DB: circle_songs_test
-          POSTGRES_PASSWORD: ""
-          POSTGRES_USER: circleci
-        image: "circleci/postgres:9.5-alpine"
-    environment:
-      BUNDLE_JOBS: "3"
-      BUNDLE_RETRY: "3"
-      PGHOST: "127.0.0.1"
-      PGPASSWORD: ""
-      PGUSER: circleci
-      RAILS_ENV: test
+
     parallelism: 3
     steps:
       - checkout
@@ -58,11 +58,10 @@ jobs:
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
       - run:
-          command: "dockerize -wait tcp://localhost:5432 -timeout 1m"
-          name: "Wait for DB"
-      - run:
-          command: "bundle exec rails db:schema:load --trace"
-          name: "Database setup"
+          name: Database Setup
+          command: |
+            bundle exec rake db:create
+            bundle exec rake db:structure:load
       - ruby/rspec-test
       - store_test_results:
           path: test-results
@@ -73,8 +72,7 @@ jobs:
     steps:
       - checkout
       - heroku/install
-      - heroku/deploy-via-git:
-          only-branch: main
+      - heroku/deploy-via-git
       - run:
           command: |
             heroku run rails db:migrate -a ${HEROKU_APP_NAME}
@@ -91,3 +89,6 @@ workflows:
       - deploy:
           requires:
             - test
+          filters:
+            branches:
+              only: main

@@ -14,9 +14,7 @@ development:
 test:
   <<: *default
   database: circle-songs-test
-  host: localhost
   username: circle-songs
-  port: 5434
 
 production:
   <<: *default
