@@ -15,7 +15,7 @@ RSpec.describe "As an admin user" do
     attach_file "Image", Rails.root.join("spec/fixtures/files/image.jpeg")
 
     click_on "Add new chord form"
-    binding.pry
+
     select chord_form.chord, from: "Chord form"
     click_on "Create Song"
     expect(find("img")["src"]).to eq Song.find_by(title: title).image_url(:thumb)
