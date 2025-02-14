@@ -38,12 +38,12 @@ jobs:
           BUNDLE_RETRY: 3
           RAILS_ENV: test
           PGHOST: 127.0.0.1
-          PGUSER: testuser # Changed from root to match POSTGRES_USER
+          PGUSER: postgres
           PGPASSWORD: ""
       - image: cimg/postgres:14.0
         environment:
-          POSTGRES_USER: testuser # This matches PGUSER above
-          POSTGRES_DB: circle_songs_test
+          POSTGRES_USER: postgres
+          POSTGRES_DB: circle-songs_test
           POSTGRES_PASSWORD: ""
 
     parallelism: 3
@@ -65,8 +65,7 @@ jobs:
       - run:
           name: Database Setup
           command: |
-            bundle exec rake db:create
-            bundle exec rake db:structure:load
+            bundle exec rake db:schema:load
       - ruby/rspec-test
       - store_test_results:
           path: test-results
