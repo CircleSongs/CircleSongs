@@ -6,7 +6,7 @@
     - if user_signed_in?
       - if song.recordings.exists?
         %span{ data: { bs_toggle: :tooltip, bs_title: pluralize(song.recordings.count, "Recording") } }
-          %i.fa-regular.fa-file-audio.has-recording{ title: pluralize(song.recordings.count, "Recording") }
+          %i.fa-light.fa-waveform.has-recording{ title: pluralize(song.recordings.count, "Recording") }
             = "(#{song.recordings.count})"
       - if song.chords.present?
         %i.fa.fa-music.has-chords{ data: { bs_toggle: :tooltip, bs_title: "Has Chords" }, title: "Has Chords" }
