@@ -35,15 +35,16 @@ jobs:
       - image: cimg/ruby:3.3.0-browsers
         environment:
           BUNDLE_JOBS: 3
-          PGPASSWORD: ""
           BUNDLE_RETRY: 3
           RAILS_ENV: test
           PGHOST: 127.0.0.1
-          PGUSER: testuser
+          PGUSER: testuser # Changed from root to match POSTGRES_USER
+          PGPASSWORD: ""
       - image: cimg/postgres:14.0
         environment:
-          POSTGRES_USER: testuser
+          POSTGRES_USER: testuser # This matches PGUSER above
           POSTGRES_DB: circle_songs_test
+          POSTGRES_PASSWORD: ""
 
     parallelism: 3
     steps:
@@ -57,6 +58,10 @@ jobs:
             sudo apt-get install imagemagick
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
+      - run:
+          name: Wait for PostgreSQL
+          command: |
+            dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
           name: Database Setup
           command: |
