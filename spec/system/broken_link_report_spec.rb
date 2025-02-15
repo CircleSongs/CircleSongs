@@ -4,7 +4,6 @@ RSpec.feature "As a guest", type: :system do
 
   scenario "I can report a recording with a broken link", :js do
     visit song_path(song)
-    pause
     within "#recording-#{recording.id}" do
       accept_confirm do
         find(".fa-chain-broken").click

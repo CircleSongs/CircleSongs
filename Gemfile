@@ -29,10 +29,6 @@ gem "shrine"
 gem "simple_form"
 gem "vite_rails"
 
-group :development, :test do
-  gem "byebug"
-end
-
 group :development do
   gem "brakeman"
   gem "foreman"
