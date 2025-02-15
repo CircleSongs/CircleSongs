@@ -141,6 +141,11 @@
   resolved "https://npm.fontawesome.com/@fortawesome/fontawesome-pro/-/6.7.2/fontawesome-pro-6.7.2.tgz#1e371abd87be21738d73d79e27d79f419d25c454"
   integrity sha512-5ZocZMRSZ0ECojDoRMJji6jHTq4ymc4LaaKrYCY55Lir2GxFRBrsm27r2sKQWjIkaVYZ3tbgjMeXb3aFbSo0Vw==
 
+"@hotwired/stimulus@^3.2.2":
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/@hotwired/stimulus/-/stimulus-3.2.2.tgz#071aab59c600fed95b97939e605ff261a4251608"
+  integrity sha512-eGeIqNOQpXoPAIP7tC1+1Yc1yl1xnwYqg+3mzqxyrbE5pg5YFBZcA6YoTiByJB6DKAEsiWtl6tjTJS4IYtbB7A==
+
 "@jridgewell/sourcemap-codec@^1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.5.0.tgz#3188bcb273a414b0d215fd22a58540b989b9409a"
@@ -332,7 +337,7 @@ colorjs.io@^0.5.0:
   resolved "https://registry.yarnpkg.com/colorjs.io/-/colorjs.io-0.5.2.tgz#63b20139b007591ebc3359932bef84628eb3fcef"
   integrity sha512-twmVoizEW7ylZSN32OgKdXRmo1qg+wT5/6C3xu5b9QsWzSFAhHLn2xd8ro0diCsKfCj1RdaTP/nrcW+vAoQPIw==
 
-debug@^4.3.4:
+debug@^4.3, debug@^4.3.4:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.4.0.tgz#2b3f2aea2ffeb776477460267377dc8710faba8a"
   integrity sha512-6WTZ/IxCY/T6BALoZHaE4ctp9xm+Z5kY/pzYaCHRFeyVhojxlrm+46y68HA6hr0TcwEssoxNiDEUJQjfPZ/RYA==
@@ -707,6 +712,11 @@ source-map-js@^1.2.1:
   resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.2.1.tgz#1ce5650fddd87abc099eda37dcff024c2667ae46"
   integrity sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==
 
+stimulus-vite-helpers@^3.0.0, stimulus-vite-helpers@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/stimulus-vite-helpers/-/stimulus-vite-helpers-3.1.0.tgz#9216d703ac8d74befece4499ea738c18de408842"
+  integrity sha512-qy9vnNnu6e/1PArEndp456BuSKLQkBgc+vX2pedOHT0N4GSLQY0l5fuQ4ft56xZ8xSWqrfuYSR+GXXIPtoESww==
+
 supports-color@^8.1.1:
   version "8.1.1"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-8.1.1.tgz#cd6fc17e28500cff56c1b86c0a7fd4a54a73005c"
@@ -757,6 +767,14 @@ vite-plugin-ruby@^5.1.0:
   dependencies:
     debug "^4.3.4"
     fast-glob "^3.3.2"
+
+vite-plugin-stimulus-hmr@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/vite-plugin-stimulus-hmr/-/vite-plugin-stimulus-hmr-3.0.0.tgz#60410a69486e86a8c1a769fe4b10039ac5f8d910"
+  integrity sha512-KElOiZOlaG4XilQQHrzK8M1u5UfK4EFfADJKQYbnmsUMifDOnPR6anVYgHAN95QyWJ67Q/rYWe5BB9M5OxocfQ==
+  dependencies:
+    debug "^4.3"
+    stimulus-vite-helpers "^3.0.0"
 
 vite@^5.0.0:
   version "5.4.14"

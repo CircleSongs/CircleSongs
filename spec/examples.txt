@@ -37,10 +37,10 @@ example_id                                         | status | run_time        |
 ./spec/system/admin/chord_forms_spec.rb[1:1]       | passed | 0.17722 seconds |
 ./spec/system/admin/chord_forms_spec.rb[1:2]       | passed | 0.39628 seconds |
 ./spec/system/admin/passwords_spec.rb[1:1]         | passed | 0.13126 seconds |
-./spec/system/admin/songs_spec.rb[1:1]             | failed | 4.75 seconds    |
-./spec/system/admin/songs_spec.rb[1:2]             | passed | 4.83 seconds    |
+./spec/system/admin/songs_spec.rb[1:1]             | failed | 2.77 seconds    |
+./spec/system/admin/songs_spec.rb[1:2]             | passed | 1.52 seconds    |
 ./spec/system/admin/users_spec.rb[1:1]             | passed | 0.61476 seconds |
-./spec/system/broken_link_report_spec.rb[1:1]      | failed | 2.33 seconds    |
+./spec/system/broken_link_report_spec.rb[1:1]      | passed | 9.14 seconds    |
 ./spec/system/categories_spec.rb[1:1]              | passed | 0.167 seconds   |
 ./spec/system/contact_form_spec.rb[1:1]            | passed | 0.38356 seconds |
 ./spec/system/contact_form_spec.rb[1:2]            | passed | 0.37019 seconds |

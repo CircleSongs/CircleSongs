@@ -1,21 +1,22 @@
-RSpec.feature 'As a guest', type: :system do
+RSpec.feature "As a guest", type: :system do
   let(:song) { songs(:hotel_california) }
   let(:recording) { song.recordings.first }
 
-  scenario 'I can report a recording with a broken link', :js do
+  scenario "I can report a recording with a broken link", :js do
     visit song_path(song)
+    pause
     within "#recording-#{recording.id}" do
       accept_confirm do
-        find('.fa-unlink').click
+        find(".fa-chain-broken").click
       end
-      expect(page).to have_content 'Reported'
+      expect(page).to have_content "Reported"
     end
-    expect(last_email.subject).to eq I18n.t('broken_link_forms.email.subject', title: song.title)
+    expect(last_email.subject).to eq I18n.t("broken_link_forms.email.subject", title: song.title)
 
     visit song_path(song)
 
     within "#recording-#{recording.id}" do
-      expect(page).to have_content 'Reported'
+      expect(page).to have_content "Reported"
     end
   end
 end

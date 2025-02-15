@@ -10,7 +10,7 @@
     = vite_stylesheet_tag 'application'
     = vite_javascript_tag 'application'
 
-  %body
+  %body{ data: { controller: "confirm" }}
     = render 'layouts/navigation'
     - unless flash.empty?
       .row

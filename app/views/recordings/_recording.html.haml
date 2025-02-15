@@ -10,8 +10,8 @@
         - if recording.reported
           %small Reported
         - else
-          = simple_form_for :broken_link_report, url: broken_link_reports_path, method: :post, data: { turbo_confirm: 'Report broken link?', type: :json, turbo: true } do |f|
-            = button_tag type: :submit, class: 'btn report-broken-link' do
+          = simple_form_for :broken_link_report, url: broken_link_reports_path, method: :post do |f|
+            = button_tag type: :submit, class: 'btn report-broken-link', data: { confirm: "Report broken recording?", action: "confirm#show" } do
               %i.fa.fa-chain-broken
             .hidden
               = f.input :nickname

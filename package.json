@@ -9,6 +9,7 @@
     "@activeadmin/activeadmin": "^3",
     "@fortawesome/fontawesome-free": "^6.7.2",
     "@fortawesome/fontawesome-pro": "^6.7.2",
+    "@hotwired/stimulus": "^3.2.2",
     "@popperjs/core": "^2.11.8",
     "@rollup/plugin-inject": "^5.0.5",
     "active_material": "^2.1.4",
@@ -18,6 +19,8 @@
     "jquery": "^3.7.1",
     "jquery-ui-dist": "^1.13.3",
     "sass-embedded": "^1.83.4",
-    "vexchords": "^1.2.0"
+    "stimulus-vite-helpers": "^3.1.0",
+    "vexchords": "^1.2.0",
+    "vite-plugin-stimulus-hmr": "^3.0.0"
   }
 }
