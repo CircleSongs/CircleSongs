@@ -5,11 +5,16 @@ import StimulusHMR from 'vite-plugin-stimulus-hmr'
 
 export default defineConfig({
   plugins: [
-    RubyPlugin(),
-    StimulusHMR(),
     inject({   // => that should be first under plugins array
       $: 'jquery',
-      jQuery: 'jquery',
+      jQuery: 'jquery'
     }),
+    RubyPlugin(),
+    StimulusHMR(),
   ],
+  build: {
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
+  }
 })

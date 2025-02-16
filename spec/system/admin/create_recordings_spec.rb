@@ -9,7 +9,6 @@ RSpec.feature "As an admin user", type: :system do
 
   scenario "I can create Recordings while creating a Song", :js do
     visit admin_songs_path
-    pause
     click_on "New Song"
     fill_in "Title", with: title
     click_on "Add New Recording"

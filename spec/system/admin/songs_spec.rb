@@ -16,7 +16,7 @@ RSpec.describe "As an admin user" do
 
     click_on "Add new chord form"
 
-    select chord_form.chord, from: "Chord form"
+    select chord_form.chord
     click_on "Create Song"
     expect(find("img")["src"]).to eq Song.find_by(title: title).image_url(:thumb)
     expect(page).to have_content "Song was successfully created."
