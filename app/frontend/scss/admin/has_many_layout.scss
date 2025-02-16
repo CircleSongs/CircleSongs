@@ -1,0 +1,82 @@
+/* Overall fieldset container */
+.chord-forms-section {
+  margin-bottom: 2rem;
+}
+
+/* Section title */
+.fieldset-title {
+  margin-bottom: 1rem;
+}
+
+/* Space between entries */
+.has_many_container>fieldset {
+  margin-bottom: 1rem;
+}
+
+/* Style for the overall container of each chord form */
+.chord-forms-container ol {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+/* Style Move handle to match Remove button */
+.chord-forms-container li.handle, .recordings-container li.handle {
+  position: static;
+  display: inline-flex;
+  align-items: center;
+  height: 35px;
+  /* Match Remove button height */
+  padding: 0 12px;
+  background: linear-gradient(180deg, #ffffff, #e6e6e6);
+  border: 1px solid #c2c2c2;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  font-weight: bold;
+  color: #666;
+  text-shadow: 0 1px 0 #fff;
+  cursor: move;
+  outline: none;
+  margin: 0;
+  order: -1;
+}
+
+/* Replace text with icon */
+.chord-forms-container li.handle::before, .recordings-container li.handle::before {
+  content: "⋮⋮";
+  font-size: 16px;
+  line-height: 1;
+}
+
+.chord-forms-container li.handle,
+.recordings-container li.handle {
+  font-size: 0;
+  /* Hide the "Move" text */
+}
+
+/* Style for the select input container */
+.chord-forms-container .select {
+  flex: 1;
+  margin: 0;
+}
+
+/* Style for the select element itself */
+.chord-forms-container .chord-form-select {
+  width: 100%;
+}
+
+/* Hide the position input properly */
+.chord-forms-container .hidden, .recordings-container .hidden {
+  display: none;
+}
+
+/* Style for the Add new chord form button */
+.has_many_add {
+  margin-top: 1rem;
+  display: inline-block;
+}

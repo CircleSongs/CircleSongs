@@ -3,11 +3,13 @@
 %h2
   = @song.title
   - if user_signed_in?
-    %small.edit= link_to fa_icon('pencil'), edit_admin_song_path(@song)
+    %small.edit
+      = link_to edit_admin_song_path(@song) do
+        %i.fa.fa-pencil
 
-  %span.float-right
+  %span.float-end
     %a.back-to-songs{ href: songs_path }
-      = fa_icon('arrow-left')
+      %i.fa.fa-arrow-left
       Songs
 - if @song.alternate_title.present?
   %p= "[#{@song.alternate_title}]"
@@ -24,7 +26,7 @@
 .row
   = render @song.recordings
 
-.row
+.row.clearfix
   - if @song.lyrics.present?
     .col.lyrics
       %p
@@ -46,6 +48,6 @@
         #song-chords{ data: @song.chords.to_json }
 
       - @song.chord_forms.order(:position).each do |chord_form|
-        %ul.text-center.float-left
+        %ul.text-center.float-start
           %li.chord-form{ data: { id: chord_form.id, chord: chord_form.chord, fingering: chord_form.fingering }}
           %li= chord_form.chord

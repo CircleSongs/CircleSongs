@@ -12,7 +12,7 @@ require 'support/auth_steps'
 require 'support/devise'
 require 'support/fixtures'
 require 'support/helper_methods'
-require 'support/js_drivers'
+require 'support/capybara_drivers'
 require 'support/mailer_macros'
 require 'support/shoulda_matchers'
 

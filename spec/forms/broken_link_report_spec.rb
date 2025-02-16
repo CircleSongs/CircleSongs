@@ -1,4 +1,4 @@
-RSpec.describe BrokenLinkReport do
+RSpec.describe BrokenLinkReport, type: :system do
   let(:song) { songs(:hotel_california) }
   let(:recording) { song.recordings.first }
   let(:params) do

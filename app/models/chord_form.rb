@@ -6,6 +6,14 @@ class ChordForm < ApplicationRecord
   validates :fingering, presence: true
   validate :fingering_must_be_json
 
+    def self.ransackable_attributes(auth_object = nil)
+    ["chord", "fingering", "id"]
+  end
+
+    def self.ransackable_associations(auth_object = nil)
+    ["song_chord_forms", "songs"]
+  end
+
   private
 
   def fingering_must_be_json
