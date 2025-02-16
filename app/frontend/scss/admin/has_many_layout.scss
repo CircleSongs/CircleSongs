@@ -25,7 +25,7 @@
 }
 
 /* Style Move handle to match Remove button */
-.chord-forms-container li.handle {
+.chord-forms-container li.handle, .recordings-container li.handle {
   position: static;
   display: inline-flex;
   align-items: center;
@@ -47,13 +47,14 @@
 }
 
 /* Replace text with icon */
-.chord-forms-container li.handle::before {
+.chord-forms-container li.handle::before, .recordings-container li.handle::before {
   content: "⋮⋮";
   font-size: 16px;
   line-height: 1;
 }
 
-.chord-forms-container li.handle {
+.chord-forms-container li.handle,
+.recordings-container li.handle {
   font-size: 0;
   /* Hide the "Move" text */
 }
@@ -70,7 +71,7 @@
 }
 
 /* Hide the position input properly */
-.chord-forms-container .hidden {
+.chord-forms-container .hidden, .recordings-container .hidden {
   display: none;
 }
 

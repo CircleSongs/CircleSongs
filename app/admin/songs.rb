@@ -115,12 +115,13 @@ ActiveAdmin.register Song do
         heading: "Recordings",
         allow_destroy: true,
         new_record: true,
-        sortable: :position
+        sortable: :position,
+        class: "recordings-container"
       ) do |a|
         a.input :title
         a.input :url
-        a.input :embedded_player
-        a.input :description
+        a.input :embedded_player, input_html: { rows: 5 }
+        a.input :description, input_html: { rows: 5 }
         a.input :reported
       end
     end
