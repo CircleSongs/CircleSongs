@@ -95,10 +95,10 @@ jobs:
       - heroku/install
       - heroku/deploy-via-git
       - run:
+          name: "Heroku post-deploy steps"
           command: |
             heroku run rails db:migrate -a ${HEROKU_APP_NAME}
             heroku restart -a ${HEROKU_APP_NAME}
-          name: "Heroku post-deploy steps"
 
 workflows:
   test-and-deploy:
