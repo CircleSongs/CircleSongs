@@ -7,12 +7,10 @@
   },
   "dependencies": {
     "@activeadmin/activeadmin": "^3",
-    "@fortawesome/fontawesome-free": "^6.7.2",
     "@fortawesome/fontawesome-pro": "^6.7.2",
     "@hotwired/stimulus": "^3.2.2",
     "@popperjs/core": "^2.11.8",
     "@rollup/plugin-inject": "^5.0.5",
-    "active_material": "^2.1.4",
     "bootstrap": "^5.3.3",
     "bootswatch": "^5.3.3",
     "chordsheetjs": "^12.0.0",

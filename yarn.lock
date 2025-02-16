@@ -131,11 +131,6 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.21.5.tgz#acad351d582d157bb145535db2a6ff53dd514b5c"
   integrity sha512-tQd/1efJuzPC6rCFwEvLtci/xNFcTZknmXs98FYDfGE4wP9ClFV98nyKrzJKVPMhdDnjzLhdUyMX4PsQAPjwIw==
 
-"@fortawesome/fontawesome-free@^6.7.2":
-  version "6.7.2"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-6.7.2.tgz#8249de9b7e22fcb3ceb5e66090c30a1d5492b81a"
-  integrity sha512-JUOtgFW6k9u4Y+xeIaEiLr3+cjoUPiAuLXoyKOJSia6Duzb7pq+A76P9ZdPDoAoxHdHzq6gE9/jKBGXlZT8FbA==
-
 "@fortawesome/fontawesome-pro@^6.7.2":
   version "6.7.2"
   resolved "https://npm.fontawesome.com/@fortawesome/fontawesome-pro/-/6.7.2/fontawesome-pro-6.7.2.tgz#1e371abd87be21738d73d79e27d79f419d25c454"
@@ -299,11 +294,6 @@
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-1.0.6.tgz#628effeeae2064a1b4e79f78e81d87b7e5fc7b50"
   integrity sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==
-
-active_material@^2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/active_material/-/active_material-2.1.4.tgz#5c97f0fdbf8448680280d2e38fdf748d0d20d570"
-  integrity sha512-2SErVpjzdcfxFRvSkcMoHJV/34ByG9/9jQicrWJwvzd99Vri+i0aiwGM+4e/s20sFn68kolq7o3ak8McijAEuQ==
 
 bootstrap@^5.3.3:
   version "5.3.3"
