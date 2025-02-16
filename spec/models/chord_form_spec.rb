@@ -6,7 +6,7 @@ RSpec.describe ChordForm do
       fingering: fingering
     }
   end
-  let(:chord) { 'Am7' }
+  let(:chord) { "Am7" }
   let(:valid_fingering) do
     <<-JSON
       {
@@ -44,19 +44,19 @@ RSpec.describe ChordForm do
   it { is_expected.to validate_presence_of :chord }
   it { is_expected.to validate_presence_of :fingering }
 
-  describe '#fingering' do
-    context 'with valid JSON' do
-      it 'returns true' do
+  describe "#fingering" do
+    context "with valid JSON" do
+      it "returns true" do
         expect(chord_form).to be_valid
       end
     end
 
-    context 'with invalid JSON' do
+    context "with invalid JSON" do
       let(:fingering) do
         invalid_fingering
       end
 
-      it 'returns false' do
+      it "returns false" do
         expect(chord_form).not_to be_valid
       end
     end

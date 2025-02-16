@@ -14,7 +14,5 @@ Rails.application.config.after_initialize do
   ActiveAdmin::Views::Pages::Base.include ActiveAdminViteJS
 
   # Include in LoggedOut pages if the constant exists
-  if defined?(ActiveAdmin::Views::Pages::LoggedOut)
-    ActiveAdmin::Views::Pages::LoggedOut.include ActiveAdminViteJS
-  end
+  ActiveAdmin::Views::Pages::LoggedOut.include ActiveAdminViteJS if defined?(ActiveAdmin::Views::Pages::LoggedOut)
 end

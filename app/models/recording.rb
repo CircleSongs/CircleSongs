@@ -6,7 +6,8 @@ class Recording < ApplicationRecord
 
   default_scope { order(:position) }
 
-    def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "description", "embedded_player", "id", "position", "reported", "song_id", "title", "updated_at", "url"]
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[created_at description embedded_player id position reported song_id
+       title updated_at url]
   end
 end

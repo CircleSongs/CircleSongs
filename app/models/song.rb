@@ -10,7 +10,7 @@ class Song < ApplicationRecord
   }, allow_destroy: true
   has_and_belongs_to_many :languages
   has_and_belongs_to_many :categories
-  has_many :song_chord_forms
+  has_many :song_chord_forms, dependent: :destroy
   accepts_nested_attributes_for :song_chord_forms, allow_destroy: true, reject_if: :all_blank
   has_many :chord_forms, through: :song_chord_forms
   accepts_nested_attributes_for :chord_forms, allow_destroy: true, reject_if: :all_blank
@@ -19,12 +19,12 @@ class Song < ApplicationRecord
     @formatted_chords ||= Chordpro.html(chords)
   end
 
-  def self.ransackable_attributes(auth_object = nil)
+  def self.ransackable_attributes(_auth_object = nil)
     %w[alternate_title chords composer composer_url created_at description id
        id_value image_data lyrics slug title translation updated_at]
   end
 
-  def self.ransackable_associations(auth_object = nil)
+  def self.ransackable_associations(_auth_object = nil)
     %w[categories chord_forms languages recordings song_chord_forms]
   end
 end

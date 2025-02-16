@@ -5,6 +5,6 @@ module SongsHelper
     [
       @q.sorts.first.name,
       @q.sorts.first.dir
-    ].join(' ')
+    ].join(" ")
   end
 end

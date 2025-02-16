@@ -1,6 +1,6 @@
-RSpec.feature 'As an admin user' do
+RSpec.feature "As an admin user" do
   let(:user) { users(:admin) }
-  let(:chord) { 'C#m7' }
+  let(:chord) { "C#m7" }
   let(:valid_fingering) do
     <<-JSON
     {
@@ -23,18 +23,18 @@ RSpec.feature 'As an admin user' do
     visit admin_chord_forms_path
   end
 
-  scenario 'my fixture works', :js do
-    expect(page).to have_selector 'div.chord-form svg'
+  scenario "my fixture works", :js do
+    expect(page).to have_selector "div.chord-form svg"
   end
 
-  scenario 'I can manage ChordForms', :js do
-    click_on 'New Chord Form'
-    fill_in 'Chord', with: chord
-    fill_in 'Fingering', with: valid_fingering
-    click_on 'Create Chord form'
-    expect(page).to have_content 'Chord form was successfully created.'
-    expect(page).to have_selector 'div.chord-form svg'
+  scenario "I can manage ChordForms", :js do
+    click_on "New Chord Form"
+    fill_in "Chord", with: chord
+    fill_in "Fingering", with: valid_fingering
+    click_on "Create Chord form"
+    expect(page).to have_content "Chord form was successfully created."
+    expect(page).to have_selector "div.chord-form svg"
     visit admin_chord_forms_path
-    expect(page).to have_selector 'div.chord-form svg'
+    expect(page).to have_selector "div.chord-form svg"
   end
 end

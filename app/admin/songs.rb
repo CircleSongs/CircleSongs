@@ -28,17 +28,17 @@ ActiveAdmin.register Song do
   permit_params :alternate_title, :composer, :composer_url, :image,
                 :description, :lyrics, :title, :translation,
                 :chords, :remove_image,
-                recordings_attributes: [
-                  :description,
-                  :embedded_player,
-                  :title,
-                  :url,
-                  :id,
-                  :position,
-                  :reported,
-                  :_destroy
+                recordings_attributes: %i[
+                  description
+                  embedded_player
+                  title
+                  url
+                  id
+                  position
+                  reported
+                  _destroy
                 ],
-                song_chord_forms_attributes: [:id, :chord_form_id, :_destroy, :position],
+                song_chord_forms_attributes: %i[id chord_form_id _destroy position],
                 category_ids: [],
                 language_ids: []
 
@@ -133,7 +133,7 @@ ActiveAdmin.register Song do
   show do
     attributes_table do
       row "Preview Link" do |song|
-        link_to "Preview", song_path(song), target: :_blank
+        link_to "Preview", song_path(song), target: :_blank, rel: :noopener
       end
       row :image do |song|
         image_tag song.image[:thumb].url if song.image.present?
@@ -141,7 +141,7 @@ ActiveAdmin.register Song do
       row :title
       row :alternate_title
       row :composer do |song|
-        link_to song.composer, song.composer_url, target: :_blank
+        link_to song.composer, song.composer_url, target: :_blank, rel: :noopener
       end
       row :description do
         simple_format song.description
@@ -179,7 +179,7 @@ ActiveAdmin.register Song do
       table_for song.recordings, class: :recordings do
         column :title
         column :url do |recording|
-          link_to recording.url, recording.url, target: :_blank
+          link_to recording.url, recording.url, target: :_blank, rel: :noopener
         end
         column :embedded_player do |recording|
           raw recording.embedded_player

@@ -7,7 +7,7 @@ RSpec.describe Song do
   it { is_expected.to have_and_belong_to_many(:languages) }
   it { is_expected.to have_and_belong_to_many(:categories) }
 
-  describe 'formatted_chords' do
+  describe "formatted_chords" do
     let(:params) do
       {
         chords: <<-TEXT
@@ -34,13 +34,13 @@ RSpec.describe Song do
       allow(Chordpro).to receive(:html).and_call_original
     end
 
-    it 'calls Chordpro' do
+    it "calls Chordpro" do
       song.formatted_chords
       expect(Chordpro).to have_received(:html)
     end
 
-    it 'returns formatted stuff' do
-      expect(song.formatted_chords).to match '<table>'
+    it "returns formatted stuff" do
+      expect(song.formatted_chords).to match "<table>"
     end
   end
 end

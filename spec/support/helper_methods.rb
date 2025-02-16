@@ -3,7 +3,7 @@ def uuid
 end
 
 def pause
-  puts 'pausing...'
+  puts "pausing..."
   STDIN.gets
 end
 
