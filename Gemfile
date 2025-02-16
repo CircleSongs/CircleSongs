@@ -29,13 +29,18 @@ gem "shrine", "~> 3.6"
 gem "simple_form", "~> 5.3"
 gem "vite_rails", "~> 3.0"
 
+group :development, :test do
+  gem "rubocop-capybara", "~> 2.21"
+  gem "rubocop-rspec_rails", "~> 2.30"
+  gem "rubocop", "~> 1.71"
+  gem "rubocop-rspec", "~> 3.4"
+  gem "rubocop-rails", "~> 2.29"
+end
+
 group :development do
   gem "brakeman", "~> 7.0"
   gem "foreman", "~> 0.88"
   gem "listen", "~> 3.9"
-  gem "rubocop", "~> 1.71"
-  gem "rubocop-rspec", "~> 3.4"
-  gem "rubocop-rails", "~> 2.29"
   gem "spring", "~> 4.2"
   gem "spring-watcher-listen", "~> 2.1"
   gem "web-console", "~> 4.2"
@@ -52,5 +57,4 @@ group :test do
   gem "simplecov", "~> 0.22"
 end
 
-gem "rubocop-capybara", "~> 2.21"
-gem "rubocop-rspec_rails", "~> 2.30"
+gem "ruby-lsp", "~> 0.23.11"

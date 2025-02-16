@@ -6,10 +6,11 @@ require:
   - rubocop-rspec_rails
   - rubocop-capybara
 
-Documentation:
+Style/Documentation:
   Enabled: false
 
 AllCops:
+  NewCops: enable
   TargetRubyVersion: 2.6
   Exclude:
     - db/**/*
@@ -37,6 +38,34 @@ Metrics/BlockLength:
     - app/admin/**/*
     - config/environments/*
 
-Metrics/LineLength:
+Layout/LineLength:
   Exclude:
     - app/admin/**/*
+
+# New cops configuration
+Gemspec/AddRuntimeDependency:
+  Enabled: true
+
+Gemspec/DeprecatedAttributeAssignment:
+  Enabled: true
+
+Gemspec/DevelopmentDependencies:
+  Enabled: true
+
+Gemspec/RequireMFA:
+  Enabled: true
+
+Layout/LineContinuationLeadingSpace:
+  Enabled: true
+
+Layout/LineContinuationSpacing:
+  Enabled: true
+
+Layout/LineEndStringConcatenationIndentation:
+  Enabled: true
+
+Layout/SpaceBeforeBrackets:
+  Enabled: true
+
+Lint/AmbiguousAssignment:
+  Enabled: true
