@@ -1,5 +1,5 @@
 require_relative "boot"
-ENV['RANSACK_FORM_BUILDER'] = '::SimpleForm::FormBuilder'
+ENV["RANSACK_FORM_BUILDER"] = "::SimpleForm::FormBuilder"
 require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
@@ -22,6 +22,7 @@ module CircleSongs
       g.orm :active_record, primary_key_type: :uuid
     end
 
+    config.active_support.to_time_preserves_timezone = :zone
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

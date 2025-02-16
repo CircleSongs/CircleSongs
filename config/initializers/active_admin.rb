@@ -1,3 +1,4 @@
+
 ActiveAdmin.setup do |config|
   meta_tags_options = { viewport: 'width=device-width, initial-scale=1' }
   config.meta_tags = meta_tags_options
@@ -14,13 +15,14 @@ ActiveAdmin.setup do |config|
   #
   config.site_title_link = '/'
 
+  config.use_webpacker = true
   # Set an optional image to be displayed for the header
   # instead of a string (overrides :site_title)
   #
   # Note: Aim for an image that's 21px high so it fits in the header.
   #
   # config.site_title_image = "logo.png"
-
+  # config.site_title_image = "http://localhost:3000/vite-dev/images/medicine-songs-logo.svg"
   # == Default Namespace
   #
   # Set the default namespace each administration resource
@@ -294,24 +296,3 @@ ActiveAdmin.setup do |config|
   #
   # config.order_clause = MyOrderClause
 end
-
-module AdminPageLayoutOverride
-  def build(*args)
-    # you can move the call to super at the end, if you wish
-    # to insert things at the begining of the page
-    super
-
-    # this will be added at the end of <body>
-    # within @body do
-    #   render partial: '...'
-    # end
-
-    # this will be added at the end of <head>
-    within head do
-      # text_node(javascript_pack_tag('admin-song-chords'))
-      text_node(javascript_importmap_tags)
-    end
-  end
-end
-
-ActiveAdmin::Views::Pages::Base.prepend AdminPageLayoutOverride

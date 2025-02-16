@@ -6,11 +6,11 @@
     %title Medicine Songs
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_importmap_tags
-    = javascript_include_tag 'https://kit.fontawesome.com/51413862f8.js', crossorigin: :anonymous
+    = vite_client_tag
+    = vite_stylesheet_tag 'application'
+    = vite_javascript_tag 'application'
 
-  %body
+  %body{ data: { controller: "confirm" }}
     = render 'layouts/navigation'
     - unless flash.empty?
       .row

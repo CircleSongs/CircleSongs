@@ -1,34 +1,34 @@
 = search_form_for @q do |f|
-  .row
+  .row.mb-3
     .col-sm-2.offset-sm-2
-      = f.input :categories_id_in, collection: @categories, input_html: { class: 'custom-select' }, include_blank: 'All', label: 'Category', required: false, label_method: :name_and_count
+      = f.input :categories_id_in, collection: @categories, input_html: { class: 'form-select' }, include_blank: 'All', label: 'Category', required: false, label_method: :name_and_count
     .col-sm-2
-      = f.input :languages_id_in, collection: Language.all, input_html: { class: 'custom-select' }, include_blank: 'All', label: 'Language', required: false
+      = f.input :languages_id_in, collection: Language.all, input_html: { class: 'form-select' }, include_blank: 'All', label: 'Language', required: false
     .col-sm-2
-      = f.input :chords_present, collection: [['Yes', true], ['No', false]], include_blank: 'All', label: 'Has Chords', required: false, input_html: { class: 'custom-select' }
+      = f.input :chords_present, collection: [['Yes', true], ['No', false]], include_blank: 'All', label: 'Has Chords', required: false, input_html: { class: 'form-select' }
     .col-sm-2
-      = f.input :s, collection: [['Title', 'title asc'], ['Date Added', 'created_at desc']], label: 'Sort by', required: false, include_blank: false, selected: songs_sort_value, input_html: { class: 'custom-select' }
+      = f.input :s, collection: [['Title', 'title asc'], ['Date Added', 'created_at desc']], label: 'Sort by', required: false, include_blank: false, selected: songs_sort_value, input_html: { class: 'form-select' }
 
-  .row
+  .row.mb-3
     .col-sm-8.offset-sm-2
       .input-group
         = f.input_field :title_cont, class: 'form-control', placeholder: 'Search titles...'
         = f.input_field :composer_cont, class: 'form-control', placeholder: 'Search composers...'
-        .input-group-append
-          = f.button :submit, class: 'btn btn-primary'
-          = link_to 'Clear', songs_path, class: 'btn btn-secondary'
+        = f.button :submit, class: 'btn btn-primary'
+        = link_to 'Clear', songs_path, class: 'btn btn-secondary'
+
+  .row.mb-3
+    .col-sm-8.offset-sm-2
+      = paginate @songs
 
   .row
-    .col
-      = paginate @songs
-.row
-  .col-sm-12
-    %ul.songs
-      - if @songs.empty?
-        %li= t 'songs.no_songs'
-      - else
-        = render @songs
+    .col-sm-12
+      %ul.songs
+        - if @songs.empty?
+          %li= t 'songs.no_songs'
+        - else
+          = render @songs
 
-.row
-  .col
-    = paginate @songs
+  .row.mt-3
+    .col-sm-8.offset-sm-2
+      = paginate @songs

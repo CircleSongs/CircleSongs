@@ -1,0 +1,37 @@
+version: "3.8"
+
+# Versions for services should mirror those in production
+
+services:
+  database:
+    container_name: "${APP_NAME}-postgres"
+    image: "postgres:15-alpine"
+    mem_limit: 256m
+    ports:
+      - "127.0.0.1:5432:5432"
+    environment:
+      POSTGRES_USER: ${APP_NAME}
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - database:/var/lib/postgresql/data:delegated
+
+  # redis:
+  #   image: redis:7.0-alpine
+  #   mem_limit: 64m
+  #   ports:
+  #     - "127.0.0.1:6379:6379"
+  #   volumes:
+  #     - redis:/data:delegated
+
+  # memcached:
+  #   image: memcached:1-alpine
+  #   mem_limit: 64m
+  #   ports:
+  #     - "127.0.0.1:11211:11211"
+
+volumes:
+  database:
+    name: "${APP_NAME}-postgres"
+  # redis:
+  #   name: "${APP_NAME}-redis"
+  # storage:
