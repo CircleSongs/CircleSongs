@@ -10,12 +10,33 @@ commands:
   setup-environment:
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - ruby-deps-v1-{{ checksum "Gemfile.lock" }}
+            - ruby-deps-v1-
+      - restore_cache:
+          keys:
+            - yarn-deps-v1-{{ checksum "yarn.lock" }}
+            - yarn-deps-v1-
       - node/install:
           node-version: "21.6.0"
       - node/install-packages:
           pkg-manager: yarn
+      - run:
+          name: Verify Yarn Cache
+          command: |
+            yarn config get cache-folder
+            yarn cache list
       - ruby/install-deps:
-          with-cache: true
+          with-cache: false
+      - save_cache:
+          key: ruby-deps-v1-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - save_cache:
+          key: yarn-deps-v1-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
       - run:
           name: Install System Dependencies
           command: |
