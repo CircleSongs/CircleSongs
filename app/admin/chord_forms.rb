@@ -4,7 +4,7 @@ ActiveAdmin.register ChordForm do
   index do
     column :chord
     column :fingering do |chord_form|
-      div class: 'chord-form', 'data-fingering': chord_form.fingering
+      div class: "chord-form", 'data-fingering': chord_form.fingering
     end
 
     actions
@@ -12,6 +12,6 @@ ActiveAdmin.register ChordForm do
 
   show do
     h3 chord_form.chord
-    div class: 'chord-form', 'data-fingering': chord_form.fingering
+    div class: "chord-form", 'data-fingering': chord_form.fingering
   end
 end

@@ -6,23 +6,23 @@ class ChordForm < ApplicationRecord
   validates :fingering, presence: true
   validate :fingering_must_be_json
 
-    def self.ransackable_attributes(auth_object = nil)
-    ["chord", "fingering", "id"]
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[chord fingering id]
   end
 
-    def self.ransackable_associations(auth_object = nil)
-    ["song_chord_forms", "songs"]
+  def self.ransackable_associations(_auth_object = nil)
+    %w[song_chord_forms songs]
   end
 
   private
 
   def fingering_must_be_json
-    return unless fingering.present?
+    return if fingering.blank?
 
     begin
       JSON.parse fingering
     rescue JSON::ParserError
-      errors.add(:fingering, 'must be valid JSON')
+      errors.add(:fingering, "must be valid JSON")
     end
   end
 end

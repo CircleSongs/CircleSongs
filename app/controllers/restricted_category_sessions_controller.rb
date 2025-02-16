@@ -7,7 +7,7 @@ class RestrictedCategorySessionsController < ApplicationController
       redirect_to songs_path
     else
       session[:restricted_categories] = false
-      flash[:error] = 'Invalid credentials.'
+      flash[:error] = "Invalid credentials."
       render :new
     end
   end

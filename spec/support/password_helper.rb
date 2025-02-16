@@ -1,4 +1,4 @@
-require 'bcrypt'
+require "bcrypt"
 
 module PasswordHelper
   def self.encrypted_password(password = nil)
@@ -7,6 +7,6 @@ module PasswordHelper
   end
 
   def self.default_password
-    'alpahbravo'
+    "alpahbravo"
   end
 end

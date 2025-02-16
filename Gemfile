@@ -51,3 +51,6 @@ group :test do
   gem "shoulda-matchers", "~> 6.4"
   gem "simplecov", "~> 0.22"
 end
+
+gem "rubocop-capybara", "~> 2.21"
+gem "rubocop-rspec_rails", "~> 2.30"

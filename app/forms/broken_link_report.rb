@@ -20,7 +20,7 @@ class BrokenLinkReport < MailForm::Base
   private
 
   def subject_text
-    I18n.t('broken_link_forms.email.subject', title: song.title)
+    I18n.t("broken_link_forms.email.subject", title: song.title)
   end
 
   def message

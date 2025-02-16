@@ -5,8 +5,8 @@ ActiveAdmin.register Category do
     column :name
     column :restricted do |category|
       if category.restricted?
-        span class: 'status_tag yes' do
-          'Yes'
+        span class: "status_tag yes" do
+          "Yes"
         end
       end
     end

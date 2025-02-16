@@ -4,9 +4,9 @@ RSpec.describe Vocabulary do
   it { is_expected.to validate_presence_of :text }
   it { is_expected.to validate_presence_of :translation }
 
-  describe '.alphabetical' do
-    it 'returns accented characters in alphabetical order' do
-      expect(result.map(&:text)).to eq ['árbol', 'cosas', 'fútbol', 'único']
+  describe ".alphabetical" do
+    it "returns accented characters in alphabetical order" do
+      expect(result.map(&:text)).to eq %w[árbol cosas fútbol único]
     end
   end
 end

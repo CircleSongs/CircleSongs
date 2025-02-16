@@ -1,15 +1,15 @@
-RSpec.feature 'As a guest', type: :system  do
+RSpec.feature "As a guest", type: :system do
   let(:hotel_california) { songs(:hotel_california) }
   let(:taki_taki) { songs(:taki_taki) }
   let(:el_condor_pasa) { songs(:el_condor_pasa) }
-  let(:chords) { '[Dm]On a dark desert [A]highway, [Em]cool wind in my hair...' }
-  let(:formatted_chords) { 'On a dark desert highway' }
+  let(:chords) { "[Dm]On a dark desert [A]highway, [Em]cool wind in my hair..." }
+  let(:formatted_chords) { "On a dark desert highway" }
 
   before do
     visit songs_path
   end
 
-  scenario 'I can view songs', :selenium do
+  scenario "I can view songs", :selenium do
     click_on hotel_california.title
     expect(page).to have_content hotel_california.title
     expect(page).to have_content hotel_california.alternate_title
@@ -21,36 +21,36 @@ RSpec.feature 'As a guest', type: :system  do
     expect(page).to have_content formatted_chords
   end
 
-  scenario 'I can search for songs' do
-    fill_in 'Search titles...', with: 'Foo'
-    click_on 'Search'
-    expect(page).to have_content I18n.t('songs.no_songs')
+  scenario "I can search for songs" do
+    fill_in "Search titles...", with: "Foo"
+    click_on "Search"
+    expect(page).to have_content I18n.t("songs.no_songs")
 
-    fill_in 'Search titles...', with: 'California'
-    click_on 'Search'
+    fill_in "Search titles...", with: "California"
+    click_on "Search"
     expect(page).to have_content hotel_california.title
     expect(page).not_to have_content taki_taki.title
     expect(page).not_to have_content el_condor_pasa.title
 
-    click_on 'Clear'
+    click_on "Clear"
 
-    select 'Traditional'
-    click_on 'Search'
+    select "Traditional"
+    click_on "Search"
     expect(page).to have_content el_condor_pasa.title
     expect(page).not_to have_content taki_taki.title
     expect(page).not_to have_content hotel_california.title
 
-    click_on 'Clear'
+    click_on "Clear"
 
-    select 'Spanish'
-    click_on 'Search'
+    select "Spanish"
+    click_on "Search"
     expect(page).not_to have_content hotel_california.title
     expect(page).not_to have_content taki_taki.title
     expect(page).to have_content el_condor_pasa.title
   end
 
-  scenario 'I do not see an edit link' do
-    expect(page).not_to have_selector 'a.edit'
-    expect(page).not_to have_selector '.has_recording'
+  scenario "I do not see an edit link" do
+    expect(page).not_to have_selector "a.edit"
+    expect(page).not_to have_selector ".has_recording"
   end
 end

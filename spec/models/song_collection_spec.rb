@@ -4,29 +4,29 @@ RSpec.describe SongCollection do
   let(:q) { song_collection.q }
   let(:results) { q.result(distinct: true) }
 
-  describe '.call' do
-    context 'with no params' do
-      it 'returns all Songs' do
+  describe ".call" do
+    context "with no params" do
+      it "returns all Songs" do
         expect(results.count).to eq 4
       end
     end
 
-    context 'with a good string' do
+    context "with a good string" do
       let(:params) do
-        { title_cont: 'California' }
+        { title_cont: "California" }
       end
 
-      it 'returns songs matching the title' do
+      it "returns songs matching the title" do
         expect(results.count).to eq 1
       end
     end
 
-    context 'with a bad string' do
+    context "with a bad string" do
       let(:params) do
-        { title_cont: 'foo' }
+        { title_cont: "foo" }
       end
 
-      it 'returns no songs' do
+      it "returns no songs" do
         expect(results.count).to eq 0
       end
     end

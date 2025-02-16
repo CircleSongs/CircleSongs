@@ -6,7 +6,7 @@ RSpec.configure do |config|
     driven_by(
       :selenium,
       using: ENV.fetch("BROWSER", :headless_chrome).to_sym,
-      screen_size: [ 1400, 1400 ]
+      screen_size: [1400, 1400]
     )
   end
 end
