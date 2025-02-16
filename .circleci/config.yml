@@ -38,11 +38,11 @@ jobs:
           BUNDLE_RETRY: 3
           RAILS_ENV: test
           PGHOST: 127.0.0.1
-          PGUSER: postgres
+          PGUSER: circle-songs
           PGPASSWORD: ""
       - image: cimg/postgres:14.0
         environment:
-          POSTGRES_USER: postgres
+          POSTGRES_USER: circle-songs
           POSTGRES_DB: circle-songs_test
           POSTGRES_PASSWORD: ""
 
