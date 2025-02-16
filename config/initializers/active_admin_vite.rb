@@ -1,18 +1,12 @@
-Rails.application.config.after_initialize do
-  module ActiveAdminViteJS
-    def stylesheet_pack_tag(style, **options)
-      style = "active_admin.scss" if style == "active_admin.css"
-      vite_stylesheet_tag(style, **options)
-    end
-
-    def javascript_pack_tag(script, **options)
-      vite_javascript_tag(script, **options)
-    end
+module ActiveAdminViteJS
+  def stylesheet_pack_tag(style, **options)
+    style = 'active_admin.scss' if style == 'active_admin.css'
+    vite_stylesheet_tag(style, **options)
   end
 
-  # Include in Base pages
-  ActiveAdmin::Views::Pages::Base.include ActiveAdminViteJS
-
-  # Include in LoggedOut pages if the constant exists
-  ActiveAdmin::Views::Pages::LoggedOut.include ActiveAdminViteJS if defined?(ActiveAdmin::Views::Pages::LoggedOut)
+  def javascript_pack_tag(script, **options)
+    vite_javascript_tag(script, **options)
+  end
 end
+
+ActiveAdmin::ViewHelpers.include ActiveAdminViteJS
