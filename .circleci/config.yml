@@ -13,6 +13,9 @@ jobs:
     resource_class: large
     steps:
       - checkout
+      - node/install:
+          install-yarn: true
+          node-version: "21.6.0"
       - run: node --version
       - ruby/install-deps
       - node/install-packages:
@@ -50,6 +53,9 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
+      - node/install:
+          install-yarn: true
+          node-version: "21.6.0"
       - run:
           name: Install ImageMagic
           command: |
