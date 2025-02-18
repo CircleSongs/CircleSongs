@@ -20,7 +20,7 @@ class Song < ApplicationRecord
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[alternate_title chords composer composer_url created_at description id
+    %w[alternate_title chords composer_name composer_url created_at description id
        id_value image_data lyrics slug title translation updated_at]
   end
 

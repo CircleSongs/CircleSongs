@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2022_04_30_034109) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_18_195155) do
+  create_schema "heroku_ext"
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -112,7 +114,7 @@ ActiveRecord::Schema[8.0].define(version: 2022_04_30_034109) do
   create_table "songs", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.string "alternate_title"
-    t.string "composer"
+    t.string "composer_name"
     t.text "lyrics"
     t.text "translation"
     t.text "chords"

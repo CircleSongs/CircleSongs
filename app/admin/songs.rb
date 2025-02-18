@@ -25,7 +25,7 @@ ActiveAdmin.register Song do
   end
 
   # Permitted parameters
-  permit_params :alternate_title, :composer, :composer_url, :image,
+  permit_params :alternate_title, :composer_name, :composer_url, :image,
                 :description, :lyrics, :title, :translation,
                 :chords, :remove_image,
                 recordings_attributes: %i[
@@ -45,7 +45,7 @@ ActiveAdmin.register Song do
   # Index page configuration
   index do
     column :title, sortable: true
-    column :composer, sortable: true
+    column :composer_name, sortable: true
     column "Has Chords", sortable: :chords do |song|
       song.chords.present? ? "Yes" : "No"
     end
@@ -63,7 +63,7 @@ ActiveAdmin.register Song do
       f.input :remove_image, as: :boolean
       f.input :title
       f.input :alternate_title
-      f.input :composer
+      f.input :composer_name
       f.input :composer_url
       f.input :description, input_html: { rows: 5 }
       f.input :lyrics, input_html: { rows: 5 }
@@ -141,7 +141,7 @@ ActiveAdmin.register Song do
       row :title
       row :alternate_title
       row :composer do |song|
-        link_to song.composer, song.composer_url, target: :_blank, rel: :noopener
+        link_to song.composer_name, song.composer_url, target: :_blank, rel: :noopener
       end
       row :description do
         simple_format song.description
