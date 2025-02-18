@@ -13,13 +13,13 @@
       Songs
 - if @song.alternate_title.present?
   %p= "[#{@song.alternate_title}]"
-- if @song.composer.present?
+- if @song.composer_name.present?
   %p
     By
     - if @song.composer_url.present?
-      = link_to @song.composer, @song.composer_url, target: :_blank
+      = link_to @song.composer_name, @song.composer_url, target: :_blank
     - else
-      = @song.composer
+      = @song.composer_name
 - if @song.description.present?
   = simple_format @song.description
 
