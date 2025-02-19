@@ -64,6 +64,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_18_195155) do
     t.text "fingering"
   end
 
+  create_table "composers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "url"
+    t.text "description"
+    t.integer "songs_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -124,6 +133,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_18_195155) do
     t.string "composer_url"
     t.text "image_data"
     t.string "slug"
+    t.uuid "composer_id"
+    t.index ["composer_id"], name: "index_songs_on_composer_id"
     t.index ["slug"], name: "index_songs_on_slug", unique: true
   end
 
