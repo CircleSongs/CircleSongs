@@ -19,7 +19,7 @@ commands:
             - yarn-deps-v1-{{ checksum "yarn.lock" }}
             - yarn-deps-v1-
       - node/install:
-          node-version: "21.6.0"
+          node-version: 23.8.0
       - node/install-packages:
           pkg-manager: yarn
       - run:
