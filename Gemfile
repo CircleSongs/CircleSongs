@@ -27,6 +27,7 @@ gem "rollbar", "~> 3.6"
 gem "sassc-rails", "~> 2.1"
 gem "shrine", "~> 3.6"
 gem "simple_form", "~> 5.3"
+gem "strong_migrations", "~> 2.2"
 gem "vite_rails", "~> 3.0"
 
 group :development, :test do
@@ -35,6 +36,7 @@ group :development, :test do
   gem "rubocop", "~> 1.71"
   gem "rubocop-rspec", "~> 3.4"
   gem "rubocop-rails", "~> 2.29"
+  gem "ruby-lsp", "~> 0.23.11"
 end
 
 group :development do
@@ -56,5 +58,3 @@ group :test do
   gem "shoulda-matchers", "~> 6.4"
   gem "simplecov", "~> 0.22"
 end
-
-gem "ruby-lsp", "~> 0.23.11"
