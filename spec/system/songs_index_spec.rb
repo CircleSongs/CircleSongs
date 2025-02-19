@@ -13,11 +13,11 @@ RSpec.feature "As a guest", type: :system do
     click_on hotel_california.title
     expect(page).to have_content hotel_california.title
     expect(page).to have_content hotel_california.alternate_title
-    expect(page).to have_content hotel_california.composer
+    expect(page).to have_content hotel_california.composer_name
     expect(page).to have_content hotel_california.lyrics
     expect(page).to have_content hotel_california.translation
     expect(page).to have_content hotel_california.categories.map(&:name).to_sentence
-    expect(page).not_to have_content chords
+    expect(page).to have_no_content chords
     expect(page).to have_content formatted_chords
   end
 
@@ -29,28 +29,28 @@ RSpec.feature "As a guest", type: :system do
     fill_in "Search titles...", with: "California"
     click_on "Search"
     expect(page).to have_content hotel_california.title
-    expect(page).not_to have_content taki_taki.title
-    expect(page).not_to have_content el_condor_pasa.title
+    expect(page).to have_no_content taki_taki.title
+    expect(page).to have_no_content el_condor_pasa.title
 
     click_on "Clear"
 
     select "Traditional"
     click_on "Search"
     expect(page).to have_content el_condor_pasa.title
-    expect(page).not_to have_content taki_taki.title
-    expect(page).not_to have_content hotel_california.title
+    expect(page).to have_no_content taki_taki.title
+    expect(page).to have_no_content hotel_california.title
 
     click_on "Clear"
 
     select "Spanish"
     click_on "Search"
-    expect(page).not_to have_content hotel_california.title
-    expect(page).not_to have_content taki_taki.title
+    expect(page).to have_no_content hotel_california.title
+    expect(page).to have_no_content taki_taki.title
     expect(page).to have_content el_condor_pasa.title
   end
 
   scenario "I do not see an edit link" do
-    expect(page).not_to have_selector "a.edit"
-    expect(page).not_to have_selector ".has_recording"
+    expect(page).to have_no_css "a.edit"
+    expect(page).to have_no_css ".has_recording"
   end
 end

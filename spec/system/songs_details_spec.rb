@@ -11,8 +11,8 @@ RSpec.feature "As a guest", type: :system do
     end
 
     scenario "if I do not add a #composer_link there is no link" do
-      expect(page).not_to have_link(song.composer, href: "")
-      expect(page).to have_content song.composer
+      expect(page).to have_no_link(song.composer_name, href: "")
+      expect(page).to have_content song.composer_name
     end
   end
 
