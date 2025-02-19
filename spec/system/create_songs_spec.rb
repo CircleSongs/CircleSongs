@@ -11,6 +11,7 @@ RSpec.feature "As an admin user", type: :system do
   let(:underlined_translation) { "This <u>translation</u> is underlined." }
   let(:chords) { "Swing [D]low, sweet [G]chari[D]ot" }
   let(:formatted_chords) { "Swing low, sweet chariot" }
+  let(:composer) { composers(:pink_floyd) }
 
   before do
     login_as user
@@ -21,8 +22,7 @@ RSpec.feature "As an admin user", type: :system do
     click_on "New Song"
     fill_in "Title", with: title
     fill_in "Alternate title", with: alternate_title
-    fill_in "Composer name", with: composer_name
-    fill_in "Composer url", with: composer_url
+    select composer.name, from: "Composer"
     fill_in "Lyrics", with: lyrics
     fill_in "Translation", with: translation
     fill_in "Chords", with: chords
@@ -34,7 +34,7 @@ RSpec.feature "As an admin user", type: :system do
     expect(page).to have_content "Song was successfully created."
     expect(page).to have_content title
     expect(page).to have_content alternate_title
-    expect(page).to have_link(composer_name, href: composer_url)
+    expect(page).to have_link(composer.name, href: composer.url)
     expect(page).to have_content lyrics
     expect(page).to have_content translation
     expect(page).to have_content description

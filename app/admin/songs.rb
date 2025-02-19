@@ -6,10 +6,12 @@ ActiveAdmin.register Song do
   filter :categories, multiple: true
   filter :chords_present, as: :boolean
   filter :chord_forms_id_not_null, label: "With Chord forms", as: :boolean
+  filter :composer_id_not_null, label: "Has Composer", as: :boolean
   filter :lyrics
   filter :translation
   filter :description
-  filter :composer_url
+  filter :composer_name, label: "Composer name (legacy)"
+  filter :composer_url, label: "Composer website (legacy)"
   filter :slug
   filter :recordings_reported, as: :boolean, label: "Broken Link Reported"
 
@@ -20,7 +22,10 @@ ActiveAdmin.register Song do
     end
 
     def scoped_collection
-      super.left_joins(:chord_forms).select("songs.*, COUNT(chord_forms.id) as chord_forms_count").group("songs.id")
+      super.left_joins(:composer)
+           .left_joins(:chord_forms)
+           .select("songs.*, COUNT(chord_forms.id) as chord_forms_count, composers.name as composer_name")
+           .group("songs.id, composers.name")
     end
   end
 
@@ -28,6 +33,7 @@ ActiveAdmin.register Song do
   permit_params :alternate_title, :composer_name, :composer_url, :image,
                 :description, :lyrics, :title, :translation,
                 :chords, :remove_image,
+                :composer_id,
                 recordings_attributes: %i[
                   description
                   embedded_player
@@ -45,7 +51,10 @@ ActiveAdmin.register Song do
   # Index page configuration
   index do
     column :title, sortable: true
-    column :composer_name, sortable: true
+    column :composer, sortable: 'composers.name' do |song|
+      link_to song.composer.name, song.composer.url, target: :_blank, rel: :noopener if song.composer
+    end
+    column "Composer (legacy)", :composer_name
     column "Has Chords", sortable: :chords do |song|
       song.chords.present? ? "Yes" : "No"
     end
@@ -63,8 +72,22 @@ ActiveAdmin.register Song do
       f.input :remove_image, as: :boolean
       f.input :title
       f.input :alternate_title
-      f.input :composer_name
-      f.input :composer_url
+      f.inputs "Composer" do
+        f.input :composer_id, as: :select,
+                              collection: Composer.order(:name).map { |c| [c.name, c.id] },
+                              input_html: { class: 'chosen-select' },
+                              prompt: "Existing composer",
+                              hint: [
+                                "Legacy composer:",
+                                f.object.composer_name,
+                                f.object.composer_url
+                              ].join(" ").html_safe
+
+        # f.inputs "New Composer", for: [:composer, f.object.composer || Composer.new] do |c|
+        #   c.input :name, label: "New Composer name"
+        #   c.input :url, label: "New Composer website"
+        # end
+      end
       f.input :description, input_html: { rows: 5 }
       f.input :lyrics, input_html: { rows: 5 }
       f.input :translation, input_html: { rows: 5 }
@@ -141,7 +164,16 @@ ActiveAdmin.register Song do
       row :title
       row :alternate_title
       row :composer do |song|
-        link_to song.composer_name, song.composer_url, target: :_blank, rel: :noopener
+        link_to song.composer.name, song.composer.url, target: :_blank, rel: :noopener if song.composer
+      end
+      row "Composer (legacy)" do |song|
+        # Display legacy composer information if present
+        text = song.composer_name.presence
+        if song.composer_url.present?
+          link_to(text || song.composer_url, song.composer_url, target: :_blank, rel: :noopener)
+        else
+          text
+        end
       end
       row :description do
         simple_format song.description
