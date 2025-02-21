@@ -160,15 +160,6 @@ ActiveAdmin.register Song do
       row :composer do |song|
         link_to song.composer.name, song.composer.url, target: :_blank, rel: :noopener if song.composer
       end
-      row "Composer (legacy)" do |song|
-        # Display legacy composer information if present
-        text = song.composer_name.presence
-        if song.composer_url.present?
-          link_to(text || song.composer_url, song.composer_url, target: :_blank, rel: :noopener)
-        else
-          text
-        end
-      end
       row :description do
         simple_format song.description
       end
