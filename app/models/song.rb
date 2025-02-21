@@ -1,4 +1,6 @@
 class Song < ApplicationRecord
+  self.ignored_columns = %i[composer_name composer_url]
+
   extend FriendlyId
   friendly_id :title, use: :slugged
 
@@ -21,7 +23,7 @@ class Song < ApplicationRecord
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[alternate_title chords composer_name composer_url created_at description id
+    %w[alternate_title chords created_at description id
        id_value image_data lyrics slug title translation updated_at]
   end
 

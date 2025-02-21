@@ -3,8 +3,7 @@ RSpec.feature "As an admin user", type: :system do
   let(:title) { FFaker::Music.song }
   let(:description) { FFaker::Lorem.paragraphs.join("\n") }
   let(:alternate_title) { FFaker::Music.song }
-  let(:composer_name) { FFaker::Music.song }
-  let(:composer_url) { FFaker::Internet.http_url }
+  let(:composer) { composers(:pink_floyd) }
   let(:lyrics) { FFaker::Music.song }
   let(:underlined_lyric) { "This <u>lyric</u> is underlined." }
   let(:translation) { FFaker::Music.song }
