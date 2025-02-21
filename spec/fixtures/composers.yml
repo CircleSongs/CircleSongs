@@ -1,3 +1,6 @@
 pink_floyd:
   name: Pink Floyd
   url: http://www.pinkfloyd.com
+the_eagles:
+  name: The Eagles
+  url: http://www.eagles.com

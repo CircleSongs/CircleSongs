@@ -2,6 +2,7 @@ ActiveAdmin.register Song do
   # Filters for index page
   filter :title
   filter :alternate_title
+  filter :composer_name_cont
   filter :languages, multiple: true
   filter :categories, multiple: true
   filter :chords_present, as: :boolean
@@ -10,7 +11,6 @@ ActiveAdmin.register Song do
   filter :lyrics
   filter :translation
   filter :description
-  filter :composer_name, label: "Composer name (legacy)"
   filter :slug
   filter :recordings_reported, as: :boolean, label: "Broken Link Reported"
 
@@ -51,9 +51,14 @@ ActiveAdmin.register Song do
   index do
     column :title, sortable: true
     column :composer, sortable: 'composers.name' do |song|
-      link_to song.composer.name, song.composer.url, target: :_blank, rel: :noopener if song.composer
+      if song.composer.present?
+        if song.composer.url.present?
+          link_to song.composer.name, song.composer.url, target: :_blank, rel: :noopener if song.composer
+        else
+          song.composer.name
+        end
+      end
     end
-    column "Composer (legacy)", :composer_name
     column "Has Chords", sortable: :chords do |song|
       song.chords.present? ? "Yes" : "No"
     end
@@ -73,19 +78,9 @@ ActiveAdmin.register Song do
       f.input :alternate_title
       f.inputs "Composer" do
         f.input :composer_id, as: :select,
-                              collection: Composer.order(:name).map { |c| [c.name, c.id] },
+                              collection: Composer.order(:name).map { |c| [[c.name, c.url].join(" | "), c.id] },
                               input_html: { class: 'chosen-select' },
-                              prompt: "Existing composer",
-                              hint: [
-                                "Legacy composer:",
-                                f.object.composer_name,
-                                f.object.composer_url
-                              ].join(" ").html_safe
-
-        # f.inputs "New Composer", for: [:composer, f.object.composer || Composer.new] do |c|
-        #   c.input :name, label: "New Composer name"
-        #   c.input :url, label: "New Composer website"
-        # end
+                              prompt: "Existing composer"
       end
       f.input :description, input_html: { rows: 5 }
       f.input :lyrics, input_html: { rows: 5 }

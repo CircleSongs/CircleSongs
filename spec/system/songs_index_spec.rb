@@ -13,7 +13,7 @@ RSpec.feature "As a guest", type: :system do
     click_on hotel_california.title
     expect(page).to have_content hotel_california.title
     expect(page).to have_content hotel_california.alternate_title
-    expect(page).to have_content hotel_california.composer_name
+    expect(page).to have_content hotel_california.composer.name
     expect(page).to have_content hotel_california.lyrics
     expect(page).to have_content hotel_california.translation
     expect(page).to have_content hotel_california.categories.map(&:name).to_sentence
