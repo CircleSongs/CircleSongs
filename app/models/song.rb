@@ -28,15 +28,4 @@ class Song < ApplicationRecord
   def self.ransackable_associations(_auth_object = nil)
     %w[categories chord_forms languages recordings song_chord_forms composer]
   end
-
-  # Temp code until we get rid of song#composer_name and song#composer_url
-  # in favor of song#composer
-  ransacker :composer_search do |parent|
-    Arel::Nodes::OrNode.new(
-      parent.table[:composer_name],
-      parent.table.join(Composer.arel_table)
-        .on(parent.table[:composer_id].eq(Composer.arel_table[:id]))
-        .project(Composer.arel_table[:name])
-    )
-  end
 end

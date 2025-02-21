@@ -1,6 +1,9 @@
 ActiveAdmin.register Composer do
   permit_params :name, :url
 
+  filter :name
+  filter :url
+  
   index do
     column :name, sortable: true
     column :url do |composer|
