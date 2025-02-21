@@ -11,7 +11,6 @@ ActiveAdmin.register Song do
   filter :translation
   filter :description
   filter :composer_name, label: "Composer name (legacy)"
-  filter :composer_url, label: "Composer website (legacy)"
   filter :slug
   filter :recordings_reported, as: :boolean, label: "Broken Link Reported"
 
@@ -30,7 +29,7 @@ ActiveAdmin.register Song do
   end
 
   # Permitted parameters
-  permit_params :alternate_title, :composer_name, :composer_url, :image,
+  permit_params :alternate_title, :image,
                 :description, :lyrics, :title, :translation,
                 :chords, :remove_image,
                 :composer_id,

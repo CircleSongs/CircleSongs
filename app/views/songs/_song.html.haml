@@ -1,12 +1,8 @@
 %li.song
   = link_to song.title, song
   %small
-    - if song.composer_name.present? || song.composer.present?
-      \-
-      - if song.composer.present?
-        = link_to song.composer.name, songs_path(q: { composer_name_or_composer_name_cont: song.composer.name })
-      - else
-        = link_to song.composer_name, songs_path(q: { composer_name_or_composer_name_cont: song.composer_name })
+    \-
+    = link_to song.composer_name, songs_path(q: { composer_name_cont: song.composer_name })
     - if user_signed_in?
       - if song.recordings.exists?
         %span{ data: { bs_toggle: :tooltip, bs_title: pluralize(song.recordings.count, "Recording") } }

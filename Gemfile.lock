@@ -153,6 +153,8 @@ GEM
     drb (2.2.1)
     dry-cli (1.2.0)
     erubi (1.13.1)
+    faker (3.5.1)
+      i18n (>= 1.8.11, < 2)
     ffaker (2.24.0)
     ffi (1.17.1-aarch64-linux-gnu)
     ffi (1.17.1-aarch64-linux-musl)
@@ -508,6 +510,7 @@ DEPENDENCIES
   chordpro (~> 1.0)
   database_cleaner (~> 2.1)
   devise (~> 4.9)
+  faker (~> 3.5)
   ffaker (~> 2.24)
   foreman (~> 0.88)
   friendly_id (~> 5.5)
@@ -547,7 +550,7 @@ DEPENDENCIES
   web-console (~> 4.2)
 
 RUBY VERSION
-   ruby 3.3.0p0
+   ruby 3.4.1p0
 
 BUNDLED WITH
    2.5.7

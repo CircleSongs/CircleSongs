@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.3.0"
+ruby "3.4.1"
 
 gem "aws-sdk-s3", "~> 1.180"
 gem "activeadmin", "~> 3.2"
@@ -9,6 +9,7 @@ gem "active_admin_flat_skin", "~> 0.1"
 gem "bootsnap", "~> 1.18"
 gem "chordpro", "~> 1.0"
 gem "devise", "~> 4.9"
+gem "faker", "~> 3.5"
 gem "friendly_id", "~> 5.5"
 gem "haml-rails", "~> 2.1"
 gem "image_processing", "~> 1.13"
