@@ -8,7 +8,7 @@ class Song < ApplicationRecord
 
   validates :title, presence: true
 
-  has_many :recordings, -> { order :created_at }
+  has_many :recordings, -> { order :created_at }, inverse_of: :song, dependent: :destroy
   accepts_nested_attributes_for :recordings, reject_if: proc { |attributes|
     attributes["url"].blank? && attributes["embedded_player"].blank?
   }, allow_destroy: true
