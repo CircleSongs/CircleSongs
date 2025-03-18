@@ -65,6 +65,12 @@ ActiveAdmin.register Song do
     column "Has Chord Forms", :chord_forms, sortable: :chord_forms_count do |song|
       song.chord_forms.exists? ? "Yes" : "No"
     end
+    column :created_at do |resource|
+      l resource.created_at, format: :short
+    end
+    column :updated_at do |resource|
+      l resource.updated_at, format: :short
+    end
     actions
   end
 

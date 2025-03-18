@@ -11,7 +11,7 @@ module CircleSongs
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
-         config.generators do |g|
+    config.generators do |g|
       g.test_framework :rspec, views: false
       g.helper false
       g.assets false
