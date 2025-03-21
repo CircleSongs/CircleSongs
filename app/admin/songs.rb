@@ -200,7 +200,11 @@ ActiveAdmin.register Song do
 
     panel "Recordings" do
       table_for song.recordings, class: :recordings do
-        column :title
+        column :title do |recording|
+          link_to edit_admin_recording_path(recording) do
+            recording.title.presence || "No title"
+          end
+        end
         column :url do |recording|
           link_to recording.url, recording.url, target: :_blank, rel: :noopener
         end

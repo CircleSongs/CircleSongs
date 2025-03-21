@@ -10,4 +10,8 @@ class Recording < ApplicationRecord
     %w[created_at description embedded_player id position reported song_id
        title updated_at url]
   end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["song"]
+  end
 end
