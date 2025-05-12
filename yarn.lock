@@ -342,10 +342,10 @@ buffer-builder@^0.2.0:
   resolved "https://registry.yarnpkg.com/buffer-builder/-/buffer-builder-0.2.0.tgz#3322cd307d8296dab1f604618593b261a3fade8f"
   integrity sha512-7VPMEPuYznPSoR21NE1zvd2Xna6c/CloiZCfcMXR1Jny6PjX0N4Nsa38zcBFo/FMK+BlA+FLKbJCQ0i2yxp+Xg==
 
-chordsheetjs@^12.1.2:
-  version "12.1.2"
-  resolved "https://registry.yarnpkg.com/chordsheetjs/-/chordsheetjs-12.1.2.tgz#d8e6420b7b161129a53b8b66be78cbfd419c9c17"
-  integrity sha512-C1eRv+9taSltUn5QwiYkXUcYfmOkJDn3sLkt/HReGirrr5zHzOhHJ1BR2tlRFYODidY8nLTPGe+Ew12kQlSXsg==
+chordsheetjs@^12.2.2:
+  version "12.2.2"
+  resolved "https://registry.yarnpkg.com/chordsheetjs/-/chordsheetjs-12.2.2.tgz#54d33b4072445c7213400cbf8d5bc7807328f6ac"
+  integrity sha512-FpM9KfrurHsK8vGHdMXIyYlZIOAc+77fpNmR+Jw5LONH+lHKZvbfxXP6jy937YUu/TcvYOZ5gQ8vEk4fZ7dOhw==
 
 colorjs.io@^0.5.0:
   version "0.5.2"
