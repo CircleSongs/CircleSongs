@@ -320,10 +320,10 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-1.0.6.tgz#628effeeae2064a1b4e79f78e81d87b7e5fc7b50"
   integrity sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==
 
-bootstrap@^5.3.3:
-  version "5.3.6"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.3.6.tgz#fbd91ebaff093f5b191a1c01a8c866d24f9fa6e1"
-  integrity sha512-jX0GAcRzvdwISuvArXn3m7KZscWWFAf1MKBcnzaN02qWMb3jpMoUX4/qgeiGzqyIb4ojulRzs89UCUmGcFSzTA==
+bootstrap@^5.3.8:
+  version "5.3.8"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.3.8.tgz#6401a10057a22752d21f4e19055508980656aeed"
+  integrity sha512-HP1SZDqaLDPwsNiqRqi5NcP0SSXciX2s9E+RyqJIIqGo+vJeN5AJVM98CXmW/Wux0nQ5L7jeWUdplCEf0Ee+tg==
 
 bootswatch@^5.3.3:
   version "5.3.5"
@@ -342,10 +342,10 @@ buffer-builder@^0.2.0:
   resolved "https://registry.yarnpkg.com/buffer-builder/-/buffer-builder-0.2.0.tgz#3322cd307d8296dab1f604618593b261a3fade8f"
   integrity sha512-7VPMEPuYznPSoR21NE1zvd2Xna6c/CloiZCfcMXR1Jny6PjX0N4Nsa38zcBFo/FMK+BlA+FLKbJCQ0i2yxp+Xg==
 
-chordsheetjs@^12.1.2:
-  version "12.1.2"
-  resolved "https://registry.yarnpkg.com/chordsheetjs/-/chordsheetjs-12.1.2.tgz#d8e6420b7b161129a53b8b66be78cbfd419c9c17"
-  integrity sha512-C1eRv+9taSltUn5QwiYkXUcYfmOkJDn3sLkt/HReGirrr5zHzOhHJ1BR2tlRFYODidY8nLTPGe+Ew12kQlSXsg==
+chordsheetjs@^12.3.1:
+  version "12.3.1"
+  resolved "https://registry.yarnpkg.com/chordsheetjs/-/chordsheetjs-12.3.1.tgz#7788b60e787f3ccb9cd3dcdc5be08594831e80b0"
+  integrity sha512-gfV0NnPUiosuC13AuEg5gWdeqiFQ+MB02rbxlsFG5xRvjgeWSxuhEenw0RF0B8xrl5lkxDOfbd47yEpa85pTFA==
 
 colorjs.io@^0.5.0:
   version "0.5.2"
