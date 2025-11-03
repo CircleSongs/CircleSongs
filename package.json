@@ -20,7 +20,7 @@
     "chordsheetjs": "^12.3.1",
     "jquery": "^3.7.1",
     "jquery-ui-dist": "^1.13.3",
-    "sass-embedded": "^1.93.2",
+    "sass-embedded": "^1.93.3",
     "stimulus-vite-helpers": "^3.1.0",
     "vexchords": "^1.2.0",
     "vite-plugin-stimulus-hmr": "^3.0.0"
