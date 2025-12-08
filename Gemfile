@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.4.1"
+ruby "3.4.7"
 
 gem "aws-sdk-s3", "~> 1.180"
 gem "activeadmin", "~> 3.2"
@@ -20,7 +20,7 @@ gem "net-smtp", "~> 0.5"
 gem "newrelic_rpm", "~> 9.17"
 gem "oj", "~> 3.16"
 gem "pg", "~> 1.5"
-gem "puma", "~> 6.6"
+gem "puma"
 gem "rails", "~> 8.0"
 gem "ransack", "~> 4.3"
 gem "redis", "~> 5.3"
