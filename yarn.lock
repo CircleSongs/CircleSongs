@@ -3,9 +3,9 @@
 
 
 "@activeadmin/activeadmin@^3":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@activeadmin/activeadmin/-/activeadmin-3.3.0.tgz#f5163cf2235a2a42efda8aa78863c61d2fc863bc"
-  integrity sha512-YVWHMI+dml5/iKleZJQ3VTvb6kbg/v8F7gsyOmxxqbxqJ6ofEK9X8CKUljA11IAWNpxV7i7ygG2WwZdMsgtcpA==
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@activeadmin/activeadmin/-/activeadmin-3.4.0.tgz#84aac5a23828e97c7e2c36ed257d1a19835e6b0c"
+  integrity sha512-ItAaWA5yhznJldmJpBJHm56eudtLIW4fRAowmxza91pJeqiWwz1UUEgN35OZLvozLk1AW1QtfuAiGdWGwUFEaA==
   dependencies:
     jquery "^3.4.1"
     jquery-ui "^1.13.3"
