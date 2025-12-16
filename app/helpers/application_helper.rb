@@ -12,4 +12,8 @@ module ApplicationHelper
       "success"
     end
   end
+
+  def feature_enabled?(feature)
+    current_user.present? && Flipper.enabled?(feature, current_user)
+  end
 end

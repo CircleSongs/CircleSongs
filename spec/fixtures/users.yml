@@ -3,3 +3,8 @@ admin:
   last_name: User
   email: admin@example.com
   encrypted_password: <%= PasswordHelper.encrypted_password %>
+homer:
+  first_name: Homer
+  last_name: Simpson
+  email: homer@example.com
+  encrypted_password: <%= PasswordHelper.encrypted_password %>
