@@ -3,6 +3,12 @@ Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
 
+  authenticate :user, ->(u) { u.admin? } do
+    namespace :admin do
+      mount Flipper::UI.app => '/flipper'
+    end
+  end
+
   root to: "songs#index"
 
   resources :contact_forms, only: %i[new create]
