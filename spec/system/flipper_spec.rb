@@ -1,4 +1,4 @@
-RSpec.feature "As a visitor", type: :system do
+RSpec.feature "Aa a visitor", type: :system do
   let(:user) { users(:admin) }
 
   scenario "Flipper is working" do
