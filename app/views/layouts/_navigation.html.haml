@@ -7,10 +7,20 @@
       %span.navbar-toggler-icon
     #navbarContent.collapse.navbar-collapse
       %ul.navbar-nav.me-auto.mb-2.mb-lg-0
-        %li.nav-item
-          = link_to 'Icaros', '/icaros', class: 'nav-link'
-        %li.nav-item
-          = link_to 'Quechua', '/quechua', class: 'nav-link'
+        - if feature_enabled?(:v2_navigation)
+          %li.nav-item
+            = link_to 'About Us', '/about_us', class: 'nav-link'
+          %li.nav-item
+            = link_to 'Support Us', '/support_us', class: 'nav-link'
+          %li.nav-item
+            = link_to 'Resources', '/resources', class: 'nav-link'
+          %li.nav-item
+            = link_to 'Song Book', '/song_book', class: 'nav-link'
+        - else
+          %li.nav-item
+            = link_to 'Icaros', '/icaros', class: 'nav-link'
+          %li.nav-item
+            = link_to 'Quechua', '/quechua', class: 'nav-link'
 
       %ul.navbar-nav.d-flex.gap-2
         %li.nav-item
