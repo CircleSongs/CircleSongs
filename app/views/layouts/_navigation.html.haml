@@ -17,7 +17,3 @@
           = link_to 'Buy Songbook PDF', '/purchase', class: 'btn btn-primary'
         %li.nav-item
           = link_to 'Make a Donation!', "https://www.paypal.com/ncp/payment/LGW7WS7S2NYHQ", class: 'btn btn-warning'
-        - unless feature_enabled?(:hide_admin_login)
-          %li.nav-item
-            = link_to admin_dashboard_path, class: 'nav-link' do
-              %i.fa-solid.fa-right-to-bracket
