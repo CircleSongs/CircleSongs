@@ -1,13 +1,13 @@
-= search_form_for @q do |f|
+= search_form_for @q, html: { novalidate: true } do |f|
   .row.mb-3
     .col-sm-2.offset-sm-2
-      = f.input :categories_id_in, collection: @categories, input_html: { class: 'form-select' }, include_blank: 'All', label: 'Category', required: false, label_method: :name_and_count
+      = f.input :categories_id_in, collection: @categories, include_blank: 'All', label: 'Category', required: false, label_method: :name_and_count
     .col-sm-2
-      = f.input :languages_id_in, collection: Language.all, input_html: { class: 'form-select' }, include_blank: 'All', label: 'Language', required: false
+      = f.input :languages_id_in, collection: Language.all, include_blank: 'All', label: 'Language', required: false
     .col-sm-2
-      = f.input :chords_present, collection: [['Yes', true], ['No', false]], include_blank: 'All', label: 'Has Chords', required: false, input_html: { class: 'form-select' }
+      = f.input :chords_present, collection: [['Yes', true], ['No', false]], include_blank: 'All', label: 'Has Chords', required: false
     .col-sm-2
-      = f.input :s, collection: [['Title', 'title asc'], ['Date Added', 'created_at desc']], label: 'Sort by', required: false, include_blank: false, selected: songs_sort_value, input_html: { class: 'form-select' }
+      = f.input :s, collection: [['Title', 'title asc'], ['Date Added', 'created_at desc']], label: 'Sort by', required: false, include_blank: false, selected: songs_sort_value
 
   .row.mb-3
     .col-sm-8.offset-sm-2
