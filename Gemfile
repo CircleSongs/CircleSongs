@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.4.7"
 
-gem "aws-sdk-s3", "~> 1.180"
+gem "aws-sdk-s3", "~> 1.208"
 gem "activeadmin", "~> 3.2"
 gem "active_admin_flat_skin", "~> 0.1"
 gem "benchmark"
