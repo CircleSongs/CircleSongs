@@ -21,7 +21,7 @@ RSpec.feature "As a guest", type: :system do
     expect(page).to have_content formatted_chords
   end
 
-  scenario "I can search for songs" do
+  scenario "I can search for songs (legacy search)" do
     fill_in "Search titles...", with: "Foo"
     click_on "Search"
     expect(page).to have_content I18n.t("songs.no_songs")
@@ -47,6 +47,45 @@ RSpec.feature "As a guest", type: :system do
     expect(page).to have_no_content hotel_california.title
     expect(page).to have_no_content taki_taki.title
     expect(page).to have_content el_condor_pasa.title
+  end
+
+  context "with v2_search enabled" do
+    let(:user) { users(:admin) }
+
+    before do
+      login_as user, scope: :user
+
+      Flipper.enable_actor :v2_search, user
+    end
+
+    scenario "I can search across title, lyrics, and composer with consolidated search" do
+      visit songs_path
+      fill_in I18n.t("songs.search_placeholder"), with: "Foo"
+      click_on "Search"
+      expect(page).to have_content I18n.t("songs.no_songs")
+
+      fill_in I18n.t("songs.search_placeholder"), with: "California"
+      click_on "Search"
+      expect(page).to have_content hotel_california.title
+      expect(page).to have_no_content taki_taki.title
+      expect(page).to have_no_content el_condor_pasa.title
+
+      click_on "Clear"
+
+      fill_in I18n.t("songs.search_placeholder"), with: "desert highway"
+      click_on "Search"
+      expect(page).to have_content hotel_california.title
+      expect(page).to have_no_content taki_taki.title
+      expect(page).to have_no_content el_condor_pasa.title
+
+      click_on "Clear"
+
+      fill_in I18n.t("songs.search_placeholder"), with: "Eagles"
+      click_on "Search"
+      expect(page).to have_content hotel_california.title
+      expect(page).to have_no_content taki_taki.title
+      expect(page).to have_no_content el_condor_pasa.title
+    end
   end
 
   scenario "I do not see an edit link" do
