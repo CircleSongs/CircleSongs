@@ -32,4 +32,15 @@ RSpec.describe "As an admin user" do
     end
     expect(page).to have_content "Song was successfully destroyed."
   end
+
+  scenario "I can edit a Song that has no image" do
+    visit admin_song_path(song)
+    click_on "Edit Song"
+    within "#song_title_input" do
+      fill_in "Title", with: "New Title"
+    end
+    click_on "Update Song"
+    expect(page).to have_content "Song was successfully updated."
+    expect(song.reload.title).to eq "New Title"
+  end
 end

@@ -50,12 +50,21 @@ RSpec.feature "As an admin user", type: :system do
   scenario "I can underline text in Song#lyrics and Song#translation" do
     visit admin_songs_path
     click_on "New Song"
+    click_on "Create Song"
+    within "#song_image_input" do
+      expect(page).to have_content "can't be blank"
+    end
+    within "#song_title_input" do
+      expect(page).to have_content "can't be blank"
+    end
 
     attach_file "Image", Rails.root.join("spec/fixtures/files/image.jpeg")
     fill_in "Title", with: title
     fill_in "Lyrics", with: underlined_lyric
     fill_in "Translation", with: underlined_translation
+
     click_on "Create Song"
+    expect(page).to have_content "Song was successfully created."
     within ".row-lyrics" do
       expect(page).to have_css "u"
     end
