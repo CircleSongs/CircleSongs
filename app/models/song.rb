@@ -7,7 +7,7 @@ class Song < ApplicationRecord
   include ImageUploader::Attachment.new(:image)
 
   validates :title, presence: true, uniqueness: true
-  validates :image, presence: true
+  validates :image, presence: true, on: :create
 
   has_many :recordings, -> { order :created_at }, inverse_of: :song, dependent: :destroy
   accepts_nested_attributes_for :recordings, reject_if: proc { |attributes|
