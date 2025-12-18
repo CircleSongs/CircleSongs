@@ -1,3 +1,6 @@
+@use "bootswatch/dist/cosmo/_variables.scss" as *;
+@use "variables" as *;
+
 .footer {
   padding: $margin;
   background-color: $gray-200;
