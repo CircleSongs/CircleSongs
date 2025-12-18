@@ -1,3 +1,6 @@
+@use "bootswatch/dist/cosmo/_variables.scss" as *;
+@use "variables" as *;
+
 ul.songs {
   margin-top: 1rem;
   li {
