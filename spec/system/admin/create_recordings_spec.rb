@@ -10,6 +10,8 @@ RSpec.feature "As an admin user", type: :system do
   scenario "I can create Recordings while creating a Song", :js do
     visit admin_songs_path
     click_on "New Song"
+
+    attach_file "Image", Rails.root.join("spec/fixtures/files/image.jpeg")
     fill_in "Title", with: title
     click_on "Add New Recording"
     click_on "Create Song"
