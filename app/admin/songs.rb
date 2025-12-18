@@ -1,5 +1,6 @@
 ActiveAdmin.register Song do
   # Filters for index page
+  filter :image_data_not_null, label: "Has Image", as: :boolean
   filter :title
   filter :alternate_title
   filter :composer_name_cont
@@ -49,6 +50,9 @@ ActiveAdmin.register Song do
 
   # Index page configuration
   index do
+    column :image do |song|
+      image_tag song.image_url(:thumb) if song.image_url(:thumb)
+    end
     column :title, sortable: true
     column :composer, sortable: 'composers.name' do |song|
       if song.composer.present?
@@ -78,7 +82,7 @@ ActiveAdmin.register Song do
   form do |f|
     f.inputs "Details" do
       f.input :image, as: :file,
-                      hint: (image_tag f.object.image[:thumb].url if f.object.image.present?)
+                      hint: (image_tag f.object.image_url(:thumb) if f.object.image_url(:thumb))
       f.input :remove_image, as: :boolean
       f.input :title
       f.input :alternate_title
@@ -159,7 +163,7 @@ ActiveAdmin.register Song do
         link_to "Preview", song_path(song), target: :_blank, rel: :noopener
       end
       row :image do |song|
-        image_tag song.image[:thumb].url if song.image.present?
+        image_tag song.image_url(:thumb) if song.image_url(:thumb)
       end
       row :title
       row :alternate_title

@@ -22,7 +22,8 @@ module CircleSongs
       g.orm :active_record, primary_key_type: :uuid
     end
 
-    config.active_support.to_time_preserves_timezone = :zone
+    # Removed deprecated config.active_support.to_time_preserves_timezone
+    # This is now the default behavior in Rails 8
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

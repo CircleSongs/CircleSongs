@@ -6,7 +6,8 @@ class Song < ApplicationRecord
 
   include ImageUploader::Attachment.new(:image)
 
-  validates :title, presence: true
+  validates :title, presence: true, uniqueness: true
+  validates :image, presence: true
 
   has_many :recordings, -> { order :created_at }, inverse_of: :song, dependent: :destroy
   accepts_nested_attributes_for :recordings, reject_if: proc { |attributes|
@@ -24,8 +25,12 @@ class Song < ApplicationRecord
     @formatted_chords ||= Chordpro.html(chords)
   end
 
+  def image_url(derivative = :large)
+    image_derivatives&.dig(derivative)&.url || image&.url
+  end
+
   def self.ransackable_attributes(_auth_object = nil)
-    %w[alternate_title chords created_at description id
+    %w[image_data alternate_title chords created_at description id
        id_value image_data lyrics slug title translation updated_at]
   end
 

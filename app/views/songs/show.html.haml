@@ -1,5 +1,5 @@
-- if @song.image.present?
-  = image_tag @song.image[:thumb].url, class: :thumb
+- if @song.image_url(:thumb)
+  = image_tag @song.image_url(:thumb), class: :thumb
 %h2
   = @song.title
   - if user_signed_in?
