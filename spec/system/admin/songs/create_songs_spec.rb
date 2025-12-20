@@ -23,7 +23,10 @@ RSpec.feature "As an admin user", type: :system do
     attach_file "Image", Rails.root.join("spec/fixtures/files/image.jpeg")
     fill_in "Title", with: title
     fill_in "Alternate title", with: alternate_title
-    select composer.name, from: "Composer"
+    within "#song_composer_id_input" do
+      find(".ts-control").click
+      find('.option', text: "#{composer.name} | #{composer.url}").click
+    end
     fill_in "Lyrics", with: lyrics
     fill_in "Translation", with: translation
     fill_in "Chords", with: chords

@@ -6,6 +6,9 @@
       = f.input :languages_id_in, collection: Language.all, include_blank: 'All', label: 'Language', required: false
     .col-sm-2
       = f.input :chords_present, collection: [['Yes', true], ['No', false]], include_blank: 'All', label: 'Has Chords', required: false
+    - if feature_enabled? :tagging
+      .col-sm-2
+        = f.input :themes_name_in, collection: ActsAsTaggableOn::Tag.for_context(:themes).pluck(:name).uniq, include_blank: 'All', label: 'Theme', required: false, input_html: { multiple: false }
     .col-sm-2
       = f.input :s, collection: [['Title', 'title asc'], ['Date Added', 'created_at desc']], label: 'Sort by', required: false, include_blank: false, selected: songs_sort_value
 

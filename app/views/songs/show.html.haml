@@ -23,6 +23,19 @@
 - if @song.description.present?
   = simple_format @song.description
 
+- if feature_enabled? :tagging
+  - if @song.theme_list.any?
+    - max_taggings_threshold = 5
+    %nav.tag-cloud{ role: "navigation", "aria-label": "Song themes", style: "--max-taggings: #{max_taggings_threshold}" }
+      %ul
+        - tag_counts = Song.theme_counts
+        - @song.theme_list.each do |theme|
+          - tag = tag_counts.find { |t| t.name == theme }
+          - count = tag&.taggings_count || 1
+          - weight = [(count.to_f / max_taggings_threshold * 100).round, 100].min
+          %li{ style: "--tag-weight: #{weight}" }
+            %a{ href: songs_path(q: { themes_name_in: theme }) }= theme
+
 .row
   = render @song.recordings
 

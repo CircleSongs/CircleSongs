@@ -46,7 +46,8 @@ ActiveAdmin.register Song do
                 ],
                 song_chord_forms_attributes: %i[id chord_form_id _destroy position],
                 category_ids: [],
-                language_ids: []
+                language_ids: [],
+                theme_list: []
 
   # Index page configuration
   index do
@@ -88,8 +89,8 @@ ActiveAdmin.register Song do
       f.input :alternate_title
       f.inputs "Composer" do
         f.input :composer_id, as: :select,
-                              collection: Composer.order(:name).map { |c| [[c.name, c.url].join(" | "), c.id] },
-                              input_html: { class: 'chosen-select' },
+                              collection: Composer.order(:name).map { |c| [[c.name, c.url].reject(&:blank?).join(" | "), c.id] },
+                              input_html: { class: 'tom-select' },
                               prompt: "Existing composer"
       end
       f.input :description, input_html: { rows: 5 }
@@ -115,6 +116,11 @@ ActiveAdmin.register Song do
                    input_html: { class: "chord-form-select" }
         end
       end
+
+      f.input :theme_list, as: :select, label: "Themes",
+                           collection: (ActsAsTaggableOn::Tag.for_context(:themes).pluck(:name) + f.object.theme_list.to_a).uniq.sort,
+                           input_html: { multiple: true, class: 'tom-select-tags' },
+                           hint: "Select existing themes or type to add new ones"
 
       f.input :languages, as: :check_boxes
 
@@ -194,6 +200,9 @@ ActiveAdmin.register Song do
         end
       end
 
+      row :themes do |song|
+        song.themes.map(&:name).to_sentence
+      end
       row :categories do |song|
         song.categories.map(&:name).to_sentence
       end
