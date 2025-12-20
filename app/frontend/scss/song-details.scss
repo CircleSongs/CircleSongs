@@ -41,3 +41,32 @@ ul {
     p { margin: 0; }
   }
 }
+
+.tag-cloud {
+  --max-taggings: 5;
+  margin: 1.5rem 0;
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+
+    li {
+      line-height: 1;
+
+      a {
+        text-decoration: none;
+        color: $primary;
+        transition: color 0.2s;
+        font-size: calc(0.75rem + (var(--tag-weight) * 0.01rem));
+        opacity: calc(0.5 + (var(--tag-weight) * 0.005));
+
+        &:hover {
+          color: darken($primary, 15%);
+        }
+      }
+    }
+  }
+}

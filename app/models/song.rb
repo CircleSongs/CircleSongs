@@ -6,6 +6,8 @@ class Song < ApplicationRecord
 
   include ImageUploader::Attachment.new(:image)
 
+  acts_as_taggable_on :themes
+
   validates :title, presence: true, uniqueness: true
   validates :image, presence: true, on: :create
 
@@ -35,6 +37,6 @@ class Song < ApplicationRecord
   end
 
   def self.ransackable_associations(_auth_object = nil)
-    %w[categories chord_forms languages recordings song_chord_forms composer]
+    %w[categories chord_forms languages recordings song_chord_forms composer tags themes]
   end
 end

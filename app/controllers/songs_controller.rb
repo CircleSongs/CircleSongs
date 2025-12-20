@@ -23,6 +23,7 @@ class SongsController < ApplicationController
       :title_start,
       :s,
       :chords_present,
+      :themes_name_in,
       :languages_id_in,
       :categories_id_in
     )

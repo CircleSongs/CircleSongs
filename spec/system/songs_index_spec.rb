@@ -22,6 +22,7 @@ RSpec.feature "As a guest", type: :system do
   end
 
   scenario "I can search for songs (legacy search)" do
+    expect(page).to have_no_content "Theme"
     fill_in "Search titles...", with: "Foo"
     click_on "Search"
     expect(page).to have_content I18n.t("songs.no_songs")
@@ -34,7 +35,7 @@ RSpec.feature "As a guest", type: :system do
 
     click_on "Clear"
 
-    select "Traditional"
+    select "Traditional", from: "Category"
     click_on "Search"
     expect(page).to have_content el_condor_pasa.title
     expect(page).to have_no_content taki_taki.title
@@ -42,14 +43,14 @@ RSpec.feature "As a guest", type: :system do
 
     click_on "Clear"
 
-    select "Spanish"
+    select "Spanish", from: "Language"
     click_on "Search"
     expect(page).to have_no_content hotel_california.title
     expect(page).to have_no_content taki_taki.title
     expect(page).to have_content el_condor_pasa.title
   end
 
-  context "with v2_search enabled" do
+  context "with :v2_search enabled" do
     let(:user) { users(:admin) }
 
     before do
@@ -85,6 +86,29 @@ RSpec.feature "As a guest", type: :system do
       expect(page).to have_content hotel_california.title
       expect(page).to have_no_content taki_taki.title
       expect(page).to have_no_content el_condor_pasa.title
+    end
+  end
+
+  context "with :tagging enabled" do
+    let(:user) { users(:admin) }
+
+    before do
+      hotel_california.update!(theme_list: ["classic rock"])
+      taki_taki.update!(theme_list: ["traditional"])
+      el_condor_pasa.update!(theme_list: ["traditional"])
+
+      login_as user, scope: :user
+
+      Flipper.enable_actor :tagging, user
+    end
+
+    scenario "I can search for songs by theme" do
+      visit songs_path
+      select "traditional", from: "Theme"
+      click_on "Search"
+      expect(page).to have_content taki_taki.title
+      expect(page).to have_content el_condor_pasa.title
+      expect(page).to have_no_content hotel_california.title
     end
   end
 

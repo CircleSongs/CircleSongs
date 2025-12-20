@@ -7,3 +7,26 @@ import Rails from "@rails/ujs";
 Rails.start();
 import "~/js/chord-forms";
 import "~/js/song-chords";
+import TomSelect from "tom-select";
+import "tom-select/dist/css/tom-select.default.css";
+
+// Initialize Tom Select on page load and after Turbo renders
+document.addEventListener('DOMContentLoaded', initTomSelects);
+document.addEventListener('has_many_add:after', initTomSelects);
+
+function initTomSelects() {
+  // Initialize regular tom-select
+  document.querySelectorAll('.tom-select:not(.tom-select-initialized)').forEach((select) => {
+    new TomSelect(select, {});
+    select.classList.add('tom-select-initialized');
+  });
+
+  // Initialize tom-select with tagging support
+  document.querySelectorAll('.tom-select-tags:not(.tom-select-initialized)').forEach((select) => {
+    new TomSelect(select, {
+      create: true,
+      plugins: ['remove_button']
+    });
+    select.classList.add('tom-select-initialized');
+  });
+}
