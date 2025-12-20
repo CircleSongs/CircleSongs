@@ -15,11 +15,7 @@
   .row.mb-3
     .col-sm-8.offset-sm-2
       .input-group
-        - if feature_enabled?(:v2_search)
-          = f.input_field :title_or_lyrics_or_composer_name_cont, class: 'form-control', placeholder: t('songs.search_placeholder')
-        - else
-          = f.input_field :title_cont, class: 'form-control', placeholder: 'Search titles...'
-          = f.input_field :composer_name_cont, class: 'form-control', placeholder: 'Search composers...'
+        = f.input_field :title_or_lyrics_or_composer_name_cont, class: 'form-control', placeholder: t('songs.search_placeholder')
         = f.button :submit, class: 'btn btn-primary'
         = link_to 'Clear', songs_path, class: 'btn btn-secondary'
 
