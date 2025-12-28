@@ -14,6 +14,7 @@ ActiveAdmin.register Song do
   filter :description
   filter :slug
   filter :recordings_reported, as: :boolean, label: "Broken Link Reported"
+  filter :recordings_url_present, label: "Has Recording URL", as: :boolean
 
   # Controller customization
   controller do
