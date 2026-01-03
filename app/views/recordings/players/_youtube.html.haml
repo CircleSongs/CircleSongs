@@ -1,2 +1,1 @@
-- video_id = recording.external_media_url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/)[1]
-%iframe{ width: "100%", height: "166", src: "https://www.youtube.com/embed/#{video_id}", frameborder: "0", allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture", allowfullscreen: true }
+%iframe{ width: "100%", height: "166", src: recording.formatted_external_media_url, frameborder: "0", allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture", allowfullscreen: true }
