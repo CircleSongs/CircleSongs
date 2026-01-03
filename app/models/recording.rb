@@ -29,14 +29,10 @@ class Recording < ApplicationRecord
     %w[song]
   end
 
-  attr_accessor :validate_url_accessibility, :url_checker_class
+  attr_accessor :validate_url_accessibility
 
   def validate_url_accessibility?
     validate_url_accessibility == true
-  end
-
-  def url_checker_class
-    @url_checker_class ||= Recordings::UrlChecker
   end
 
   def source
@@ -89,7 +85,7 @@ class Recording < ApplicationRecord
   def external_media_url_accessible
     return if external_media_url.blank?
 
-    unless url_checker_class.new(external_media_url).call
+    unless Recordings::UrlChecker.new.call(external_media_url)
       errors.add(:external_media_url, "is not accessible or returns an error")
     end
   end
