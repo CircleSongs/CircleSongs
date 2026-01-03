@@ -28,14 +28,14 @@ RSpec.describe "As an admin user" do
   scenario "I can delete a song from the show page" do
     visit admin_song_path(song)
     accept_confirm do
-      click_on "Delete Song"
+      click_on "Delete"
     end
     expect(page).to have_content "Song was successfully destroyed."
   end
 
   scenario "I can edit a Song that has no image" do
     visit admin_song_path(song)
-    click_on "Edit Song"
+    click_on "Edit"
     within "#song_title_input" do
       fill_in "Title", with: "New Title"
     end
