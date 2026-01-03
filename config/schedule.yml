@@ -16,8 +16,8 @@
 # "*/30 * * * *"  - Every 30 minutes
 
 # Example: Check for broken links daily at 2am
-broken_link_check:
-  cron: "0 2 * * *"
-  class: "Recordings::BrokenLinkDetectorDispatcherJob"
-  queue: "default"
-  description: "Check all recordings for broken external media links"
+# broken_link_check:
+#   cron: "0 2 * * *"
+#   class: "Recordings::BrokenLinkDetectorDispatcherJob"
+#   queue: "default"
+#   description: "Check all recordings for broken external media links"
