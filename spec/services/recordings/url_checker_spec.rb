@@ -2,50 +2,59 @@ require "rails_helper"
 
 RSpec.describe Recordings::UrlChecker do
   describe "#call" do
-    let(:checker) { described_class.new(url) }
+    let(:http_client) { instance_double(Faraday::Connection) }
+    let(:logger) { instance_double(Logger) }
+    let(:checker) { described_class.new(http_client: http_client, logger: logger) }
 
     context "with a valid, accessible URL" do
       let(:url) { "https://example.com" }
-      let(:success_response) { instance_double(Net::HTTPSuccess) }
+      let(:response) { instance_double(Faraday::Response, success?: true) }
 
       before do
-        allow(Net::HTTP).to receive(:get_response).and_return(success_response)
-        allow(success_response).to receive(:is_a?).with(Net::HTTPSuccess).and_return(true)
-        allow(success_response).to receive(:is_a?).with(Net::HTTPRedirection).and_return(false)
+        allow(http_client).to receive(:get).with(url).and_return(response)
       end
 
       it "returns true" do
-        expect(checker.call).to be true
+        expect(checker.call(url)).to be true
       end
     end
 
     context "with a URL that redirects" do
       let(:url) { "https://example.com" }
-      let(:redirect_response) { instance_double(Net::HTTPRedirection) }
+      let(:response) { instance_double(Faraday::Response, success?: true) }
 
       before do
-        allow(Net::HTTP).to receive(:get_response).and_return(redirect_response)
-        allow(redirect_response).to receive(:is_a?).with(Net::HTTPSuccess).and_return(false)
-        allow(redirect_response).to receive(:is_a?).with(Net::HTTPRedirection).and_return(true)
+        allow(http_client).to receive(:get).with(url).and_return(response)
       end
 
       it "returns true" do
-        expect(checker.call).to be true
+        expect(checker.call(url)).to be true
       end
     end
 
     context "with a URL that returns 404" do
       let(:url) { "https://example.com/not-found" }
-      let(:error_response) { instance_double(Net::HTTPNotFound) }
+      let(:response) { instance_double(Faraday::Response, success?: false) }
 
       before do
-        allow(Net::HTTP).to receive(:get_response).and_return(error_response)
-        allow(error_response).to receive(:is_a?).with(Net::HTTPSuccess).and_return(false)
-        allow(error_response).to receive(:is_a?).with(Net::HTTPRedirection).and_return(false)
+        allow(http_client).to receive(:get).with(url).and_return(response)
       end
 
       it "returns false" do
-        expect(checker.call).to be false
+        expect(checker.call(url)).to be false
+      end
+    end
+
+    context "with a stale/broken URL" do
+      let(:url) { "https://soundcloud.com/deleted-track" }
+      let(:response) { instance_double(Faraday::Response, success?: false) }
+
+      before do
+        allow(http_client).to receive(:get).with(url).and_return(response)
+      end
+
+      it "returns false" do
+        expect(checker.call(url)).to be false
       end
     end
 
@@ -53,16 +62,17 @@ RSpec.describe Recordings::UrlChecker do
       let(:url) { "https://example.com/timeout" }
 
       before do
-        allow(Net::HTTP).to receive(:get_response).and_raise(StandardError.new("Connection timeout"))
+        allow(http_client).to receive(:get).and_raise(Faraday::TimeoutError.new("Connection timeout"))
+        allow(logger).to receive(:error)
       end
 
       it "returns false" do
-        expect(checker.call).to be false
+        expect(checker.call(url)).to be false
       end
 
       it "logs the error" do
-        expect(Rails.logger).to receive(:error).with(/Failed to check URL/)
-        checker.call
+        expect(logger).to receive(:error).with(/Failed to check URL/)
+        checker.call(url)
       end
     end
 
@@ -70,7 +80,7 @@ RSpec.describe Recordings::UrlChecker do
       let(:url) { "" }
 
       it "returns false" do
-        expect(checker.call).to be false
+        expect(checker.call(url)).to be false
       end
     end
 
@@ -78,7 +88,7 @@ RSpec.describe Recordings::UrlChecker do
       let(:url) { nil }
 
       it "returns false" do
-        expect(checker.call).to be false
+        expect(checker.call(url)).to be false
       end
     end
   end

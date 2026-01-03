@@ -2,62 +2,54 @@ require "rails_helper"
 
 RSpec.describe Recordings::BrokenLinkDetector do
   let(:recording) { recordings(:hotel_california_soundclound) }
-  let(:service) { described_class.new(recording) }
+  let(:url_checker) { instance_double(Recordings::UrlChecker) }
+  let(:service) { described_class.new(url_checker: url_checker) }
 
   describe "#call" do
     context "when all URLs are accessible" do
-      let(:url_checker) { instance_double(Recordings::UrlChecker) }
-
       before do
-        allow(Recordings::UrlChecker).to receive(:new).and_return(url_checker)
         allow(url_checker).to receive(:call).and_return(true)
       end
 
       it "sets reported to false" do
-        service.call
+        service.call(recording)
         expect(recording.reload.reported).to be false
       end
 
       it "returns false" do
-        expect(service.call).to be false
+        expect(service.call(recording)).to be false
       end
     end
 
     context "when external_media_url is broken" do
-      let(:broken_checker) { instance_double(Recordings::UrlChecker, call: false) }
-      let(:working_checker) { instance_double(Recordings::UrlChecker, call: true) }
-
       before do
-        allow(Recordings::UrlChecker).to receive(:new).with(recording.external_media_url).and_return(broken_checker)
-        allow(Recordings::UrlChecker).to receive(:new).with(recording.url).and_return(working_checker)
+        allow(url_checker).to receive(:call).with(recording.external_media_url).and_return(false)
+        allow(url_checker).to receive(:call).with(recording.url).and_return(true)
       end
 
       it "sets reported to true" do
-        service.call
+        service.call(recording)
         expect(recording.reload.reported).to be true
       end
 
       it "returns true" do
-        expect(service.call).to be true
+        expect(service.call(recording)).to be true
       end
     end
 
     context "when url is broken" do
-      let(:broken_checker) { instance_double(Recordings::UrlChecker, call: false) }
-      let(:working_checker) { instance_double(Recordings::UrlChecker, call: true) }
-
       before do
-        allow(Recordings::UrlChecker).to receive(:new).with(recording.external_media_url).and_return(working_checker)
-        allow(Recordings::UrlChecker).to receive(:new).with(recording.url).and_return(broken_checker)
+        allow(url_checker).to receive(:call).with(recording.external_media_url).and_return(true)
+        allow(url_checker).to receive(:call).with(recording.url).and_return(false)
       end
 
       it "sets reported to true" do
-        service.call
+        service.call(recording)
         expect(recording.reload.reported).to be true
       end
 
       it "returns true" do
-        expect(service.call).to be true
+        expect(service.call(recording)).to be true
       end
     end
 
@@ -70,20 +62,18 @@ RSpec.describe Recordings::BrokenLinkDetector do
       end
 
       it "sets reported to false" do
-        service.call
+        service.call(recording)
         expect(recording.reload.reported).to be false
       end
     end
 
     context "when URL check raises an error" do
-      let(:broken_checker) { instance_double(Recordings::UrlChecker, call: false) }
-
       before do
-        allow(Recordings::UrlChecker).to receive(:new).and_return(broken_checker)
+        allow(url_checker).to receive(:call).and_return(false)
       end
 
       it "sets reported to true" do
-        service.call
+        service.call(recording)
         expect(recording.reload.reported).to be true
       end
     end

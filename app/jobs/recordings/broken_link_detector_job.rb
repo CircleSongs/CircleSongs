@@ -3,8 +3,9 @@ module Recordings
     queue_as :default
 
     def perform(recording_id)
-      recording = Recording.find(recording_id)
-      Recordings::BrokenLinkDetector.new(recording).call
+      return unless recording = Recording.find_by(id: recording_id)
+
+      Recordings::BrokenLinkDetector.new.call recording
     end
   end
 end
