@@ -16,6 +16,7 @@ class Recording < ApplicationRecord
     recording.url.present? || recording.external_media_url.present?
   } }, on: :update
   validate :external_media_url_format
+  validate :external_media_url_accessible, if: -> { validate_url_accessibility? }
 
   default_scope { order(:position) }
 
@@ -26,6 +27,16 @@ class Recording < ApplicationRecord
 
   def self.ransackable_associations(_auth_object = nil)
     %w[song]
+  end
+
+  attr_accessor :validate_url_accessibility, :url_checker_class
+
+  def validate_url_accessibility?
+    validate_url_accessibility == true
+  end
+
+  def url_checker_class
+    @url_checker_class ||= Recordings::UrlChecker
   end
 
   def source
@@ -73,5 +84,13 @@ class Recording < ApplicationRecord
     return if source && external_media_url.match?(SOURCE_PATTERNS[source])
 
     errors.add(:external_media_url, "must be a valid SoundCloud, YouTube, Spotify, or Bandcamp URL")
+  end
+
+  def external_media_url_accessible
+    return if external_media_url.blank?
+
+    unless url_checker_class.new(external_media_url).call
+      errors.add(:external_media_url, "is not accessible or returns an error")
+    end
   end
 end
