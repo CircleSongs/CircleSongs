@@ -4,7 +4,7 @@ class Recording < ApplicationRecord
     youtube: %r{\Ahttps?://(?:www\.)?youtube\.com/watch\?v=[\w-]+}i,
     spotify: %r{\Ahttps?://open\.spotify\.com/track/([\w-]+)}i,
     bandcamp: %r{\Ahttps?://bandcamp\.com/EmbeddedPlayer/(album|track)=\d+}i
-  }
+  }.freeze
 
   belongs_to :song
 
@@ -16,23 +16,27 @@ class Recording < ApplicationRecord
     recording.url.present? || recording.external_media_url.present?
   } }, on: :update
   validate :external_media_url_format
-  validate :external_media_url_accessible, if: -> { validate_url_accessibility? }
 
   default_scope { order(:position) }
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[created_at description embedded_player external_media_url id position reported song_id
-       title updated_at url]
+    %w[
+      created_at
+      description
+      embedded_player
+      external_media_url
+      id
+      position
+      reported
+      song_id
+      title
+      updated_at
+      url
+    ]
   end
 
   def self.ransackable_associations(_auth_object = nil)
     %w[song]
-  end
-
-  attr_accessor :validate_url_accessibility
-
-  def validate_url_accessibility?
-    validate_url_accessibility == true
   end
 
   def source
@@ -41,7 +45,6 @@ class Recording < ApplicationRecord
     when /youtube/ then :youtube
     when /spotify/ then :spotify
     when /bandcamp/ then :bandcamp
-    else nil
     end
   end
 
@@ -50,7 +53,7 @@ class Recording < ApplicationRecord
 
     case source
     when :youtube
-      match = external_media_url.match(/youtube\.com\/watch\?v=([\w-]+)/)
+      match = external_media_url.match(%r{youtube\.com/watch\?v=([\w-]+)})
       return external_media_url unless match
 
       video_id = match[1]
@@ -73,20 +76,11 @@ class Recording < ApplicationRecord
   end
 
   private
+    def external_media_url_format
+      return if external_media_url.blank?
 
-  def external_media_url_format
-    return if external_media_url.blank?
+      return if source && external_media_url.match?(SOURCE_PATTERNS[source])
 
-    return if source && external_media_url.match?(SOURCE_PATTERNS[source])
-
-    errors.add(:external_media_url, "must be a valid SoundCloud, YouTube, Spotify, or Bandcamp URL")
-  end
-
-  def external_media_url_accessible
-    return if external_media_url.blank?
-
-    unless Recordings::UrlChecker.new.call(external_media_url)
-      errors.add(:external_media_url, "is not accessible or returns an error")
+      errors.add(:external_media_url, "must be a valid SoundCloud, YouTube, Spotify, or Bandcamp URL")
     end
-  end
 end

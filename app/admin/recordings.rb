@@ -28,8 +28,8 @@ ActiveAdmin.register Recording do
                      input_html: { class: 'tom-select' }
       f.input :title
       f.input :external_media_url, hint: "Supported: SoundCloud, YouTube, Spotify URLs. For Bandcamp, paste the embed URL from the embed code."
-      f.input :url
-      f.input :embedded_player, input_html: { rows: 5 }
+      f.input :url unless f.object.new_record?
+      f.input :embedded_player, input_html: { rows: 5 } unless f.object.new_record?
       f.input :description, input_html: { rows: 5 }
       f.input :position
       f.input :reported
