@@ -2,6 +2,8 @@
   .card
     - if recording.title.present?
       %h5.card-header= recording.title
+    - if recording.source.present?
+      = render "recordings/players/#{recording.source}", recording: recording
     - if recording.embedded_player.present?
       = raw recording.embedded_player
     .card-body
