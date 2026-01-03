@@ -13,7 +13,7 @@ class Song < ApplicationRecord
 
   has_many :recordings, -> { order :created_at }, inverse_of: :song, dependent: :destroy
   accepts_nested_attributes_for :recordings, reject_if: proc { |attributes|
-    attributes["url"].blank? && attributes["embedded_player"].blank?
+    attributes["url"].blank? && attributes["embedded_player"].blank? && attributes["external_media_url"].blank?
   }, allow_destroy: true
   has_and_belongs_to_many :languages
   has_and_belongs_to_many :categories

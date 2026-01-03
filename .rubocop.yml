@@ -67,5 +67,15 @@ Layout/LineEndStringConcatenationIndentation:
 Layout/SpaceBeforeBrackets:
   Enabled: true
 
+Layout/IndentationConsistency:
+  EnforcedStyle: indented_internal_methods
+
+Layout/EmptyLinesAroundAccessModifier:
+  EnforcedStyle: only_before
+
+Rails/SkipsModelValidations:
+  Exclude:
+    - app/services/recordings/broken_link_detector.rb
+
 Lint/AmbiguousAssignment:
   Enabled: true

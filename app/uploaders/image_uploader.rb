@@ -14,8 +14,10 @@ class ImageUploader < Shrine
   end
 
   def generate_location(io, record: nil, derivative: nil, **)
-    if record
+    if record && record.id.present? && derivative.present?
       "#{record.id}/#{derivative}/#{super}"
+    elsif record && record.id.present?
+      "#{record.id}/#{super}"
     else
       super
     end

@@ -1,5 +1,5 @@
 ActiveAdmin.register Recording do
-  permit_params :title, :url, :embedded_player, :description, :reported, :song_id, :position
+  permit_params :title, :url, :embedded_player, :description, :reported, :song_id, :position, :external_media_url
 
   filter :title
   filter :url
@@ -27,8 +27,9 @@ ActiveAdmin.register Recording do
       f.input :song, collection: Song.order(:title).map { |s| [s.title, s.id] },
                      input_html: { class: 'tom-select' }
       f.input :title
-      f.input :url
-      f.input :embedded_player, input_html: { rows: 5 }
+      f.input :external_media_url, hint: "Supported: SoundCloud, YouTube, Spotify URLs. For Bandcamp, paste the embed URL from the embed code."
+      f.input :url unless f.object.new_record?
+      f.input :embedded_player, input_html: { rows: 5 } unless f.object.new_record?
       f.input :description, input_html: { rows: 5 }
       f.input :position
       f.input :reported

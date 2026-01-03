@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   devise_for :users, ActiveAdmin::Devise.config
 
@@ -6,6 +8,7 @@ Rails.application.routes.draw do
   authenticate :user, ->(u) { u.admin? } do
     namespace :admin do
       mount Flipper::UI.app => '/flipper'
+      mount Sidekiq::Web => '/sidekiq'
     end
   end
 

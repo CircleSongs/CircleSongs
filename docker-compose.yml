@@ -15,13 +15,14 @@ services:
     volumes:
       - database:/var/lib/postgresql/data:delegated
 
-  # redis:
-  #   image: redis:7.0-alpine
-  #   mem_limit: 64m
-  #   ports:
-  #     - "127.0.0.1:6379:6379"
-  #   volumes:
-  #     - redis:/data:delegated
+  redis:
+    container_name: "${APP_NAME}-redis"
+    image: redis:7.0-alpine
+    mem_limit: 64m
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - redis:/data:delegated
 
   # memcached:
   #   image: memcached:1-alpine
@@ -32,6 +33,6 @@ services:
 volumes:
   database:
     name: "${APP_NAME}-postgres"
-  # redis:
-  #   name: "${APP_NAME}-redis"
+  redis:
+    name: "${APP_NAME}-redis"
   # storage:
