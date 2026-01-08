@@ -1,11 +1,23 @@
 {
-  "stack": "heroku-18",
+  "stack": "heroku-24",
   "name": "circle-songs",
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "heroku/ruby"
+    }
+  ],
   "scripts": {
     "postdeploy": "bundle exec rake db:schema:load db:seed"
   },
   "env": {
-    "RAILS_MASTER_KEY": { "required": true }
+    "RAILS_MASTER_KEY": {
+      "required": true
+    },
+    "NODE_ENV": "production",
+    "RAILS_ENV": "production"
   },
   "addons": [
     "heroku-postgresql"
