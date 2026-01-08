@@ -16,6 +16,9 @@
     "RAILS_MASTER_KEY": {
       "required": true
     },
+    "FONTAWESOME_NPM_AUTH_TOKEN": {
+      "required": true
+    },
     "NODE_ENV": "production",
     "RAILS_ENV": "production"
   },
