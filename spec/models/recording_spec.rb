@@ -202,7 +202,7 @@ RSpec.describe Recording do
     end
 
     context "with valid Spotify track URL" do
-      let(:external_media_url) { "https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT" }
+      let(:external_media_url) { "https://open.spotify.com/embed/track/4cOdK2wGLETKBW3PvgPWqT" }
       let(:url) { nil }
       let(:embedded_player) { nil }
 
