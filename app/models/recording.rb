@@ -2,7 +2,7 @@ class Recording < ApplicationRecord
   SOURCE_PATTERNS = {
     soundcloud: %r{\Ahttps?://soundcloud\.com/[\w-]+/[\w-]+(\?.*)?}i,
     youtube: %r{\Ahttps?://(?:www\.)?youtube\.com/watch\?v=[\w-]+}i,
-    spotify: %r{\Ahttps?://open\.spotify\.com/track/([\w-]+)}i,
+    spotify: %r{\Ahttps?://open\.spotify\.com/embed/track/([\w-]+)}i,
     bandcamp: %r{\Ahttps?://bandcamp\.com/EmbeddedPlayer/(album|track)=\d+}i
   }.freeze
 

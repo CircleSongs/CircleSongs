@@ -13,7 +13,7 @@ hotel_california_the_eagles:
 hotel_california_spotify:
   song: hotel_california
   title: Spotify
-  external_media_url: https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT
+  external_media_url: https://open.spotify.com/embed/track/4cOdK2wGLETKBW3PvgPWqT
 
 hotel_california_bandcamp:
   song: hotel_california

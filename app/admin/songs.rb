@@ -185,9 +185,12 @@ ActiveAdmin.register Song do
 
         h3 "Spotify"
         ul do
-          li "Copy the track URL directly from your browser's address bar"
-          li "Only tracks are supported (not albums or playlists)"
-          li raw "Example: <code>https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT</code>"
+          li "1. Go to the track page on Spotify"
+          li "2. Click the 'Share' button (might be under ... menu)"
+          li "3. Click 'Embed track'"
+          li "4. Check the 'Show code' checkbox"
+          li "5. Copy the iframe src URL"
+          li raw "Example: <code>https://open.spotify.com/embed/track/4cOdK2wGLETKBW3PvgPWqT</code>"
         end
 
         h3 "Bandcamp"
