@@ -155,12 +155,7 @@ ActiveAdmin.register Song do
         class: "recordings-container"
       ) do |a|
         a.input :title
-        a.input :external_media_url, hint: proc {
-          text_node "Supported: SoundCloud, YouTube, Spotify, Bandcamp. "
-          a href: "#", onclick: "document.getElementById('recording-instructions-modal').style.display='block'; return false;", style: "font-size:0.9em;" do
-            "Instructions"
-          end
-        }
+        a.input :external_media_url, hint: "Supported: SoundCloud, YouTube, Spotify, Bandcamp. <a href=\"#\" onclick=\"document.getElementById('recording-instructions-modal').style.display='block'; return false;\" style=\"font-size:0.9em;\">Instructions</a>".html_safe
         a.input :url unless a.object.new_record?
         a.input :embedded_player, input_html: { rows: 5 } unless a.object.new_record?
         a.input :description, input_html: { rows: 5 }
