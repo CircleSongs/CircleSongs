@@ -60,10 +60,9 @@ end
 
 group :test do
   gem "capybara", "~> 3.40"
-  gem "database_cleaner", "~> 2.1"
   gem "ffaker", "~> 2.24"
+  gem "rspec_junit_formatter", "~> 0.6.0"
   gem "rspec-rails", "~> 7.1"
-  gem "rspec_junit_formatter", "~> 0.6"
   gem "selenium-webdriver", "~> 4.28"
   gem "shoulda-matchers", "~> 6.4"
   gem "simplecov", "~> 0.22"
