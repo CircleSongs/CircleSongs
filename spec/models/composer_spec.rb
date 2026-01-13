@@ -1,96 +1,81 @@
 RSpec.describe Composer do
-  let(:composer) { described_class.new(params) }
-  let(:params) { base_params }
-  let(:base_params) { {} }
-  let(:valid_name) { Faker::Name.name }
-  let(:valid_url) { "https://example.com" }
+  subject(:composer) { described_class.new(attributes) }
+
+  let(:attributes) do
+    {
+      name: name,
+      url: url
+    }
+  end
+  let(:name) { Faker::Name.name }
+  let(:url) { Faker::Internet.url }
 
   it { is_expected.to have_many(:songs).dependent(:nullify) }
 
   describe "validations" do
-    subject { composer }
+    context "when both name and url are blank" do
+      let(:name) { nil }
+      let(:url) { nil }
 
-    # context "when both name and url are blank" do
-    #   it "is invalid" do
-    #     expect(subject).not_to be_valid
-    #     expect(composer.errors[:base]).to include("Name or URL must be present")
-    #   end
-    # end
+      before { composer.valid? }
 
-    # context "with only name" do
-    #   let(:base_params) { { name: valid_name } }
+      it { is_expected.not_to be_valid }
 
-    #   it { is_expected.to be_valid }
-    # end
+      it "has the correct error message" do
+        expect(composer.errors[:base]).to include("Name or URL must be present")
+      end
+    end
 
-    # context "with only url" do
-    #   let(:base_params) { { url: valid_url } }
+    context "with only name" do
+      let(:url) { nil }
 
-    #   it { is_expected.to be_valid }
-    # end
+      it { is_expected.to be_valid }
+    end
 
-    # context "with both name and url" do
-    #   let(:base_params) { { name: valid_name, url: valid_url } }
+    context "with only url" do
+      let(:name) { nil }
 
-    #   it { is_expected.to be_valid }
-    # end
+      it { is_expected.to be_valid }
+    end
 
-    # context "with duplicate name" do
-    #   let(:base_params) { { name: valid_name } }
+    context "with duplicate name" do
+      before do
+        described_class.create! attributes
+      end
 
-    #   before { described_class.create!(name: valid_name) }
+      it { is_expected.not_to be_valid }
 
-    #   it { is_expected.to validate_uniqueness_of(:name) }
-    # end
+      it "has the correct error message" do
+        composer.valid?
 
-    # describe "url format" do
-    #   let(:base_params) { { url: test_url } }
+        expect(composer.errors[:name]).to include("has already been taken")
+      end
+    end
 
-    #   context "with valid urls" do
-    #     [
-    #       "http://example.com",
-    #       "https://test.com/path",
-    #       "https://music.site.com/composer/123"
-    #     ].each do |url|
-    #       context "when url is #{url}" do
-    #         let(:test_url) { url }
+    context "with invalid url" do
+      let(:url) { "not-a-url" }
 
-    #         it { is_expected.to be_valid }
-    #       end
-    #     end
-    #   end
+      it { is_expected.not_to be_valid }
+    end
+  end
 
-    #   context "with invalid urls" do
-    #     [
-    #       "not-a-url",
-    #       "ftp://example.com",
-    #       "just text",
-    #       "http:/missing-slash"
-    #     ].each do |url|
-    #       context "when url is #{url}" do
-    #         let(:test_url) { url }
+  describe "#name" do
+    let(:name) { "  #{Faker::Name.name}  " }
 
-    #         it { is_expected.not_to be_valid }
-
-    #         it "has the correct error message" do
-    #           subject.valid?
-    #           expect(subject.errors[:url]).to include("must be a valid URL")
-    #         end
-    #       end
-    #     end
-    #   end
-    # end
+    it "strips whitespace from the name" do
+      expect(composer.name).to eq name.strip
+    end
   end
 
   describe ".ransackable_attributes" do
-    subject { described_class.ransackable_attributes }
-
-    it { is_expected.to match_array(%w[created_at id name url]) }
+    it "returns the correct attributes" do
+      expect(described_class.ransackable_attributes).to match_array(%w[created_at id name url])
+    end
   end
 
   describe ".ransackable_associations" do
-    subject { described_class.ransackable_associations }
-
-    it { is_expected.to match_array(%w[songs]) }
+    it "returns the correct values" do
+      expect(described_class.ransackable_associations).to match_array(%w[songs])
+    end
   end
 end
