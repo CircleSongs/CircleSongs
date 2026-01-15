@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :broken_link_reports
   resources :songs
   resources :restricted_category_sessions
+  resources :playlists, only: %i[index]
 
   get "donation_thank_you", to: "thank_you#donation"
   get "purchase_thank_you", to: "thank_you#purchase"
