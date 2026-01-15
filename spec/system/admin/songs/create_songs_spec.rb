@@ -14,14 +14,19 @@ RSpec.feature "As an admin user", type: :system do
 
   before do
     login_as user
-    visit admin_songs_path
   end
 
   scenario "I can create a Song", :js do
+    visit admin_songs_path
     click_on "New Song"
+
+    attach_file "Image", Rails.root.join("spec/fixtures/files/image.jpeg")
     fill_in "Title", with: title
     fill_in "Alternate title", with: alternate_title
-    select composer.name, from: "Composer"
+    within "#song_composer_id_input" do
+      find(".ts-control").click
+      find('.option', text: "#{composer.name} | #{composer.url}").click
+    end
     fill_in "Lyrics", with: lyrics
     fill_in "Translation", with: translation
     fill_in "Chords", with: chords
@@ -29,7 +34,9 @@ RSpec.feature "As an admin user", type: :system do
     check "Traditional"
     check "English"
     check "Spanish"
+
     click_on "Create Song"
+
     expect(page).to have_content "Song was successfully created."
     expect(page).to have_content title
     expect(page).to have_content alternate_title
@@ -44,11 +51,23 @@ RSpec.feature "As an admin user", type: :system do
   end
 
   scenario "I can underline text in Song#lyrics and Song#translation" do
+    visit admin_songs_path
     click_on "New Song"
+    click_on "Create Song"
+    within "#song_image_input" do
+      expect(page).to have_content "can't be blank"
+    end
+    within "#song_title_input" do
+      expect(page).to have_content "can't be blank"
+    end
+
+    attach_file "Image", Rails.root.join("spec/fixtures/files/image.jpeg")
     fill_in "Title", with: title
     fill_in "Lyrics", with: underlined_lyric
     fill_in "Translation", with: underlined_translation
+
     click_on "Create Song"
+    expect(page).to have_content "Song was successfully created."
     within ".row-lyrics" do
       expect(page).to have_css "u"
     end

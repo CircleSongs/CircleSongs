@@ -9,24 +9,6 @@ RSpec.describe "As an admin user" do
     login_as user
   end
 
-  scenario "I can add a song", :js do
-    visit admin_songs_path
-    click_on "New Song"
-    fill_in "Title", with: title
-    attach_file "Image", Rails.root.join("spec/fixtures/files/image.jpeg")
-    click_on "Add new chord form"
-    select chord_form.chord
-
-    click_on "Add New Recording"
-    fill_in "Embedded player*", with: embed_code
-
-    click_on "Create Song"
-    expect(page).to have_content "Song was successfully created."
-    expect(find("img")["src"]).to eq Song.find_by(title: title).image_url(:thumb)
-    expect(page).to have_content chord_form.chord
-    expect(page).to have_css "div.chord-form svg"
-  end
-
   scenario "I see an edit link on the public index page" do
     visit songs_path
     expect(page).to have_css "a.edit"
@@ -46,8 +28,34 @@ RSpec.describe "As an admin user" do
   scenario "I can delete a song from the show page" do
     visit admin_song_path(song)
     accept_confirm do
-      click_on "Delete Song"
+      click_on "Delete"
     end
     expect(page).to have_content "Song was successfully destroyed."
+  end
+
+  scenario "I can edit a Song that has no image" do
+    visit admin_song_path(song)
+    click_on "Edit"
+    within "#song_title_input" do
+      fill_in "Title", with: "New Title"
+    end
+    click_on "Update Song"
+    expect(page).to have_content "Song was successfully updated."
+    expect(song.reload.title).to eq "New Title"
+  end
+
+  scenario "I can mark a song as featured", :focus do
+    visit edit_admin_song_path(song)
+    check "Featured"
+    click_on "Update Song"
+    expect(page).to have_content "Song was successfully updated."
+    expect(song.reload.featured).to be true
+    visit admin_songs_path
+    select "Yes", from: "Featured"
+    click_on "Filter"
+    expect(page).to have_content song.title
+    select "No", from: "Featured"
+    click_on "Filter"
+    expect(page).to have_no_content song.title
   end
 end

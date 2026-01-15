@@ -1,15 +1,21 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.4.7"
+ruby "3.4.8"
 
-gem "aws-sdk-s3", "~> 1.180"
+gem "aws-sdk-s3", "~> 1.208"
 gem "activeadmin", "~> 3.2"
 gem "active_admin_flat_skin", "~> 0.1"
+gem "acts-as-taggable-on", "~> 13.0"
+gem "benchmark"
 gem "bootsnap", "~> 1.18"
 gem "chordpro", "~> 1.0"
 gem "devise", "~> 4.9"
 gem "faker", "~> 3.5"
+gem "faraday", "~> 2.12"
+gem "flipper-active_record", "~> 1.3"
+gem "flipper-ui", "~> 1.3"
+gem "flipper", "~> 1.3"
 gem "friendly_id", "~> 5.5"
 gem "haml-rails", "~> 2.1"
 gem "image_processing", "~> 1.13"
@@ -27,6 +33,7 @@ gem "redis", "~> 5.3"
 gem "rollbar", "~> 3.6"
 gem "sassc-rails", "~> 2.1"
 gem "shrine", "~> 3.6"
+gem "sidekiq", "~> 8.1"
 gem "simple_form", "~> 5.3"
 gem "strong_migrations", "~> 2.2"
 gem "vite_rails", "~> 3.0"
@@ -53,16 +60,10 @@ end
 
 group :test do
   gem "capybara", "~> 3.40"
-  gem "database_cleaner", "~> 2.1"
   gem "ffaker", "~> 2.24"
+  gem "rspec_junit_formatter", "~> 0.6.0"
   gem "rspec-rails", "~> 7.1"
-  gem "rspec_junit_formatter", "~> 0.6"
   gem "selenium-webdriver", "~> 4.28"
   gem "shoulda-matchers", "~> 6.4"
   gem "simplecov", "~> 0.22"
 end
-
-gem "flipper", "~> 1.3"
-gem "flipper-active_record", "~> 1.3"
-
-gem "flipper-ui", "~> 1.3"

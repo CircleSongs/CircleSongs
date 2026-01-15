@@ -58,7 +58,7 @@ commands:
 jobs:
   test:
     docker:
-      - image: cimg/ruby:3.4.7-browsers
+      - image: cimg/ruby:3.4.8-browsers
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
@@ -82,9 +82,22 @@ jobs:
           name: Database Setup
           command: |
             bundle exec rake db:schema:load
-      - ruby/rspec-test
+      - run:
+          name: Create test results directory
+          command: mkdir -p ~/rspec
+      - run:
+          name: Run RSpec tests
+          command: |
+            circleci tests glob "spec/**/*_spec.rb" | \
+            circleci tests run --command="xargs bundle exec rspec \
+              --format progress \
+              --format RspecJunitFormatter \
+              -o ~/rspec/rspec.xml" \
+              --verbose \
+              --split-by=timings
+          when: always
       - store_test_results:
-          path: test-results
+          path: ~/rspec
       - store_artifacts:
           path: tmp/capybara
 

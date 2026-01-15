@@ -19,9 +19,11 @@ class SongsController < ApplicationController
     params.require(:q).permit(
       :title_cont,
       :composer_name_cont,
+      :title_or_lyrics_or_composer_name_cont,
       :title_start,
       :s,
       :chords_present,
+      :themes_name_in,
       :languages_id_in,
       :categories_id_in
     )

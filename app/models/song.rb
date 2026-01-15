@@ -6,11 +6,14 @@ class Song < ApplicationRecord
 
   include ImageUploader::Attachment.new(:image)
 
-  validates :title, presence: true
+  acts_as_taggable_on :themes
+
+  validates :title, presence: true, uniqueness: true
+  validates :image, presence: true, on: :create
 
   has_many :recordings, -> { order :created_at }, inverse_of: :song, dependent: :destroy
   accepts_nested_attributes_for :recordings, reject_if: proc { |attributes|
-    attributes["url"].blank? && attributes["embedded_player"].blank?
+    attributes["url"].blank? && attributes["embedded_player"].blank? && attributes["external_media_url"].blank?
   }, allow_destroy: true
   has_and_belongs_to_many :languages
   has_and_belongs_to_many :categories
@@ -24,12 +27,16 @@ class Song < ApplicationRecord
     @formatted_chords ||= Chordpro.html(chords)
   end
 
+  def image_url(derivative = :large)
+    image_derivatives&.dig(derivative)&.url || image&.url
+  end
+
   def self.ransackable_attributes(_auth_object = nil)
-    %w[alternate_title chords created_at description id
-       id_value image_data lyrics slug title translation updated_at]
+    %w[image_data alternate_title chords created_at description id
+       id_value image_data lyrics slug title translation updated_at featured]
   end
 
   def self.ransackable_associations(_auth_object = nil)
-    %w[categories chord_forms languages recordings song_chord_forms composer]
+    %w[categories chord_forms languages recordings song_chord_forms composer tags themes]
   end
 end
