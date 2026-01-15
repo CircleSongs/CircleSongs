@@ -43,4 +43,19 @@ RSpec.describe "As an admin user" do
     expect(page).to have_content "Song was successfully updated."
     expect(song.reload.title).to eq "New Title"
   end
+
+  scenario "I can mark a song as featured", :focus do
+    visit edit_admin_song_path(song)
+    check "Featured"
+    click_on "Update Song"
+    expect(page).to have_content "Song was successfully updated."
+    expect(song.reload.featured).to be true
+    visit admin_songs_path
+    select "Yes", from: "Featured"
+    click_on "Filter"
+    expect(page).to have_content song.title
+    select "No", from: "Featured"
+    click_on "Filter"
+    expect(page).to have_no_content song.title
+  end
 end

@@ -15,7 +15,7 @@ ActiveAdmin.register Song do
   filter :slug
   filter :recordings_reported, as: :boolean, label: "Broken Link Reported"
   filter :recordings_url_present, label: "Has Recording URL", as: :boolean
-
+  filter :featured, as: :boolean
   # Controller customization
   controller do
     def find_resource
@@ -35,6 +35,7 @@ ActiveAdmin.register Song do
                 :description, :lyrics, :title, :translation,
                 :chords, :remove_image,
                 :composer_id,
+                :featured,
                 recordings_attributes: %i[
                   description
                   embedded_player
@@ -67,6 +68,9 @@ ActiveAdmin.register Song do
         end
       end
     end
+    column :featured, sortable: :featured do |song|
+      song.featured ? "Yes" : "No"
+    end
     column "Has Chords", sortable: :chords do |song|
       song.chords.present? ? "Yes" : "No"
     end
@@ -90,6 +94,7 @@ ActiveAdmin.register Song do
       f.input :remove_image, as: :boolean
       f.input :title
       f.input :alternate_title
+      f.input :featured, as: :boolean
       f.inputs "Composer" do
         f.input :composer_id, as: :select,
                               collection: Composer.order(:name).map { |c| [[c.name, c.url].reject(&:blank?).join(" | "), c.id] },
@@ -236,6 +241,9 @@ ActiveAdmin.register Song do
       end
       row :description do
         simple_format song.description
+      end
+      row :featured do |song|
+        song.featured ? "Yes" : "No"
       end
       row :lyrics do
         simple_format song.lyrics, {}, sanitize: false

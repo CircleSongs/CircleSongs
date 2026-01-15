@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_30_131457) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_15_224724) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -143,6 +143,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_30_131457) do
     t.string "composer_url"
     t.datetime "created_at", precision: nil, null: false
     t.text "description"
+    t.boolean "featured", default: false, null: false
     t.text "image_data"
     t.text "lyrics"
     t.string "slug"
@@ -150,6 +151,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_30_131457) do
     t.text "translation"
     t.datetime "updated_at", precision: nil, null: false
     t.index ["composer_id"], name: "index_songs_on_composer_id"
+    t.index ["featured"], name: "index_songs_on_featured", where: "featured"
     t.index ["slug"], name: "index_songs_on_slug", unique: true
   end
 
