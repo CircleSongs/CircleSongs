@@ -61,4 +61,54 @@ RSpec.describe Playlist, type: :model do
       end
     end
   end
+
+  describe "#service" do
+    context "with a Spotify URL" do
+      let(:url) { "https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M" }
+
+      it "returns spotify" do
+        expect(playlist.service).to eq("spotify")
+      end
+    end
+
+    context "with a YouTube URL" do
+      let(:url) { "https://www.youtube.com/playlist?list=PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf" }
+
+      it "returns youtube" do
+        expect(playlist.service).to eq("youtube")
+      end
+    end
+
+    context "with a SoundCloud URL" do
+      let(:url) { "https://soundcloud.com/artist-name/sets/playlist-name" }
+
+      it "returns soundcloud" do
+        expect(playlist.service).to eq("soundcloud")
+      end
+    end
+
+    context "with a Bandcamp URL" do
+      let(:url) { "https://bandcamp.com/EmbeddedPlayer/album=1764593721" }
+
+      it "returns bandcamp" do
+        expect(playlist.service).to eq("bandcamp")
+      end
+    end
+
+    context "with an invalid URL" do
+      let(:url) { "https://invalid.com/playlist" }
+
+      it "returns nil" do
+        expect(playlist.service).to be_nil
+      end
+    end
+
+    context "with a nil URL" do
+      let(:url) { nil }
+
+      it "returns nil" do
+        expect(playlist.service).to be_nil
+      end
+    end
+  end
 end
