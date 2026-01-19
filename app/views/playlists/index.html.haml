@@ -1,0 +1,7 @@
+.row
+  .col-sm-12
+    %ul.playlists
+      - if @playlists.empty?
+        %li No playlists available
+      - else
+        = render @playlists
