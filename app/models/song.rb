@@ -33,7 +33,7 @@ class Song < ApplicationRecord
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[image_data alternate_title chords created_at description id
-       id_value image_data lyrics slug title translation updated_at]
+       id_value image_data lyrics slug title translation updated_at featured]
   end
 
   def self.ransackable_associations(_auth_object = nil)

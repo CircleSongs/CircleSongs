@@ -1,0 +1,11 @@
+%li.playlist{style: "padding: 0.5rem;"}
+  - if playlist.service
+    = image_tag vite_asset_path("images/icons/#{playlist.service}.png"), alt: playlist.service.capitalize, class: "playlist-icon", width: 20, height: 20, style: "margin-right: 0.5rem;"
+  = link_to playlist.title, playlist.url, target: '_blank', rel: 'noopener'
+  %small
+    - if playlist.description.present?
+      \-
+      = playlist.description
+    - if user_signed_in?
+      = link_to edit_admin_playlist_path(playlist), class: :edit do
+        %i.fa.fa-pencil
