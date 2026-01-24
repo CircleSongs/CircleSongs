@@ -44,7 +44,7 @@ RSpec.describe "As an admin user" do
     expect(song.reload.title).to eq "New Title"
   end
 
-  scenario "I can mark a song as featured", :focus do
+  scenario "I can mark a song as featured" do
     visit edit_admin_song_path(song)
     check "Featured"
     click_on "Update Song"

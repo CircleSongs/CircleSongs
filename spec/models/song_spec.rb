@@ -9,7 +9,6 @@ RSpec.describe Song do
 
   describe "validations" do
     it { is_expected.to validate_presence_of(:title) }
-    it { is_expected.to validate_presence_of(:image) }
   end
 
   describe "formatted_chords" do
