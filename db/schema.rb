@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_19_144731) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_15_231303) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -116,10 +116,19 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_19_144731) do
     t.string "value"
   end
 
+  create_table "playlists", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.string "url"
+  end
+
   create_table "recordings", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", precision: nil, null: false
     t.text "description"
     t.text "embedded_player"
+    t.string "external_media_url"
     t.integer "position"
     t.boolean "reported"
     t.uuid "song_id"
@@ -142,6 +151,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_19_144731) do
     t.string "composer_url"
     t.datetime "created_at", precision: nil, null: false
     t.text "description"
+    t.boolean "featured", default: false, null: false
     t.text "image_data"
     t.text "lyrics"
     t.string "slug"
@@ -149,6 +159,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_19_144731) do
     t.text "translation"
     t.datetime "updated_at", precision: nil, null: false
     t.index ["composer_id"], name: "index_songs_on_composer_id"
+    t.index ["featured"], name: "index_songs_on_featured", where: "featured"
     t.index ["slug"], name: "index_songs_on_slug", unique: true
   end
 

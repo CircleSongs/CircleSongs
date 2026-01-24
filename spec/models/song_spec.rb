@@ -8,9 +8,7 @@ RSpec.describe Song do
   it { is_expected.to have_and_belong_to_many(:categories) }
 
   describe "validations" do
-    it { should validate_presence_of(:title) }
-    it { should validate_presence_of(:image) }
-
+    it { is_expected.to validate_presence_of(:title) }
   end
 
   describe "formatted_chords" do

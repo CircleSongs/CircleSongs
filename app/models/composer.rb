@@ -1,10 +1,12 @@
 class Composer < ApplicationRecord
-  # validates :name, uniqueness: true, if: :name?
-  # validates :url, format: {
-  #   with: %r{\Ahttps?://\S+\.\S+\z},
-  #   message: "must be a valid URL"
-  # }, if: :url?
+  validates :name, uniqueness: true, if: -> { name.present? }
+  validates :url, format: {
+    with: %r{\Ahttps?://\S+\.\S+\z},
+    message: "must be a valid URL"
+  }, if: :url?
   validate :name_or_url_present
+
+  normalizes :name, with: ->(name) { name.strip }
 
   has_many :songs, dependent: :nullify
 
@@ -17,10 +19,9 @@ class Composer < ApplicationRecord
   end
 
   private
+    def name_or_url_present
+      return unless name.blank? && url.blank?
 
-  def name_or_url_present
-    return unless name.blank? && url.blank?
-
-    errors.add(:base, "Name or URL must be present")
-  end
+      errors.add(:base, "Name or URL must be present")
+    end
 end
