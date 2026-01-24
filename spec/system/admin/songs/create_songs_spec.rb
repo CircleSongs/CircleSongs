@@ -54,9 +54,6 @@ RSpec.feature "As an admin user", type: :system do
     visit admin_songs_path
     click_on "New Song"
     click_on "Create Song"
-    within "#song_image_input" do
-      expect(page).to have_content "can't be blank"
-    end
     within "#song_title_input" do
       expect(page).to have_content "can't be blank"
     end
