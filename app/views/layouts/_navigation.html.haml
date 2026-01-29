@@ -1,29 +1,38 @@
-%nav.navbar.navbar-expand-lg.navbar-light.bg-light
-  .container-fluid
-    %a.navbar-brand{ href: '/'}
-      = image_tag vite_asset_path('images/medicine-songs-logo.svg'), width: 100, height: 100
-      Medicine Songs
-    %button.navbar-toggler{"aria-controls" => "navbarContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-toggle" => "collapse", "data-bs-target" => "#navbarContent", :type => "button"}
-      %span.navbar-toggler-icon
-    #navbarContent.collapse.navbar-collapse
-      %ul.navbar-nav.me-auto.mb-2.mb-lg-0
-        - if feature_enabled?(:v2_navigation)
-          %li.nav-item
-            = link_to 'About Us', '/about_us', class: 'nav-link'
-          %li.nav-item
-            = link_to 'Support Us', '/support_us', class: 'nav-link'
-          %li.nav-item
-            = link_to 'Resources', '/resources', class: 'nav-link'
-          %li.nav-item
-            = link_to 'Song Book', '/song_book', class: 'nav-link'
-        - else
-          %li.nav-item
-            = link_to 'Icaros', '/icaros', class: 'nav-link'
-          %li.nav-item
-            = link_to 'Quechua', '/quechua', class: 'nav-link'
+%header.site-header.main-texture{"data-header" => ""}
+  .container
+    .header-inner
+      %a.brand{href: "/", "aria-label" => "MedicineSongs.net Home"}
+        .brand__logo
+          = image_tag vite_asset_path('images/logo-dark.svg'), class: 'logo-img logo-dark', alt: 'MedicineSongs.net'
+          = image_tag vite_asset_path('images/logo-light.svg'), class: 'logo-img logo-light', alt: 'MedicineSongs.net'
 
-      %ul.navbar-nav.d-flex.gap-2
-        %li.nav-item
-          = link_to 'Buy Songbook PDF', '/purchase', class: 'btn btn-primary'
-        %li.nav-item
-          = link_to 'Make a Donation!', "https://www.paypal.com/ncp/payment/LGW7WS7S2NYHQ", class: 'btn btn-warning'
+      #site-nav.nav-panel{"data-nav-panel" => ""}
+        %nav.nav{"aria-label" => "Primary"}
+          %ul.nav__list
+            %li
+              = link_to 'Home', '/', class: 'nav__link'
+            %li
+              = link_to 'Song Search', '/songs', class: 'nav__link'
+            %li
+              = link_to 'About', '/about_us', class: 'nav__link'
+            %li
+              = link_to 'Resources', '/resources', class: 'nav__link'
+            %li
+              = link_to 'Songbook', '/purchase', class: 'nav__link'
+            %li
+              = link_to 'Support Us', '/donations', class: 'nav__link'
+            -# %li
+            -#   = link_to 'Icaros', '/icaros', class: 'nav__link'
+            -# %li
+            -#   = link_to 'Quechua', '/quechua', class: 'nav__link'
+
+      .header-actions
+        %button.nav-toggle.icon-btn{type: "button", "data-nav-toggle" => "", "aria-label" => "Toggle navigation", "aria-expanded" => "false"}
+          .hamburger
+            %span.hamburger__line
+            %span.hamburger__line
+            %span.hamburger__line
+        %button.icon-btn{type: "button", "data-theme-toggle" => "", "aria-label" => "Toggle theme"}
+          %div{"data-theme-icon" => ""}
+            = image_tag vite_asset_path('images/sun.svg'), class: 'theme-img toggle-dark', alt: 'Light Mode'
+            = image_tag vite_asset_path('images/moon.svg'), class: 'theme-img toggle-light', alt: 'Dark Mode'

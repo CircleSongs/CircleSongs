@@ -1,36 +1,164 @@
-= search_form_for @q, html: { novalidate: true } do |f|
-  .row.mb-3
-    .col-sm-2.offset-sm-2
-      = f.input :categories_id_in, collection: @categories, include_blank: 'All', label: 'Category', required: false, label_method: :name_and_count
-    .col-sm-2
-      = f.input :languages_id_in, collection: Language.all, include_blank: 'All', label: 'Language', required: false
-    .col-sm-2
-      = f.input :chords_present, collection: [['Yes', true], ['No', false]], include_blank: 'All', label: 'Has Chords', required: false
-    - if feature_enabled? :tagging
-      .col-sm-2
-        = f.input :themes_name_in, collection: ActsAsTaggableOn::Tag.for_context(:themes).pluck(:name).uniq, include_blank: 'All', label: 'Theme', required: false, input_html: { multiple: false }
-    .col-sm-2
-      = f.input :s, collection: [['Title', 'title asc'], ['Date Added', 'created_at desc']], label: 'Sort by', required: false, include_blank: false, selected: songs_sort_value
+.search-strip
+  = search_form_for @q, html: { role: 'search', 'aria-label': 'Song search', class: 'search-strip__inner' } do |f|
+    .container
+      .grid
+        .col-8
+          .search-form--extended
+            = f.label :title_or_lyrics_or_composer_name_cont, 'Search', class: 'sr-only'
+            = f.input_field :title_or_lyrics_or_composer_name_cont, id: 'song-search', class: 'search-input', type: 'search', placeholder: 'Search for songs here using any word in song title or lyrics, or by composer'
+            .form-btns
+              = link_to 'Reset Form', songs_path, class: 'clear-btn btn btn--plain'
+              = f.button :submit, 'Search Songs', class: 'search-btn btn btn--wide'
+        
+        .col-8
+          .grid
+            .col-8
+              .search-form--extended
+                .select-shell
+                  = f.label :categories_id_in, 'Category', class: 'sr-only'
+                  = f.input_field :categories_id_in, collection: @categories, include_blank: 'Category', label_method: :name_and_count, id: 'category', class: 'select--category'
+                  %span.arrow--down
+                
+                .select-shell
+                  = f.label :chords_present, 'Has Chords', class: 'sr-only'
+                  = f.input_field :chords_present, collection: [['Yes', true], ['No', false]], include_blank: 'Has Chords', id: 'has-chords', class: 'select--has-chords'
+                  %span.arrow--down
+            
+            .col-8
+              .search-form--extended
+                .select-shell
+                  = f.label :languages_id_in, 'Language', class: 'sr-only'
+                  = f.input_field :languages_id_in, collection: Language.all, include_blank: 'Language', id: 'language', class: 'select--language'
+                  %span.arrow--down
+                
+                - if feature_enabled? :tagging
+                  .select-shell
+                    = f.label :themes_name_in, 'Theme', class: 'sr-only'
+                    = f.input_field :themes_name_in, collection: ActsAsTaggableOn::Tag.for_context(:themes).pluck(:name).uniq, include_blank: 'Theme', id: 'theme', class: 'select--theme', multiple: false
+                    %span.arrow--down
 
-  .row.mb-3
-    .col-sm-8.offset-sm-2
-      .input-group
-        = f.input_field :title_or_lyrics_or_composer_name_cont, class: 'form-control', placeholder: t('songs.search_placeholder')
-        = f.button :submit, class: 'btn btn-primary'
-        = link_to 'Clear', songs_path, class: 'btn btn-secondary'
+%main
+  -# Panels
+  %section.section.main-texture{"aria-label" => "Explore collections"}
+    .container
+      .grid.grid--equal-height-cols
+        .col-5
+          %section.panel.panel--categories{"aria-label" => "Categories"}
+            %h2.panel__title.ruled Categories
+            %ul.categories-list.list--inline.list--unstyled
+              - if @categories.any?
+                - @categories.limit(10).each do |category|
+                  %li
+                    %span= category.name
+                    = link_to category.songs.count, songs_path(q: { categories_id_in: category.id }), class: 'btn btn--secondary btn--sm'
+              - else
+                -# PLACEHOLDER: No categories
+                %li
+                  %span Water Songs
+                  = link_to '14', '#', class: 'btn btn--secondary btn--sm'
+        
+        .col-6
+          %section.panel.panel--themes{"aria-label" => "Song themes"}
+            %h2.panel__title.ruled Song Themes
+            .themes-cloud{"aria-label" => "Theme cloud"}
+              - if respond_to?(:feature_enabled?) && feature_enabled?(:tagging) && @themes.present?
+                - max_count = @themes.first.taggings_count.to_f
+                - @themes.each do |theme|
+                  - weight = (theme.taggings_count / max_count * 100).round
+                  - css_class = weight > 60 ? 'is-strong' : ''
+                  = link_to theme.name, songs_path(q: { themes_name_in: theme.name }), class: css_class
+              - else
+                -# PLACEHOLDER: Hardcoded themes
+                = link_to 'water', '#'
+                = link_to 'healing', '#', class: 'is-strong'
+                = link_to 'ceremony', '#'
+                = link_to 'fire', '#', class: 'is-strong'
+                = link_to 'love', '#', class: 'is-strong'
+                = link_to 'earth', '#'
+                = link_to 'gratitude', '#'
+                = link_to 'prayer', '#'
+                = link_to 'peace', '#', class: 'is-strong'
+                = link_to 'resilience', '#'
+        
+        .col-5
+          %section.panel.panel--playlists{"aria-label" => "Playlists"}
+            %h2.panel__title.ruled Playlists
+            %ul.playlist-list.list--inline.list--unstyled
+              -# PLACEHOLDER: Hardcoded playlists until you implement playlists
+              %li
+                %span.playlist-item__left
+                  %span.soundcloud-icon{"aria-hidden" => "true"}
+                    = image_tag vite_asset_path('images/soundcloud-tile.svg'), width: 24
+                  %span Water Songs
+                = link_to 'Play >', '#', class: 'btn btn--sm', "aria-label" => "Play Water Songs"
+              %li
+                %span.playlist-item__left
+                  %span.soundcloud-icon{"aria-hidden" => "true"}
+                    = image_tag vite_asset_path('images/soundcloud-tile.svg'), width: 24
+                  %span Fire Songs
+                = link_to 'Play >', '#', class: 'btn btn--sm', "aria-label" => "Play Fire Songs"
 
-  .row.mb-3
-    .col-sm-8.offset-sm-2
-      = paginate @songs
-
-  .row
-    .col-sm-12
-      %ul.songs
-        - if @songs.empty?
-          %li= t 'songs.no_songs'
-        - else
-          = render @songs
-
-  .row.mt-3
-    .col-sm-8.offset-sm-2
-      = paginate @songs
+  -# Search Results
+  %section.section{"aria-label" => "Search Results"}
+    .container
+      .grid
+        .col-16
+          .songlist.main-texture{"aria-label" => "Song list"}
+            .container
+              %header.songlist__head
+                %h2.h1.margin--0 Song List
+                %p.songlist__meta
+                  Showing
+                  %strong= @songs.size
+                  of
+                  %strong= @songs.total_count
+                  results. Click column headers to sort.
+            
+            .songtable{role: "region", "aria-label" => "Song list table"}
+              %table.songtable__table
+                %thead
+                  %tr
+                    %th{scope: "col"}
+                      = sort_link(@q, :title, 'Song Title', default_order: :asc, class: 'songtable__sort')
+                    %th{scope: "col"}
+                      = sort_link(@q, :composer_name, 'Composer Name', class: 'songtable__sort')
+                    %th{scope: "col"}
+                      = sort_link(@q, :created_at, 'Date Added', default_order: :desc, class: 'songtable__sort')
+                    %th{scope: "col"}
+                      %button.songtable__sort{type: "button"} Language
+                
+                %tbody
+                  - if @songs.empty?
+                    %tr
+                      %td{colspan: 4}
+                        .text-center.py-5= t 'songs.no_songs'
+                  - else
+                    = render @songs
+            
+            .container
+              %footer.songlist__foot
+                .songlist__foot-left
+                  Showing page
+                  %strong= @songs.current_page
+                  of
+                  %strong= @songs.total_pages
+                
+                %nav.pager{"aria-label" => "Pagination"}
+                  = link_to '&lt;'.html_safe, @songs.prev_page ? songs_path(page: @songs.prev_page) : '#', class: 'btn btn--nav', "aria-label" => "Previous page"
+                  - (1..@songs.total_pages).each do |page|
+                    - if page == @songs.current_page
+                      = link_to page, '#', class: 'btn btn--nav is-current', "aria-current" => "page"
+                    - else
+                      = link_to page, songs_path(page: page), class: 'btn btn--nav'
+                  = link_to '&gt;'.html_safe, @songs.next_page ? songs_path(page: @songs.next_page) : '#', class: 'btn btn--nav', "aria-label" => "Next page"
+                
+                .songlist__foot-right
+                  %label.songlist__perpage
+                    %span Show Per Page:
+                    .select-shell
+                      %select{"aria-label" => "Show per page"}
+                        %option 10
+                        %option 25
+                        %option{selected: true} 50
+                        %option 100
+                      %span.arrow--down{"aria-hidden" => "true"}

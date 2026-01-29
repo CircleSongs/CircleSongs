@@ -1,0 +1,55 @@
+@layer layout {
+	/* =========================================================
+        16-col grid (minimal)
+        ========================================================= */
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(16, minmax(0, 1fr));
+		gap: var(--gutter);
+		width: 100%;
+	}
+	.col-16 {
+		grid-column: span 16;
+	}
+	.col-12 {
+		grid-column: span 12;
+	}
+	.col-10 {
+		grid-column: span 10;
+	}
+	.col-8 {
+		grid-column: span 8;
+	}
+	.col-6 {
+		grid-column: span 6;
+	}
+	.col-5 {
+		grid-column: span 5;
+	}
+	.col-4 {
+		grid-column: span 4;
+	}
+	.col-3 {
+		grid-column: span 3;
+	}
+
+	.grid--equal-height-cols {
+		align-items: stretch;
+	}
+
+	.grid--equal-height-cols > * {
+		display: flex;
+		min-height: 0;
+	}
+
+	/* Mobile: single-column behavior WITHOUT switching the grid to 1fr */
+	@media (max-width: 991.98px) {
+		.grid {
+			grid-template-columns: repeat(16, minmax(0, 1fr));
+		}
+		.grid > * {
+			grid-column: 1 / -1;
+			min-width: 0;
+		}
+	}
+}
