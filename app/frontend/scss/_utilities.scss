@@ -1,0 +1,53 @@
+/* =========================
+    UTILITIES (highest priority)
+    ========================= */
+@layer utilities {
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+	.margin--0 {
+		margin: 0;
+	}
+	.padding--0 {
+		padding: 0;
+	}
+	@media (max-width: 991.98px){
+		.reset--mobile {
+			margin: 0;
+			padding: 0;
+		}
+	}
+	.no-pointer-events {
+		pointer-events: none;
+	}
+	.inline-block {
+		display: inline-block;
+	}
+	@media (min-width: 992px){
+		.col-center {
+			justify-self: center;
+			margin-inline: auto;
+		}
+		/* Center presets (optional helpers) */
+		.col-6.col-center {
+			grid-column: 6 / span 6;
+		}
+		.col-8.col-center {
+			grid-column: 5 / span 8;
+		}
+		.col-10.col-center {
+			grid-column: 4 / span 10;
+		}
+		.col-12.col-center {
+			grid-column: 3 / span 12;
+		}
+	}
+}

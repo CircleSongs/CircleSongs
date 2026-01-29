@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     end
   end
 
-  root to: "songs#index"
+  root to: "home#index"
 
   resources :contact_forms, only: %i[new create]
   resources :broken_link_reports

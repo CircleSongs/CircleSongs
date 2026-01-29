@@ -1,0 +1,76 @@
+/* =========================
+    TOKENS (variables only)
+    ========================= */
+@layer tokens {
+	:root {
+		/* Colors */
+		--color-daybreak-linen: #fff2d6;
+		--color-moonlight-mist: #e6e1d9;
+		--color-warm-stone: #d2c6b3;
+		--color-crystaline-gold: #ffcc66;
+		--color-ember-bronze: #8c5a2b;
+		--color-forest-smoke-green: #4a5f58;
+		--color-midnight-teal: #293b3e;
+		--color-celestial-night-blue: #121a21;
+		--color-temple-charcoal: #1a1a1a;
+		--color-aged-copper: #d49041;
+
+		/* Typography (expanded props) */
+		--heading-main-font-family: "Cormorant";
+		--heading-main-font-weight: 400;
+		--heading-main-font-size: 60px;		
+		--heading-main-line-height: 1.2em;
+		--heading-main-letter-spacing: 0px;
+		--heading-main-text-transform: none;
+
+		--heading-2-font-family: "Cormorant";
+		--heading-2-font-weight: 600;
+		--heading-2-font-size: 40px;
+		--heading-2-line-height: 1.225em;
+		--heading-2-letter-spacing: 0px;
+		--heading-2-text-transform: none;
+
+		--heading-3-font-family: "Alegreya Sans SC";
+		--heading-3-font-weight: 500;
+		--heading-3-font-size: 32px;
+		--heading-3-line-height: 1.25em;
+		--heading-3-letter-spacing: 0px;
+		--heading-3-text-transform: none;
+
+		--body-font-family: "Alegreya Sans";
+		--body-font-weight: 400;
+		--body-font-size: 22px;
+		--body-line-height: 32px;
+		--body-letter-spacing: 0px;
+		--body-text-transform: none;
+
+		/* Typography (shorthand tokens) */
+		--heading-main: var(--heading-main-font-weight)
+			var(--heading-main-font-size) / var(--heading-main-line-height)
+			var(--heading-main-font-family);
+
+		--heading-2: var(--heading-2-font-weight) var(--heading-2-font-size) /
+			var(--heading-2-line-height) var(--heading-2-font-family);
+
+		--heading-3: var(--heading-3-font-weight) var(--heading-3-font-size) /
+			var(--heading-3-line-height) var(--heading-3-font-family);
+
+		--body-text: var(--body-font-weight) var(--body-font-size) /
+			var(--body-line-height) var(--body-font-family);
+
+		/* Layout tokens */
+		--container: 1200px;
+		--gutter: 24px;
+
+		/* Component sizing */
+		--search-h: 38px;
+
+		/* Misc */
+		--hairline: color-mix(
+			in oklab,
+			var(--color-moonlight-mist) 18%,
+			transparent
+		);
+		@media (max-width: 991.98px) {--heading-main-font-size: 40px; --heading-2-font-size: 35px; --heading-3-font-size: 30px; }
+	}
+}

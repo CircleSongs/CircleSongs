@@ -1,66 +1,121 @@
-- if @song.image_url(:thumb)
-  = image_tag @song.image_url(:thumb), class: :thumb
-%h2
-  = @song.title
-  - if user_signed_in?
-    %small.edit
-      = link_to edit_admin_song_path(@song) do
-        %i.fa.fa-pencil
+%main
+  %section.hero{"aria-label" => "Featured hero"}
+    .hero__bg{"aria-hidden" => "true"}
+      - if @song.image_url(:thumb)
+        = image_tag @song.image_url(:thumb), alt: @song.title
+      - else
+        = image_tag vite_asset_path('images/hero-bg.jpg'), alt: "Etheral Hallway"
+    .container.reset--mobile
+      .hero__inner.section
+        .grid
+          .col-16
+            %aside.featured{"aria-label" => "Featured song"}
+              .featured__label
+                = link_to songs_path do
+                  &lt; Back To Song Search
+              
+              .grid
+                .col-8
+                  .featured__inner
+                    %h3.featured__title.h2.ruled.inline-block
+                      = @song.title
+                      - if user_signed_in?
+                        %small.edit
+                          = link_to edit_admin_song_path(@song) do
+                            %i.fa.fa-pencil
+                    
+                    - if @song.alternate_title.present?
+                      .featured__meta= "[#{@song.alternate_title}]"
+                    
+                    - if @song.composer.present?
+                      .featured__meta
+                        - if @song.composer.url.present?
+                          = link_to @song.composer.name, @song.composer.url, target: :_blank
+                        - else
+                          = @song.composer.name
+                    
+                    - if @song.description.present?
+                      .featured__excerpt= simple_format @song.description
+                    
+                    .featured__details
+                      - if @song.categories.any?
+                        %div
+                          Category:
+                          %i= @song.categories.map(&:name).join(', ')
+                      - else
+                        -# PLACEHOLDER: No category data
+                        %div
+                          Category:
+                          %i None
+                      
+                      %div
+                        Has Chords:
+                        %i= @song.chords.present? ? 'Yes' : 'No'
+                      
+                      %div
+                        Language:
+                        %i= @song.languages.map(&:name).join(', ')
+                    
+                    - if feature_enabled?(:tagging) && @song.theme_list.any?
+                      %ul.tags{role: "list", "aria-label" => "Tags"}
+                        - @song.theme_list.each do |theme|
+                          %li
+                            = link_to theme, songs_path(q: { themes_name_in: theme }), class: 'btn btn--tag'
+                
+                .col-8
+                  .featured__inner
+                    %h3.h2.ruled.inline-block Recordings:
+                    - if @song.recordings.any?
+                      %div
+                        %ul.list--inline.list--inline-start.list--unstyled
+                          - @song.recordings.each do |recording|
+                            %li
+                              - if recording.url.present?
+                                = link_to '>', recording.url, target: :_blank, class: 'btn btn--sm'
+                              - else
+                                = link_to '>', '#', class: 'btn btn--sm'
+                              %span.recording-artist= recording.artist
+                              \-
+                              %span.recording-details= recording.details
+                    - else
+                      -# PLACEHOLDER: No recordings
+                      %p No recordings available
 
-  %span.float-end
-    %a.back-to-songs{ href: songs_path }
-      %i.fa.fa-arrow-left
-      Songs
-- if @song.alternate_title.present?
-  %p= "[#{@song.alternate_title}]"
-- if @song.composer.present?
-  %p
-    By
-    - if @song.composer.url.present?
-      = link_to @song.composer.name, @song.composer.url, target: :_blank
-    - else
-      = @song.composer.name
-- if @song.description.present?
-  = simple_format @song.description
+  -# Song Details
+  %section.section.main-texture{"aria-label" => "Song Details"}
+    .container
+      .grid
+        .col-16
+          .panel.panel--lyrics{"aria-label" => "Lyrics"}
+            .grid
+              - if @song.lyrics.present? || @song.translation.present?
+                - if @song.lyrics.present?
+                  .col-8
+                    %h2 Lyrics
+                    %pre= simple_format @song.lyrics, {}, sanitize: false
+                
+                - if @song.translation.present?
+                  .col-8
+                    %h2 Translation
+                    %pre= simple_format @song.translation, {}, sanitize: false
+              - else
+                -# PLACEHOLDER: No lyrics or translation
+                .col-16
+                  %p No lyrics or translation available
 
-- if feature_enabled? :tagging
-  - if @song.theme_list.any?
-    - max_taggings_threshold = 5
-    %nav.tag-cloud{ role: "navigation", "aria-label": "Song themes", style: "--max-taggings: #{max_taggings_threshold}" }
-      %ul
-        - tag_counts = Song.theme_counts
-        - @song.theme_list.each do |theme|
-          - tag = tag_counts.find { |t| t.name == theme }
-          - count = tag&.taggings_count || 1
-          - weight = [(count.to_f / max_taggings_threshold * 100).round, 100].min
-          %li{ style: "--tag-weight: #{weight}" }
-            %a{ href: songs_path(q: { themes_name_in: theme }) }= theme
-
-.row
-  = render @song.recordings
-
-.row.clearfix
-  - if @song.lyrics.present?
-    .col.lyrics
-      %p
-        %strong Lyrics
-        = simple_format @song.lyrics, {}, sanitize: false
-
-  - if @song.translation.present?
-    .col.translation
-      %p
-        %strong Translation
-        = simple_format @song.translation, {}, sanitize: false
-
+  -# Chords
   - if @song.chords.present?
-    .col
-      %p
-        %strong Chords
-
-      %pre
-        #song-chords{ data: @song.chords.to_json }
-
-      - @song.chord_forms.order(:position).each do |chord_form|
-        %ul.text-center.float-start
-          %li.chord-form{ data: { id: chord_form.id, chord: chord_form.chord, fingering: chord_form.fingering }}
-          %li= chord_form.chord
+    %section.section{"aria-label" => "Chords"}
+      .container
+        .grid
+          .col-16
+            %h2.ruled.inline-block Chords
+            %pre
+              #song-chords{ data: @song.chords.to_json }
+            
+            - if @song.chord_forms.any?
+              .chord-forms
+                - @song.chord_forms.order(:position).each do |chord_form|
+                  %ul.text-center.float-start
+                    %li.chord-form{ data: { id: chord_form.id, chord: chord_form.chord, fingering: chord_form.fingering }}
+                    %li= chord_form.chord

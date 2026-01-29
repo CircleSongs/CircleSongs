@@ -1,11 +1,16 @@
-%footer.footer
-  %p
-    This page is created with deep respect and gratitude for all those who have developed, cultivated, and passed on the knowledge and
-    = link_to 'traditions of healing', sacred_password_path, class: :gratitude
-    with sound, music, and vibration. Great thanks to the composers of these songs, to all that inspired them, and to all of our teachers on this path. May we each cultivate our authentic gifts in service to a greater harmony.
-  %p
-    Medicine Songs &copy;
-    = Date.today.year
-    \|
-    = link_to 'Contact Us', new_contact_form_path
+%footer.site-footer.main-texture{"aria-label" => "Footer"}
+  .container
+    %p.footer-note
+      This page is created with deep respect and gratitude for all those who have developed, cultivated, and
+      passed on the knowledge and
+      = link_to 'traditions of healing', sacred_password_path, class: :gratitude
+      with sound, music, and vibration. Great thanks to the
+      composers of these songs, to all that inspired them, and to all of our teachers on this path. May we
+      each cultivate our authentic gifts in service to a greater harmony.
 
+    .footer-links
+      %span
+        © Medicinesongs.Net
+        = Date.today.year
+      %span |
+      = link_to 'Contact Us', new_contact_form_path

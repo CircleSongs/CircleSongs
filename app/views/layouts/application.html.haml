@@ -6,18 +6,30 @@
     %title Medicine Songs
     = csrf_meta_tags
     = csp_meta_tag
+    
+    -# Fonts
+    %link{rel: "preconnect", href: "https://fonts.googleapis.com"}
+    %link{rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: true}
+    %link{href: "https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;1,400&family=Cormorant+Upright:ital,wght@0,300;0,400;0,600;1,400&family=Alegreya+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Alegreya+Sans+SC:wght@400;500;700&family=Alegreya:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Alegreya+SC:wght@400;500;700&display=swap", rel: "stylesheet"}
+    
+    -# Swiper (carousel)
+    %link{rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"}
+    
     = vite_client_tag
     = vite_stylesheet_tag 'application'
     = vite_javascript_tag 'application'
 
-  %body{ data: { controller: "confirm" }}
+  %body.theme-dark{ data: { controller: "confirm" }}
     = render 'layouts/navigation'
     - unless flash.empty?
-      .row
-        .col
-          = render 'layouts/messages'
+      .container
+        .row
+          .col
+            = render 'layouts/messages'
 
-    .container.main
-      = yield
+    = yield
 
     = render 'layouts/footer'
+    
+    -# Swiper JS
+    %script{src: "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"}

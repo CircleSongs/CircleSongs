@@ -1,13 +1,9 @@
-@use "bootswatch/dist/cosmo/_variables.scss" as *;
-@use "bootswatch/dist/cosmo/bootstrap.min.css";
-@use "variables" as *;
+
+@use "tokens" as *;
+@use "base" as *;
 @use "layout" as *;
-@use "navigation" as *;
-@use "footer" as *;
-@use "songs-index" as *;
-@use "song-details" as *;
-@use "forms" as *;
-@use "restricted-category-sessions" as *;
-@use "pagination" as *;
-@use "downloads" as *;
-@use "vocabulary" as *;
+@use "pages" as *;
+@use "utilities" as *;
+
+/* Declare cascade order (lowest → highest) */
+@layer tokens, base, layout, pages, utilities;

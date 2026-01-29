@@ -1,18 +1,26 @@
-%li.song
-  = link_to song.title, song
-  %small
+%tr.songrow
+  %td
+    .songrow__titleline
+      = link_to song.title, song_path(song), class: 'songrow__title'
+      - if song.chords.present?
+        %span.btn.btn--tiny.no-pointer-events HAS CHORDS
+      - if user_signed_in?
+        - if song.recordings.exists?
+          %span.btn.btn--tiny.no-pointer-events{data: { bs_toggle: :tooltip, bs_title: pluralize(song.recordings.count, "Recording") }}
+            = "#{song.recordings.count} REC"
+    - if feature_enabled?(:tagging) && song.theme_list.any?
+      %ul.tags{role: "list", "aria-label" => "Tags"}
+        - song.theme_list.first(3).each do |theme|
+          %li
+            = link_to theme, songs_path(q: { themes_name_in: theme }), class: 'btn btn--tag btn--secondary'
+  %td.songrow__cell
     - if song.composer.present?
-      \-
       - if song.composer.url.present?
         = link_to song.composer.name, songs_path(q: { composer_name_cont: song.composer.name })
       - else
         = song.composer.name
     - if user_signed_in?
-      - if song.recordings.exists?
-        %span{ data: { bs_toggle: :tooltip, bs_title: pluralize(song.recordings.count, "Recording") } }
-          %i.fa-light.fa-waveform.has-recording{ title: pluralize(song.recordings.count, "Recording") }
-            = "(#{song.recordings.count})"
-      - if song.chords.present?
-        %i.fa.fa-music.has-chords{ data: { bs_toggle: :tooltip, bs_title: "Has Chords" }, title: "Has Chords" }
-      = link_to edit_admin_song_path(song), class: :edit do
+      = link_to edit_admin_song_path(song), class: 'edit', style: 'margin-left: 10px;' do
         %i.fa.fa-pencil
+  %td.songrow__cell= song.created_at.strftime('%m/%d/%Y')
+  %td.songrow__cell= song.languages.map(&:name).join(', ')
