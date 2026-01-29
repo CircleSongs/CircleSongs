@@ -1,7 +1,7 @@
 import { Application } from "@hotwired/stimulus";
 import { registerControllers } from "stimulus-vite-helpers";
 
-import "@fortawesome/fontawesome-pro/css/all.min.css";
+import "@fortawesome/fontawesome-free/css/all.min.css"
 import "@popperjs/core";
 import * as bootstrap from "bootstrap";
 
