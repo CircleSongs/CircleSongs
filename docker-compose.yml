@@ -4,7 +4,7 @@ version: "3.8"
 
 services:
   database:
-    container_name: "${APP_NAME}-postgres"
+    container_name: "${APP_NAME}postgres"
     image: "postgres:15-alpine"
     mem_limit: 256m
     ports:

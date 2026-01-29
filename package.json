@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@activeadmin/activeadmin": "^3",
-    "@fortawesome/fontawesome-pro": "^6.7.2",
+    "@fortawesome/fontawesome-free": "^7.1.0",
     "@hotwired/stimulus": "^3.2.2",
     "@popperjs/core": "^2.11.8",
     "@rails/ujs": "^7.1.3-4",
