@@ -1,3 +1,5 @@
+# app/uploaders/image_uploader.rb
+
 require "image_processing/mini_magick"
 
 class ImageUploader < Shrine
