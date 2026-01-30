@@ -1,5 +1,7 @@
 class SongsController < ApplicationController
   before_action :set_categories, only: :index
+  before_action :set_themes, only: :index
+  before_action :set_playlists, only: :index
 
   def index
     @q = SongCollection.new(params: search_params).q

@@ -1,0 +1,11 @@
+%section.panel.panel--categories.categories{"aria-label" => "Categories"}
+  %h2.panel__title.ruled Categories
+  %ul.categories.categories-list.list--inline.list--unstyled
+    - if categories.any?
+      - categories.limit(10).each do |category|
+        %li
+          %span
+            = link_to category.name, songs_path(q: { categories_id_in: category.id }), class: 'btn btn--secondary btn--sm'
+    - else
+      %li
+        %span No categories found

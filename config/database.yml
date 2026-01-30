@@ -6,7 +6,7 @@ default: &default
 
 development:
   <<: *default
-  database: circle-songs_development
+  database: circle-songs_data
   username: circle-songs
 
 test:

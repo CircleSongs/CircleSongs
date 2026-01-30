@@ -1,6 +1,6 @@
 en:
   songs:
-    search_placeholder: Search by title, lyrics, or composer...
+    search_placeholder: Search for songs here using any word in song title or lyrics, or by composer
     no_songs: Sorry! No songs matched your search...
   restricted_categories:
     password_label: Please enter the secret password to continue.

@@ -3,6 +3,8 @@ RSpec.feature "As a guest", type: :system do
   let(:recording) { song.recordings.first }
 
   scenario "I can report a recording with a broken link", :js do
+    skip "Functionality removed in redesign..."
+
     visit song_path(song)
     within "#recording-#{recording.id}" do
       accept_confirm do

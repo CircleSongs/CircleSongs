@@ -5,17 +5,16 @@ RSpec.feature "As an", type: :system do
   let(:restricted_song) { songs(:restricted) }
   let(:password) { passwords(:restricted_songs).value }
 
-  before do
-    visit root_path
-  end
-
   context "unauthenticated guest" do
     scenario "I cannot see restricted Categories or Songs" do
+      visit songs_path
+
       expect(page).to have_select(
-        "Category",
-        options: unrestricted_categories.map(&:name_and_count).unshift("All")
+        id: "category",
+        options: unrestricted_categories.map(&:name_and_count).unshift("Category"),
+        visible: false
       )
-      expect(page).not_to have_content restricted_song.title
+      expect(page).to have_no_content restricted_song.title
     end
   end
 
@@ -25,6 +24,7 @@ RSpec.feature "As an", type: :system do
 
       scenario "I see an error" do
         visit new_restricted_category_session_path
+
         fill_in I18n.t("restricted_categories.password_label"), with: password
         click_on "Submit"
         expect(page).to have_content "Invalid credentials."
@@ -34,6 +34,7 @@ RSpec.feature "As an", type: :system do
     context "with good credentials" do
       scenario "I am redirected to Songs#index" do
         visit new_restricted_category_session_path
+
         fill_in I18n.t("restricted_categories.password_label"), with: password
         click_on "Submit"
         expect(page).to have_current_path "/songs"
@@ -47,8 +48,12 @@ RSpec.feature "As an", type: :system do
     end
 
     scenario "I can see all the categories and songs" do
+      visit songs_path
+
       expect(page).to have_select(
-        "Category", options: all_categories.map(&:name_and_count).unshift("All")
+        id: "category",
+        options: all_categories.map(&:name_and_count).unshift("Category"),
+        visible: false
       )
       expect(page).to have_content restricted_song.title
     end
@@ -56,6 +61,7 @@ RSpec.feature "As an", type: :system do
 
   scenario "I can use a pretty url to access the sacred password" do
     visit sacred_password_path
+
     fill_in I18n.t("restricted_categories.password_label"), with: password
     click_on "Submit"
     expect(page).to have_current_path "/songs"

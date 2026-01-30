@@ -10,3 +10,5 @@ RSpec.configure do |config|
     )
   end
 end
+
+Selenium::WebDriver.logger.ignore(:clear_local_storage, :clear_session_storage)

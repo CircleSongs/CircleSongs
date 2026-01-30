@@ -98,11 +98,11 @@ taki   = upsert_song!(title: "Taki Taki Muyki")
 locked = upsert_song!(title: "Restricted Song")
 
 Recording.find_or_create_by!(title: "Sound Cloud", song: hotel) do |r|
-  r.external_media_url = "http://soundcloud.com/hotel-california"
+  r.external_media_url = "https://soundcloud.com/hotel-california/foo"
 end
 
 Recording.find_or_create_by!(title: "The Eagles Website", song: hotel) do |r|
-  r.external_media_url = "http://theeagles.com/hotel-california"
+  r.external_media_url = "https://open.spotify.com/embed/track/hotel-california/bar"
 end
 
 hotel.languages << english unless hotel.languages.exists?(english.id)
