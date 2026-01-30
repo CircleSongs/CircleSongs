@@ -13,7 +13,7 @@
               .featured__label
                 = link_to songs_path do
                   &lt; Back To Song Search
-              
+
               .grid
                 .col-8
                   .featured__inner
@@ -23,20 +23,20 @@
                         %small.edit
                           = link_to edit_admin_song_path(@song) do
                             %i.fa.fa-pencil
-                    
+
                     - if @song.alternate_title.present?
                       .featured__meta= "[#{@song.alternate_title}]"
-                    
+
                     - if @song.composer.present?
                       .featured__meta
                         - if @song.composer.url.present?
                           = link_to @song.composer.name, @song.composer.url, target: :_blank
                         - else
                           = @song.composer.name
-                    
+
                     - if @song.description.present?
                       .featured__excerpt= simple_format @song.description
-                    
+
                     .featured__details
                       - if @song.categories.any?
                         %div
@@ -47,21 +47,21 @@
                         %div
                           Category:
                           %i None
-                      
+
                       %div
                         Has Chords:
                         %i= @song.chords.present? ? 'Yes' : 'No'
-                      
+
                       %div
                         Language:
                         %i= @song.languages.map(&:name).join(', ')
-                    
+
                     - if feature_enabled?(:tagging) && @song.theme_list.any?
                       %ul.tags{role: "list", "aria-label" => "Tags"}
                         - @song.theme_list.each do |theme|
                           %li
                             = link_to theme, songs_path(q: { themes_name_in: theme }), class: 'btn btn--tag'
-                
+
                 .col-8
                   .featured__inner
                     %h3.h2.ruled.inline-block Recordings:
@@ -74,9 +74,9 @@
                                 = link_to '>', recording.url, target: :_blank, class: 'btn btn--sm'
                               - else
                                 = link_to '>', '#', class: 'btn btn--sm'
-                              %span.recording-artist= recording.artist
+                              %span.recording-artist= "recording.artist"
                               \-
-                              %span.recording-details= recording.details
+                              %span.recording-details= "recording.details"
                     - else
                       -# PLACEHOLDER: No recordings
                       %p No recordings available
@@ -90,12 +90,12 @@
             .grid
               - if @song.lyrics.present? || @song.translation.present?
                 - if @song.lyrics.present?
-                  .col-8
+                  .col-8.lyrics
                     %h2 Lyrics
                     %pre= simple_format @song.lyrics, {}, sanitize: false
-                
+
                 - if @song.translation.present?
-                  .col-8
+                  .col-8.translation
                     %h2 Translation
                     %pre= simple_format @song.translation, {}, sanitize: false
               - else
@@ -112,7 +112,7 @@
             %h2.ruled.inline-block Chords
             %pre
               #song-chords{ data: @song.chords.to_json }
-            
+
             - if @song.chord_forms.any?
               .chord-forms
                 - @song.chord_forms.order(:position).each do |chord_form|

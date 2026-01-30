@@ -6,11 +6,16 @@ RSpec.feature "As a guest", type: :system do
   let(:formatted_chords) { "On a dark desert highway" }
 
   before do
+    hotel_california.update!(theme_list: ["classic rock"])
+    taki_taki.update!(theme_list: ["traditional"])
+    el_condor_pasa.update!(theme_list: ["traditional"])
+
     visit songs_path
   end
 
   scenario "I can view songs" do
     click_on hotel_california.title
+
     expect(page).to have_content hotel_california.title
     expect(page).to have_content hotel_california.alternate_title
     expect(page).to have_content hotel_california.composer.name
@@ -24,53 +29,39 @@ RSpec.feature "As a guest", type: :system do
   scenario "I can search across title, lyrics, and composer with consolidated search" do
     visit songs_path
     fill_in I18n.t("songs.search_placeholder"), with: "Foo"
-    click_on "Search"
+    click_on "Search Songs"
     expect(page).to have_content I18n.t("songs.no_songs")
 
     fill_in I18n.t("songs.search_placeholder"), with: "California"
-    click_on "Search"
+    click_on "Search Songs"
     expect(page).to have_content hotel_california.title
     expect(page).to have_no_content taki_taki.title
     expect(page).to have_no_content el_condor_pasa.title
 
-    click_on "Clear"
+    click_on "Reset Form"
 
     fill_in I18n.t("songs.search_placeholder"), with: "desert highway"
-    click_on "Search"
+    click_on "Search Songs"
     expect(page).to have_content hotel_california.title
     expect(page).to have_no_content taki_taki.title
     expect(page).to have_no_content el_condor_pasa.title
 
-    click_on "Clear"
+    click_on "Reset Form"
 
     fill_in I18n.t("songs.search_placeholder"), with: "Eagles"
-    click_on "Search"
+    click_on "Search Songs"
     expect(page).to have_content hotel_california.title
     expect(page).to have_no_content taki_taki.title
     expect(page).to have_no_content el_condor_pasa.title
   end
 
-  context "with :tagging enabled" do
-    let(:user) { users(:admin) }
+  scenario "I can search for songs by theme" do
+    visit songs_path
+    click_on "traditional"
 
-    before do
-      hotel_california.update!(theme_list: ["classic rock"])
-      taki_taki.update!(theme_list: ["traditional"])
-      el_condor_pasa.update!(theme_list: ["traditional"])
-
-      login_as user, scope: :user
-
-      Flipper.enable_actor :tagging, user
-    end
-
-    scenario "I can search for songs by theme" do
-      visit songs_path
-      select "traditional", from: "Theme"
-      click_on "Search"
-      expect(page).to have_content taki_taki.title
-      expect(page).to have_content el_condor_pasa.title
-      expect(page).to have_no_content hotel_california.title
-    end
+    expect(page).to have_content taki_taki.title
+    expect(page).to have_content el_condor_pasa.title
+    expect(page).to have_no_content hotel_california.title
   end
 
   scenario "I do not see an edit link" do

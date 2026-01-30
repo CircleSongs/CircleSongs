@@ -22,6 +22,8 @@ class Song < ApplicationRecord
   accepts_nested_attributes_for :chord_forms, allow_destroy: true, reject_if: :all_blank
   belongs_to :composer, counter_cache: true, optional: true
 
+  scope :featured, -> { where(featured: true) }
+
   def formatted_chords
     @formatted_chords ||= Chordpro.html(chords)
   end

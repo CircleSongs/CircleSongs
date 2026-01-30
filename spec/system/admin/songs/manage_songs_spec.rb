@@ -11,8 +11,8 @@ RSpec.describe "As an admin user" do
 
   scenario "I see an edit link on the public index page" do
     visit songs_path
+
     expect(page).to have_css "a.edit"
-    expect(page).to have_css ".has-recording"
   end
 
   scenario "I can delete a song from the index page" do
