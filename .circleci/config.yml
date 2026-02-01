@@ -82,21 +82,18 @@ jobs:
           command: |
             bundle exec rake db:schema:load
       - run:
-          name: Create test results directory
-          command: mkdir -p ~/rspec
-      - run:
           name: Run RSpec tests
           command: |
-            circleci tests glob "spec/**/*_spec.rb" | \
-            circleci tests run --command="xargs bundle exec rspec \
-              --format progress \
-              --format RspecJunitFormatter \
-              -o ~/rspec/rspec.xml" \
+            mkdir test-results
+            TEST_FILES=$(circleci tests glob "spec/**/*_spec.rb")
+            echo "$TEST_FILES" | circleci tests run --command="xargs bundle exec \
+            rspec --format RspecJunitFormatter \
+              -o test-results/junit.xml" \
               --verbose \
               --split-by=timings
           when: always
       - store_test_results:
-          path: ~/rspec
+          path: test-results
       - store_artifacts:
           path: tmp/capybara
 
