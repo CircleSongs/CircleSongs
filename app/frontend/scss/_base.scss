@@ -91,6 +91,20 @@
 		text-transform: var(--heading-3-text-transform);
 	}
 
+	input[type="search"]::-webkit-search-cancel-button {
+		-webkit-appearance: none;
+		appearance: none;
+		height: 20px;
+		width: 20px;
+		background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23999"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>');
+		background-size: 20px 20px;
+		cursor: pointer;
+	}
+
+	input[type="search"]::-webkit-search-cancel-button:hover {
+		opacity: 0.7;
+	}
+
 	.container {
 		max-width: var(--container);
 		width: 100%;
@@ -122,6 +136,7 @@
 		text-decoration: none;
 		background: url(../images/button-bg-rust.png) center center;
 		background-size: cover;
+		cursor: pointer;
 		&:hover {
 			border-color: rgba(255, 211, 124, 0.65);
 		}
@@ -197,7 +212,7 @@
 	}
 
 	.btn--nav {
-display: inline-flex;
+		display: inline-flex;
 		align-items: center;
 		justify-content: center;
 		min-width: 36px;
@@ -241,19 +256,20 @@ display: inline-flex;
 
 	.list--inline {
 		display: inline-flex;
-		flex-direction: column;
-	}
-	.list--inline li {
-		display: inline-flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 12px;
-		padding: 12px 0;
-		border-top: 1px solid var(--hairline);
-		margin-bottom: 0;
-		&:first-child {
-			border-top: 0;
-			padding-top: 0;
+		flex-direction: column;		
+		li {
+			display: inline-flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 12px;
+			padding: 12px 0;
+			border-top: 1px solid var(--hairline);
+			margin-bottom: 0;
+			flex-wrap: wrap;
+			&:first-child {
+				border-top: 0;
+				padding-top: 0;
+			}
 		}
 	}
 

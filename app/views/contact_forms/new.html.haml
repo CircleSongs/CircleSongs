@@ -1,10 +1,15 @@
-%h1 Contact Us
-.row.contact-form
-  .col-sm-6.offset-sm-3
-    = simple_form_for @contact_form do |f|
-      = f.input :name, required: false, label: false, placeholder: 'Name (optional)...'
-      = f.input :email, required: false, label: false, placeholder: 'Email (optional)...'
-      = f.input :subject, label: false, placeholder: 'Subject...'
-      = f.input :message, as: :text, label: false, placeholder: 'Message...'
-      = f.input :nickname, as: :hidden
-      = f.submit 'Submit', class: 'btn btn-primary btn-block'
+%main
+  %section.section
+    .container
+      .grid
+        .col-12
+          %h1 Contact Us
+          .contact-form
+            = simple_form_for @contact_form do |f|
+              = f.input :name, required: false, label: false, placeholder: 'Name (optional)...'
+              = f.input :email, required: false, label: false, placeholder: 'Email (optional)...'
+              = f.input :subject, label: false, placeholder: 'Subject...'
+              = f.input :message, as: :text, label: false, placeholder: 'Message...'
+              = f.input :nickname, as: :hidden
+              %br.break
+              = f.submit 'Submit', class: 'btn search-btn btn btn--wide'

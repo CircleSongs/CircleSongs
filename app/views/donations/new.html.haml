@@ -16,13 +16,18 @@
                     Let your love abound!
                 %tr
                   %td
-                    %select{:name => "os0"}
-                      %option{:value => "Love droplet"} Love droplet $5.00 USD
-                      %option{:value => "Love potion"} Love potion $10.00 USD
-                      %option{:value => "Love tsunami"} Love tsunami $25.00 USD
-                      %option{:value => "Love supernova"} Love supernova $50.00 USD
+                    %br
+                    .select-shell
+                      %select{:name => "os0"}
+                        %option{:value => "Love droplet"} Love droplet $5.00 USD
+                        %option{:value => "Love potion"} Love potion $10.00 USD
+                        %option{:value => "Love tsunami"} Love tsunami $25.00 USD
+                        %option{:value => "Love supernova"} Love supernova $50.00 USD
+                      %span.arrow--down
+              %br
               %input{:name => "currency_code", :type => "hidden", :value => "USD"}/
-              %input{:alt => "PayPal - The safer, easier way to pay online!", :border => "0", :name => "submit", :src => "https://www.paypalobjects.com/en_US/i/btn/btn_paynow_LG.gif", :type => "image"}/
+              %input{:type => "submit", :alt => "PayPal - The safer, easier way to pay online!", :border => "0", :name => "submit", :value => "submit", :src => "https://www.paypalobjects.com/en_US/i/btn/btn_paynow_LG.gif", :class => "btn" }/
               %img{:alt => "", :border => "0", :height => "1", :src => "https://www.paypalobjects.com/en_US/i/scr/pixel.gif", :width => "1"}/
+
 
 

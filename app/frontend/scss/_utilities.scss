@@ -50,4 +50,38 @@
 			grid-column: 3 / span 12;
 		}
 	}
+	@keyframes disappear {
+		to { display: none; }
+	}
+	.alert,
+	.notice,
+	.success {
+		position: fixed;
+		top: 0;
+		right: 0;
+		left: 0;
+		background: #c7000077;
+		text-align: center;
+		color: white;
+		font-style: italic;
+		animation: disappear 0s 4s forwards;
+		&:after {
+			position: absolute;
+			content: "×";
+			right: 10px;
+			cursor: pointer;
+		}
+	}
+	.notice,
+	.alert-notice {
+		background-color: #ffe600bb;
+	}
+	.success,
+	.alert-success {
+		background-color: #2d613ec8;
+	}
+	.invalid-feedback {
+		color: #d95656;
+    	padding: 12px;
+	}
 }

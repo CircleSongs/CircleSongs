@@ -1,10 +1,12 @@
 %main
   %section.hero{"aria-label" => "Featured hero"}
     .hero__bg{"aria-hidden" => "true"}
-      - if @song.image_url(:thumb)
-        = image_tag @song.image_url(:thumb), alt: @song.title
-      - else
-        = image_tag vite_asset_path('images/hero-bg.jpg'), alt: "Etheral Hallway"
+      = image_tag vite_asset_path('images/hero-bg.jpg'), alt: "Etheral Hallway"
+    -# TODO Replace with random image from backend hero section
+    -#   - if @song.image_url(:thumb)
+    -#     = image_tag @song.image_url(:thumb), alt: @song.title
+    -#   - else
+    -#     = image_tag vite_asset_path('images/hero-bg.jpg'), alt: "Etheral Hallway"
     .container.reset--mobile
       .hero__inner.section
         .grid

@@ -13,6 +13,10 @@ module ApplicationHelper
     end
   end
 
+def active_link_class(path)
+  current_page?(path) ? 'nav__link--current' : ''
+end
+
   def feature_enabled?(feature)
     current_user.present? && Flipper.enabled?(feature, current_user)
   end

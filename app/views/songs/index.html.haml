@@ -77,9 +77,9 @@
 
                 %tbody
                   - if @songs.empty?
-                    %tr
+                    %tr.songrow
                       %td{colspan: 4}
-                        .text-center.py-5= t 'songs.no_songs'
+                        .songrow__titleline= t 'songs.no_songs'
                   - else
                     = render @songs
 
