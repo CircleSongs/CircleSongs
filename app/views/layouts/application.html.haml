@@ -3,6 +3,7 @@
   %head
     = render 'layouts/google_analytics'
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}/
     %title Medicine Songs
     = csrf_meta_tags
     = csp_meta_tag
@@ -19,7 +20,7 @@
     = vite_stylesheet_tag 'application'
     = vite_javascript_tag 'application'
 
-  %body.theme-dark{ data: { controller: "confirm" }}
+  %body{class: "theme-#{@theme}", data: { controller: "confirm" }}
     = render 'layouts/navigation'
     - unless flash.empty?
       .container

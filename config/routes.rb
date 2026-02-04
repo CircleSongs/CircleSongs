@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   resources :restricted_category_sessions
   resources :playlists, only: %i[index]
 
+  patch '/theme', to: 'themes#update'
+
   get "donation_thank_you", to: "thank_you#donation"
   get "purchase_thank_you", to: "thank_you#purchase"
   get "sacred", to: "restricted_category_sessions#new", as: :sacred_password

@@ -2,7 +2,7 @@
   .container
     = form_with url: songs_path, method: :get, html: { class: 'search-strip__inner', role: 'search', 'aria-label': 'Song search' } do |f|
       = f.label 'q[title_or_lyrics_or_composer_name_cont]', 'Search', class: 'sr-only', id: 'song-search-label'
-      = f.text_field 'q[title_or_lyrics_or_composer_name_cont]', id: 'song-search', class: 'search-input', type: 'search', placeholder: 'Search for songs here using any word in song title or lyrics, or by composer'
+      = f.text_field 'q[title_or_lyrics_or_composer_name_cont]', id: 'song-search', class: 'search-input', type: 'search', placeholder: t('songs.search_placeholder')
       = f.button 'Search Songs', class: 'search-btn btn btn--wide btn--inline', type: 'submit'
 
 %main
@@ -10,6 +10,7 @@
   %section.hero{"aria-label" => "Featured hero"}
     .hero__bg{"aria-hidden" => "true"}
       = image_tag vite_asset_path('images/hero-bg.jpg'), alt: "Etheral Hallway"
+    -# TODO Replace with random image from backend hero section
     .container.reset--mobile
       .hero__inner.section
         .grid
@@ -73,4 +74,4 @@
 
   %section.secret-door{"aria-label" => "Illustration band"}
     = image_tag vite_asset_path('images/secret-door.jpg'), alt: "", loading: 'lazy'
-    = link_to '', '#', class: 'secret-door-link'
+    = link_to '', sacred_password_path, class: 'secret-door-link'

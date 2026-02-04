@@ -18,7 +18,9 @@
 		gap: 0;
 		padding: 24px 0;
 	}
-	.search-input {
+	.search-input,
+	input.form-control,
+	textarea.form-control {
 		flex: 1;
 		border: 1px solid var(--hairline);
 		border-right: 0;
@@ -45,6 +47,15 @@
 			.theme-light & {
 				background-color: var(--color-daybreak-linen);
 			}
+		}
+	}
+	input.form-control,
+	textarea.form-control {
+		display: block;
+		width: 100%;
+		margin-top: 12px;
+		.theme-light & {
+			background-color: var(--color-warm-stone);
 		}
 	}
 	.search-btn {		

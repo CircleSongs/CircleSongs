@@ -1,9 +1,13 @@
-.row.restricted-category-session-form
-  .col-sm-4.offset-sm-4
-    - if flash
-      .row
-        .col-12
-          = render 'layouts/messages'
-    = simple_form_for :restricted_category_session, method: :post, url: '/restricted_category_sessions' do |f|
-      = f.input :password, label: I18n.t('restricted_categories.password_label'), required: false
-      = f.submit 'Submit', class: 'btn btn-block btn-primary'
+%main
+  %section.section
+    .container
+      .grid
+        .col-12.col-center.restricted-category-session-form
+          - if flash
+            .row
+              .col-12
+                = render 'layouts/messages'
+          = simple_form_for :restricted_category_session, method: :post, url: '/restricted_category_sessions' do |f|
+            .search-form--extended
+              = f.input :password, class: 'search-input', label: I18n.t('restricted_categories.password_label'), required: false
+              = f.submit 'Submit', class: 'search-btn btn btn--wide'

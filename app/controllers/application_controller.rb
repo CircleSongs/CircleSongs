@@ -1,5 +1,11 @@
 class ApplicationController < ActionController::Base
+  before_action :set_theme
+
   private
+    def set_theme
+      @theme = session[:theme] || 'dark'
+    end
+
     def after_sign_out_path_for(_resource_or_scope)
       root_path
     end

@@ -3,7 +3,7 @@
         Template: Header / Nav
         ========================================================= */
 	.site-header {
-		border-image-source: url(../images/border-gold.png);
+		border-image-source: url(../../images/border-gold.png);
 		border-image-slice: 0 0 100% 0; /* Slices the bottom edge of the image to use */
 		border-image-width: 0 0 1px 0; /* Sets the width for the bottom border */
 		border-image-repeat: repeat;
@@ -79,7 +79,7 @@
 		}
 		&.nav__link--current,
 		&:hover {
-			background: url(../images/nav-bg.png);
+			background: url(../../images/nav-bg.png);
 			border-color: var(--color-forest-smoke-green);
 			color: var(--color-moonlight-mist);
 			.theme-light & {

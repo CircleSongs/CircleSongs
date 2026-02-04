@@ -42,10 +42,9 @@
 		min-height: 0;
 	}
 
-	/* Mobile: single-column behavior WITHOUT switching the grid to 1fr */
 	@media (max-width: 991.98px) {
 		.grid {
-			grid-template-columns: repeat(16, minmax(0, 1fr));
+			grid-template-columns: 1fr;
 		}
 		.grid > * {
 			grid-column: 1 / -1;

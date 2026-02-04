@@ -10,21 +10,21 @@
         %nav.nav{"aria-label" => "Primary"}
           %ul.nav__list
             %li
-              = link_to 'Home', '/', class: 'nav__link'
+              = link_to 'Home', '/', class: "nav__link #{active_link_class(root_path)}"
             %li
-              = link_to 'Song Search', '/songs', class: 'nav__link'
+              = link_to 'Song Search', '/songs', class: "nav__link #{active_link_class('/songs')}"
             %li
-              = link_to 'About', '/about_us', class: 'nav__link'
+              = link_to 'About', '/about_us', class: "nav__link #{active_link_class('/about_us')}"
             %li
-              = link_to 'Resources', '/resources', class: 'nav__link'
+              = link_to 'Resources', '/resources', class: "nav__link #{active_link_class('/resources')}"
             %li
-              = link_to 'Songbook', '/purchase', class: 'nav__link'
+              = link_to 'Songbook', '/purchase', class: "nav__link #{active_link_class('/purchase')}"
             %li
-              = link_to 'Support Us', '/donations', class: 'nav__link'
+              = link_to 'Support Us', '/donations', class: "nav__link #{active_link_class('/donations')}"
             -# %li
-            -#   = link_to 'Icaros', '/icaros', class: 'nav__link'
+            -#   = link_to 'Icaros', '/icaros', class: "nav__link #{active_link_class('/icaros')}"
             -# %li
-            -#   = link_to 'Quechua', '/quechua', class: 'nav__link'
+            -#   = link_to 'Quechua', '/quechua', class: "nav__link #{active_link_class('/quechua')}"
 
       .header-actions
         %button.nav-toggle.icon-btn{type: "button", "data-nav-toggle" => "", "aria-label" => "Toggle navigation", "aria-expanded" => "false"}
