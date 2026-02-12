@@ -19,7 +19,7 @@ commands:
             - yarn-deps-v1-{{ checksum "yarn.lock" }}
             - yarn-deps-v1-
       - node/install:
-          node-version: 25.2.1
+          node-version: 22.13.1
       - node/install-packages:
           pkg-manager: yarn
       - run:
@@ -52,7 +52,6 @@ commands:
       - run:
           name: Precompile assets with Vite
           command: |
-            bundle exec vite install
             bundle exec vite build
 
 jobs:
