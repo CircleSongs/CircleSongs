@@ -32,9 +32,14 @@ class Song < ApplicationRecord
     image_derivatives&.dig(derivative)&.url || image&.url
   end
 
+  ransacker :composer_name do |parent|
+    subquery = Composer.select(:name).where(Composer.arel_table[:id].eq(parent.table[:composer_id])).limit(1)
+    Arel::Nodes::SqlLiteral.new("(#{subquery.to_sql})")
+  end
+
   def self.ransackable_attributes(_auth_object = nil)
     %w[image_data alternate_title chords created_at description id
-       id_value image_data lyrics slug title translation updated_at featured]
+       id_value image_data lyrics slug title translation updated_at featured composer_name]
   end
 
   def self.ransackable_associations(_auth_object = nil)
