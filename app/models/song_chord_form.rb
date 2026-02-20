@@ -1,5 +1,5 @@
 class SongChordForm < ApplicationRecord
-  belongs_to :song
+  belongs_to :song, touch: true
   belongs_to :chord_form
 
   def self.ransackable_attributes(_auth_object = nil)

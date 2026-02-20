@@ -1,12 +1,12 @@
 class Recording < ApplicationRecord
   SOURCE_PATTERNS = {
-    soundcloud: %r{\Ahttps?://soundcloud\.com/[\w-]+/[\w-]+(\?.*)?}i,
+    soundcloud: %r{\Ahttps?://(w\.)?soundcloud\.com/(player/\?|[\w-]+/[\w-]+)(\?.*)?}i,
     youtube: %r{\Ahttps?://(?:www\.)?youtube\.com/watch\?v=[\w-]+}i,
     spotify: %r{\Ahttps?://open\.spotify\.com/embed/track/([\w-]+)}i,
     bandcamp: %r{\Ahttps?://bandcamp\.com/EmbeddedPlayer/(album|track)=\d+}i
   }.freeze
 
-  belongs_to :song
+  belongs_to :song, touch: true
 
   validates :external_media_url, presence: true, on: :create
   validates :url, presence: { unless: proc { |recording|
@@ -59,7 +59,16 @@ class Recording < ApplicationRecord
       video_id = match[1]
       "https://www.youtube.com/embed/#{video_id}"
     when :soundcloud
-      "https://w.soundcloud.com/player/?url=#{CGI.escape(external_media_url)}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
+      if external_media_url.match?(%r{w\.soundcloud\.com/player/})
+        uri = URI.parse(external_media_url)
+        params = URI.decode_www_form(uri.query)
+        api_url = params.assoc("url")&.last
+        return external_media_url if api_url.blank?
+      else
+        api_url = external_media_url
+      end
+
+      "https://w.soundcloud.com/player/?url=#{CGI.escape(api_url)}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
     when :bandcamp
       match = external_media_url.match(%r{bandcamp\.com/EmbeddedPlayer/(album|track)=(\d+)(?:.*?/track=(\d+))?})
       return external_media_url unless match

@@ -183,9 +183,19 @@ ActiveAdmin.register Song do
         end
 
         h3 "SoundCloud"
+        h4 "Public tracks"
         ul do
           li "Copy the URL directly from your browser's address bar"
           li raw "Example: <code>https://soundcloud.com/artist-name/track-name</code>"
+        end
+        h4 "Private tracks"
+        ol do
+          li "Go to the track on SoundCloud"
+          li "Click the 'Share' button"
+          li "Click the 'Embed' tab"
+          li raw "You'll see a block of code. Look for the part that starts with <code>src=\"</code>"
+          li raw "Copy the long URL between the quotes after <code>src=</code> \u2014 it starts with <code>https://w.soundcloud.com/player/</code>"
+          li "Paste that entire URL here"
         end
 
         h3 "Spotify"
