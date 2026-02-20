@@ -99,6 +99,14 @@ RSpec.describe Recording do
       end
     end
 
+    context "with a SoundCloud player embed URL" do
+      let(:external_media_url) { "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1234&color=%23ff5500" }
+
+      it "returns :soundcloud" do
+        expect(recording.source).to eq(:soundcloud)
+      end
+    end
+
     context "with a Bandcamp URL" do
       let(:external_media_url) { "https://bandcamp.com/EmbeddedPlayer/album=1764593721/track=1396136340" }
 
@@ -139,6 +147,17 @@ RSpec.describe Recording do
       it "returns the player URL" do
         expect(recording.formatted_external_media_url).to include("https://w.soundcloud.com/player/?url=")
         expect(recording.formatted_external_media_url).to include(CGI.escape(external_media_url))
+      end
+    end
+
+    context "with a SoundCloud private player embed URL" do
+      let(:external_media_url) { "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%3Atracks%3A2265369650%3Fsecret_token%3Ds-ZwLDKPCKtIZ&color=%23ff5500&inverse=false&auto_play=false&show_user=true" }
+
+      it "extracts the url param and reconstructs the player URL" do
+        result = recording.formatted_external_media_url
+        expect(result).to start_with("https://w.soundcloud.com/player/?url=")
+        expect(result).to include(CGI.escape("https://api.soundcloud.com/tracks/soundcloud:tracks:2265369650?secret_token=s-ZwLDKPCKtIZ"))
+        expect(result).to include("auto_play=false")
       end
     end
 
