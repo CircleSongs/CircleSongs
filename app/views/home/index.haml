@@ -25,12 +25,12 @@
                       .swiper-slide
                         %h3.featured__title.h2.ruled
                           = song.title
-                          .featured__meta= song.composer&.name || 'Traditional'
-                          .featured__excerpt
-                            - if song.lyrics.present?
-                              = truncate(song.lyrics, length: 150, separator: "\n")
-                          .featured__row
-                            = link_to 'View Song', song_path(song), class: 'btn'
+                        .featured__meta= song.composer&.name || 'Traditional'
+                        .featured__excerpt
+                          - if song.lyrics.present?
+                            = truncate(song.lyrics, length: 150, separator: "\n")
+                        .featured__row
+                          = link_to 'View Song', song_path(song), class: 'btn'
 
   %section.section.main-texture{"aria-label" => "Explore collections"}
     .container
