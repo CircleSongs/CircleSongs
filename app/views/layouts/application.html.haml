@@ -7,6 +7,14 @@
     %title Medicine Songs
     = csrf_meta_tags
     = csp_meta_tag
+
+	-# Favicons (served via Vite from app/frontend/images/favicon/*)
+	%link{rel: "icon", type: "image/png", sizes: "96x96", href: vite_asset_path("images/favicon/favicon-96x96.png")}
+	%link{rel: "icon", type: "image/svg+xml", href: vite_asset_path("images/favicon/favicon.svg")}
+	%link{rel: "shortcut icon", href: vite_asset_path("images/favicon/favicon.ico")}
+	%link{rel: "apple-touch-icon", sizes: "180x180", href: vite_asset_path("images/favicon/apple-touch-icon.png")}
+	%meta{name: "apple-mobile-web-app-title", content: "MedicineSongs.net"}
+	%link{rel: "manifest", href: vite_asset_path("images/favicon/site.webmanifest")}
     
     -# Fonts
     %link{rel: "preconnect", href: "https://fonts.googleapis.com"}
