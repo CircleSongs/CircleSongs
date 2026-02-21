@@ -2,8 +2,8 @@
 %section.panel.panel--themes.themes{"aria-label" => "Song themes"}
   %h2.panel__title.ruled
     Song Themes
-    .themes-cloud{"aria-label" => "Theme cloud"}
-      - themes.each do |theme|
-        - weight = (theme.taggings_count / max_count * 100).round
-        - css_class = weight > 60 ? 'is-strong' : ''
-        = link_to theme.name, songs_path(q: { themes_name_in: theme.name }), class: css_class
+  .themes-cloud{"aria-label" => "Theme cloud"}
+    - themes.each do |theme|
+      - weight = (theme.taggings_count / max_count * 100).round
+      - css_class = weight > 60 ? 'is-strong' : ''
+      = link_to theme.name, songs_path(q: { themes_name_in: theme.name }), class: css_class

@@ -36,16 +36,6 @@
                   %span.arrow--down
 
 %main
-  %section.section.main-texture{"aria-label" => "Explore collections"}
-    .container
-      .grid.grid--equal-height-cols
-        .col-5
-          = render 'layouts/categories', categories: @categories
-        .col-6
-          = render 'layouts/themes', themes: @themes
-        .col-5
-          = render 'layouts/playlists', playlists: @playlists
-
   -# Search Results
   %section.section{"aria-label" => "Search Results"}
     .container
