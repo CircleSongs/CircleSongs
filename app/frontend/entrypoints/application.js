@@ -85,21 +85,22 @@ const tooltipList = [...tooltipTriggerList].map(
   }
 })();
 
-// Smooth scroll to search results after form submission
+// Smooth scroll to search results after form submission OR pagination
 (function () {
   try {
     const searchForm = document.querySelector('form[action*="/songs"]');
     const resultsTable = document.querySelector('.songlist'); // adjust selector to match your table
-    
-    if (!searchForm || !resultsTable) return;
-    
-	// Check if we just performed a search (URL has query params)
-	const urlParams = new URLSearchParams(window.location.search);
-	const hasSearchParams = Array.from(urlParams.keys()).some(key => key.startsWith('q['));
 
-	if (hasSearchParams) {
-		resultsTable.scrollIntoView({ behavior: 'smooth', block: 'start' });
-	}
+    if (!searchForm || !resultsTable) return;
+
+    // Check if we just performed a search (URL has query params) OR pagination
+    const urlParams = new URLSearchParams(window.location.search);
+    const hasSearchParams = Array.from(urlParams.keys()).some(key => key.startsWith('q['));
+    const hasPageParam = urlParams.has('page');
+
+    if (hasSearchParams || hasPageParam) {
+      resultsTable.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   } catch (error) {
     console.error('Search scroll error:', error);
   }
