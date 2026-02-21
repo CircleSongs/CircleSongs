@@ -11,14 +11,20 @@
           %ul.nav__list
             %li
               = link_to 'Song Search', '/songs', class: "nav__link #{active_link_class('/songs')}"
-            %li
-              = link_to 'About', '/about_us', class: "nav__link #{active_link_class('/about_us')}"
+            %li{ class: "nav__link nav__dropdown #{active_link_class(['/who_we_are','/honoring_the_artists'])}" }
+              %span.dropdown-label
+                About Us
+              %ul
+                %li
+                  = link_to 'Who We Are', '/who_we_are', class: "nav__link #{active_link_class('/who_we_are')}"
+                %li
+                  = link_to 'Honoring The Artists', '/honoring_the_artists', class: "nav__link #{active_link_class('/honoring_the_artists')}"            
             %li
               = link_to 'Resources', '/resources', class: "nav__link #{active_link_class('/resources')}"
             %li
               = link_to 'Songbook', '/purchase', class: "nav__link #{active_link_class('/purchase')}"
             %li
-              = link_to 'Support Us', '/donations', class: "nav__link #{active_link_class('/donations')}"
+              = link_to 'Support Us', 'https://www.patreon.com/c/SingMedicineSongs', target: '_blank', class: "nav__link #{active_link_class('/donations')}"
             -# %li
             -#   = link_to 'Icaros', '/icaros', class: "nav__link #{active_link_class('/icaros')}"
             -# %li
