@@ -32,8 +32,8 @@ Rails.application.routes.draw do
   get "learning_music", to: "site#learning_music"
   get "integration", to: "site#integration"
 
-  get "about_us", to: "site#about_us"
+  get "who_we_are", to: "site#who_we_are"
+  get "honoring_the_artists", to: "site#honoring_the_artists"
   get "resources", to: "site#resources"
-  get "support_us", to: "site#support_us"
   get "song_book", to: "site#song_book"
 end

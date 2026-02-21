@@ -13,8 +13,8 @@ module ApplicationHelper
     end
   end
 
-def active_link_class(path)
-  current_page?(path) ? 'nav__link--current' : ''
+def active_link_class(paths)
+  Array(paths).any? { |p| current_page?(p) } ? 'nav__link--current' : ''
 end
 
   def feature_enabled?(feature)
