@@ -10,8 +10,6 @@
         %nav.nav{"aria-label" => "Primary"}
           %ul.nav__list
             %li
-              = link_to 'Home', '/', class: "nav__link #{active_link_class(root_path)}"
-            %li
               = link_to 'Song Search', '/songs', class: "nav__link #{active_link_class('/songs')}"
             %li
               = link_to 'About', '/about_us', class: "nav__link #{active_link_class('/about_us')}"
