@@ -250,6 +250,14 @@
 		text-align: center;	
 		color: inherit;	
 	}
+	.category__link,
+	.playlist-item__title-text {
+		text-decoration: none;
+		color: inherit;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
 	.themes-cloud {
 		display: flex;
 		flex-wrap: wrap;
@@ -279,9 +287,19 @@
 	}
 
 	.playlist-item__left {
+		flex-wrap: nowrap;
+	}
+
+	.playlist-item__left,
+	.playlist-item__title {
 		display: inline-flex;
 		align-items: center;
 		gap: 10px;
+		width: 100%;
+	}
+
+	.playlist-item__title {
+		justify-content: space-between;
 	}
 
 	.secret-door {

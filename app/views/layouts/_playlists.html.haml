@@ -2,9 +2,9 @@
   %h2.panel__title.ruled Playlists
   %ul.playlist-list.list--inline.list--unstyled
     - playlists.each do |playlist|
-      %span.playlist-item__left
+      %li.playlist-item__left
         %span.soundcloud-icon{"aria-hidden" => "true"}
           = image_tag vite_asset_path('images/soundcloud-tile.svg'), width: 24
-        %span
-          = playlist.title
+        %span.playlist-item__title
+          = link_to playlist.title, playlist.url, class: 'playlist-item__title-text', "aria-label" => "Play #{playlist.title}", target: :_blank
           = link_to 'Play >', playlist.url, class: 'btn btn--sm', "aria-label" => "Play #{playlist.title}", target: :_blank
