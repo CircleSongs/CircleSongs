@@ -1,5 +1,6 @@
 .search-strip
   = search_form_for @q, html: { role: 'search', 'aria-label': 'Song search', class: 'search-strip__inner' } do |f|
+    = hidden_field_tag :per_page, params[:per_page] if params[:per_page].present?
     .container
       .grid
         .col-8
@@ -63,7 +64,7 @@
                     %th{scope: "col"}
                       = sort_link(@q, :created_at, 'Date Added', default_order: :desc, class: 'songtable__sort')
                     %th{scope: "col"}
-                      %button.songtable__sort{type: "button"} Language
+                      = sort_link(@q, :languages_name, 'Language', class: 'songtable__sort')
 
                 %tbody
                   - if @songs.empty?
@@ -82,21 +83,25 @@
                   %strong= @songs.total_pages
 
                 %nav.pager{"aria-label" => "Pagination"}
-                  = link_to '&lt;'.html_safe, @songs.prev_page ? songs_path(page: @songs.prev_page) : '#', class: 'btn btn--nav', "aria-label" => "Previous page"
+                  = link_to '&lt;'.html_safe, @songs.prev_page ? songs_path(request.query_parameters.merge(page: @songs.prev_page)) : '#', class: 'btn btn--nav', "aria-label" => "Previous page"
                   - (1..@songs.total_pages).each do |page|
                     - if page == @songs.current_page
                       = link_to page, '#', class: 'btn btn--nav is-current', "aria-current" => "page"
                     - else
-                      = link_to page, songs_path(page: page), class: 'btn btn--nav'
-                  = link_to '&gt;'.html_safe, @songs.next_page ? songs_path(page: @songs.next_page) : '#', class: 'btn btn--nav', "aria-label" => "Next page"
+                      = link_to page, songs_path(request.query_parameters.merge(page: page)), class: 'btn btn--nav'
+                  = link_to '&gt;'.html_safe, @songs.next_page ? songs_path(request.query_parameters.merge(page: @songs.next_page)) : '#', class: 'btn btn--nav', "aria-label" => "Next page"
 
                 .songlist__foot-right
-                  %label.songlist__perpage
-                    %span Show Per Page:
-                    .select-shell
-                      %select{"aria-label" => "Show per page"}
-                        %option 10
-                        %option 25
-                        %option{selected: true} 50
-                        %option 100
-                      %span.arrow--down{"aria-hidden" => "true"}
+                  = form_tag songs_path, method: :get, class: 'songlist__perpage' do
+                    - request.query_parameters.except("per_page", "page").each do |key, value|
+                      - if value.is_a?(Hash)
+                        - value.each do |k, v|
+                          - if v.present?
+                            = hidden_field_tag "#{key}[#{k}]", v
+                      - elsif value.present?
+                        = hidden_field_tag key, value
+                    %label
+                      %span Show Per Page:
+                      .select-shell
+                        = select_tag :per_page, options_for_select([10, 25, 50, 100], (params[:per_page] || 50).to_i), "aria-label" => "Show per page", onchange: "this.form.submit()"
+                        %span.arrow--down{"aria-hidden" => "true"}
