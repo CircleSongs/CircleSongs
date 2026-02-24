@@ -1,4 +1,4 @@
-RSpec.feature "As an admin user", type: :system do
+RSpec.describe "As an admin user" do
   let(:user) { users(:admin) }
   let(:title) { FFaker::Music.song }
   let(:youtube_link) { "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
@@ -50,7 +50,7 @@ RSpec.feature "As an admin user", type: :system do
     fill_in "Title", with: title
     click_on "Add New Recording"
     click_on "Create Song"
-    expect(page).not_to have_selector("table.recordings tbody")
+    expect(page).to have_content("Song was successfully created")
 
     song = Song.find_by(title: title)
     visit edit_admin_song_path(song)
