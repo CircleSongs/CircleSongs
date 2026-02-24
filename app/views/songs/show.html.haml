@@ -69,16 +69,38 @@
                     %h3.h2.ruled.inline-block Recordings:
                     - if @song.recordings.any?
                       %div
-                        %ul.list--inline.list--inline-start.list--unstyled
+                        %ul.list--unstyled
                           - @song.recordings.each do |recording|
                             %li
-                              - if recording.url.present?
-                                = link_to '>', recording.url, target: :_blank, class: 'btn btn--sm'
-                              - else
-                                = link_to '>', '#', class: 'btn btn--sm'
-                              %span.recording-artist= "recording.artist"
-                              \-
-                              %span.recording-details= "recording.details"
+                              - if recording.embedded_player.present?
+                                != recording.embedded_player
+                              - elsif recording.external_media_url.present?
+                                .embedded-recording
+                                  %iframe{
+                                    width: "100%",
+                                    height: (
+                                    case recording.source
+                                    when :spotify then 80
+                                    when :youtube then 180
+                                    when :bandcamp then 40
+                                    else 20
+                                    end
+                                    ),
+                                    class: (
+                                    case recording.source
+                                    when :spotify then "iframe--spotify"
+                                    when :youtube then "iframe--youtube"
+                                    when :bandcamp then "iframe--bandcamp"
+                                    when :soundcloud then "iframe--soundcloud"
+                                    else "iframe--generic"
+                                    end
+                                    ),
+                                    frameborder: "0",
+                                    allow: "autoplay; encrypted-media; fullscreen; picture-in-picture",
+                                    allowfullscreen: true,
+                                    loading: "lazy",
+                                    src: recording.formatted_external_media_url
+                                  }
                     - else
                       -# PLACEHOLDER: No recordings
                       %p No recordings available
