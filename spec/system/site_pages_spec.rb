@@ -9,9 +9,8 @@ RSpec.describe "As a User", type: :system do
     scenario "I see the new navigation" do
       visit root_path
 
-      expect(page).to have_content(/Home/i)
       expect(page).to have_content(/Song Search/i)
-      expect(page).to have_content(/About/i)
+      expect(page).to have_content(/About Us/i)
       expect(page).to have_content(/Resources/i)
       expect(page).to have_content(/Songbook/i)
       expect(page).to have_content(/Support Us/i)

@@ -1,4 +1,4 @@
-RSpec.feature "As a guest", type: :system do
+RSpec.describe "As a guest" do
   let(:hotel_california) { songs(:hotel_california) }
   let(:taki_taki) { songs(:taki_taki) }
   let(:el_condor_pasa) { songs(:el_condor_pasa) }
@@ -57,7 +57,8 @@ RSpec.feature "As a guest", type: :system do
 
   scenario "I can search for songs by theme" do
     visit songs_path
-    click_on "traditional"
+    select "traditional", from: "theme"
+    click_on "Search Songs"
 
     expect(page).to have_content taki_taki.title
     expect(page).to have_content el_condor_pasa.title

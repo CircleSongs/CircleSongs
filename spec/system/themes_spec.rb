@@ -1,10 +1,9 @@
-RSpec.feature "As a guest", type: :system do
-  scenario "I can see category counts beside the category name" do
+RSpec.describe "As a guest" do
+  scenario "I can filter songs by theme" do
     visit songs_path
 
-    within ".themes" do
-      click_on "traditional"
-    end
+    select "traditional", from: "theme"
+    click_on "Search Songs"
 
     expect(page).to have_content "Traditional"
   end

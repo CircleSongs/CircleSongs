@@ -1,4 +1,4 @@
-RSpec.feature "Playlists", type: :system do
+RSpec.describe "Playlists" do
   let(:spotify) { playlists(:spotify) }
   let(:youtube) { playlists(:youtube) }
   let(:soundcloud) { playlists(:soundcloud) }

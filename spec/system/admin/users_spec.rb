@@ -1,4 +1,4 @@
-RSpec.feature "As an admin user" do
+RSpec.describe "As an admin user" do
   let(:user) { users(:admin) }
   let(:email) { FFaker::Internet.email }
   let(:new_email) { FFaker::Internet.email }

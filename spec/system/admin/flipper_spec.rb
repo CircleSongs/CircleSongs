@@ -1,4 +1,4 @@
-RSpec.feature "As an authenticated User", type: :system do
+RSpec.describe "As an authenticated User" do
   before do
     login_as user
   end
