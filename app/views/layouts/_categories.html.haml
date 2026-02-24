@@ -7,7 +7,7 @@
           %span
             = link_to category.name, songs_path(q: { categories_id_in: category.id }), class: 'category__link'
           %span
-            = link_to "#", songs_path(q: { categories_id_in: category.id }), class: 'btn btn--secondary btn--sm'
+            = link_to category.songs.count, songs_path(q: { categories_id_in: category.id }), class: 'btn btn--secondary btn--sm'
     - else
       %li
         %span No categories found

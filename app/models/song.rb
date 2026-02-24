@@ -37,9 +37,16 @@ class Song < ApplicationRecord
     Arel::Nodes::SqlLiteral.new("(#{subquery.to_sql})")
   end
 
+  ransacker :languages_name do |parent|
+    subquery = Language.joins("INNER JOIN languages_songs ON languages.id = languages_songs.language_id")
+                       .where("languages_songs.song_id = #{parent.table.name}.id")
+                       .select("string_agg(languages.name, ', ' ORDER BY languages.name)")
+    Arel::Nodes::SqlLiteral.new("(#{subquery.to_sql})")
+  end
+
   def self.ransackable_attributes(_auth_object = nil)
     %w[image_data alternate_title chords created_at description id
-       id_value image_data lyrics slug title translation updated_at featured composer_name]
+       id_value image_data lyrics slug title translation updated_at featured composer_name languages_name]
   end
 
   def self.ransackable_associations(_auth_object = nil)

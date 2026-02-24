@@ -6,7 +6,7 @@ class SongsController < ApplicationController
   def index
     @q = Song.ransack(search_params)
     @q.sorts = "title asc" if @q.sorts.empty?
-    @songs = @q.result.page(params[:page])
+    @songs = @q.result.page(params[:page]).per(per_page)
   end
 
   def show
@@ -36,6 +36,10 @@ class SongsController < ApplicationController
       else
         raw_search_params.merge categories_id_not_in: Category.restricted.map(&:id)
       end
+    end
+
+    def per_page
+      params[:per_page].presence || 50
     end
 
     def set_categories
