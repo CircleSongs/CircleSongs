@@ -5,6 +5,15 @@ ActiveAdmin.register Category do
 
   permit_params :name, :restricted, :description, :position
 
+  form do |f|
+    f.inputs do
+      f.input :name
+      f.input :description, as: :text
+      f.input :restricted
+    end
+    f.actions
+  end
+
   index as: :table do
     column("", class: "handle") { "☰" }
     column :name
