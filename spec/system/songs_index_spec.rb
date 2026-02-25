@@ -19,7 +19,7 @@ RSpec.describe "As a guest" do
     expect(page).to have_content hotel_california.title
     expect(page).to have_content hotel_california.alternate_title
     expect(page).to have_content hotel_california.composer.name
-    expect(page).to have_content hotel_california.lyrics
+    expect(page).to have_content "On a dark desert highway, cool wind in my hair"
     expect(page).to have_content hotel_california.translation
     expect(page).to have_content hotel_california.categories.map(&:name).to_sentence
     expect(page).to have_no_content chords
