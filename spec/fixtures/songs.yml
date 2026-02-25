@@ -1,7 +1,8 @@
 hotel_california:
   title: Hotel California
   alternate_title: Most Popular Song In The World
-  lyrics: On a dark desert highway, cool wind in my hair...
+  featured: true
+  lyrics: "On a dark desert highway, <em>cool wind</em> in my hair\nWarm smell of colitas rising up through the air"
   translation: En un calle oscuro...
   chords: "[Dm]On a dark desert [A]highway, [Em]cool wind in my hair..."
   categories: popular

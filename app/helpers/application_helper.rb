@@ -22,6 +22,10 @@ end
     (80 + weight * 70).round
   end
 
+  def excerpt_text(html, length: 150, omission: "...")
+    truncate(strip_tags(html.to_s), length: length, separator: "\n", omission: omission)
+  end
+
   def feature_enabled?(feature)
     current_user.present? && Flipper.enabled?(feature, current_user)
   end
