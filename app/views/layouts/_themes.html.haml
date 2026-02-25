@@ -4,6 +4,4 @@
     Song Themes
   .themes-cloud{"aria-label" => "Theme cloud"}
     - themes.each do |theme|
-      - weight = (theme.taggings_count / max_count * 100).round
-      - css_class = weight > 60 ? 'is-strong' : ''
-      = link_to theme.name, songs_path(q: { themes_name_in: theme.name }), class: css_class
+      = link_to theme.name, songs_path(q: { themes_name_in: theme.name }), style: "font-size: #{theme_font_size(theme.taggings_count, max_count)}%"

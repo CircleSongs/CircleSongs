@@ -17,6 +17,11 @@ def active_link_class(paths)
   Array(paths).any? { |p| current_page?(p) } ? 'nav__link--current' : ''
 end
 
+  def theme_font_size(taggings_count, max_count)
+    weight = max_count > 0 ? taggings_count.to_f / max_count : 0
+    (80 + weight * 70).round
+  end
+
   def feature_enabled?(feature)
     current_user.present? && Flipper.enabled?(feature, current_user)
   end
