@@ -4,7 +4,7 @@ class RestrictedCategorySessionsController < ApplicationController
   def create
     if authorized?
       session[:restricted_categories] = true
-      redirect_to songs_path
+      redirect_to sacred_info_path
     else
       session[:restricted_categories] = false
       flash[:error] = "Invalid credentials."

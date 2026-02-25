@@ -6,4 +6,5 @@ def authorize_restricted_categories(password)
     with: password
   )
   click_on "Submit"
+  expect(page).to have_content "Welcome to the chamber of secrets!"
 end

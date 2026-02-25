@@ -1,0 +1,11 @@
+%h1 Welcome to the chamber of secrets!
+
+%p The ikaros have been added to search results. You can now find them alongside all other songs when browsing or searching.
+
+.sacred-info-actions
+  = link_to "About the Ikaros", icaros_path, class: "btn btn--wide"
+  = link_to "See All Ikaros", songs_path(q: { categories_id_in: Category.find_by(name: "Ikaros")&.id }), class: "btn btn--wide"
+  = link_to "Ikaros Playlist", "https://on.soundcloud.com/sGQluJgfLbADDuh1FB", target: "_blank", rel: "noopener noreferrer", class: "btn btn--wide"
+
+%h2 Our Prayer
+%p May these sacred songs continue to bring healing, connection, and reverence to all who carry them.

@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   get "icaros", to: "site#icaros"
   get "learning_music", to: "site#learning_music"
   get "integration", to: "site#integration"
+  get "sacred_info", to: "site#sacred_info"
 
   get "who_we_are", to: "site#who_we_are"
   get "honoring_the_artists", to: "site#honoring_the_artists"

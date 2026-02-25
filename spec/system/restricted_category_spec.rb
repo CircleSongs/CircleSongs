@@ -37,7 +37,7 @@ RSpec.describe "As an" do
 
         fill_in I18n.t("restricted_categories.password_label"), with: password
         click_on "Submit"
-        expect(page).to have_current_path "/songs"
+        expect(page).to have_current_path "/sacred_info"
       end
     end
   end
@@ -64,6 +64,6 @@ RSpec.describe "As an" do
 
     fill_in I18n.t("restricted_categories.password_label"), with: password
     click_on "Submit"
-    expect(page).to have_current_path "/songs"
+    expect(page).to have_current_path "/sacred_info"
   end
 end
