@@ -1,12 +1,14 @@
 ActiveAdmin.register Playlist do
+  include SortableIndex
+  config.sort_order = "position_asc"
+  config.paginate = false
   permit_params :title, :description, :url
 
-  index do
+  index as: :table do
+    column("", class: "handle") { "☰" }
     column :title
     column :description
     column :url
-    column :created_at
-    column :updated_at
     actions
   end
 

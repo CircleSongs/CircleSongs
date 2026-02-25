@@ -2,17 +2,21 @@ spotify:
   title: Spotify
   description: A curated collection of Bobby McFerrin's best circle songs
   url: https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M
+  position: 1
 
 youtube:
   title: YouTube
   description: Learn the art of vocal improvisation
   url: https://www.youtube.com/playlist?list=PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
+  position: 2
 
 soundcloud:
   title: SoundCloud
   description: Songs perfect for group singing
   url: https://soundcloud.com/artist-name/sets/community-songs
+  position: 3
 
 bandcamp:
   title: Bandcamp
   url: https://bandcamp.com/EmbeddedPlayer/album=1764593721
+  position: 4

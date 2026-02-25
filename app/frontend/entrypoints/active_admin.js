@@ -35,3 +35,24 @@ function initTomSelects() {
       select.classList.add("tom-select-initialized");
     });
 }
+
+// Include CSRF token in all jQuery AJAX requests
+$.ajaxSetup({
+  headers: {
+    "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content")
+  }
+});
+
+// Sortable admin index tables
+$(document).ready(function() {
+  $("table.index_table:has(.handle) tbody").sortable({
+    handle: ".handle",
+    axis: "y",
+    update: function() {
+      var ids = $(this).find("tr").map(function() {
+        return this.id.replace(/^[^_]+_/, "");
+      }).get();
+      $.post(window.location.pathname + "/sort", { ids: ids });
+    }
+  });
+});

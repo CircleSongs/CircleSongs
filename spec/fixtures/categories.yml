@@ -1,9 +1,13 @@
 popular:
   name: Popular
+  position: 1
 traditional:
   name: Traditional
+  position: 2
 sacred:
   name: Sacred
+  position: 3
 restricted:
   name: Restricted
   restricted: true
+  position: 4

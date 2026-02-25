@@ -9,4 +9,11 @@ RSpec.describe Category do
       expect(category.name_and_count).to eq "#{category.name} (#{category.songs.count})"
     end
   end
+
+  describe "default_scope" do
+    it "orders by position" do
+      expect(described_class.all.to_sql).to include("ORDER BY")
+      expect(described_class.all.to_sql).to include("position")
+    end
+  end
 end
