@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     end
 
     def set_themes
-      @themes = ActsAsTaggableOn::Tag.for_context(:themes)
+      @themes = ActsAsTaggableOn::Tag.for_context(:themes).order(name: :asc)
     end
 
     def set_playlists
