@@ -33,7 +33,7 @@
                   %span.arrow--down
                 .select-shell
                   = f.label :themes_name_in, 'Theme', class: 'sr-only'
-                  = f.input_field :themes_name_in, collection: ActsAsTaggableOn::Tag.for_context(:themes).pluck(:name).uniq, include_blank: 'Theme', id: 'theme', class: 'select--theme', multiple: false
+                  = f.input_field :themes_name_in, collection: ActsAsTaggableOn::Tag.for_context(:themes).pluck(:name).uniq.sort, include_blank: 'Theme', id: 'theme', class: 'select--theme', multiple: false
                   %span.arrow--down
 
 %main
