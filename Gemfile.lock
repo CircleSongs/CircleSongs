@@ -89,6 +89,9 @@ GEM
     acts-as-taggable-on (13.0.0)
       activerecord (>= 7.1, < 8.2)
       zeitwerk (>= 2.4, < 3.0)
+    acts_as_list (1.2.6)
+      activerecord (>= 6.1)
+      activesupport (>= 6.1)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
     arbre (1.7.0)
@@ -576,6 +579,7 @@ DEPENDENCIES
   active_admin_flat_skin (~> 0.1)
   activeadmin (~> 3.2)
   acts-as-taggable-on (~> 13.0)
+  acts_as_list (~> 1.2)
   aws-sdk-s3 (~> 1.208)
   benchmark
   bootsnap (~> 1.18)

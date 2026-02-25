@@ -26,6 +26,38 @@ RSpec.describe "As an admin user" do
     expect(page).to have_content category.name
   end
 
+  scenario "I can see drag handles on the index page" do
+    visit admin_categories_path
+
+    expect(page).to have_css "td.handle", minimum: 1
+    expect(page).to have_content "☰"
+  end
+
+  scenario "I can reorder categories via drag and drop", :js do
+    popular = categories(:popular)
+    traditional = categories(:traditional)
+    sacred = categories(:sacred)
+    restricted = categories(:restricted)
+
+    visit admin_categories_path
+
+    # Verify initial order (position_asc)
+    ids_from_rows = page.all("table.index_table tbody tr").map { |r| r[:id].sub(/^[^_]+_/, "") }
+    expect(ids_from_rows).to eq [popular, traditional, sacred, restricted].map(&:id)
+
+    # Simulate the sort POST that the drag-and-drop JS fires
+    new_order = [sacred, traditional, popular, restricted].map(&:id)
+    page.execute_script <<~JS
+      $.post(window.location.pathname + "/sort", { ids: #{new_order.to_json} });
+    JS
+    sleep 0.5
+
+    # Reload and verify new order persisted
+    visit admin_categories_path
+    reordered_ids = page.all("table.index_table tbody tr").map { |r| r[:id].sub(/^[^_]+_/, "") }
+    expect(reordered_ids).to eq new_order
+  end
+
   scenario "I can delete a category from the index page" do
     visit admin_categories_path
     within "#category_#{category.id}" do

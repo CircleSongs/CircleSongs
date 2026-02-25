@@ -111,4 +111,11 @@ RSpec.describe Playlist, type: :model do
       end
     end
   end
+
+  describe "default_scope" do
+    it "orders by position" do
+      expect(described_class.all.to_sql).to include("ORDER BY")
+      expect(described_class.all.to_sql).to include("position")
+    end
+  end
 end

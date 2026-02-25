@@ -14,6 +14,36 @@ RSpec.describe "Admin Playlists", type: :system do
     expect(page).to have_content youtube.title
   end
 
+  scenario "I can see drag handles on the index page" do
+    visit admin_playlists_path
+
+    expect(page).to have_css "td.handle", minimum: 1
+    expect(page).to have_content "☰"
+  end
+
+  scenario "I can reorder playlists via drag and drop", :js do
+    soundcloud = playlists(:soundcloud)
+    bandcamp = playlists(:bandcamp)
+
+    visit admin_playlists_path
+
+    # Verify initial order (position_asc)
+    ids_from_rows = page.all("table.index_table tbody tr").map { |r| r[:id].sub(/^[^_]+_/, "") }
+    expect(ids_from_rows).to eq [spotify, youtube, soundcloud, bandcamp].map(&:id)
+
+    # Simulate the sort POST that the drag-and-drop JS fires
+    new_order = [bandcamp, soundcloud, youtube, spotify].map(&:id)
+    page.execute_script <<~JS
+      $.post(window.location.pathname + "/sort", { ids: #{new_order.to_json} });
+    JS
+    sleep 0.5
+
+    # Reload and verify new order persisted
+    visit admin_playlists_path
+    reordered_ids = page.all("table.index_table tbody tr").map { |r| r[:id].sub(/^[^_]+_/, "") }
+    expect(reordered_ids).to eq new_order
+  end
+
   scenario "I can view a playlist show page" do
     visit admin_playlist_path(spotify)
 

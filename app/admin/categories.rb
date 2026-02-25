@@ -1,7 +1,12 @@
 ActiveAdmin.register Category do
-  permit_params :name, :restricted, :description
+  include SortableIndex
+  config.sort_order = "position_asc"
+  config.paginate = false
 
-  index do
+  permit_params :name, :restricted, :description, :position
+
+  index as: :table do
+    column("", class: "handle") { "☰" }
     column :name
     column :description
     column :restricted do |category|
