@@ -13,4 +13,6 @@ class SiteController < ApplicationController
   def integration; end
 
   def learning_music; end
+
+  def sacred_info; end
 end
