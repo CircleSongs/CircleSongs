@@ -3,6 +3,7 @@ popular:
   position: 1
 traditional:
   name: Traditional
+  description: Songs passed down through oral tradition
   position: 2
 sacred:
   name: Sacred

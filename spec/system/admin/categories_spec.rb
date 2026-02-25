@@ -58,6 +58,35 @@ RSpec.describe "As an admin user" do
     expect(reordered_ids).to eq new_order
   end
 
+  scenario "I can create a category with a description" do
+    visit admin_categories_path
+
+    click_on "New Category"
+    fill_in "Name", with: name
+    fill_in "Description", with: "A test description"
+    click_on "Create Category"
+    expect(page).to have_content "Category was successfully created."
+    expect(page).to have_content "A test description"
+
+    created = Category.find_by(name: name)
+    expect(created.description).to eq "A test description"
+  end
+
+  scenario "I can edit a category description" do
+    visit edit_admin_category_path(category)
+
+    fill_in "Description", with: "Updated description"
+    click_on "Update Category"
+    expect(page).to have_content "Category was successfully updated."
+    expect(category.reload.description).to eq "Updated description"
+  end
+
+  scenario "I can see description on the index page" do
+    visit admin_categories_path
+
+    expect(page).to have_content category.description
+  end
+
   scenario "I can delete a category from the index page" do
     visit admin_categories_path
     within "#category_#{category.id}" do

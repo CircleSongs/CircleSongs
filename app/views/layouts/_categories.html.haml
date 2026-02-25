@@ -5,7 +5,7 @@
       - categories.limit(10).each do |category|
         %li
           %span
-            = link_to category.name, songs_path(q: { categories_id_in: category.id }), class: 'category__link'
+            = link_to category.name, songs_path(q: { categories_id_in: category.id }), class: 'category__link', title: category.description
           %span
             = link_to category.songs.count, songs_path(q: { categories_id_in: category.id }), class: 'btn btn--secondary btn--sm'
     - else
