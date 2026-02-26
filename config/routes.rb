@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   resources :contact_forms, only: %i[new create]
   resources :broken_link_reports
   resources :songs
-  resources :restricted_category_sessions
+  resources :restricted_category_sessions, only: %i[new create], path: "sacred"
   resources :playlists, only: %i[index]
 
   patch '/theme', to: 'themes#update'
