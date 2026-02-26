@@ -2,12 +2,6 @@
 	/* =========================================================
         Template: Header / Nav
         ========================================================= */
-	.site-header {
-		border-image-source: url(../../images/border-gold.png);
-		border-image-slice: 0 0 100% 0; /* Slices the bottom edge of the image to use */
-		border-image-width: 0 0 1px 0; /* Sets the width for the bottom border */
-		border-image-repeat: repeat;
-	}
 	.header-inner {
 		display: flex;
 		align-items: center;
@@ -74,6 +68,10 @@
 		white-space: nowrap;
 		text-decoration: none;
 		transition: all 0.1s ease-in;
+		i {
+			padding-left: 10px;
+			font-size: 12px;
+		}
 		.theme-light & {
 			color: var(--color-temple-charcoal);
 		}

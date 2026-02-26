@@ -24,7 +24,11 @@
             %li
               = link_to 'Songbook', '/purchase', class: "nav__link #{active_link_class('/purchase')}"
             %li
-              = link_to 'Support Us', 'https://www.patreon.com/c/SingMedicineSongs', target: '_blank', class: "nav__link #{active_link_class('/donations')}"
+              = link_to 'https://www.patreon.com/c/SingMedicineSongs',
+                        target: '_blank',
+                        class: "nav__link #{active_link_class('/donations')}" do
+                Support Us
+                %i.fa.fa-external-link{ aria: { hidden: true } }
             -# %li
             -#   = link_to 'Icaros', '/icaros', class: "nav__link #{active_link_class('/icaros')}"
             -# %li

@@ -9,6 +9,11 @@
 		font-style: italic;
 		font-weight: 300;
 	}
+	.embedded-recording {
+		iframe {
+			max-width: 100%;
+		}
+	}
 	.iframe--soundcloud {
 		background-color: var(--color-warm-stone);
 		border-radius: 6px;

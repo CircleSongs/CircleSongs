@@ -116,12 +116,12 @@
                 - if @song.lyrics.present?
                   .col-8.lyrics
                     %h2 Lyrics
-                    %pre= simple_format @song.lyrics, {}, sanitize: false
+                    %div= simple_format @song.lyrics, {}, sanitize: false
 
                 - if @song.translation.present?
                   .col-8.translation
                     %h2 Translation
-                    %pre= simple_format @song.translation, {}, sanitize: false
+                    %div= simple_format @song.translation, {}, sanitize: false
               - else
                 -# PLACEHOLDER: No lyrics or translation
                 .col-16
