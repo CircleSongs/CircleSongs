@@ -244,6 +244,13 @@
 		flex-wrap: wrap;
 	}
 
+	.pager__gap {
+		display: inline-flex;
+		align-items: center;
+		padding: 8px 4px;
+		opacity: 0.5;
+	}
+
 	/* responsive: table becomes scrollable instead of breaking */
 	@media (max-width: 991.98px) {
 		.songlist__head {

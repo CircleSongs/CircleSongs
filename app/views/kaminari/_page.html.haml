@@ -1,0 +1,4 @@
+- if page.current?
+  = link_to page, "#", class: "btn btn--nav is-current", "aria-current" => "page"
+- else
+  = link_to page, url, class: "btn btn--nav"
