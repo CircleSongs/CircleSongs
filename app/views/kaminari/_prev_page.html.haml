@@ -1,0 +1,4 @@
+- if current_page.first?
+  %span.btn.btn--nav{"aria-disabled" => "true"} &lt;
+- else
+  = link_to raw("&lt;"), url, class: "btn btn--nav", "aria-label" => "Previous page"

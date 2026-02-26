@@ -82,14 +82,7 @@
                   of
                   %strong= @songs.total_pages
 
-                %nav.pager{"aria-label" => "Pagination"}
-                  = link_to '&lt;'.html_safe, @songs.prev_page ? songs_path(request.query_parameters.merge(page: @songs.prev_page)) : '#', class: 'btn btn--nav', "aria-label" => "Previous page"
-                  - (1..@songs.total_pages).each do |page|
-                    - if page == @songs.current_page
-                      = link_to page, '#', class: 'btn btn--nav is-current', "aria-current" => "page"
-                    - else
-                      = link_to page, songs_path(request.query_parameters.merge(page: page)), class: 'btn btn--nav'
-                  = link_to '&gt;'.html_safe, @songs.next_page ? songs_path(request.query_parameters.merge(page: @songs.next_page)) : '#', class: 'btn btn--nav', "aria-label" => "Next page"
+                = paginate @songs
 
                 .songlist__foot-right
                   = form_tag songs_path, method: :get, class: 'songlist__perpage' do
