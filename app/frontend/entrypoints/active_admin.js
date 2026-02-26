@@ -30,6 +30,7 @@ function initTomSelects() {
       new TomSelect(select, {
         create: true,
         plugins: ["remove_button"],
+        maxOptions: 500,
       });
       select.classList.add("tom-select-initialized");
     });
