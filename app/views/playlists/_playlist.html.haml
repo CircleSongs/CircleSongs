@@ -1,6 +1,6 @@
 %li.playlist-item__left
   %span.playlist-icon
     = image_tag vite_asset_path("images/icons/#{playlist.service}.png"), width: 24, alt: playlist.service.capitalize
-    %span.playlist-item__title
-      = link_to playlist.title, playlist.url, class: 'playlist-item__title-text', "aria-label" => "Play #{playlist.title}", target: :_blank
-      = link_to 'Play >', playlist.url, class: 'btn btn--sm', "aria-label" => "Play #{playlist.title}", target: :_blank
+  %span.playlist-item__title
+    = link_to playlist.title, playlist.url, class: 'playlist-item__title-text', "aria-label" => "Play #{playlist.title}", target: :_blank
+    = link_to 'Play >', playlist.url, class: 'btn btn--sm', "aria-label" => "Play #{playlist.title}", target: :_blank

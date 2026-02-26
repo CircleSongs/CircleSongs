@@ -115,6 +115,7 @@
 	}
 
 	.btn {
+		display: inline-block;
 		padding: 8px 24px;
 		border: 1px solid color-mix(in oklab, var(--color-aged-copper) 55%, transparent);
 		border-style: solid;
@@ -126,7 +127,6 @@
 		line-height: 1;
 		text-transform: capitalize;
 		white-space: nowrap;
-		display: flex;
 		align-items: center;
 		position: relative;
 		z-index: 2;
@@ -232,6 +232,13 @@
 				background: var(--Moonlight-Mist, #E6E1D9);
 			}
 		}
+	}
+
+	.btn-group {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		align-items: flex-start;
 	}
 
 	.main-texture {

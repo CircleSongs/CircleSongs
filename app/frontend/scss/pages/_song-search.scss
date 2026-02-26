@@ -192,11 +192,14 @@
 		margin-bottom: 18px;
 	}
 
-	.songrow__title {
+	.songrow a {
 		text-decoration: none;
 		color: var(--color-moonlight-mist);
 		.theme-light & {
 			color: var(--color-temple-charcoal);
+		}
+		&:hover {
+			text-decoration: underline;
 		}
 	}
 
@@ -234,11 +237,11 @@
 		font-size: 18px;
 	}
 
-	/* pager buttons like the screenshot */
 	.pager {
 		display: inline-flex;
 		gap: 10px;
 		justify-self: center;
+		flex-wrap: wrap;
 	}
 
 	/* responsive: table becomes scrollable instead of breaking */
