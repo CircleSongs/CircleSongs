@@ -7,7 +7,7 @@
             .row
               .col-12
                 = render 'layouts/messages'
-          = simple_form_for :restricted_category_session, method: :post, url: '/restricted_category_sessions' do |f|
+          = simple_form_for :restricted_category_session, method: :post, url: '/sacred' do |f|
             .search-form--extended
-              = f.input :password, class: 'search-input', label: I18n.t('restricted_categories.password_label'), required: false
+              = f.input :password, class: 'search-input', label: I18n.t('restricted_categories.password_label'), required: false, as: :string
               = f.submit 'Submit', class: 'search-btn btn btn--wide'

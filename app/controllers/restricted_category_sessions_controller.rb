@@ -13,12 +13,11 @@ class RestrictedCategorySessionsController < ApplicationController
   end
 
   private
+    def auth_params
+      params.require(:restricted_category_session).permit :password
+    end
 
-  def auth_params
-    params.require(:restricted_category_session).permit :password
-  end
-
-  def authorized?
-    auth_params[:password] == Password.restricted_songs
-  end
+    def authorized?
+      auth_params[:password] == Password.restricted_songs
+    end
 end
