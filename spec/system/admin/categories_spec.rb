@@ -13,10 +13,12 @@ RSpec.describe "As an admin user" do
 
     click_on "New Category"
     fill_in "Name", with: name
+    fill_in "Description", with: "A test description"
     check "Restricted"
     click_on "Create Category"
     expect(page).to have_content "Category was successfully created."
     expect(page).to have_content "RESTRICTED YES"
+    expect(page).to have_content "A test description"
   end
 
   scenario "I can view the index page" do
@@ -56,20 +58,6 @@ RSpec.describe "As an admin user" do
     visit admin_categories_path
     reordered_ids = page.all("table.index_table tbody tr").map { |r| r[:id].sub(/^[^_]+_/, "") }
     expect(reordered_ids).to eq new_order
-  end
-
-  scenario "I can create a category with a description" do
-    visit admin_categories_path
-
-    click_on "New Category"
-    fill_in "Name", with: name
-    fill_in "Description", with: "A test description"
-    click_on "Create Category"
-    expect(page).to have_content "Category was successfully created."
-    expect(page).to have_content "A test description"
-
-    created = Category.find_by(name: name)
-    expect(created.description).to eq "A test description"
   end
 
   scenario "I can edit a category description" do
