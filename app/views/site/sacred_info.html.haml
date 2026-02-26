@@ -5,14 +5,14 @@
         .col-12.col-center
           %h1 Welcome to the chamber of secrets!
 
-          %p Now that you’re through the passage, the ikaros will automatically be added to your song search results on this site.   It is our intention to keep these songs a bit hidden.  
-          %p 
-            Before listening and learning, please 
-            = link_to "savor these words and take them to heart.", "/icaros"
+          %p Now that you’re through the passage, the ikaros will automatically be added to your song search results on this site.   It is our intention to keep these songs a bit hidden.
+          %p
+            Before listening and learning, please
+            = link_to "savor these words and take them to heart.", "/ikaros"
           %p Thank you for your care for these sacred technologies of song.
 
           %p.sacred-info-actions.btn-group
-            = link_to "About the Ikaros", icaros_path, class: "btn btn--wide"
+            = link_to "About the Ikaros", ikaros_path, class: "btn btn--wide"
             = link_to "See All Ikaros", songs_path(q: { categories_id_in: Category.find_by(name: "Ikaros")&.id }), class: "btn btn--wide"
             = link_to "Ikaros Playlist", "https://on.soundcloud.com/sGQluJgfLbADDuh1FB", target: "_blank", rel: "noopener noreferrer", class: "btn btn--wide"
 
@@ -23,4 +23,3 @@
             may we also deepen in humble service to the Divine.
             %br/
             May our voices breathe harmony, love, and consciousness into this living world.
-

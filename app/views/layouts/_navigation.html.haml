@@ -18,21 +18,17 @@
                 %li
                   = link_to 'Who We Are', '/who_we_are', class: "nav__link #{active_link_class('/who_we_are')}"
                 %li
-                  = link_to 'Honoring The Artists', '/honoring_the_artists', class: "nav__link #{active_link_class('/honoring_the_artists')}"            
+                  = link_to 'Honoring The Artists', '/honoring_the_artists', class: "nav__link #{active_link_class('/honoring_the_artists')}"
             %li
               = link_to 'Resources', '/resources', class: "nav__link #{active_link_class('/resources')}"
             %li
               = link_to 'Songbook', '/purchase', class: "nav__link #{active_link_class('/purchase')}"
             %li
               = link_to 'https://www.patreon.com/c/SingMedicineSongs',
-                        target: '_blank',
-                        class: "nav__link #{active_link_class('/donations')}" do
+                target: '_blank',
+                class: "nav__link #{active_link_class('/donations')}" do
                 Support Us
                 %i.fa.fa-external-link{ aria: { hidden: true } }
-            -# %li
-            -#   = link_to 'Icaros', '/icaros', class: "nav__link #{active_link_class('/icaros')}"
-            -# %li
-            -#   = link_to 'Quechua', '/quechua', class: "nav__link #{active_link_class('/quechua')}"
 
       .header-actions
         %button.nav-toggle.icon-btn{type: "button", "data-nav-toggle" => "", "aria-label" => "Toggle navigation", "aria-expanded" => "false"}

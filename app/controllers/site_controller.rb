@@ -8,7 +8,7 @@ class SiteController < ApplicationController
     @vocabularies = Vocabulary.alphabetical
   end
 
-  def icaros; end
+  def ikaros; end
 
   def integration; end
 
