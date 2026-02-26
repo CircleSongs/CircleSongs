@@ -5,6 +5,7 @@ RSpec.describe "As a guest", type: :system do
   let(:message) { FFaker::Lorem.sentence }
 
   before do
+    allow(Rails.application.credentials).to receive(:contact_email).and_return("test@example.com")
     visit new_contact_form_path
   end
 
