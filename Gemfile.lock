@@ -162,7 +162,7 @@ GEM
     erubi (1.13.1)
     faker (3.5.1)
       i18n (>= 1.8.11, < 2)
-    faraday (2.14.0)
+    faraday (2.14.1)
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
@@ -588,7 +588,7 @@ DEPENDENCIES
   chordpro (~> 1.0)
   devise (~> 4.9)
   faker (~> 3.5)
-  faraday (~> 2.12)
+  faraday (~> 2.14)
   ffaker (~> 2.24)
   flipper (~> 1.3)
   flipper-active_record (~> 1.3)
