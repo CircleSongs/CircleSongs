@@ -24,6 +24,8 @@
     -# Swiper (carousel)
     %link{rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"}
     
+    = yield :head
+
     = vite_client_tag
     = vite_stylesheet_tag 'application'
     = vite_javascript_tag 'application'
