@@ -70,7 +70,7 @@ jobs:
           POSTGRES_USER: circle-songs
           POSTGRES_DB: circle-songs_test
           POSTGRES_PASSWORD: ""
-    parallelism: 3
+    parallelism: 1
     steps:
       - setup-environment
       - run:
