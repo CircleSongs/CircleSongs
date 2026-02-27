@@ -1,4 +1,6 @@
 ActiveAdmin.register Composer do
+  menu priority: 4
+
   permit_params :name, :url
 
   filter :name

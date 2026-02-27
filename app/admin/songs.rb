@@ -1,4 +1,6 @@
 ActiveAdmin.register Song do
+  menu priority: 1
+
   # Filters for index page
   filter :image_data_not_null, label: "Has Image", as: :boolean
   filter :title

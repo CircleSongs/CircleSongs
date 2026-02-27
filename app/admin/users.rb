@@ -1,4 +1,6 @@
 ActiveAdmin.register User do
+  menu parent: "Site", priority: 3
+
   config.sort_order = :created_at_desc
   actions :all, except: [:show]
   permit_params :email, :password, :password_confirmation

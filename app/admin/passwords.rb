@@ -1,4 +1,6 @@
 ActiveAdmin.register Password do
+  menu parent: "Site", priority: 1
+
   config.sort_order = :created_at_asc
   actions :all, except: %i[destroy show]
   permit_params :name, :value
