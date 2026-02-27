@@ -10,6 +10,7 @@ ActiveAdmin.register Song do
   filter :chords_present, as: :boolean, label: "Has Chords Text"
   filter :chord_forms_id_not_null, label: "Has Chord Diagrams", as: :boolean
   filter :composer_id_not_null, label: "Has Composer", as: :boolean
+  filter :recordings_id_not_null, label: "Has Recordings", as: :boolean
   filter :themes_name_in,
          as: :select,
          multiple: true,
@@ -26,7 +27,8 @@ ActiveAdmin.register Song do
     def scoped_collection
       super.left_joins(:composer)
            .left_joins(:chord_forms)
-           .select("songs.*, COUNT(chord_forms.id) as chord_forms_count, composers.name as composer_name")
+           .left_joins(:recordings)
+           .select("songs.*, COUNT(DISTINCT chord_forms.id) as chord_forms_count, COUNT(DISTINCT recordings.id) as recordings_count, composers.name as composer_name")
            .group("songs.id, composers.name")
     end
   end
@@ -56,7 +58,9 @@ ActiveAdmin.register Song do
     column :image do |song|
       image_tag song.image_url(:thumb) if song.image_url(:thumb)
     end
-    column :title, sortable: true
+    column :title, sortable: true do |song|
+      link_to song.title, admin_song_path(song)
+    end
     column :composer, sortable: 'composers.name' do |song|
       if song.composer.present?
         if song.composer.url.present?
@@ -67,21 +71,26 @@ ActiveAdmin.register Song do
       end
     end
     column :featured, sortable: :featured do |song|
-      song.featured ? "Yes" : "No"
+      icon_class = song.featured ? "fa-check has-yes" : "fa-xmark has-no"
+      content_tag :i, nil, class: "fa-solid #{icon_class}"
     end
     column "Has Chords", sortable: :chords do |song|
-      song.chords.present? ? "Yes" : "No"
+      icon_class = song.chords.present? ? "fa-check has-yes" : "fa-xmark has-no"
+      content_tag :i, nil, class: "fa-solid #{icon_class}"
     end
     column "Has Chord Forms", :chord_forms, sortable: :chord_forms_count do |song|
-      song.chord_forms.exists? ? "Yes" : "No"
+      icon_class = song.chord_forms.exists? ? "fa-check has-yes" : "fa-xmark has-no"
+      content_tag :i, nil, class: "fa-solid #{icon_class}"
     end
-    column :created_at do |resource|
-      l resource.created_at, format: :short
+    column "Recordings", sortable: :recordings_count do |song|
+      song.recordings.size
     end
-    column :updated_at do |resource|
-      l resource.updated_at, format: :short
+    column "Created", sortable: :created_at do |song|
+      song.created_at.strftime("%-m/%-d/%y %-l:%M%P")
     end
-    actions
+    column "Updated", sortable: :updated_at do |song|
+      song.updated_at.strftime("%-m/%-d/%y %-l:%M%P")
+    end
   end
 
   # Form configuration
@@ -154,7 +163,6 @@ ActiveAdmin.register Song do
         heading: "Recordings",
         allow_destroy: true,
         new_record: true,
-        sortable: :position,
         class: "recordings-container"
       ) do |a|
         a.input :title
@@ -234,6 +242,13 @@ ActiveAdmin.register Song do
     link_to "Delete", admin_song_path(resource), method: :delete, data: { confirm: "Are you sure?" }, style: "background-color: #d32f2f; color: white;"
   end
 
+  member_action :sort_recordings, method: :post do
+    params[:ids].each_with_index do |id, index|
+      resource.recordings.where(id: id).update_all(position: index + 1)
+    end
+    head :ok
+  end
+
   show do
     attributes_table do
       row :image do |song|
@@ -283,9 +298,10 @@ ActiveAdmin.register Song do
     end
 
     panel "Recordings" do
-      table_for song.recordings, class: :recordings do
+      table_for song.recordings, class: "recordings sortable-show",
+                                 data: { sort_url: sort_recordings_admin_song_path(song) } do
+        column("", class: "handle") { "☰" }
         column :title
-
         column :external_media_url do |recording|
           if recording.source.present?
             render "recordings/players/#{recording.source}", recording: recording
