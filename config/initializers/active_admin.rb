@@ -1,21 +1,11 @@
 
 ActiveAdmin.setup do |config|
-  meta_tags_options = { viewport: 'width=device-width, initial-scale=1' }
-  config.meta_tags = meta_tags_options
-  config.meta_tags_for_logged_out_pages = meta_tags_options
   # == Site Title
   #
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
   config.site_title = 'Medicine Songs'
-
-  # Set the link url for the title. For example, to take
-  # users to your main site. Defaults to no link.
-  #
-  config.site_title_link = '/'
-
-  config.use_webpacker = true
   # Set an optional image to be displayed for the header
   # instead of a string (overrides :site_title)
   #
