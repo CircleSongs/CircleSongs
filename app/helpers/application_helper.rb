@@ -26,6 +26,11 @@ end
     truncate(strip_tags(html.to_s), length: length, separator: "\n", omission: omission)
   end
 
+  def random_hero_image
+    images = Dir.glob(Rails.root.join("app/frontend/images/hero/*"))
+    vite_asset_path("images/hero/#{File.basename(images.sample)}")
+  end
+
   def feature_enabled?(feature)
     current_user.present? && Flipper.enabled?(feature, current_user)
   end
