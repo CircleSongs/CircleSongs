@@ -13,6 +13,15 @@ RSpec.describe "Admin Tags", type: :system do
     expect(page).to have_content "classic rock"
   end
 
+  scenario "name links to show page" do
+    tag = ActsAsTaggableOn::Tag.find_by!(name: "classic rock")
+
+    visit admin_tags_path
+    click_link "classic rock"
+
+    expect(page).to have_current_path(admin_tag_path(tag))
+  end
+
   scenario "usage count links to songs filtered by theme" do
     tag = ActsAsTaggableOn::Tag.find_by!(name: "classic rock")
 

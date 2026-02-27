@@ -39,7 +39,7 @@ function csrfToken() {
 
 // Sortable admin index tables
 document.addEventListener("DOMContentLoaded", function() {
-  document.querySelectorAll("table.data-table").forEach(function(table) {
+  document.querySelectorAll("table.data-table:not(.sortable-show)").forEach(function(table) {
     const tbody = table.querySelector("tbody");
     if (!tbody || !table.querySelector(".handle")) return;
 
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const tbody = table.querySelector("tbody");
     if (!tbody || !table.querySelector(".handle")) return;
 
-    const sortUrl = table.dataset.sortUrl;
+    const sortUrl = table.dataset.sortUrl || table.closest("[data-sort-url]")?.dataset.sortUrl;
     if (!sortUrl) return;
 
     new Sortable(tbody, {

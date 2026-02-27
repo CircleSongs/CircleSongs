@@ -244,7 +244,7 @@ ActiveAdmin.register Song do
 
   member_action :sort_recordings, method: :post do
     params[:ids].each_with_index do |id, index|
-      resource.recordings.where(id: id).update_all(position: index + 1)
+      Recording.where(id: id).update_all(position: index + 1)
     end
     head :ok
   end
@@ -297,9 +297,8 @@ ActiveAdmin.register Song do
       end
     end
 
-    panel "Recordings" do
-      table_for song.recordings, class: "recordings sortable-show",
-                                 data: { sort_url: sort_recordings_admin_song_path(song) } do
+    panel "Recordings", "data-sort-url": sort_recordings_admin_song_path(song) do
+      table_for song.recordings, class: "recordings sortable-show" do
         column("", class: "handle") { "☰" }
         column :title
         column :external_media_url do |recording|

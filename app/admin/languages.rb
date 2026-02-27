@@ -9,7 +9,9 @@ ActiveAdmin.register Language do
 
   index as: :table do
     column("", class: "handle") { "☰" }
-    column :name
+    column :name do |language|
+      link_to language.name, admin_language_path(language)
+    end
     column "Songs" do |language|
       link_to language.songs.size, admin_songs_path(q: { languages_id_in: [language.id] })
     end

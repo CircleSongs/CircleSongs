@@ -48,6 +48,16 @@ RSpec.describe "Admin Languages", type: :system do
     expect(reordered_ids).to eq new_order
   end
 
+  scenario "name links to show page" do
+    visit admin_languages_path
+
+    within "#language_#{language.id}" do
+      click_link language.name
+    end
+
+    expect(page).to have_current_path(admin_language_path(language))
+  end
+
   scenario "songs count links to songs filtered by language" do
     visit admin_languages_path
 
