@@ -10,7 +10,11 @@ ActiveAdmin.register Song do
   filter :chords_present, as: :boolean, label: "Has Chords Text"
   filter :chord_forms_id_not_null, label: "Has Chord Diagrams", as: :boolean
   filter :composer_id_not_null, label: "Has Composer", as: :boolean
-  filter :recordings_external_media_url_present, label: "Has Recording URL", as: :boolean
+  filter :themes_name_in,
+         as: :select,
+         multiple: true,
+         label: "Tag name",
+         collection: -> { ActsAsTaggableOn::Tag.order(:name).pluck(:name) }
   filter :lyrics
   filter :translation
   # Controller customization

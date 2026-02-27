@@ -1,6 +1,9 @@
 english:
   name: English
+  position: 1
 spanish:
   name: Spanish
+  position: 2
 katchwa:
   name: Katchwa
+  position: 3
