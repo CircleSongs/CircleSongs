@@ -1,4 +1,6 @@
 ActiveAdmin.register Category do
+  menu parent: "Taxonomy", priority: 1
+
   include SortableIndex
   config.sort_order = "position_asc"
   config.paginate = false
