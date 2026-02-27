@@ -20,7 +20,7 @@ RSpec.describe "Admin Tags", type: :system do
 
     click_link tag.taggings_count.to_s
 
-    expect(page).to have_current_path(admin_songs_path(q: { themes_name_eq: "classic rock" }))
+    expect(page).to have_current_path(admin_songs_path(q: { themes_name_in: ["classic rock"] }))
     expect(page).to have_content song.title
   end
 

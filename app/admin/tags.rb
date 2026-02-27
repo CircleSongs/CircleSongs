@@ -1,5 +1,6 @@
 ActiveAdmin.register ActsAsTaggableOn::Tag, as: "Tag" do
   menu parent: "Taxonomy", priority: 3, label: "Tags (Themes)"
+  config.sort_order = "name_asc"
 
   permit_params :name
 
@@ -9,7 +10,7 @@ ActiveAdmin.register ActsAsTaggableOn::Tag, as: "Tag" do
     selectable_column
     column :name
     column "Usage Count", sortable: :taggings_count do |tag|
-      link_to tag.taggings_count, admin_songs_path(q: { themes_name_eq: tag.name })
+      link_to tag.taggings_count, admin_songs_path(q: { themes_name_in: [tag.name] })
     end
     actions
   end
@@ -17,7 +18,7 @@ ActiveAdmin.register ActsAsTaggableOn::Tag, as: "Tag" do
   show do
     attributes_table do
       row :name
-      row("Usage Count") { |tag| link_to tag.taggings_count, admin_songs_path(q: { themes_name_eq: tag.name }) }
+      row("Usage Count") { |tag| link_to tag.taggings_count, admin_songs_path(q: { themes_name_in: [tag.name] }) }
     end
 
     panel "Songs with this tag" do

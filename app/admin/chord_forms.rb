@@ -7,6 +7,9 @@ ActiveAdmin.register ChordForm do
 
   index do
     column :chord
+    column "Songs" do |chord_form|
+      link_to chord_form.songs.size, admin_songs_path(q: { chord_forms_id_in: [chord_form.id] })
+    end
     column :fingering do |chord_form|
       div class: "chord-form", 'data-fingering': chord_form.fingering
     end
