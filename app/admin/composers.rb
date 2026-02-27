@@ -8,7 +8,9 @@ ActiveAdmin.register Composer do
   filter :url_present, as: :boolean, label: "Has URL"
   
   index do
-    column :name, sortable: true
+    column :name, sortable: true do |composer|
+      link_to composer.name, admin_composer_path(composer)
+    end
     column :url do |composer|
       link_to composer.url, composer.url, target: '_blank', rel: 'noopener' if composer.url.present?
     end

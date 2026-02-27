@@ -8,7 +8,9 @@ ActiveAdmin.register ActsAsTaggableOn::Tag, as: "Tag" do
 
   index do
     selectable_column
-    column :name
+    column :name do |tag|
+      link_to tag.name, admin_tag_path(tag)
+    end
     column "Usage Count", sortable: :taggings_count do |tag|
       link_to tag.taggings_count, admin_songs_path(q: { themes_name_in: [tag.name] })
     end

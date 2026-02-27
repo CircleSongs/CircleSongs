@@ -8,7 +8,9 @@ ActiveAdmin.register Playlist do
 
   index as: :table do
     column("", class: "handle") { "☰" }
-    column :title
+    column :title do |playlist|
+      link_to playlist.title, admin_playlist_path(playlist)
+    end
     column :description
     column :url
     actions

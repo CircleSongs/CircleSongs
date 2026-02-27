@@ -10,7 +10,9 @@ ActiveAdmin.register User do
 
   index do
     column :email
-    column :created_at
+    column "Created", sortable: :created_at do |user|
+      user.created_at.strftime("%-m/%-d/%y %-l:%M%P")
+    end
     actions
   end
 
