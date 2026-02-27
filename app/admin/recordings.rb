@@ -15,10 +15,10 @@ ActiveAdmin.register Recording do
     end
     column :position, sortable: true
     column "Created", sortable: :created_at do |recording|
-      recording.created_at.strftime("%-m/%-d/%y %-l:%M%P")
+      safe_join([recording.created_at.strftime("%-m/%-d/%y"), recording.created_at.strftime("%-l:%M%P").strip], tag.br)
     end
     column "Updated", sortable: :updated_at do |recording|
-      recording.updated_at.strftime("%-m/%-d/%y %-l:%M%P")
+      safe_join([recording.updated_at.strftime("%-m/%-d/%y"), recording.updated_at.strftime("%-l:%M%P").strip], tag.br)
     end
     actions
   end
@@ -41,6 +41,13 @@ ActiveAdmin.register Recording do
         link_to recording.song.title, admin_song_path(recording.song) if recording.song
       end
       row :title
+      row :player do |recording|
+        if recording.source.present?
+          render "recordings/players/#{recording.source}", recording: recording
+        else
+          "No player available"
+        end
+      end
       row :description do
         simple_format recording.description
       end

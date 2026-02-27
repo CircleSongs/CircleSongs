@@ -64,7 +64,7 @@ ActiveAdmin.register Song do
     column :composer, sortable: 'composers.name' do |song|
       if song.composer.present?
         if song.composer.url.present?
-          link_to song.composer.name, song.composer.url, target: :_blank, rel: :noopener if song.composer
+          link_to "#{song.composer.name} #{content_tag(:i, nil, class: 'fa-solid fa-arrow-up-right-from-square')}".html_safe, song.composer.url, target: :_blank, rel: :noopener if song.composer
         else
           song.composer.name
         end
@@ -86,10 +86,10 @@ ActiveAdmin.register Song do
       song.recordings.size
     end
     column "Created", sortable: :created_at do |song|
-      song.created_at.strftime("%-m/%-d/%y %-l:%M%P")
+      safe_join([song.created_at.strftime("%-m/%-d/%y"), song.created_at.strftime("%-l:%M%P").strip], tag.br)
     end
     column "Updated", sortable: :updated_at do |song|
-      song.updated_at.strftime("%-m/%-d/%y %-l:%M%P")
+      safe_join([song.updated_at.strftime("%-m/%-d/%y"), song.updated_at.strftime("%-l:%M%P").strip], tag.br)
     end
   end
 
@@ -257,7 +257,9 @@ ActiveAdmin.register Song do
       row :title
       row :alternate_title
       row :composer do |song|
-        link_to song.composer.name, song.composer.url, target: :_blank, rel: :noopener if song.composer
+        if song.composer
+          link_to "#{song.composer.name} #{content_tag(:i, nil, class: 'fa-solid fa-arrow-up-right-from-square')}".html_safe, song.composer.url, target: :_blank, rel: :noopener
+        end
       end
       row :description do
         simple_format song.description
