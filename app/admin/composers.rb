@@ -12,7 +12,9 @@ ActiveAdmin.register Composer do
       link_to composer.name, admin_composer_path(composer)
     end
     column :url do |composer|
-      link_to composer.url, composer.url, target: '_blank', rel: 'noopener' if composer.url.present?
+      if composer.url.present?
+        link_to "#{composer.url} #{content_tag(:i, nil, class: 'fa-solid fa-arrow-up-right-from-square')}".html_safe, composer.url, target: '_blank', rel: 'noopener'
+      end
     end
     column :songs_count, sortable: true do |composer|
       link_to composer.songs_count, admin_songs_path(q: { composer_name_cont: composer.name })
@@ -32,7 +34,9 @@ ActiveAdmin.register Composer do
     attributes_table do
       row :name
       row :url do |composer|
-        link_to composer.url, composer.url, target: '_blank', rel: 'noopener' if composer.url.present?
+        if composer.url.present?
+          link_to "#{composer.url} #{content_tag(:i, nil, class: 'fa-solid fa-arrow-up-right-from-square')}".html_safe, composer.url, target: '_blank', rel: 'noopener'
+        end
       end
     end
   end

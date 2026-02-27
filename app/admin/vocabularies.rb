@@ -10,10 +10,10 @@ ActiveAdmin.register Vocabulary do
     column :text
     column :translation
     column "Created", sortable: :created_at do |vocabulary|
-      vocabulary.created_at.strftime("%-m/%-d/%y %-l:%M%P")
+      safe_join([vocabulary.created_at.strftime("%-m/%-d/%y"), vocabulary.created_at.strftime("%-l:%M%P").strip], tag.br)
     end
     column "Updated", sortable: :updated_at do |vocabulary|
-      vocabulary.updated_at.strftime("%-m/%-d/%y %-l:%M%P")
+      safe_join([vocabulary.updated_at.strftime("%-m/%-d/%y"), vocabulary.updated_at.strftime("%-l:%M%P").strip], tag.br)
     end
     actions
   end

@@ -12,7 +12,11 @@ ActiveAdmin.register Playlist do
       link_to playlist.title, admin_playlist_path(playlist)
     end
     column :description
-    column :url
+    column :url do |playlist|
+      if playlist.url.present?
+        link_to "#{playlist.url} #{content_tag(:i, nil, class: 'fa-solid fa-arrow-up-right-from-square')}".html_safe, playlist.url, target: :_blank, rel: :noopener
+      end
+    end
     actions
   end
 
@@ -30,7 +34,9 @@ ActiveAdmin.register Playlist do
       row :title
       row :description
       row :url do |playlist|
-        link_to playlist.url, playlist.url, target: :_blank, rel: :noopener
+        if playlist.url.present?
+          link_to "#{playlist.url} #{content_tag(:i, nil, class: 'fa-solid fa-arrow-up-right-from-square')}".html_safe, playlist.url, target: :_blank, rel: :noopener
+        end
       end
       row :created_at
       row :updated_at
