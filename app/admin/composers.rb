@@ -4,7 +4,8 @@ ActiveAdmin.register Composer do
   permit_params :name, :url
 
   filter :name
-  filter :url
+  filter :songs_count
+  filter :url_present, as: :boolean, label: "Has URL"
   
   index do
     column :name, sortable: true

@@ -1,6 +1,8 @@
 ActiveAdmin.register ChordForm do
   menu priority: 3
 
+  filter :chord
+
   permit_params :chord, :fingering
 
   index do

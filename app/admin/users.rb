@@ -5,6 +5,8 @@ ActiveAdmin.register User do
   actions :all, except: [:show]
   permit_params :email, :password, :password_confirmation
   filter :email
+  filter :first_name
+  filter :last_name
 
   index do
     column :email
