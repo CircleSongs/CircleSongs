@@ -11,7 +11,6 @@ RSpec.describe "Admin Recordings", type: :system do
     visit admin_recordings_path
 
     expect(page).to have_content recording.title
-    expect(page).to have_link recording.url, href: recording.url
     expect(page).to have_link song.title, href: admin_song_path(song)
   end
 
@@ -19,7 +18,6 @@ RSpec.describe "Admin Recordings", type: :system do
     visit admin_recording_path(recording)
 
     expect(page).to have_content recording.title
-    expect(page).to have_link recording.url, href: recording.url
     expect(page).to have_link song.title, href: admin_song_path(song)
     expect(page).to have_content recording.description if recording.description.present?
   end

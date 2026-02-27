@@ -1,13 +1,11 @@
 hotel_california_soundclound:
   song: hotel_california
   title: Sound Cloud
-  url: http://soundclound.com/hotel-california
   external_media_url: https://soundcloud.com/artist/hotel-california
 
 hotel_california_the_eagles:
   song: hotel_california
   title: The Eagles Website
-  url: http://theeagles.com/hotel-california
   external_media_url: https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
 hotel_california_spotify:

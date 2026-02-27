@@ -12,7 +12,9 @@ ActiveAdmin.register Composer do
     column :url do |composer|
       link_to composer.url, composer.url, target: '_blank', rel: 'noopener' if composer.url.present?
     end
-    column :songs_count, sortable: true
+    column :songs_count, sortable: true do |composer|
+      link_to composer.songs_count, admin_songs_path(q: { composer_name_cont: composer.name })
+    end
     actions
   end
 

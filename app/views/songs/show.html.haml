@@ -72,9 +72,7 @@
                         %ul.list--unstyled
                           - @song.recordings.each do |recording|
                             %li
-                              - if recording.embedded_player.present?
-                                != recording.embedded_player
-                              - elsif recording.external_media_url.present?
+                              - if recording.external_media_url.present?
                                 .embedded-recording
                                   %iframe{
                                     width: "100%",

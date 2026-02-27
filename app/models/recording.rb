@@ -1,4 +1,6 @@
 class Recording < ApplicationRecord
+  self.ignored_columns += %i[url embedded_player reported]
+
   SOURCE_PATTERNS = {
     soundcloud: %r{\Ahttps?://(w\.)?soundcloud\.com/(player/\?|[\w-]+/[\w-]+)(\?.*)?}i,
     youtube: %r{\Ahttps?://(?:www\.)?youtube\.com/watch\?v=[\w-]+}i,
@@ -9,12 +11,6 @@ class Recording < ApplicationRecord
   belongs_to :song, touch: true
 
   validates :external_media_url, presence: true, on: :create
-  validates :url, presence: { unless: proc { |recording|
-    recording.embedded_player.present? || recording.external_media_url.present?
-  } }, on: :update
-  validates :embedded_player, presence: { unless: proc { |recording|
-    recording.url.present? || recording.external_media_url.present?
-  } }, on: :update
   validate :external_media_url_format
 
   default_scope { order(:position) }
@@ -23,15 +19,12 @@ class Recording < ApplicationRecord
     %w[
       created_at
       description
-      embedded_player
       external_media_url
       id
       position
-      reported
       song_id
       title
       updated_at
-      url
     ]
   end
 

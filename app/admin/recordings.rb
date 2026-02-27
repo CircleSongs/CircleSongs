@@ -5,7 +5,6 @@ ActiveAdmin.register Recording do
 
   filter :title
   filter :song_title_cont, label: "Song Title"
-  filter :reported, as: :boolean, label: "Broken Link"
 
   index do
     column :title, sortable: true
