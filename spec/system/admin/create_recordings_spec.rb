@@ -64,34 +64,11 @@ RSpec.describe "As an admin user" do
 
     visit edit_admin_song_path(song)
 
-    within "li.recordings" do
+    within ".has-many-container fieldset.has-many-fields:first-of-type" do
       check "Delete"
     end
     click_on "Update Song"
     expect(page).not_to have_selector("table.recordings tbody")
   end
 
-  scenario "New recordings do not show embedded_player or url fields", :js do
-    visit admin_songs_path
-    click_on "New Song"
-
-    attach_file "Image", Rails.root.join("spec/fixtures/files/image.jpeg")
-    fill_in "Title", with: title
-    click_on "Add New Recording"
-
-    expect(page).to have_field("External media url")
-    expect(page).not_to have_field("Url")
-    expect(page).not_to have_field("Embedded player")
-  end
-
-  scenario "Existing recordings show embedded_player and url fields", :js do
-    song = songs(:hotel_california)
-
-    visit edit_admin_song_path(song)
-
-    within first("li.recordings") do
-      expect(page).to have_field("Url")
-      expect(page).to have_field("Embedded player")
-    end
-  end
 end

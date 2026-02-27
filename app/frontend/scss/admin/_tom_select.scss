@@ -1,4 +1,4 @@
-// Tom Select overrides for ActiveAdmin forms
+/* Tom Select overrides for ActiveAdmin forms */
 .ts-wrapper {
   max-width: 800px;
   width: 100%;
@@ -8,7 +8,7 @@
     display: inline-block !important;
   }
 
-  // Fix for single select - remove extra whitespace/newline after selection
+  /* Fix for single select - remove extra whitespace/newline after selection */
   &.single .ts-control {
     input {
       display: none !important;
@@ -16,7 +16,7 @@
   }
 }
 
-// For the dropdown content
+/* For the dropdown content */
 .ts-dropdown {
   max-width: 400px;
 }
