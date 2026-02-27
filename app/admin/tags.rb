@@ -9,7 +9,7 @@ ActiveAdmin.register ActsAsTaggableOn::Tag, as: "Tag" do
     selectable_column
     column :name
     column "Usage Count", sortable: :taggings_count do |tag|
-      tag.taggings_count
+      link_to tag.taggings_count, admin_songs_path(q: { themes_name_eq: tag.name })
     end
     actions
   end
@@ -17,7 +17,7 @@ ActiveAdmin.register ActsAsTaggableOn::Tag, as: "Tag" do
   show do
     attributes_table do
       row :name
-      row("Usage Count") { |tag| tag.taggings_count }
+      row("Usage Count") { |tag| link_to tag.taggings_count, admin_songs_path(q: { themes_name_eq: tag.name }) }
     end
 
     panel "Songs with this tag" do

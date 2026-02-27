@@ -20,6 +20,9 @@ ActiveAdmin.register Category do
     column("", class: "handle") { "☰" }
     column :name
     column :description
+    column "Songs" do |category|
+      link_to category.songs.size, admin_songs_path(q: { categories_id_in: [category.id] })
+    end
     column :restricted do |category|
       if category.restricted?
         span class: "status_tag yes" do

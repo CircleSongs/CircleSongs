@@ -1,42 +1,17 @@
 RSpec.describe Recording do
   let(:recording) { described_class.new(params) }
   let(:song) { songs(:hotel_california) }
-  let(:url) { FFaker::Internet.http_url }
-  let(:embedded_player) { FFaker::Lorem.paragraph }
   let(:external_media_url) { "https://soundcloud.com/artist-name/track-name" }
   let(:params) do
     {
       song: song,
-      url: url,
-      embedded_player: embedded_player,
       external_media_url: external_media_url
     }
   end
 
   it { is_expected.to belong_to(:song) }
 
-  context "with only url" do
-    let(:embedded_player) { nil }
-    let(:external_media_url) { nil }
-
-    it "is valid on update" do
-      expect(recording).to be_valid(:update)
-    end
-  end
-
-  context "with only embedded player" do
-    let(:url) { nil }
-    let(:external_media_url) { nil }
-
-    it "is valid on update" do
-      expect(recording).to be_valid(:update)
-    end
-  end
-
-  context "with only external media url" do
-    let(:embedded_player) { nil }
-    let(:url) { nil }
-
+  context "with external media url" do
     it "is valid on create" do
       expect(recording).to be_valid(:create)
     end
@@ -200,8 +175,6 @@ RSpec.describe Recording do
   describe "validations" do
     context "with invalid YouTube URL (short format)" do
       let(:external_media_url) { "https://youtu.be/dQw4w9WgXcQ" }
-      let(:url) { nil }
-      let(:embedded_player) { nil }
 
       it "is invalid" do
         expect(recording).not_to be_valid
@@ -211,8 +184,6 @@ RSpec.describe Recording do
 
     context "with invalid Spotify URL (album instead of track)" do
       let(:external_media_url) { "https://open.spotify.com/album/4cOdK2wGLETKBW3PvgPWqT" }
-      let(:url) { nil }
-      let(:embedded_player) { nil }
 
       it "is invalid" do
         expect(recording).not_to be_valid
@@ -222,8 +193,6 @@ RSpec.describe Recording do
 
     context "with valid Spotify track URL" do
       let(:external_media_url) { "https://open.spotify.com/embed/track/4cOdK2wGLETKBW3PvgPWqT" }
-      let(:url) { nil }
-      let(:embedded_player) { nil }
 
       it "is valid" do
         expect(recording).to be_valid
@@ -232,8 +201,6 @@ RSpec.describe Recording do
 
     context "with valid Bandcamp embed URL" do
       let(:external_media_url) { "https://bandcamp.com/EmbeddedPlayer/album=1764593721" }
-      let(:url) { nil }
-      let(:embedded_player) { nil }
 
       it "is valid" do
         expect(recording).to be_valid

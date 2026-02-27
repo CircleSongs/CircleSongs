@@ -69,7 +69,7 @@ RSpec.describe Composer do
 
   describe ".ransackable_attributes" do
     it "returns the correct attributes" do
-      expect(described_class.ransackable_attributes).to match_array(%w[created_at id name url])
+      expect(described_class.ransackable_attributes).to match_array(%w[created_at id name songs_count url])
     end
   end
 
