@@ -221,8 +221,11 @@ ActiveAdmin.setup do |config|
   #
     config.namespace :admin do |admin|
       admin.build_menu :default do |menu|
-        menu.add label: "Flipper", url: "/admin/flipper", priority: 1000, if: proc { current_user&.admin? }
-        menu.add label: "Sidekiq", url: "/admin/sidekiq", priority: 1001, if: proc { current_user&.admin? }
+        menu.add label: "Taxonomy", url: "#", priority: 6
+        menu.add label: "Site", url: "#", priority: 7
+        menu.add label: "System", url: "#", priority: 8
+        menu.add label: "Flipper", url: "/admin/flipper", parent: "System", priority: 1, if: proc { current_user&.admin? }
+        menu.add label: "Sidekiq", url: "/admin/sidekiq", parent: "System", priority: 2, if: proc { current_user&.admin? }
       end
     end
 

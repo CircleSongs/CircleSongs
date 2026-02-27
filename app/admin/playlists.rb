@@ -1,4 +1,6 @@
 ActiveAdmin.register Playlist do
+  menu priority: 5
+
   include SortableIndex
   config.sort_order = "position_asc"
   config.paginate = false

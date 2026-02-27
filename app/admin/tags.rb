@@ -1,5 +1,5 @@
 ActiveAdmin.register ActsAsTaggableOn::Tag, as: "Tag" do
-  menu label: "Tags (Themes)"
+  menu parent: "Taxonomy", priority: 3, label: "Tags (Themes)"
 
   permit_params :name
 
