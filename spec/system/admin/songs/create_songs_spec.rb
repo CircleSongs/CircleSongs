@@ -67,10 +67,10 @@ RSpec.describe "As an admin user" do
 
     click_on "Create Song"
     expect(page).to have_content "Song was successfully created."
-    within ".row-lyrics" do
+    within "[data-row='lyrics']" do
       expect(page).to have_css "u"
     end
-    within ".row-translation" do
+    within "[data-row='translation']" do
       expect(page).to have_css "u"
     end
     visit songs_path

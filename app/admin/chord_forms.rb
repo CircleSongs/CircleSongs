@@ -11,7 +11,7 @@ ActiveAdmin.register ChordForm do
   end
 
   show do
-    h3 chord_form.chord
-    div class: "chord-form", 'data-fingering': chord_form.fingering
+    h3 resource.chord
+    div class: "chord-form", 'data-fingering': resource.fingering
   end
 end

@@ -38,13 +38,10 @@ ActiveAdmin.register Song do
                 :featured,
                 recordings_attributes: %i[
                   description
-                  embedded_player
                   external_media_url
                   title
-                  url
                   id
                   position
-                  reported
                   _destroy
                 ],
                 song_chord_forms_attributes: %i[id chord_form_id _destroy position],
@@ -161,10 +158,7 @@ ActiveAdmin.register Song do
       ) do |a|
         a.input :title
         a.input :external_media_url, hint: "Supported: SoundCloud, YouTube, Spotify, Bandcamp. <a href=\"#\" onclick=\"document.getElementById('recording-instructions-modal').style.display='block'; return false;\" style=\"font-size:0.9em;\">Instructions</a>".html_safe
-        a.input :url unless a.object.new_record?
-        a.input :embedded_player, input_html: { rows: 5 } unless a.object.new_record?
         a.input :description, input_html: { rows: 5 }
-        a.input :reported
       end
     end
 
@@ -228,15 +222,15 @@ ActiveAdmin.register Song do
   config.action_items.delete_if { |item| %i[edit destroy].include?(item.name) }
 
   action_item :preview, only: :show do
-    link_to "Preview", song_path(song)
+    link_to "Preview", song_path(resource)
   end
 
   action_item :edit, only: :show do
-    link_to "Edit", edit_admin_song_path(song)
+    link_to "Edit", edit_admin_song_path(resource)
   end
 
   action_item :destroy, only: :show do
-    link_to "Delete", admin_song_path(song), method: :delete, data: { confirm: "Are you sure?" }, style: "background-color: #d32f2f; color: white;"
+    link_to "Delete", admin_song_path(resource), method: :delete, data: { confirm: "Are you sure?" }, style: "background-color: #d32f2f; color: white;"
   end
 
   show do
@@ -291,9 +285,6 @@ ActiveAdmin.register Song do
       table_for song.recordings, class: :recordings do
         column :title
 
-        column :url do |recording|
-          link_to recording.url, recording.url, target: :_blank, rel: :noopener
-        end
         column :external_media_url do |recording|
           if recording.source.present?
             render "recordings/players/#{recording.source}", recording: recording
@@ -301,11 +292,7 @@ ActiveAdmin.register Song do
             "No player available"
           end
         end
-        column :embedded_player do |recording|
-          raw recording.embedded_player
-        end
         column :description
-        column :reported
       end
     end
   end
