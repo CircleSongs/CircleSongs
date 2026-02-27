@@ -4,12 +4,8 @@ ActiveAdmin.register Recording do
   permit_params :title, :description, :song_id, :position, :external_media_url
 
   filter :title
-  filter :description
   filter :song_title_cont, label: "Song Title"
-  filter :url
-  filter :url_present, as: :boolean
-  filter :description_present, as: :boolean
-  filter :description
+  filter :reported, as: :boolean, label: "Broken Link"
 
   index do
     column :title, sortable: true

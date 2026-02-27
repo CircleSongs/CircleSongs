@@ -1,23 +1,19 @@
 ActiveAdmin.register Song do
   menu priority: 1
 
-  # Filters for index page
-  filter :image_data_not_null, label: "Has Image", as: :boolean
   filter :title
-  filter :alternate_title
   filter :composer_name_cont
   filter :languages, multiple: true
   filter :categories, multiple: true
-  filter :chords_present, as: :boolean
-  filter :chord_forms_id_not_null, label: "With Chord forms", as: :boolean
+  filter :featured, as: :boolean
+  filter :image_data_not_null, label: "Has Image", as: :boolean
+  filter :chords_present, as: :boolean, label: "Has Chords Text"
+  filter :chord_forms_id_not_null, label: "Has Chord Diagrams", as: :boolean
   filter :composer_id_not_null, label: "Has Composer", as: :boolean
-  filter :lyrics
-  filter :translation
-  filter :description
-  filter :slug
   filter :recordings_reported, as: :boolean, label: "Broken Link Reported"
   filter :recordings_url_present, label: "Has Recording URL", as: :boolean
-  filter :featured, as: :boolean
+  filter :lyrics
+  filter :translation
   # Controller customization
   controller do
     def find_resource
