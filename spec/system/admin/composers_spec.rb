@@ -12,6 +12,16 @@ RSpec.describe "Admin Composers", type: :system do
     expect(page).to have_content composer.name
   end
 
+  scenario "name links to show page" do
+    visit admin_composers_path
+
+    within "#composer_#{composer.id}" do
+      click_link composer.name
+    end
+
+    expect(page).to have_current_path(admin_composer_path(composer))
+  end
+
   scenario "songs count links to songs filtered by composer" do
     visit admin_composers_path
 

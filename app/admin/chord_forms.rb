@@ -6,7 +6,9 @@ ActiveAdmin.register ChordForm do
   permit_params :chord, :fingering
 
   index do
-    column :chord
+    column :chord do |chord_form|
+      link_to chord_form.chord, admin_chord_form_path(chord_form)
+    end
     column "Songs" do |chord_form|
       link_to chord_form.songs.size, admin_songs_path(q: { chord_forms_id_in: [chord_form.id] })
     end

@@ -86,6 +86,16 @@ RSpec.describe "As an admin user" do
     expect(page).to have_content category.description
   end
 
+  scenario "name links to show page" do
+    visit admin_categories_path
+
+    within "#category_#{category.id}" do
+      click_link category.name
+    end
+
+    expect(page).to have_current_path(admin_category_path(category))
+  end
+
   scenario "songs count links to songs filtered by category" do
     visit admin_categories_path
 

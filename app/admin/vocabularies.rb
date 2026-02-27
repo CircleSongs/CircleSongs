@@ -9,8 +9,12 @@ ActiveAdmin.register Vocabulary do
   index do
     column :text
     column :translation
-    column :created_at
-    column :updated_at
+    column "Created", sortable: :created_at do |vocabulary|
+      vocabulary.created_at.strftime("%-m/%-d/%y %-l:%M%P")
+    end
+    column "Updated", sortable: :updated_at do |vocabulary|
+      vocabulary.updated_at.strftime("%-m/%-d/%y %-l:%M%P")
+    end
     actions
   end
 end

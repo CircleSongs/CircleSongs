@@ -7,11 +7,19 @@ ActiveAdmin.register Recording do
   filter :song_title_cont, label: "Song Title"
 
   index do
-    column :title, sortable: true
+    column :title, sortable: true do |recording|
+      link_to recording.title, admin_recording_path(recording)
+    end
     column :song, sortable: 'songs.title' do |recording|
       link_to recording.song.title, admin_song_path(recording.song) if recording.song
     end
     column :position, sortable: true
+    column "Created", sortable: :created_at do |recording|
+      recording.created_at.strftime("%-m/%-d/%y %-l:%M%P")
+    end
+    column "Updated", sortable: :updated_at do |recording|
+      recording.updated_at.strftime("%-m/%-d/%y %-l:%M%P")
+    end
     actions
   end
 

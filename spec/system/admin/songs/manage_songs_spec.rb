@@ -53,13 +53,30 @@ RSpec.describe "As an admin user" do
     end
   end
 
+  scenario "show page renders recordings in position order" do
+    r1 = recordings(:hotel_california_soundclound)
+    r2 = recordings(:hotel_california_the_eagles)
+    r3 = recordings(:hotel_california_spotify)
+    r4 = recordings(:hotel_california_bandcamp)
+
+    # Set positions in reverse of creation order
+    r4.update_column(:position, 1)
+    r3.update_column(:position, 2)
+    r2.update_column(:position, 3)
+    r1.update_column(:position, 4)
+
+    visit admin_song_path(song)
+
+    titles = page.all("table.sortable-show tbody tr td:nth-child(2)").map(&:text)
+    expect(titles).to eq [r4.title, r3.title, r2.title, r1.title]
+  end
+
   scenario "I can reorder recordings via drag and drop on the show page", :js do
     r1 = recordings(:hotel_california_soundclound)
     r2 = recordings(:hotel_california_the_eagles)
     r3 = recordings(:hotel_california_spotify)
     r4 = recordings(:hotel_california_bandcamp)
 
-    # Set initial positions
     [r1, r2, r3, r4].each_with_index { |r, i| r.update_column(:position, i + 1) }
 
     visit admin_song_path(song)
@@ -67,6 +84,7 @@ RSpec.describe "As an admin user" do
     ids_from_rows = page.all("table.sortable-show tbody tr").map { |r| r[:id].sub(/^[^_]+_/, "") }
     expect(ids_from_rows).to eq [r1, r2, r3, r4].map(&:id)
 
+    # Simulate the sort POST that the drag-and-drop JS fires
     new_order = [r3, r1, r4, r2].map(&:id)
     ids_param = new_order.map { |id| "ids[]=#{id}" }.join("&")
     sort_url = sort_recordings_admin_song_path(song)

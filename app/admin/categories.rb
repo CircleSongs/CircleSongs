@@ -18,7 +18,9 @@ ActiveAdmin.register Category do
 
   index as: :table do
     column("", class: "handle") { "☰" }
-    column :name
+    column :name do |category|
+      link_to category.name, admin_category_path(category)
+    end
     column :description
     column "Songs" do |category|
       link_to category.songs.size, admin_songs_path(q: { categories_id_in: [category.id] })

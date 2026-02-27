@@ -14,6 +14,16 @@ RSpec.describe "Admin Playlists", type: :system do
     expect(page).to have_content youtube.title
   end
 
+  scenario "title links to show page" do
+    visit admin_playlists_path
+
+    within "#playlist_#{spotify.id}" do
+      click_link spotify.title
+    end
+
+    expect(page).to have_current_path(admin_playlist_path(spotify))
+  end
+
   scenario "I can see drag handles on the index page" do
     visit admin_playlists_path
 
