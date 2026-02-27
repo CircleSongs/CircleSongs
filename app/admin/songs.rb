@@ -10,8 +10,7 @@ ActiveAdmin.register Song do
   filter :chords_present, as: :boolean, label: "Has Chords Text"
   filter :chord_forms_id_not_null, label: "Has Chord Diagrams", as: :boolean
   filter :composer_id_not_null, label: "Has Composer", as: :boolean
-  filter :recordings_reported, as: :boolean, label: "Broken Link Reported"
-  filter :recordings_url_present, label: "Has Recording URL", as: :boolean
+  filter :recordings_external_media_url_present, label: "Has Recording URL", as: :boolean
   filter :lyrics
   filter :translation
   # Controller customization

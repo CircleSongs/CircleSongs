@@ -24,7 +24,10 @@ RSpec.describe "As an admin user" do
   scenario "I can view the index page" do
     visit admin_categories_path
 
-    expect(page).to have_content "#{restricted_category.name} Yes"
+    within "#category_#{restricted_category.id}" do
+      expect(page).to have_content restricted_category.name
+      expect(page).to have_content "Yes"
+    end
     expect(page).to have_content category.name
   end
 
@@ -81,6 +84,16 @@ RSpec.describe "As an admin user" do
     visit admin_categories_path
 
     expect(page).to have_content category.description
+  end
+
+  scenario "songs count links to songs filtered by category" do
+    visit admin_categories_path
+
+    within "#category_#{category.id}" do
+      click_link category.songs.size.to_s
+    end
+
+    expect(page).to have_current_path(admin_songs_path(q: { categories_id_in: [category.id] }))
   end
 
   scenario "I can delete a category from the index page" do
