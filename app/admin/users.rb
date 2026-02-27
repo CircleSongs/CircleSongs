@@ -11,7 +11,7 @@ ActiveAdmin.register User do
   index do
     column :email
     column "Created", sortable: :created_at do |user|
-      user.created_at.strftime("%-m/%-d/%y %-l:%M%P")
+      safe_join([user.created_at.strftime("%-m/%-d/%y"), user.created_at.strftime("%-l:%M%P").strip], tag.br)
     end
     actions
   end
