@@ -65,6 +65,37 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
+// Sortable show-page tables (e.g. recordings on song show)
+document.addEventListener("DOMContentLoaded", function() {
+  document.querySelectorAll("table.sortable-show").forEach(function(table) {
+    const tbody = table.querySelector("tbody");
+    if (!tbody || !table.querySelector(".handle")) return;
+
+    const sortUrl = table.dataset.sortUrl;
+    if (!sortUrl) return;
+
+    new Sortable(tbody, {
+      handle: ".handle",
+      animation: 150,
+      onEnd: function() {
+        const ids = Array.from(tbody.querySelectorAll("tr")).map(function(row) {
+          return row.id.replace(/^[^_]+_/, "");
+        });
+
+        const body = ids.map(id => `ids[]=${encodeURIComponent(id)}`).join("&");
+        fetch(sortUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "X-CSRF-Token": csrfToken(),
+          },
+          body: body,
+        });
+      },
+    });
+  });
+});
+
 // Sortable has_many fields (AA4 removed jQuery UI sortable support)
 document.addEventListener("DOMContentLoaded", initHasManySortables);
 document.addEventListener("has_many_add:after", initHasManySortables);
