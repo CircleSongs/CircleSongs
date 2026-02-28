@@ -12,6 +12,7 @@ Capybara.register_driver :headless_chrome do |app|
 end
 
 Capybara.javascript_driver = :headless_chrome
+Capybara.save_path = Rails.root.join("tmp/screenshots")
 
 RSpec.configure do |config|
   config.before(:each, type: :system) do
@@ -20,6 +21,12 @@ RSpec.configure do |config|
       using: ENV.fetch("BROWSER", :headless_chrome).to_sym,
       screen_size: [1400, 1400]
     )
+  end
+
+  config.after(:each, type: :system) do |example|
+    if example.exception
+      save_screenshot("#{example.full_description.parameterize}.png")
+    end
   end
 end
 
