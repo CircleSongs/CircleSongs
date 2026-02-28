@@ -47,14 +47,12 @@ RSpec.describe "As an" do
       authorize_restricted_categories(password)
     end
 
-    scenario "I can see all the categories and songs" do
+    scenario "I can see restricted categories and songs" do
       visit songs_path
 
-      expect(page).to have_select(
-        id: "category",
-        options: all_categories.map(&:name_and_count).unshift("Category"),
-        visible: false
-      )
+      select(restricted_categories.first.name_and_count, from: "category")
+      click_on "Search Songs"
+
       expect(page).to have_content restricted_song.title
     end
   end
