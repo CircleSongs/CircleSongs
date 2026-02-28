@@ -2,12 +2,12 @@ ActiveAdmin.register Recording do
   permit_params :title, :url, :embedded_player, :description, :reported, :song_id, :position, :external_media_url
 
   filter :title
-  filter :url
-  filter :description
-  filter :reported, as: :boolean
+  filter :external_media_url
   filter :song_title_cont, label: "Song Title"
-  filter :created_at
-  filter :updated_at
+  filter :url
+  filter :url_present, as: :boolean
+  filter :description_present, as: :boolean
+  filter :description
 
   index do
     column :title, sortable: true
@@ -16,6 +16,9 @@ ActiveAdmin.register Recording do
     end
     column :url do |recording|
       link_to recording.url, recording.url, target: '_blank', rel: 'noopener' if recording.url.present?
+    end
+    column :description do |recording|
+      recording.description.presence || '-'
     end
     column :reported, sortable: true
     column :position, sortable: true
