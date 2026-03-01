@@ -82,7 +82,14 @@ jobs:
       - name: Install Heroku CLI
         run: curl https://cli-assets.heroku.com/install.sh | sh
 
-      - run: |
+      - name: Deploy to Heroku
+        run: |
+          cat > ~/.netrc <<EOF
+          machine git.heroku.com
+            login heroku
+            password ${{ secrets.HEROKU_API_KEY }}
+          EOF
+          chmod 600 ~/.netrc
           heroku git:remote -a ${{ secrets.HEROKU_APP_NAME }}
           git push heroku main
           heroku run rails db:migrate -a ${{ secrets.HEROKU_APP_NAME }}
