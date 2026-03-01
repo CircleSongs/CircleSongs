@@ -16,10 +16,10 @@ ActiveAdmin.register Recording do
     end
     column :position, sortable: true
     column "Created", sortable: :created_at do |recording|
-      safe_join([recording.created_at.strftime("%-m/%-d/%y"), recording.created_at.strftime("%-l:%M%P").strip], tag.br)
+      admin_date(recording.created_at)
     end
     column "Updated", sortable: :updated_at do |recording|
-      safe_join([recording.updated_at.strftime("%-m/%-d/%y"), recording.updated_at.strftime("%-l:%M%P").strip], tag.br)
+      admin_date(recording.updated_at)
     end
     actions
   end
@@ -53,8 +53,6 @@ ActiveAdmin.register Recording do
         simple_format recording.description
       end
       row :position
-      row :created_at
-      row :updated_at
     end
   end
 

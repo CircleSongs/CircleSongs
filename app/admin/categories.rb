@@ -27,11 +27,7 @@ ActiveAdmin.register Category do
       link_to category.songs.size, admin_songs_path(q: { categories_id_in: [category.id] })
     end
     column :restricted do |category|
-      if category.restricted?
-        span class: "status_tag yes" do
-          "Yes"
-        end
-      end
+      boolean_icon(category.restricted?)
     end
     actions
   end

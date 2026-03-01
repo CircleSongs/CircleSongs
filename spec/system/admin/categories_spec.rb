@@ -26,7 +26,7 @@ RSpec.describe "As an admin user" do
 
     within "#category_#{restricted_category.id}" do
       expect(page).to have_content restricted_category.name
-      expect(page).to have_content "Yes"
+      expect(page).to have_css "i.fa-check.has-yes"
     end
     expect(page).to have_content category.name
   end
