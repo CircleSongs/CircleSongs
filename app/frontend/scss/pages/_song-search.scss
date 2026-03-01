@@ -13,6 +13,9 @@
 		flex-direction: row;
 		justify-content: flex-end;
 		gap: 24px;
+		@media (max-width: 991.98px) {
+			gap: 0;
+		}
 	}
 
 	/* Custom Select */
@@ -114,6 +117,9 @@
 		font-size: 16px;
 		line-height: 1.35;
 		color: color-mix(in oklab, var(--color-moonlight-mist) 78%, transparent);
+		.theme-light & {
+			color: var(--color-celestial-night-blue);
+		}
 	}
 
 	.songtable {
@@ -123,7 +129,7 @@
 		background: color-mix(in oklab, var(--color-celestial-night-blue) 55%, transparent);
 		.theme-light & {
 			background: color-mix(in oklab, var(--color-crystaline-gold) 55%, transparent);
-		}		
+		}
 	}
 
 	.songtable__table {
