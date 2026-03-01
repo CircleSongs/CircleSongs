@@ -1,4 +1,6 @@
 class Password < ApplicationRecord
+  include Trackable
+
   validates :name, presence: true
   validates :value, presence: true
 

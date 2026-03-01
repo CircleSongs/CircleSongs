@@ -1,4 +1,6 @@
 class Song < ApplicationRecord
+  include Trackable
+
   self.ignored_columns = %i[composer_name composer_url]
 
   extend FriendlyId
@@ -38,7 +40,8 @@ class Song < ApplicationRecord
   end
 
   ransacker :languages_name do |parent|
-    subquery = Language.joins("INNER JOIN languages_songs ON languages.id = languages_songs.language_id")
+    subquery = Language.unscoped
+                       .joins("INNER JOIN languages_songs ON languages.id = languages_songs.language_id")
                        .where("languages_songs.song_id = #{parent.table.name}.id")
                        .select("string_agg(languages.name, ', ' ORDER BY languages.name)")
     Arel::Nodes::SqlLiteral.new("(#{subquery.to_sql})")

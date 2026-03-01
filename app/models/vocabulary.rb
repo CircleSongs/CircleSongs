@@ -1,4 +1,6 @@
 class Vocabulary < ApplicationRecord
+  include Trackable
+
   validates :text, presence: true
   validates :translation, presence: true
 
