@@ -1,4 +1,5 @@
 ActiveAdmin.register Recording do
+  include TrackableShow
   menu priority: 2
 
   permit_params :title, :description, :song_id, :position, :external_media_url

@@ -1,4 +1,5 @@
 ActiveAdmin.register Song do
+  include TrackableShow
   menu priority: 1
 
   filter :title

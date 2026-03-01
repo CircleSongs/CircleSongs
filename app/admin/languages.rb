@@ -1,4 +1,5 @@
 ActiveAdmin.register Language do
+  include TrackableShow
   menu parent: "Taxonomy", priority: 2
 
   include SortableIndex

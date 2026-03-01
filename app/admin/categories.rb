@@ -1,4 +1,5 @@
 ActiveAdmin.register Category do
+  include TrackableShow
   menu parent: "Taxonomy", priority: 1
 
   include SortableIndex
