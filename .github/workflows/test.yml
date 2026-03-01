@@ -79,6 +79,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install Heroku CLI
+        run: curl https://cli-assets.heroku.com/install.sh | sh
+
       - run: |
           heroku git:remote -a ${{ secrets.HEROKU_APP_NAME }}
           git push heroku main
