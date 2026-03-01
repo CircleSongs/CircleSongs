@@ -1,4 +1,6 @@
 class Language < ApplicationRecord
+  include Trackable
+
   acts_as_list
   default_scope { order(:position) }
 

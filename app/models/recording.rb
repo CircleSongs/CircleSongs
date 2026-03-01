@@ -1,4 +1,6 @@
 class Recording < ApplicationRecord
+  include Trackable
+
   self.ignored_columns += %i[url embedded_player reported]
 
   SOURCE_PATTERNS = {

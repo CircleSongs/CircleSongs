@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_27_212033) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_01_000804) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -47,11 +47,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_27_212033) do
 
   create_table "categories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", precision: nil, null: false
+    t.uuid "created_by_id"
     t.text "description"
     t.string "name"
     t.integer "position"
     t.boolean "restricted", default: false
     t.datetime "updated_at", precision: nil, null: false
+    t.uuid "updated_by_id"
   end
 
   create_table "categories_songs", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -61,15 +63,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_27_212033) do
 
   create_table "chord_forms", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "chord"
+    t.uuid "created_by_id"
     t.text "fingering"
+    t.uuid "updated_by_id"
   end
 
   create_table "composers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.uuid "created_by_id"
     t.text "description"
     t.string "name"
     t.integer "songs_count", default: 0, null: false
     t.datetime "updated_at", null: false
+    t.uuid "updated_by_id"
     t.string "url"
   end
 
@@ -102,9 +108,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_27_212033) do
 
   create_table "languages", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", precision: nil, null: false
+    t.uuid "created_by_id"
     t.string "name"
     t.integer "position"
     t.datetime "updated_at", precision: nil, null: false
+    t.uuid "updated_by_id"
   end
 
   create_table "languages_songs", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -114,22 +122,27 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_27_212033) do
 
   create_table "passwords", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.uuid "created_by_id"
     t.string "name"
     t.datetime "updated_at", null: false
+    t.uuid "updated_by_id"
     t.string "value"
   end
 
   create_table "playlists", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.uuid "created_by_id"
     t.text "description"
     t.integer "position"
     t.string "title"
     t.datetime "updated_at", null: false
+    t.uuid "updated_by_id"
     t.string "url"
   end
 
   create_table "recordings", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", precision: nil, null: false
+    t.uuid "created_by_id"
     t.text "description"
     t.text "embedded_player"
     t.string "external_media_url"
@@ -138,6 +151,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_27_212033) do
     t.uuid "song_id"
     t.string "title"
     t.datetime "updated_at", precision: nil, null: false
+    t.uuid "updated_by_id"
     t.string "url"
   end
 
@@ -154,6 +168,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_27_212033) do
     t.string "composer_name"
     t.string "composer_url"
     t.datetime "created_at", precision: nil, null: false
+    t.uuid "created_by_id"
     t.text "description"
     t.boolean "featured", default: false, null: false
     t.text "image_data"
@@ -162,6 +177,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_27_212033) do
     t.string "title"
     t.text "translation"
     t.datetime "updated_at", precision: nil, null: false
+    t.uuid "updated_by_id"
     t.index ["composer_id"], name: "index_songs_on_composer_id"
     t.index ["featured"], name: "index_songs_on_featured", where: "featured"
     t.index ["slug"], name: "index_songs_on_slug", unique: true
@@ -207,12 +223,32 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_27_212033) do
 
   create_table "vocabularies", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.uuid "created_by_id"
     t.string "text"
     t.string "translation"
     t.datetime "updated_at", null: false
+    t.uuid "updated_by_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "categories", "users", column: "created_by_id"
+  add_foreign_key "categories", "users", column: "updated_by_id"
+  add_foreign_key "chord_forms", "users", column: "created_by_id"
+  add_foreign_key "chord_forms", "users", column: "updated_by_id"
+  add_foreign_key "composers", "users", column: "created_by_id"
+  add_foreign_key "composers", "users", column: "updated_by_id"
+  add_foreign_key "languages", "users", column: "created_by_id"
+  add_foreign_key "languages", "users", column: "updated_by_id"
+  add_foreign_key "passwords", "users", column: "created_by_id"
+  add_foreign_key "passwords", "users", column: "updated_by_id"
+  add_foreign_key "playlists", "users", column: "created_by_id"
+  add_foreign_key "playlists", "users", column: "updated_by_id"
+  add_foreign_key "recordings", "users", column: "created_by_id"
+  add_foreign_key "recordings", "users", column: "updated_by_id"
+  add_foreign_key "songs", "users", column: "created_by_id"
+  add_foreign_key "songs", "users", column: "updated_by_id"
   add_foreign_key "taggings", "tags"
+  add_foreign_key "vocabularies", "users", column: "created_by_id"
+  add_foreign_key "vocabularies", "users", column: "updated_by_id"
 end
