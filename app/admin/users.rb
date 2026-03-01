@@ -7,12 +7,15 @@ ActiveAdmin.register User do
   filter :email
   filter :first_name
   filter :last_name
+  filter :disabled
 
   index do
     column :email
-    column :disabled
+    column :disabled do |user|
+      boolean_icon(user.disabled)
+    end
     column "Created", sortable: :created_at do |user|
-      safe_join([user.created_at.strftime("%-m/%-d/%y"), user.created_at.strftime("%-l:%M%P").strip], tag.br)
+      admin_date(user.created_at)
     end
     actions
   end

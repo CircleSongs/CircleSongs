@@ -1,0 +1,13 @@
+a[target="_blank"]::after {
+  display: inline-block;
+  margin-left: 0.25em;
+  font-family: "Font Awesome 7 Free";
+  font-weight: 900;
+  font-size: 0.85em;
+  content: "\f08e";
+  opacity: 0.7;
+}
+
+a[target="_blank"]:hover::after {
+  opacity: 1;
+}

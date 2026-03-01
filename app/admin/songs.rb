@@ -65,32 +65,29 @@ ActiveAdmin.register Song do
     column :composer, sortable: 'composers.name' do |song|
       if song.composer.present?
         if song.composer.url.present?
-          link_to "#{song.composer.name} #{content_tag(:i, nil, class: 'fa-solid fa-arrow-up-right-from-square')}".html_safe, song.composer.url, target: :_blank, rel: :noopener if song.composer
+          link_to song.composer.name, song.composer.url, target: :_blank, rel: :noopener
         else
           song.composer.name
         end
       end
     end
     column :featured, sortable: :featured do |song|
-      icon_class = song.featured ? "fa-check has-yes" : "fa-xmark has-no"
-      content_tag :i, nil, class: "fa-solid #{icon_class}"
+      boolean_icon(song.featured)
     end
     column "Has Chords", sortable: :chords do |song|
-      icon_class = song.chords.present? ? "fa-check has-yes" : "fa-xmark has-no"
-      content_tag :i, nil, class: "fa-solid #{icon_class}"
+      boolean_icon(song.chords.present?)
     end
     column "Has Chord Forms", :chord_forms, sortable: :chord_forms_count do |song|
-      icon_class = song.chord_forms.exists? ? "fa-check has-yes" : "fa-xmark has-no"
-      content_tag :i, nil, class: "fa-solid #{icon_class}"
+      boolean_icon(song.chord_forms.exists?)
     end
     column "Recordings", sortable: :recordings_count do |song|
       song.recordings.size
     end
     column "Created", sortable: :created_at do |song|
-      safe_join([song.created_at.strftime("%-m/%-d/%y"), song.created_at.strftime("%-l:%M%P").strip], tag.br)
+      admin_date(song.created_at)
     end
     column "Updated", sortable: :updated_at do |song|
-      safe_join([song.updated_at.strftime("%-m/%-d/%y"), song.updated_at.strftime("%-l:%M%P").strip], tag.br)
+      admin_date(song.updated_at)
     end
   end
 
@@ -259,7 +256,11 @@ ActiveAdmin.register Song do
       row :alternate_title
       row :composer do |song|
         if song.composer
-          link_to "#{song.composer.name} #{content_tag(:i, nil, class: 'fa-solid fa-arrow-up-right-from-square')}".html_safe, song.composer.url, target: :_blank, rel: :noopener
+          if song.composer.url.present?
+            link_to song.composer.name, song.composer.url, target: :_blank, rel: :noopener
+          else
+            song.composer.name
+          end
         end
       end
       row :description do
