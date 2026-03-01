@@ -1,4 +1,5 @@
 ActiveAdmin.register Playlist do
+  include TrackableShow
   menu priority: 5
 
   include SortableIndex

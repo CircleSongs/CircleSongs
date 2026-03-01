@@ -1,4 +1,5 @@
 ActiveAdmin.register Composer do
+  include TrackableShow
   menu priority: 4
 
   permit_params :name, :url
