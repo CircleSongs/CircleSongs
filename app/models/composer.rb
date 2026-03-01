@@ -1,4 +1,6 @@
 class Composer < ApplicationRecord
+  include Trackable
+
   validates :name, uniqueness: true, if: -> { name.present? }
   validates :url, format: {
     with: %r{\Ahttps?://\S+\.\S+\z},
