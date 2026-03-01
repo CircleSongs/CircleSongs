@@ -1,4 +1,6 @@
 class ChordForm < ApplicationRecord
+  include Trackable
+
   has_many :song_chord_forms
   has_many :songs, through: :song_chord_forms
 

@@ -23,6 +23,26 @@ RSpec.describe "As an admin user" do
     visit admin_chord_forms_path
   end
 
+  scenario "chord links to show page" do
+    chord_form = chord_forms(:Am7)
+
+    within "#chord_form_#{chord_form.id}" do
+      click_link chord_form.chord
+    end
+
+    expect(page).to have_current_path(admin_chord_form_path(chord_form))
+  end
+
+  scenario "songs count links to songs filtered by chord form" do
+    chord_form = chord_forms(:Am7)
+
+    within "#chord_form_#{chord_form.id}" do
+      click_link chord_form.songs.size.to_s
+    end
+
+    expect(page).to have_current_path(admin_songs_path(q: { chord_forms_id_in: [chord_form.id] }))
+  end
+
   scenario "my fixture works", :js do
     expect(page).to have_selector "div.chord-form svg"
   end

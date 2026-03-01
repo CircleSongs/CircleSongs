@@ -1,0 +1,9 @@
+@import "tailwindcss";
+@config "../../../tailwind-active_admin.config.js";
+@import "tom-select/dist/css/tom-select.default.css";
+@import "../scss/admin/_tom_select.scss";
+@import "../scss/admin/has_many_layout.scss";
+@import "../scss/admin/chord_forms.scss";
+@import "../scss/admin/_sortable.scss";
+@import "../scss/admin/_boolean_icons.scss";
+@import "../scss/admin/_external_links.scss";

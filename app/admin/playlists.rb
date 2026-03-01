@@ -1,4 +1,7 @@
 ActiveAdmin.register Playlist do
+  include TrackableShow
+  menu priority: 5
+
   include SortableIndex
   config.sort_order = "position_asc"
   config.paginate = false
@@ -6,9 +9,15 @@ ActiveAdmin.register Playlist do
 
   index as: :table do
     column("", class: "handle") { "☰" }
-    column :title
+    column :title do |playlist|
+      link_to playlist.title, admin_playlist_path(playlist)
+    end
     column :description
-    column :url
+    column :url do |playlist|
+      if playlist.url.present?
+        link_to playlist.url, playlist.url, target: :_blank, rel: :noopener
+      end
+    end
     actions
   end
 
@@ -26,10 +35,10 @@ ActiveAdmin.register Playlist do
       row :title
       row :description
       row :url do |playlist|
-        link_to playlist.url, playlist.url, target: :_blank, rel: :noopener
+        if playlist.url.present?
+          link_to playlist.url, playlist.url, target: :_blank, rel: :noopener
+        end
       end
-      row :created_at
-      row :updated_at
     end
   end
 end

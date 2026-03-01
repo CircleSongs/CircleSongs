@@ -1,7 +1,12 @@
 class ApplicationController < ActionController::Base
   before_action :set_theme
+  before_action :set_current_user
 
   private
+    def set_current_user
+      Current.user = current_user if defined?(current_user)
+    end
+
     def set_theme
       @theme = session[:theme] || 'dark'
     end

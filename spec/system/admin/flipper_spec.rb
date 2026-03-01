@@ -8,6 +8,7 @@ RSpec.describe "As an authenticated User" do
     scenario "I can manage Flipper features" do
       visit admin_dashboard_path
 
+      click_on "System"
       click_on "Flipper"
       expect(page).to have_content("Flipper")
     end
