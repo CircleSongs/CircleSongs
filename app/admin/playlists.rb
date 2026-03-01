@@ -15,7 +15,7 @@ ActiveAdmin.register Playlist do
     column :description
     column :url do |playlist|
       if playlist.url.present?
-        link_to "#{playlist.url} #{content_tag(:i, nil, class: 'fa-solid fa-arrow-up-right-from-square')}".html_safe, playlist.url, target: :_blank, rel: :noopener
+        link_to playlist.url, playlist.url, target: :_blank, rel: :noopener
       end
     end
     actions
@@ -36,11 +36,9 @@ ActiveAdmin.register Playlist do
       row :description
       row :url do |playlist|
         if playlist.url.present?
-          link_to "#{playlist.url} #{content_tag(:i, nil, class: 'fa-solid fa-arrow-up-right-from-square')}".html_safe, playlist.url, target: :_blank, rel: :noopener
+          link_to playlist.url, playlist.url, target: :_blank, rel: :noopener
         end
       end
-      row :created_at
-      row :updated_at
     end
   end
 end

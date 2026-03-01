@@ -2,3 +2,4 @@ en:
   time:
     formats:
       short: "%H:%M %b %-d"
+      admin: "%-m/%-d/%y\n%-l:%M%P"

@@ -290,3 +290,19 @@ ActiveAdmin.setup do |config|
   #
   # config.order_clause = MyOrderClause
 end
+
+module AdminViewHelpers
+  def admin_date(datetime)
+    parts = l(datetime, format: :admin).split("\n")
+    safe_join(parts, tag.br)
+  end
+
+  def boolean_icon(value)
+    icon_class = value ? "fa-check has-yes" : "fa-xmark has-no"
+    content_tag :i, nil, class: "fa-solid #{icon_class}"
+  end
+end
+
+Rails.application.config.after_initialize do
+  ActiveAdmin::BaseController.helper AdminViewHelpers
+end
