@@ -18,7 +18,7 @@
     "bootstrap": "^5.3.8",
     "bootswatch": "^5.3.3",
     "chordsheetjs": "^13.0.3",
-    "jquery": "^3.7.1",
+    "jquery": "^4.0.0",
     "jquery-ui-dist": "^1.13.3",
     "sass-embedded": "^1.93.3",
     "stimulus-vite-helpers": "^3.1.0",
