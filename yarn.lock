@@ -514,10 +514,10 @@ chokidar@^4.0.0:
   dependencies:
     readdirp "^4.0.1"
 
-chordsheetjs@^13.0.3:
-  version "13.0.3"
-  resolved "https://registry.yarnpkg.com/chordsheetjs/-/chordsheetjs-13.0.3.tgz#d783011036866ed216c2ad3905c4df15f091e602"
-  integrity sha512-7ca3eP7jy6mH7vBakgcTkYtvPqmAlt8BTORsQ8IaeOw/AViDyDkvCYsv/efi3xqnRqFaF7AIDPGx3UstNcDtqg==
+chordsheetjs@^14.0.0:
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/chordsheetjs/-/chordsheetjs-14.0.0.tgz#af917a8665b7ebe80b98ca054fff6a8b3c26ee9e"
+  integrity sha512-JDSgKxw/+DSXhMOMb9g5jNLgL5/NPYHQDPW9av56iJqXhXzAMKPKbfZRgFWE/g74ZZNq8K8EagxaJms3XfRHkA==
   dependencies:
     jspdf "^4.0.0"
 
