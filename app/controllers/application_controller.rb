@@ -23,6 +23,6 @@ class ApplicationController < ActionController::Base
     end
 
     def set_featured_songs
-      @featured_songs = Song.featured.limit(3)
+      @featured_songs = Song.featured.limit(7)
     end
 end
