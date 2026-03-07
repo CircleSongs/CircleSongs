@@ -12,6 +12,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     end
   end
 
+  get "up", to: "rails/health#show", as: :rails_health_check
+
   root to: "home#index"
 
   resources :contact_forms, only: %i[new create]
