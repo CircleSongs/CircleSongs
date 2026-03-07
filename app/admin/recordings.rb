@@ -2,7 +2,7 @@ ActiveAdmin.register Recording do
   include TrackableShow
   menu priority: 2
 
-  permit_params :title, :description, :song_id, :position, :external_media_url
+  permit_params :title, :song_id, :external_media_url
 
   filter :title
   filter :song_title_cont, label: "Song Title"
@@ -30,8 +30,6 @@ ActiveAdmin.register Recording do
                      input_html: { class: 'tom-select' }
       f.input :title
       f.input :external_media_url, hint: "Supported: SoundCloud, YouTube, Spotify URLs. For Bandcamp, paste the embed URL from the embed code."
-      f.input :description, input_html: { rows: 5 }
-      f.input :position
     end
     f.actions
   end
@@ -48,9 +46,6 @@ ActiveAdmin.register Recording do
         else
           "No player available"
         end
-      end
-      row :description do
-        simple_format recording.description
       end
       row :position
     end

@@ -1,7 +1,7 @@
 class Recording < ApplicationRecord
   include Trackable
 
-  self.ignored_columns += %i[url embedded_player reported]
+  self.ignored_columns += %i[url embedded_player reported description]
 
   SOURCE_PATTERNS = {
     soundcloud: %r{\Ahttps?://(w\.)?soundcloud\.com/(player/\?|[\w-]+/[\w-]+)(\?.*)?}i,
@@ -20,7 +20,6 @@ class Recording < ApplicationRecord
   def self.ransackable_attributes(_auth_object = nil)
     %w[
       created_at
-      description
       external_media_url
       id
       position
