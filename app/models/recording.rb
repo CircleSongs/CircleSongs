@@ -1,4 +1,8 @@
 class Recording < ApplicationRecord
+  include Trackable
+
+  self.ignored_columns += %i[url embedded_player reported description]
+
   SOURCE_PATTERNS = {
     soundcloud: %r{\Ahttps?://(w\.)?soundcloud\.com/(player/\?|[\w-]+/[\w-]+)(\?.*)?}i,
     youtube: %r{\Ahttps?://(?:www\.)?youtube\.com/watch\?v=[\w-]+}i,
@@ -9,12 +13,6 @@ class Recording < ApplicationRecord
   belongs_to :song, touch: true
 
   validates :external_media_url, presence: true, on: :create
-  validates :url, presence: { unless: proc { |recording|
-    recording.embedded_player.present? || recording.external_media_url.present?
-  } }, on: :update
-  validates :embedded_player, presence: { unless: proc { |recording|
-    recording.url.present? || recording.external_media_url.present?
-  } }, on: :update
   validate :external_media_url_format
 
   default_scope { order(:position) }
@@ -22,16 +20,12 @@ class Recording < ApplicationRecord
   def self.ransackable_attributes(_auth_object = nil)
     %w[
       created_at
-      description
-      embedded_player
       external_media_url
       id
       position
-      reported
       song_id
       title
       updated_at
-      url
     ]
   end
 
@@ -52,39 +46,46 @@ class Recording < ApplicationRecord
     return external_media_url if external_media_url.blank?
 
     case source
-    when :youtube
-      match = external_media_url.match(%r{youtube\.com/watch\?v=([\w-]+)})
-      return external_media_url unless match
-
-      video_id = match[1]
-      "https://www.youtube.com/embed/#{video_id}"
-    when :soundcloud
-      if external_media_url.match?(%r{w\.soundcloud\.com/player/})
-        uri = URI.parse(external_media_url)
-        params = URI.decode_www_form(uri.query)
-        api_url = params.assoc("url")&.last
-        return external_media_url if api_url.blank?
-      else
-        api_url = external_media_url
-      end
-
-      "https://w.soundcloud.com/player/?url=#{CGI.escape(api_url)}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
-    when :bandcamp
-      match = external_media_url.match(%r{bandcamp\.com/EmbeddedPlayer/(album|track)=(\d+)(?:.*?/track=(\d+))?})
-      return external_media_url unless match
-
-      type = match[1]
-      id = match[2]
-      track_id = match[3]
-      embed_url = "https://bandcamp.com/EmbeddedPlayer/#{type}=#{id}/size=small/bgcol=ffffff/linkcol=0687f5/transparent=true/"
-      embed_url += "track=#{track_id}/" if track_id
-      embed_url
-    else
-      external_media_url
+    when :youtube    then format_youtube_url
+    when :soundcloud then format_soundcloud_url
+    when :bandcamp   then format_bandcamp_url
+    else external_media_url
     end
   end
 
   private
+    def format_youtube_url
+      match = external_media_url.match(%r{youtube\.com/watch\?v=([\w-]+)})
+      return external_media_url unless match
+
+      "https://www.youtube.com/embed/#{match[1]}"
+    end
+
+    def format_soundcloud_url
+      api_url = soundcloud_api_url
+      return external_media_url if api_url.blank?
+
+      "https://w.soundcloud.com/player/?url=#{CGI.escape(api_url)}" \
+        "&color=%23ff5500&auto_play=false&hide_related=false" \
+        "&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
+    end
+
+    def soundcloud_api_url
+      return external_media_url unless external_media_url.match?(%r{w\.soundcloud\.com/player/})
+
+      URI.decode_www_form(URI.parse(external_media_url).query).assoc("url")&.last
+    end
+
+    def format_bandcamp_url
+      match = external_media_url.match(%r{bandcamp\.com/EmbeddedPlayer/(album|track)=(\d+)(?:.*?/track=(\d+))?})
+      return external_media_url unless match
+
+      embed_url = "https://bandcamp.com/EmbeddedPlayer/#{match[1]}=#{match[2]}" \
+                  "/size=small/bgcol=ffffff/linkcol=0687f5/transparent=true/"
+      embed_url += "track=#{match[3]}/" if match[3]
+      embed_url
+    end
+
     def external_media_url_format
       return if external_media_url.blank?
 

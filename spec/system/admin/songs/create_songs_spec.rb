@@ -55,7 +55,6 @@ RSpec.describe "As an admin user" do
     click_on "New Song"
     click_on "Create Song"
 
-
     within "#song_title_input" do
       expect(page).to have_content "can't be blank"
     end
@@ -67,10 +66,10 @@ RSpec.describe "As an admin user" do
 
     click_on "Create Song"
     expect(page).to have_content "Song was successfully created."
-    within ".row-lyrics" do
+    within "[data-row='lyrics']" do
       expect(page).to have_css "u"
     end
-    within ".row-translation" do
+    within "[data-row='translation']" do
       expect(page).to have_css "u"
     end
     visit songs_path

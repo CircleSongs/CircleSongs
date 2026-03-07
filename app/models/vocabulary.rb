@@ -1,4 +1,6 @@
 class Vocabulary < ApplicationRecord
+  include Trackable
+
   validates :text, presence: true
   validates :translation, presence: true
 
@@ -6,5 +8,9 @@ class Vocabulary < ApplicationRecord
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[created_at id id_value text translation updated_at]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    []
   end
 end

@@ -24,9 +24,7 @@ RSpec.configure do |config|
   end
 
   config.after(:each, type: :system) do |example|
-    if example.exception
-      save_screenshot("#{example.full_description.parameterize}.png")
-    end
+    save_screenshot("#{example.full_description.parameterize}.png") if example.exception
   end
 end
 

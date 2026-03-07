@@ -1,5 +1,7 @@
 class Song < ApplicationRecord
-  self.ignored_columns = %i[composer_name composer_url]
+  include Trackable
+
+  self.ignored_columns += %i[composer_name composer_url]
 
   extend FriendlyId
   friendly_id :title, use: :slugged
@@ -8,7 +10,7 @@ class Song < ApplicationRecord
 
   acts_as_taggable_on :themes
 
-  validates :title, presence: true, uniqueness: true
+  validates :title, presence: true, uniqueness: true # rubocop:disable Rails/UniqueValidationWithoutIndex
 
   has_many :recordings, -> { order :created_at }, inverse_of: :song, dependent: :destroy
   accepts_nested_attributes_for :recordings, reject_if: proc { |attributes|
@@ -38,7 +40,8 @@ class Song < ApplicationRecord
   end
 
   ransacker :languages_name do |parent|
-    subquery = Language.joins("INNER JOIN languages_songs ON languages.id = languages_songs.language_id")
+    subquery = Language.unscoped
+                       .joins("INNER JOIN languages_songs ON languages.id = languages_songs.language_id")
                        .where("languages_songs.song_id = #{parent.table.name}.id")
                        .select("string_agg(languages.name, ', ' ORDER BY languages.name)")
     Arel::Nodes::SqlLiteral.new("(#{subquery.to_sql})")

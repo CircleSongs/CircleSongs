@@ -12,7 +12,7 @@ RSpec.describe "As an" do
       expect(page).to have_select(
         id: "category",
         options: unrestricted_categories.map(&:name_and_count).unshift("Category"),
-        visible: false
+        visible: :all
       )
       expect(page).to have_no_content restricted_song.title
     end
@@ -27,7 +27,7 @@ RSpec.describe "As an" do
 
         fill_in I18n.t("restricted_categories.password_label"), with: password
         click_on "Submit"
-        expect(page).to have_content "Invalid credentials."
+        expect(page).to have_content I18n.t("restricted_category_sessions.create.invalid_credentials")
       end
     end
 

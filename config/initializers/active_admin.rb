@@ -1,21 +1,11 @@
 
 ActiveAdmin.setup do |config|
-  meta_tags_options = { viewport: 'width=device-width, initial-scale=1' }
-  config.meta_tags = meta_tags_options
-  config.meta_tags_for_logged_out_pages = meta_tags_options
   # == Site Title
   #
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
   config.site_title = 'Medicine Songs'
-
-  # Set the link url for the title. For example, to take
-  # users to your main site. Defaults to no link.
-  #
-  config.site_title_link = '/'
-
-  config.use_webpacker = true
   # Set an optional image to be displayed for the header
   # instead of a string (overrides :site_title)
   #
@@ -143,7 +133,7 @@ ActiveAdmin.setup do |config|
   #
   # Enable and disable Batch Actions
   #
-  config.batch_actions = true
+  config.batch_actions = false
 
   # == Controller Filters
   #
@@ -231,8 +221,11 @@ ActiveAdmin.setup do |config|
   #
     config.namespace :admin do |admin|
       admin.build_menu :default do |menu|
-        menu.add label: "Flipper", url: "/admin/flipper", priority: 1000, if: proc { current_user&.admin? }
-        menu.add label: "Sidekiq", url: "/admin/sidekiq", priority: 1001, if: proc { current_user&.admin? }
+        menu.add label: "Taxonomy", url: "#", priority: 6
+        menu.add label: "Site", url: "#", priority: 7
+        menu.add label: "System", url: "#", priority: 8
+        menu.add label: "Flipper", url: "/admin/flipper", parent: "System", priority: 1, if: proc { current_user&.admin? }
+        menu.add label: "Sidekiq", url: "/admin/sidekiq", parent: "System", priority: 2, if: proc { current_user&.admin? }
       end
     end
 
@@ -296,4 +289,20 @@ ActiveAdmin.setup do |config|
   # You can inherit it with own class and inject it for all resources
   #
   # config.order_clause = MyOrderClause
+end
+
+module AdminViewHelpers
+  def admin_date(datetime)
+    parts = l(datetime, format: :admin).split("\n")
+    safe_join(parts, tag.br)
+  end
+
+  def boolean_icon(value)
+    icon_class = value ? "fa-check has-yes" : "fa-xmark has-no"
+    content_tag :i, nil, class: "fa-solid #{icon_class}"
+  end
+end
+
+Rails.application.config.after_initialize do
+  ActiveAdmin::BaseController.helper AdminViewHelpers
 end

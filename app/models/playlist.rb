@@ -1,11 +1,13 @@
 class Playlist < ApplicationRecord
+  include Trackable
+
   acts_as_list
   default_scope { order(:position) }
 
   validates :title, presence: true
   validates :url, presence: true, format: {
     with: %r{(spotify|youtube|soundcloud|bandcamp)\.com/},
-    message: "must be from Spotify, YouTube, SoundCloud, or Bandcamp"
+    message: "must be from Spotify, YouTube, SoundCloud, or Bandcamp" # rubocop:disable Rails/I18nLocaleTexts
   }
 
   def service

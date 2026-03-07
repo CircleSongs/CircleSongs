@@ -1,15 +1,23 @@
 ActiveAdmin.register Composer do
+  include TrackableShow
+  menu priority: 4
+
   permit_params :name, :url
 
   filter :name
-  filter :url
-  
+  filter :songs_count
+  filter :url_present, as: :boolean, label: "Has URL"
+
   index do
-    column :name, sortable: true
+    column :name, sortable: true do |composer|
+      link_to composer.name, admin_composer_path(composer)
+    end
     column :url do |composer|
       link_to composer.url, composer.url, target: '_blank', rel: 'noopener' if composer.url.present?
     end
-    column :songs_count, sortable: true
+    column :songs_count, sortable: true do |composer|
+      link_to composer.songs_count, admin_songs_path(q: { composer_name_cont: composer.name })
+    end
     actions
   end
 

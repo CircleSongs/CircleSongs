@@ -1,6 +1,6 @@
 require 'sidekiq/web'
 
-Rails.application.routes.draw do
+Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   devise_for :users, ActiveAdmin::Devise.config
 
   ActiveAdmin.routes(self)
@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   root to: "home#index"
 
   resources :contact_forms, only: %i[new create]
-  resources :broken_link_reports
   resources :songs
   resources :restricted_category_sessions, only: %i[new create], path: "sacred"
   resources :playlists, only: %i[index]

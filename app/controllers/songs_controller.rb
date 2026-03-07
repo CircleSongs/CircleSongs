@@ -14,19 +14,19 @@ class SongsController < ApplicationController
   end
 
   private
-    def raw_search_params
+    def raw_search_params # rubocop:disable Metrics/MethodLength
       return {} unless params[:q]
 
-      params.require(:q).permit(
-        :title_cont,
-        :composer_name_cont,
-        :title_or_lyrics_or_composer_name_cont,
-        :title_start,
-        :s,
-        :chords_present,
-        :themes_name_in,
-        :languages_id_in,
-        :categories_id_in
+      params.expect(
+        q: %i[title_cont
+              composer_name_cont
+              title_or_lyrics_or_composer_name_cont
+              title_start
+              s
+              chords_present
+              themes_name_in
+              languages_id_in
+              categories_id_in]
       )
     end
 

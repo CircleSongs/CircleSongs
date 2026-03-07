@@ -4,8 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.4.8"
 
 gem "aws-sdk-s3", "~> 1.208"
-gem "activeadmin", "~> 3.2"
-gem "active_admin_flat_skin", "~> 0.1"
+gem "activeadmin", "4.0.0.beta21"
 gem "acts_as_list", "~> 1.2"
 gem "acts-as-taggable-on", "~> 13.0"
 gem "benchmark"
@@ -36,6 +35,7 @@ gem "shrine", "~> 3.6"
 gem "sidekiq", "~> 8.1"
 gem "simple_form", "~> 5.3"
 gem "strong_migrations", "~> 2.2"
+gem "importmap-rails"
 gem "vite_rails", "~> 3.0"
 
 group :development, :test do
