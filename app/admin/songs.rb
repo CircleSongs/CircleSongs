@@ -41,11 +41,9 @@ ActiveAdmin.register Song do
                 :composer_id,
                 :featured,
                 recordings_attributes: %i[
-                  description
                   external_media_url
                   title
                   id
-                  position
                   _destroy
                 ],
                 song_chord_forms_attributes: %i[id chord_form_id _destroy position],
@@ -102,7 +100,7 @@ ActiveAdmin.register Song do
       f.input :featured, as: :boolean
       f.inputs "Composer" do
         f.input :composer_id, as: :select,
-                              collection: Composer.order(:name).map { |c| [[c.name, c.url].reject(&:blank?).join(" | "), c.id] },
+                              collection: Composer.order(:name).map { |c| [[c.name, c.url].compact_blank.join(" | "), c.id] },
                               input_html: { class: 'tom-select' },
                               prompt: "Existing composer"
       end
@@ -165,7 +163,6 @@ ActiveAdmin.register Song do
       ) do |a|
         a.input :title
         a.input :external_media_url, hint: "Supported: SoundCloud, YouTube, Spotify, Bandcamp. <a href=\"#\" onclick=\"document.getElementById('recording-instructions-modal').style.display='block'; return false;\" style=\"font-size:0.9em;\">Instructions</a>".html_safe
-        a.input :description, input_html: { rows: 5 }
       end
     end
 
@@ -211,7 +208,7 @@ ActiveAdmin.register Song do
 
         h3 "Bandcamp"
         ul do
-          li { strong "Important: " + "Bandcamp requires the embed URL, not the page URL" }
+          li { strong "Important: Bandcamp requires the embed URL, not the page URL" }
           li "1. Go to the track or album page on Bandcamp"
           li "2. Click the 'Share / Embed' button"
           li "3. In the embed code, find the iframe src URL"
@@ -242,7 +239,7 @@ ActiveAdmin.register Song do
 
   member_action :sort_recordings, method: :post do
     params[:ids].each_with_index do |id, index|
-      Recording.where(id: id).update_all(position: index + 1)
+      Recording.where(id: id).update_all(position: index + 1) # rubocop:disable Rails/SkipsModelValidations
     end
     head :ok
   end
@@ -301,7 +298,7 @@ ActiveAdmin.register Song do
       end
     end
 
-    panel "Recordings", "data-sort-url": sort_recordings_admin_song_path(song) do
+    panel "Recordings", 'data-sort-url': sort_recordings_admin_song_path(song) do
       table_for song.recordings, class: "recordings sortable-show" do
         column("", class: "handle") { "☰" }
         column :title
@@ -312,7 +309,7 @@ ActiveAdmin.register Song do
             "No player available"
           end
         end
-        column :description
+        column :source
       end
     end
   end

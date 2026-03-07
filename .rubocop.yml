@@ -30,8 +30,18 @@ RSpec:
   Exclude:
     - spec/system/**/*
 
+Lint/Debugger:
+  Exclude:
+    - spec/**/*
+
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+RSpec/ExampleLength:
+  Max: 8
+
+RSpec/MultipleExpectations:
+  Max: 5
 
 Metrics/BlockLength:
   Exclude:

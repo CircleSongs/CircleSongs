@@ -19,7 +19,7 @@ RSpec.describe "As an admin user" do
     visit admin_songs_path
 
     within "#song_#{song.id}" do
-      click_link song.title
+      click_on song.title
     end
 
     expect(page).to have_current_path(admin_song_path(song))
@@ -59,11 +59,12 @@ RSpec.describe "As an admin user" do
     r3 = recordings(:hotel_california_spotify)
     r4 = recordings(:hotel_california_bandcamp)
 
-    # Set positions in reverse of creation order
+    # rubocop:disable Rails/SkipsModelValidations
     r4.update_column(:position, 1)
     r3.update_column(:position, 2)
     r2.update_column(:position, 3)
     r1.update_column(:position, 4)
+    # rubocop:enable Rails/SkipsModelValidations
 
     visit admin_song_path(song)
 
@@ -77,7 +78,7 @@ RSpec.describe "As an admin user" do
     r3 = recordings(:hotel_california_spotify)
     r4 = recordings(:hotel_california_bandcamp)
 
-    [r1, r2, r3, r4].each_with_index { |r, i| r.update_column(:position, i + 1) }
+    [r1, r2, r3, r4].each_with_index { |r, i| r.update_column(:position, i + 1) } # rubocop:disable Rails/SkipsModelValidations
 
     visit admin_song_path(song)
 

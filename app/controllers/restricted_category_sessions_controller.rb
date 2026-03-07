@@ -7,14 +7,14 @@ class RestrictedCategorySessionsController < ApplicationController
       redirect_to sacred_info_path
     else
       session[:restricted_categories] = false
-      flash[:error] = "Invalid credentials."
+      flash[:error] = t(".invalid_credentials")
       render :new
     end
   end
 
   private
     def auth_params
-      params.require(:restricted_category_session).permit :password
+      params.expect restricted_category_session: [:password]
     end
 
     def authorized?

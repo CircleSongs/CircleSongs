@@ -4,7 +4,7 @@ class Composer < ApplicationRecord
   validates :name, uniqueness: true, if: -> { name.present? }
   validates :url, format: {
     with: %r{\Ahttps?://\S+\.\S+\z},
-    message: "must be a valid URL"
+    message: "must be a valid URL" # rubocop:disable Rails/I18nLocaleTexts
   }, if: :url?
   validate :name_or_url_present
 

@@ -1,7 +1,7 @@
 class Song < ApplicationRecord
   include Trackable
 
-  self.ignored_columns = %i[composer_name composer_url]
+  self.ignored_columns += %i[composer_name composer_url]
 
   extend FriendlyId
   friendly_id :title, use: :slugged
@@ -10,7 +10,7 @@ class Song < ApplicationRecord
 
   acts_as_taggable_on :themes
 
-  validates :title, presence: true, uniqueness: true
+  validates :title, presence: true, uniqueness: true # rubocop:disable Rails/UniqueValidationWithoutIndex
 
   has_many :recordings, -> { order :created_at }, inverse_of: :song, dependent: :destroy
   accepts_nested_attributes_for :recordings, reject_if: proc { |attributes|

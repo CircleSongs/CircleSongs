@@ -1,4 +1,4 @@
-RSpec.describe "Admin Playlists", type: :system do
+RSpec.describe "Admin Playlists" do
   let(:user) { users(:admin) }
   let(:spotify) { playlists(:spotify) }
   let(:youtube) { playlists(:youtube) }
@@ -18,7 +18,7 @@ RSpec.describe "Admin Playlists", type: :system do
     visit admin_playlists_path
 
     within "#playlist_#{spotify.id}" do
-      click_link spotify.title
+      click_on spotify.title
     end
 
     expect(page).to have_current_path(admin_playlist_path(spotify))

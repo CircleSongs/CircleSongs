@@ -1,4 +1,4 @@
-RSpec.describe "Admin Recordings", type: :system do
+RSpec.describe "Admin Recordings" do
   let(:user) { users(:admin) }
   let(:recording) { recordings(:hotel_california_soundclound) }
   let(:song) { songs(:hotel_california) }
@@ -18,7 +18,7 @@ RSpec.describe "Admin Recordings", type: :system do
     visit admin_recordings_path
 
     within "#recording_#{recording.id}" do
-      click_link recording.title
+      click_on recording.title
     end
 
     expect(page).to have_current_path(admin_recording_path(recording))

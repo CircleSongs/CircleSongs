@@ -4,7 +4,7 @@ RSpec.describe Trackable do
   let(:user) { users(:admin) }
 
   describe "on create" do
-    it "sets created_by and updated_by from Current.user" do
+    it "sets created_by and updated_by from Current.user", :aggregate_failures do
       Current.user = user
       vocab = Vocabulary.create!(text: "hello", translation: "hola")
 
@@ -12,7 +12,7 @@ RSpec.describe Trackable do
       expect(vocab.updated_by).to eq(user)
     end
 
-    it "does not overwrite an explicitly set created_by" do
+    it "does not overwrite an explicitly set created_by", :aggregate_failures do
       other_user = users(:homer)
       Current.user = user
       vocab = Vocabulary.create!(text: "hello", translation: "hola", created_by: other_user)
@@ -34,7 +34,7 @@ RSpec.describe Trackable do
   end
 
   describe "when no user is set" do
-    it "leaves created_by and updated_by nil" do
+    it "leaves created_by and updated_by nil", :aggregate_failures do
       Current.user = nil
       vocab = Vocabulary.create!(text: "hello", translation: "hola")
 

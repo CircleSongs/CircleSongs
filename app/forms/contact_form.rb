@@ -18,16 +18,15 @@ class ContactForm < MailForm::Base
   end
 
   private
+    def from_name
+      name.presence || DEFAULT_FROM_NAME
+    end
 
-  def from_name
-    name.presence || DEFAULT_FROM_NAME
-  end
+    def from_email
+      email.presence || DEFAULT_FROM_EMAIL
+    end
 
-  def from_email
-    email.presence || DEFAULT_FROM_EMAIL
-  end
-
-  def subject_text
-    subject.presence || DEFAULT_SUBJECT
-  end
+    def subject_text
+      subject.presence || DEFAULT_SUBJECT
+    end
 end

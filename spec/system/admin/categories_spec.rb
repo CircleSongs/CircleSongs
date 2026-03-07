@@ -90,7 +90,7 @@ RSpec.describe "As an admin user" do
     visit admin_categories_path
 
     within "#category_#{category.id}" do
-      click_link category.name
+      click_on category.name
     end
 
     expect(page).to have_current_path(admin_category_path(category))
@@ -100,7 +100,7 @@ RSpec.describe "As an admin user" do
     visit admin_categories_path
 
     within "#category_#{category.id}" do
-      click_link category.songs.size.to_s
+      click_on category.songs.size.to_s
     end
 
     expect(page).to have_current_path(admin_songs_path(q: { categories_id_in: [category.id] }))

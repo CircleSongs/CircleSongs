@@ -1,4 +1,4 @@
-RSpec.describe "Admin Languages", type: :system do
+RSpec.describe "Admin Languages" do
   let(:user) { users(:admin) }
   let(:language) { languages(:english) }
 
@@ -52,7 +52,7 @@ RSpec.describe "Admin Languages", type: :system do
     visit admin_languages_path
 
     within "#language_#{language.id}" do
-      click_link language.name
+      click_on language.name
     end
 
     expect(page).to have_current_path(admin_language_path(language))
@@ -62,7 +62,7 @@ RSpec.describe "Admin Languages", type: :system do
     visit admin_languages_path
 
     within "#language_#{language.id}" do
-      click_link language.songs.size.to_s
+      click_on language.songs.size.to_s
     end
 
     expect(page).to have_current_path(admin_songs_path(q: { languages_id_in: [language.id] }))

@@ -7,7 +7,7 @@ module Trackable
     end
 
     def ransackable_associations(auth_object = nil)
-      super + %w[created_by updated_by]
+      (super | %w[created_by updated_by])
     end
   end
 

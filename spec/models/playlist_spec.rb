@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Playlist, type: :model do
+RSpec.describe Playlist do
   let(:playlist) { described_class.new(params) }
   let(:title) { "Best Circle Songs" }
   let(:description) { "A collection of the best circle songs" }
@@ -113,7 +113,7 @@ RSpec.describe Playlist, type: :model do
   end
 
   describe "default_scope" do
-    it "orders by position" do
+    it "orders by position", :aggregate_failures do
       expect(described_class.all.to_sql).to include("ORDER BY")
       expect(described_class.all.to_sql).to include("position")
     end

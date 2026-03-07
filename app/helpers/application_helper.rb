@@ -13,13 +13,13 @@ module ApplicationHelper
     end
   end
 
-def active_link_class(paths)
-  Array(paths).any? { |p| current_page?(p) } ? 'nav__link--current' : ''
-end
+  def active_link_class(paths)
+    Array(paths).any? { |p| current_page?(p) } ? 'nav__link--current' : ''
+  end
 
   def theme_font_size(taggings_count, max_count)
-    weight = max_count > 0 ? taggings_count.to_f / max_count : 0
-    (80 + weight * 70).round
+    weight = max_count.positive? ? taggings_count.to_f / max_count : 0
+    (80 + (weight * 70)).round
   end
 
   def excerpt_text(html, length: 150, omission: "...")
@@ -27,7 +27,7 @@ end
   end
 
   def random_hero_image
-    images = Dir.glob(Rails.root.join("app/frontend/images/hero/*"))
+    images = Rails.root.glob("app/frontend/images/hero/*")
     vite_asset_path("images/hero/#{File.basename(images.sample)}")
   end
 

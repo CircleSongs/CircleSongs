@@ -3,7 +3,7 @@ module SortableIndex
     base.instance_eval do
       collection_action :sort, method: :post do
         params[:ids].each_with_index do |id, index|
-          resource_class.where(id: id).update_all(position: index + 1)
+          resource_class.where(id: id).update_all(position: index + 1) # rubocop:disable Rails/SkipsModelValidations
         end
         head :ok
       end

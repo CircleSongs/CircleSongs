@@ -18,8 +18,8 @@ RSpec.describe "As an Admin user" do
     expect(page).to have_content name
     expect(page).to have_content value
     within "table" do
-      expect(page).not_to have_link "Delete"
-      expect(page).not_to have_link "Show"
+      expect(page).to have_no_link "Delete"
+      expect(page).to have_no_link "Show"
     end
     within "#index_table_passwords tbody tr:nth-child(2)" do
       click_on "Edit"

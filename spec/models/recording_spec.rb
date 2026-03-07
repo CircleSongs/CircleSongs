@@ -38,13 +38,13 @@ RSpec.describe Recording do
       end
     end
 
-    context "on update" do
+    context "when updating" do
       before do
         recording.save!
       end
 
       it "allows empty :external_media_url" do
-        recording.update! external_media_url: nil
+        expect { recording.update! external_media_url: nil }.not_to raise_error
       end
     end
   end
@@ -119,7 +119,7 @@ RSpec.describe Recording do
     context "with a SoundCloud URL" do
       let(:external_media_url) { "https://soundcloud.com/artist/track" }
 
-      it "returns the player URL" do
+      it "returns the player URL", :aggregate_failures do
         expect(recording.formatted_external_media_url).to include("https://w.soundcloud.com/player/?url=")
         expect(recording.formatted_external_media_url).to include(CGI.escape(external_media_url))
       end
@@ -128,10 +128,12 @@ RSpec.describe Recording do
     context "with a SoundCloud private player embed URL" do
       let(:external_media_url) { "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%3Atracks%3A2265369650%3Fsecret_token%3Ds-ZwLDKPCKtIZ&color=%23ff5500&inverse=false&auto_play=false&show_user=true" }
 
-      it "extracts the url param and reconstructs the player URL" do
+      it "extracts the url param and reconstructs the player URL", :aggregate_failures do
         result = recording.formatted_external_media_url
         expect(result).to start_with("https://w.soundcloud.com/player/?url=")
-        expect(result).to include(CGI.escape("https://api.soundcloud.com/tracks/soundcloud:tracks:2265369650?secret_token=s-ZwLDKPCKtIZ"))
+        expect(result).to include(
+          CGI.escape("https://api.soundcloud.com/tracks/soundcloud:tracks:2265369650?secret_token=s-ZwLDKPCKtIZ")
+        )
         expect(result).to include("auto_play=false")
       end
     end
@@ -147,7 +149,7 @@ RSpec.describe Recording do
     context "with a Bandcamp embed URL" do
       let(:external_media_url) { "https://bandcamp.com/EmbeddedPlayer/album=1764593721/size=large/track=1396136340/foo=bar" }
 
-      it "returns a cleaned embed URL" do
+      it "returns a cleaned embed URL", :aggregate_failures do
         result = recording.formatted_external_media_url
         expect(result).to include("https://bandcamp.com/EmbeddedPlayer/album=1764593721")
         expect(result).to include("size=small")
@@ -176,18 +178,20 @@ RSpec.describe Recording do
     context "with invalid YouTube URL (short format)" do
       let(:external_media_url) { "https://youtu.be/dQw4w9WgXcQ" }
 
-      it "is invalid" do
+      it "is invalid", :aggregate_failures do
         expect(recording).not_to be_valid
-        expect(recording.errors[:external_media_url]).to include("must be a valid SoundCloud, YouTube, Spotify, or Bandcamp URL")
+        expect(recording.errors[:external_media_url])
+          .to include("must be a valid SoundCloud, YouTube, Spotify, or Bandcamp URL")
       end
     end
 
     context "with invalid Spotify URL (album instead of track)" do
       let(:external_media_url) { "https://open.spotify.com/album/4cOdK2wGLETKBW3PvgPWqT" }
 
-      it "is invalid" do
+      it "is invalid", :aggregate_failures do
         expect(recording).not_to be_valid
-        expect(recording.errors[:external_media_url]).to include("must be a valid SoundCloud, YouTube, Spotify, or Bandcamp URL")
+        expect(recording.errors[:external_media_url])
+          .to include("must be a valid SoundCloud, YouTube, Spotify, or Bandcamp URL")
       end
     end
 

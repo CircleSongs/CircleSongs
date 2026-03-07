@@ -11,7 +11,7 @@ RSpec.describe Category do
   end
 
   describe "default_scope" do
-    it "orders by position" do
+    it "orders by position", :aggregate_failures do
       expect(described_class.all.to_sql).to include("ORDER BY")
       expect(described_class.all.to_sql).to include("position")
     end

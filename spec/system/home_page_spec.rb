@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Home page", type: :system do
+RSpec.describe "Home page" do
   let(:song) { songs(:hotel_california) }
 
   scenario "featured song displays lyrics as plain text with tags stripped" do
@@ -8,7 +8,7 @@ RSpec.describe "Home page", type: :system do
 
     within ".featured__excerpt" do
       expect(page).to have_text("cool wind")
-      expect(page).not_to have_css("em")
+      expect(page).to have_no_css("em")
     end
   end
 

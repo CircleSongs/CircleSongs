@@ -1,4 +1,4 @@
-RSpec.describe "As a User", type: :system do
+RSpec.describe "As a User" do
   let(:user) { users(:admin) }
 
   before do
