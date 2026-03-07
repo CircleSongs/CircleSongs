@@ -17,14 +17,13 @@ class ChordForm < ApplicationRecord
   end
 
   private
+    def fingering_must_be_json
+      return if fingering.blank?
 
-  def fingering_must_be_json
-    return if fingering.blank?
-
-    begin
-      JSON.parse fingering
-    rescue JSON::ParserError
-      errors.add(:fingering, "must be valid JSON")
+      begin
+        JSON.parse fingering
+      rescue JSON::ParserError
+        errors.add(:fingering, "must be valid JSON")
+      end
     end
-  end
 end

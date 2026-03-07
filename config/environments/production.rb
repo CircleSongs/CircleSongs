@@ -3,10 +3,10 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    port: ENV["MAILGUN_SMTP_PORT"],
-    address: ENV["MAILGUN_SMTP_SERVER"],
-    user_name: ENV["MAILGUN_SMTP_LOGIN"],
-    password: ENV["MAILGUN_SMTP_PASSWORD"],
+    port: ENV.fetch("MAILGUN_SMTP_PORT", nil),
+    address: ENV.fetch("MAILGUN_SMTP_SERVER", nil),
+    user_name: ENV.fetch("MAILGUN_SMTP_LOGIN", nil),
+    password: ENV.fetch("MAILGUN_SMTP_PASSWORD", nil),
     domain: Rails.application.credentials.base_domain,
     authentication: :plain
   }
@@ -87,7 +87,7 @@ Rails.application.configure do
   config.active_support.report_deprecations = false
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
+  config.log_formatter = Logger::Formatter.new
 
   # Use a different logger for distributed setups.
   # require "syslog/logger"

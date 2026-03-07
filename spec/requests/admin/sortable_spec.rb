@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Admin sortable endpoints", type: :request do
+RSpec.describe "Admin sortable endpoints" do
   let(:admin) { users(:admin) }
 
   before do
@@ -12,7 +12,7 @@ RSpec.describe "Admin sortable endpoints", type: :request do
     let(:traditional) { categories(:traditional) }
     let(:sacred) { categories(:sacred) }
 
-    it "reorders categories by position" do
+    it "reorders categories by position", :aggregate_failures do
       post "/admin/categories/sort", params: { ids: [sacred.id, traditional.id, popular.id] }
 
       expect(response).to have_http_status(:ok)
@@ -27,7 +27,7 @@ RSpec.describe "Admin sortable endpoints", type: :request do
     let(:youtube) { playlists(:youtube) }
     let(:soundcloud) { playlists(:soundcloud) }
 
-    it "reorders playlists by position" do
+    it "reorders playlists by position", :aggregate_failures do
       post "/admin/playlists/sort", params: { ids: [soundcloud.id, youtube.id, spotify.id] }
 
       expect(response).to have_http_status(:ok)
@@ -39,31 +39,39 @@ RSpec.describe "Admin sortable endpoints", type: :request do
 
   describe "POST /admin/songs/:id/sort_recordings" do
     let(:song) { songs(:hotel_california) }
-    let(:r1) { recordings(:hotel_california_soundclound) }
-    let(:r2) { recordings(:hotel_california_the_eagles) }
-    let(:r3) { recordings(:hotel_california_spotify) }
-    let(:r4) { recordings(:hotel_california_bandcamp) }
+    let(:soundcloud_rec) { recordings(:hotel_california_soundclound) }
+    let(:eagles_rec) { recordings(:hotel_california_the_eagles) }
+    let(:spotify_rec) { recordings(:hotel_california_spotify) }
+    let(:bandcamp_rec) { recordings(:hotel_california_bandcamp) }
 
     before do
-      [r1, r2, r3, r4].each_with_index { |r, i| r.update_column(:position, i + 1) }
+      # rubocop:disable Rails/SkipsModelValidations
+      [soundcloud_rec, eagles_rec, spotify_rec, bandcamp_rec].each_with_index do |r, i|
+        r.update_column(:position, i + 1)
+      end
+      # rubocop:enable Rails/SkipsModelValidations
     end
 
-    it "reorders recordings by position" do
-      post sort_recordings_admin_song_path(song), params: { ids: [r3.id, r1.id, r4.id, r2.id] }
+    it "reorders recordings by position", :aggregate_failures do
+      post sort_recordings_admin_song_path(song),
+           params: { ids: [spotify_rec.id, soundcloud_rec.id, bandcamp_rec.id, eagles_rec.id] }
 
       expect(response).to have_http_status(:ok)
-      expect(r3.reload.position).to eq 1
-      expect(r1.reload.position).to eq 2
-      expect(r4.reload.position).to eq 3
-      expect(r2.reload.position).to eq 4
+      expect(spotify_rec.reload.position).to eq 1
+      expect(soundcloud_rec.reload.position).to eq 2
+      expect(bandcamp_rec.reload.position).to eq 3
+      expect(eagles_rec.reload.position).to eq 4
     end
 
-    it "persists order across page loads" do
-      post sort_recordings_admin_song_path(song), params: { ids: [r3.id, r1.id, r4.id, r2.id] }
+    it "persists order across page loads", :aggregate_failures do
+      post sort_recordings_admin_song_path(song),
+           params: { ids: [spotify_rec.id, soundcloud_rec.id, bandcamp_rec.id, eagles_rec.id] }
 
       get admin_song_path(song)
       expect(response).to have_http_status(:ok)
-      expect(response.body).to match(/#{r3.title}.*#{r1.title}.*#{r4.title}.*#{r2.title}/m)
+      expect(response.body).to match(
+        /#{spotify_rec.title}.*#{soundcloud_rec.title}.*#{bandcamp_rec.title}.*#{eagles_rec.title}/m
+      )
     end
   end
 end

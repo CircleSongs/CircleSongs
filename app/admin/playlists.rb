@@ -14,9 +14,7 @@ ActiveAdmin.register Playlist do
     end
     column :description
     column :url do |playlist|
-      if playlist.url.present?
-        link_to playlist.url, playlist.url, target: :_blank, rel: :noopener
-      end
+      link_to playlist.url, playlist.url, target: :_blank, rel: :noopener if playlist.url.present?
     end
     actions
   end
@@ -35,9 +33,7 @@ ActiveAdmin.register Playlist do
       row :title
       row :description
       row :url do |playlist|
-        if playlist.url.present?
-          link_to playlist.url, playlist.url, target: :_blank, rel: :noopener
-        end
+        link_to playlist.url, playlist.url, target: :_blank, rel: :noopener if playlist.url.present?
       end
     end
   end

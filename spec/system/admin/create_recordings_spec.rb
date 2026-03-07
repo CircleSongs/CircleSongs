@@ -68,7 +68,6 @@ RSpec.describe "As an admin user" do
       check "Delete"
     end
     click_on "Update Song"
-    expect(page).not_to have_selector("table.recordings tbody")
+    expect(page).to have_no_css("table.recordings tbody")
   end
-
 end

@@ -4,7 +4,7 @@ class ContactFormsController < ApplicationController
     render :new
   end
 
-  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
   def create
     @contact_form = ContactForm.new(contact_form_params)
     @contact_form.request = request
@@ -16,21 +16,20 @@ class ContactFormsController < ApplicationController
       flash[:success] = t(".success")
       redirect_to songs_path
     else
-      flash.now[:error] = "Please correct the errors below"
+      flash.now[:error] = t(".error")
       render :new
     end
   end
-  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
 
   private
-
-  def contact_form_params
-    params.require(:contact_form).permit(
-      :name,
-      :email,
-      :subject,
-      :message,
-      :nickname
-    )
-  end
+    def contact_form_params
+      params.expect(
+        contact_form: %i[name
+                         email
+                         subject
+                         message
+                         nickname]
+      )
+    end
 end

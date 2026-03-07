@@ -1,4 +1,4 @@
-RSpec.describe "Admin Composers", type: :system do
+RSpec.describe "Admin Composers" do
   let(:user) { users(:admin) }
   let(:composer) { composers(:the_eagles) }
 
@@ -16,7 +16,7 @@ RSpec.describe "Admin Composers", type: :system do
     visit admin_composers_path
 
     within "#composer_#{composer.id}" do
-      click_link composer.name
+      click_on composer.name
     end
 
     expect(page).to have_current_path(admin_composer_path(composer))
@@ -26,7 +26,7 @@ RSpec.describe "Admin Composers", type: :system do
     visit admin_composers_path
 
     within "#composer_#{composer.id}" do
-      click_link composer.songs_count.to_s
+      click_on composer.songs_count.to_s
     end
 
     expect(page).to have_current_path(admin_songs_path(q: { composer_name_cont: composer.name }))

@@ -55,7 +55,6 @@ RSpec.describe "As an admin user" do
     click_on "New Song"
     click_on "Create Song"
 
-
     within "#song_title_input" do
       expect(page).to have_content "can't be blank"
     end

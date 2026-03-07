@@ -1,4 +1,4 @@
-RSpec.describe "As a guest", type: :system do
+RSpec.describe "As a guest" do
   let(:name) { FFaker::Name.name }
   let(:email) { FFaker::Internet.email }
   let(:subject_text) { FFaker::Lorem.sentence }
@@ -15,7 +15,7 @@ RSpec.describe "As a guest", type: :system do
     fill_in "Subject...", with: subject_text
     fill_in "Message...", with: message
     click_on "Submit"
-    expect(page).to have_content I18n.t("contact_forms.success")
+    expect(page).to have_content I18n.t("contact_forms.create.success")
     expect(last_email.to).to include Rails.application.credentials.contact_email
     expect(last_email.from).to include email
     expect(page).to have_current_path songs_path
@@ -26,7 +26,7 @@ RSpec.describe "As a guest", type: :system do
     expect(page).to have_content "Message can't be blank"
     fill_in "Message...", with: message
     click_on "Submit"
-    expect(page).to have_content I18n.t("contact_forms.success")
+    expect(page).to have_content I18n.t("contact_forms.create.success")
     expect(last_email.from).to include ContactForm::DEFAULT_FROM_EMAIL
     expect(last_email.subject).to eq ContactForm::DEFAULT_SUBJECT
   end
@@ -35,7 +35,7 @@ RSpec.describe "As a guest", type: :system do
     fill_in "Message...", with: message
     page.execute_script("document.querySelector('#contact_form_nickname').value = 'foo'")
     click_on "Submit"
-    expect(page).to have_content I18n.t("contact_forms.success")
+    expect(page).to have_content I18n.t("contact_forms.create.success")
     expect(last_email).to be_nil
   end
 end

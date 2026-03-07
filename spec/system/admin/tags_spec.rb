@@ -1,4 +1,4 @@
-RSpec.describe "Admin Tags", type: :system do
+RSpec.describe "Admin Tags" do
   let(:user) { users(:admin) }
   let(:song) { songs(:hotel_california) }
 
@@ -17,7 +17,7 @@ RSpec.describe "Admin Tags", type: :system do
     tag = ActsAsTaggableOn::Tag.find_by!(name: "classic rock")
 
     visit admin_tags_path
-    click_link "classic rock"
+    click_on "classic rock"
 
     expect(page).to have_current_path(admin_tag_path(tag))
   end
@@ -27,7 +27,7 @@ RSpec.describe "Admin Tags", type: :system do
 
     visit admin_tags_path
 
-    click_link tag.taggings_count.to_s
+    click_on tag.taggings_count.to_s
 
     expect(page).to have_current_path(admin_songs_path(q: { themes_name_in: ["classic rock"] }))
     expect(page).to have_content song.title

@@ -4,7 +4,7 @@ class Language < ApplicationRecord
   acts_as_list
   default_scope { order(:position) }
 
-  has_and_belongs_to_many :songs
+  has_and_belongs_to_many :songs # rubocop:disable Rails/HasAndBelongsToMany
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[created_at id id_value name position updated_at]
