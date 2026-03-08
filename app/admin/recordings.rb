@@ -53,7 +53,7 @@ ActiveAdmin.register Recording do
 
   controller do
     def scoped_collection
-      super.joins(:song)
+      super.includes(:song).joins(:song)
     end
   end
 end

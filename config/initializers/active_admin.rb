@@ -225,7 +225,8 @@ ActiveAdmin.setup do |config|
         menu.add label: "Site", url: "#", priority: 7
         menu.add label: "System", url: "#", priority: 8
         menu.add label: "Flipper", url: "/admin/flipper", parent: "System", priority: 1, if: proc { current_user&.admin? }
-        menu.add label: "Sidekiq", url: "/admin/sidekiq", parent: "System", priority: 2, if: proc { current_user&.admin? }
+        menu.add label: "PgHero", url: "/admin/pghero", parent: "System", priority: 2, if: proc { current_user&.admin? }
+        menu.add label: "Sidekiq", url: "/admin/sidekiq", parent: "System", priority: 3, if: proc { current_user&.admin? }
       end
     end
 
