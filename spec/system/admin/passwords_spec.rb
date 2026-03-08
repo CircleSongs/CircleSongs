@@ -21,7 +21,7 @@ RSpec.describe "As an Admin user" do
       expect(page).to have_no_link "Delete"
       expect(page).to have_no_link "Show"
     end
-    within "#index_table_passwords tbody tr:nth-child(2)" do
+    within(find("#index_table_passwords tbody tr", text: name)) do
       click_on "Edit"
     end
     expect(page).to have_field "Name", with: name, disabled: true
