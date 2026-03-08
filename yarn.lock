@@ -179,7 +179,7 @@
 
 "@fortawesome/fontawesome-free@^7.1.0":
   version "7.2.0"
-  resolved "https://npm.fontawesome.com/@fortawesome/fontawesome-free/-/fontawesome-free-7.2.0.tgz#188c1053ce422ad1f934d7df242a973fcb89636d"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-7.2.0.tgz#188c1053ce422ad1f934d7df242a973fcb89636d"
   integrity sha512-3DguDv/oUE+7vjMeTSOjCSG+KeawgVQOHrKRnvUuqYh1mfArrh7s+s8hXW3e4RerBA1+Wh+hBqf8sJNpqNrBWg==
 
 "@hotwired/stimulus@^3.2.2":
