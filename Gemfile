@@ -36,9 +36,14 @@ gem "sidekiq", "~> 8.1"
 gem "simple_form", "~> 5.3"
 gem "strong_migrations", "~> 2.2"
 gem "importmap-rails"
+gem "pghero"
+gem "rack-mini-profiler"
+gem "stackprof"
 gem "vite_rails", "~> 3.0"
 
 group :development, :test do
+  gem "bullet"
+  gem "bundler-audit", require: false
   gem "rubocop-capybara", "~> 2.21"
   gem "rubocop-rspec_rails", "~> 2.30"
   gem "rubocop", "~> 1.71"
@@ -51,6 +56,7 @@ end
 
 group :development do
   gem "brakeman", "~> 7.0"
+  gem "letter_opener"
   gem "foreman", "~> 0.88"
   gem "listen", "~> 3.9"
   gem "spring", "~> 4.2"

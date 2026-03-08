@@ -6,7 +6,9 @@ class SongsController < ApplicationController
   def index
     @q = Song.ransack(search_params)
     @q.sorts = "title asc" if @q.sorts.empty?
-    @songs = @q.result.page(params[:page]).per(per_page)
+    scope = @q.result.includes(:composer, :languages)
+    scope = scope.includes(:recordings) if user_signed_in?
+    @songs = scope.page(params[:page]).per(per_page)
   end
 
   def show

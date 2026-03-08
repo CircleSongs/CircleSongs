@@ -5,9 +5,9 @@
       - if song.chords.present?
         %span.btn.btn--tiny.no-pointer-events HAS CHORDS
       - if user_signed_in?
-        - if song.recordings.exists?
-          %span.btn.btn--tiny.no-pointer-events{data: { bs_toggle: :tooltip, bs_title: pluralize(song.recordings.count, "Recording") }}
-            = "#{song.recordings.count} REC"
+        - if song.recordings.any?
+          %span.btn.btn--tiny.no-pointer-events{data: { bs_toggle: :tooltip, bs_title: pluralize(song.recordings.size, "Recording") }}
+            = "#{song.recordings.size} REC"
     - if feature_enabled?(:tagging) && song.theme_list.any?
       %ul.tags{role: "list", "aria-label" => "Tags"}
         - song.theme_list.first(3).each do |theme|

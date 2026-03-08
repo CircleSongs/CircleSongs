@@ -8,6 +8,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   authenticate :user, ->(u) { u.admin? } do
     namespace :admin do
       mount Flipper::UI.app => '/flipper'
+      mount PgHero::Engine, at: '/pghero'
       mount Sidekiq::Web => '/sidekiq'
     end
   end

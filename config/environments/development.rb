@@ -71,4 +71,15 @@ Rails.application.configure do
 
   # Use Sidekiq for Active Job
   config.active_job.queue_adapter = :sidekiq
+
+  # Preview emails in browser instead of sending
+  config.action_mailer.delivery_method = :letter_opener
+
+  # Bullet N+1 query detection
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = true
+    Bullet.bullet_logger = true
+    Bullet.rails_logger = true
+  end
 end
