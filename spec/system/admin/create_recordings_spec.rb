@@ -54,8 +54,10 @@ RSpec.describe "As an admin user" do
 
     song = Song.find_by(title: title)
     visit edit_admin_song_path(song)
+    expect(page).to have_content("Edit Song")
 
     click_on "Add New Recording"
+    expect(page).to have_field("External media url")
     fill_in "External media url", with: soundcloud_link
     click_on "Update Song"
 
@@ -63,6 +65,7 @@ RSpec.describe "As an admin user" do
     expect(song.recordings.count).to eq(1)
 
     visit edit_admin_song_path(song)
+    expect(page).to have_css(".has-many-container fieldset.has-many-fields")
 
     within ".has-many-container fieldset.has-many-fields:first-of-type" do
       check "Delete"
