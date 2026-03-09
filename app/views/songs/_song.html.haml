@@ -15,7 +15,7 @@
             = link_to theme, songs_path(q: { themes_name_in: theme }), class: 'btn btn--tag btn--secondary'
   %td.songrow__cell
     - if song.composer.present?
-      = link_to song.composer.name, songs_path(q: { composer_name_cont: song.composer.name })
+      = link_to song.composer.name, songs_path(q: { title_or_lyrics_or_composer_name_cont: song.composer.name })
     - if user_signed_in?
       = link_to edit_admin_song_path(song), class: 'edit', style: 'margin-left: 10px;' do
         %i.fa.fa-pencil
