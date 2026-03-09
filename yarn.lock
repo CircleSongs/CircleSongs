@@ -705,10 +705,10 @@ chokidar@^4.0.0:
   dependencies:
     readdirp "^4.0.1"
 
-chordsheetjs@^13.0.3:
-  version "13.2.2"
-  resolved "https://registry.yarnpkg.com/chordsheetjs/-/chordsheetjs-13.2.2.tgz#05f0d70fb8e7f3e8fe6c16f237937394f4a34be9"
-  integrity sha512-wOFNo57NNnQBU2AOI+8bBbk0w8v9ILbP8Jy8AqozMAEAP2h2uTsZeOo9APOFqiUEFWa8AvSafW0doLqza1sOmQ==
+chordsheetjs@^14.0.0:
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/chordsheetjs/-/chordsheetjs-14.0.0.tgz#af917a8665b7ebe80b98ca054fff6a8b3c26ee9e"
+  integrity sha512-JDSgKxw/+DSXhMOMb9g5jNLgL5/NPYHQDPW9av56iJqXhXzAMKPKbfZRgFWE/g74ZZNq8K8EagxaJms3XfRHkA==
   dependencies:
     jspdf "^4.0.0"
 
