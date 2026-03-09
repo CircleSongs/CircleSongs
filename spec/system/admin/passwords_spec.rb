@@ -1,6 +1,6 @@
 RSpec.describe "As an Admin user" do
   let(:user) { users(:admin) }
-  let(:name) { FFaker::Lorem.word }
+  let(:name) { "Sacred Songs" }
   let(:value) { FFaker::Internet.password }
   let(:new_value) { FFaker::Internet.password }
 
