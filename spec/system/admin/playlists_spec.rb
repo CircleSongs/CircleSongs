@@ -78,7 +78,6 @@ RSpec.describe "Admin Playlists" do
     fill_in "Description", with: "A great new playlist"
     fill_in "Url", with: "https://open.spotify.com/playlist/123456"
     click_on "Create Playlist"
-
     expect(page).to have_content "Playlist was successfully created."
     expect(page).to have_content "New Playlist"
   end
@@ -89,7 +88,6 @@ RSpec.describe "Admin Playlists" do
     click_on "Edit Playlist"
     fill_in "Title", with: "Updated Title"
     click_on "Update Playlist"
-
     expect(page).to have_content "Playlist was successfully updated."
     expect(page).to have_content "Updated Title"
   end

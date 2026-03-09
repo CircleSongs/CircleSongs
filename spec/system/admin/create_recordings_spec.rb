@@ -19,7 +19,6 @@ RSpec.describe "As an admin user" do
     expect(page).to have_field("External media url")
     fill_in "External media url", with: soundcloud_link
     click_on "Create Song"
-
     expect(page).to have_content("Song was successfully created")
 
     song = Song.find_by(title: title)
@@ -38,7 +37,6 @@ RSpec.describe "As an admin user" do
     expect(page).to have_field("External media url")
     fill_in "External media url", with: youtube_link
     click_on "Create Song"
-
     expect(page).to have_content("Song was successfully created")
 
     song = Song.find_by(title: title)
@@ -66,7 +64,6 @@ RSpec.describe "As an admin user" do
     expect(page).to have_field("External media url")
     fill_in "External media url", with: soundcloud_link
     click_on "Update Song"
-
     expect(page).to have_content("Song was successfully updated")
     expect(song.recordings.count).to eq(1)
 
