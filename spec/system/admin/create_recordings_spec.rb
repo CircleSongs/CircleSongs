@@ -56,6 +56,7 @@ RSpec.describe "As an admin user" do
     click_on "Add New Recording"
     expect(page).to have_field("External media url")
     click_on "Create Song"
+    expect(page).not_to have_current_path("/admin/songs/new")
     expect(page).to have_content("Song was successfully created")
 
     song = Song.find_by(title: title)
