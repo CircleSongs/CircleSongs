@@ -11,6 +11,7 @@ RSpec.describe "As an admin user" do
   scenario "I can create a user", :js do
     visit admin_users_path
     click_on "New User"
+    expect(page).to have_content("New User")
     fill_in "Email", with: email
     fill_in "Password", with: password, match: :prefer_exact
     fill_in "Password confirmation", with: password, match: :prefer_exact
@@ -20,6 +21,7 @@ RSpec.describe "As an admin user" do
     within "tbody tr:nth-child(1)" do
       click_on "Edit"
     end
+    expect(page).to have_content("Edit User")
     fill_in "Email", with: new_email
     fill_in "Password", with: password, match: :prefer_exact
     fill_in "Password confirmation", with: password, match: :prefer_exact
@@ -32,6 +34,7 @@ RSpec.describe "As an admin user" do
     homer = users(:homer)
     new_password = FFaker::Internet.password
     visit edit_admin_user_path(homer)
+    expect(page).to have_content("Edit User")
     fill_in "Password", with: new_password, match: :prefer_exact
     fill_in "Password confirmation", with: new_password, match: :prefer_exact
     click_on "Update User"
@@ -42,6 +45,7 @@ RSpec.describe "As an admin user" do
   scenario "I can disable a user without changing their password" do
     homer = users(:homer)
     visit edit_admin_user_path(homer)
+    expect(page).to have_content("Edit User")
     check "Disabled"
     click_on "Update User"
     expect(page).to have_content "User was successfully updated."

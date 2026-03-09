@@ -11,6 +11,8 @@ RSpec.describe "As an admin user" do
     song.update!(theme_list: [])
 
     visit edit_admin_song_path(song)
+    expect(page).to have_content("Edit Song")
+    expect(page).to have_css("#song_theme_list-ts-control")
 
     # Add first new tag by typing and pressing Enter
     within('#song_theme_list_input') do

@@ -11,6 +11,7 @@ RSpec.describe "As an Admin user" do
   scenario "I can manage Passwords" do
     visit admin_passwords_path
     click_on "New Password"
+    expect(page).to have_content("New Password")
     fill_in "Name", with: name
     fill_in "Value", with: value
     click_on "Create Password"
