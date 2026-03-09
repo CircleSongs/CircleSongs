@@ -53,6 +53,7 @@ RSpec.describe "As an admin user" do
     fill_in "Chord", with: chord
     fill_in "Fingering", with: valid_fingering
     click_on "Create Chord form"
+    expect(page).to have_no_current_path("/admin/chord_forms/new")
     expect(page).to have_content "Chord form was successfully created."
     expect(page).to have_css "div.chord-form svg"
     visit admin_chord_forms_path

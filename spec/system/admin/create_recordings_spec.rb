@@ -19,6 +19,7 @@ RSpec.describe "As an admin user" do
     expect(page).to have_field("External media url")
     fill_in "External media url", with: soundcloud_link
     click_on "Create Song"
+    expect(page).to have_no_current_path("/admin/songs/new")
 
     expect(page).to have_content("Song was successfully created")
 
@@ -38,6 +39,7 @@ RSpec.describe "As an admin user" do
     expect(page).to have_field("External media url")
     fill_in "External media url", with: youtube_link
     click_on "Create Song"
+    expect(page).to have_no_current_path("/admin/songs/new")
 
     expect(page).to have_content("Song was successfully created")
 
@@ -56,7 +58,7 @@ RSpec.describe "As an admin user" do
     click_on "Add New Recording"
     expect(page).to have_field("External media url")
     click_on "Create Song"
-    expect(page).not_to have_current_path("/admin/songs/new")
+    expect(page).to have_no_current_path("/admin/songs/new")
     expect(page).to have_content("Song was successfully created")
 
     song = Song.find_by(title: title)
@@ -67,6 +69,7 @@ RSpec.describe "As an admin user" do
     expect(page).to have_field("External media url")
     fill_in "External media url", with: soundcloud_link
     click_on "Update Song"
+    expect(page).to have_no_current_path(edit_admin_song_path(song))
 
     expect(page).to have_content("Song was successfully updated")
     expect(song.recordings.count).to eq(1)
@@ -78,6 +81,7 @@ RSpec.describe "As an admin user" do
       check "Delete"
     end
     click_on "Update Song"
+    expect(page).to have_no_current_path(edit_admin_song_path(song))
     expect(page).to have_no_css("table.recordings tbody")
   end
 end
