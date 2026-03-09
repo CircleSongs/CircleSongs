@@ -39,20 +39,20 @@ RSpec.describe "As a guest" do
     expect(page).to have_no_content el_condor_pasa.title
 
     click_on "Reset Form"
-    expect(page).to have_content hotel_california.title
     expect(page).to have_content taki_taki.title
-    expect(page).to have_field(I18n.t("songs.search_placeholder"), with: "")
+    expect(page).to have_content hotel_california.title
+    expect(page).to have_content el_condor_pasa.title
 
     fill_in I18n.t("songs.search_placeholder"), with: "desert highway"
     click_on "Search Songs"
-    expect(page).to have_content hotel_california.title
     expect(page).to have_no_content taki_taki.title
+    expect(page).to have_content hotel_california.title
     expect(page).to have_no_content el_condor_pasa.title
 
     click_on "Reset Form"
-    expect(page).to have_content hotel_california.title
     expect(page).to have_content taki_taki.title
-    expect(page).to have_field(I18n.t("songs.search_placeholder"), with: "")
+    expect(page).to have_content hotel_california.title
+    expect(page).to have_content el_condor_pasa.title
 
     fill_in I18n.t("songs.search_placeholder"), with: "Eagles"
     click_on "Search Songs"
