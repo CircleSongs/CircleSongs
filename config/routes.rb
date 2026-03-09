@@ -1,5 +1,3 @@
-require 'sidekiq/web'
-
 Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   devise_for :users, ActiveAdmin::Devise.config
 
@@ -9,7 +7,6 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     namespace :admin do
       mount Flipper::UI.app => '/flipper'
       mount PgHero::Engine, at: '/pghero'
-      mount Sidekiq::Web => '/sidekiq'
     end
   end
 

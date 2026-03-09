@@ -1,3 +1,8 @@
+require "simplecov"
+SimpleCov.start "rails" do
+  enable_coverage :branch
+end
+
 require "capybara/rspec"
 
 RSpec.configure do |config|

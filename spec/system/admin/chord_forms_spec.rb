@@ -49,6 +49,7 @@ RSpec.describe "As an admin user" do
 
   scenario "I can manage ChordForms", :js do
     click_on "New Chord Form"
+    expect(page).to have_content("New Chord Form")
     fill_in "Chord", with: chord
     fill_in "Fingering", with: valid_fingering
     click_on "Create Chord form"

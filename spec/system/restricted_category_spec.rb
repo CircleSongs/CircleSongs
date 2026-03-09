@@ -49,6 +49,7 @@ RSpec.describe "As an" do
 
     scenario "I can see restricted categories and songs" do
       visit songs_path
+      expect(page).to have_select("category")
 
       select(restricted_categories.first.name_and_count, from: "category")
       click_on "Search Songs"

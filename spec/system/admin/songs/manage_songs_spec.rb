@@ -36,6 +36,7 @@ RSpec.describe "As an admin user" do
   scenario "I can edit a Song that has no image" do
     visit admin_song_path(song)
     click_on "Edit"
+    expect(page).to have_content("Edit Song")
     within "#song_title_input" do
       fill_in "Title", with: "New Title"
     end
@@ -108,6 +109,7 @@ RSpec.describe "As an admin user" do
 
   scenario "I can mark a song as featured" do
     visit edit_admin_song_path(song)
+    expect(page).to have_content("Edit Song")
     check "Featured"
     click_on "Update Song"
     expect(page).to have_content "Song was successfully updated."
