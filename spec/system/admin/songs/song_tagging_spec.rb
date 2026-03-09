@@ -20,7 +20,6 @@ RSpec.describe "As an admin user" do
     end
 
     click_on "Update Song"
-
     expect(page).to have_content "foo"
   end
 end
