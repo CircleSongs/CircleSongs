@@ -3,10 +3,10 @@ require "capybara/rspec"
 
 # Chrome 145+ raises CDP -32000 "Node with given id does not belong to the
 # document" during page transitions. Capybara retries StaleElementReferenceError
-# but not this UnknownError variant. Re-raise as StaleElementReferenceError so
-# Capybara's built-in retry logic handles it.
-Capybara::Selenium::Node.prepend(Module.new do
-  def execute(*args)
+# but not this UnknownError variant. Patch the Selenium bridge to re-raise as
+# StaleElementReferenceError so Capybara's built-in retry logic handles it.
+Selenium::WebDriver::Remote::Bridge.prepend(Module.new do
+  def execute(*)
     super
   rescue Selenium::WebDriver::Error::UnknownError => e
     if e.message.include?("does not belong to the document")
