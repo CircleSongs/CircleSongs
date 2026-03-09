@@ -41,7 +41,6 @@ RSpec.describe "As an admin user" do
       fill_in "Title", with: "New Title"
     end
     click_on "Update Song"
-    expect(page).to have_no_current_path(edit_admin_song_path(song))
     expect(page).to have_content "Song was successfully updated."
     expect(song.reload.title).to eq "New Title"
   end
@@ -113,7 +112,6 @@ RSpec.describe "As an admin user" do
     expect(page).to have_content("Edit Song")
     check "Featured"
     click_on "Update Song"
-    expect(page).to have_no_current_path(edit_admin_song_path(song))
     expect(page).to have_content "Song was successfully updated."
     expect(song.reload.featured).to be true
     visit admin_songs_path

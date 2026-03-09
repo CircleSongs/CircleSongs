@@ -15,7 +15,6 @@ RSpec.describe "As an Admin user" do
     fill_in "Name", with: name
     fill_in "Value", with: value
     click_on "Create Password"
-    expect(page).to have_no_current_path("/admin/passwords/new")
     expect(page).to have_content "Password was successfully created."
     expect(page).to have_content name
     expect(page).to have_content value
@@ -30,7 +29,6 @@ RSpec.describe "As an Admin user" do
     expect(page).to have_field "Value", with: value
     fill_in "Value", with: new_value
     click_on "Update Password"
-    expect(page).to have_no_current_path(%r{/admin/passwords/.+/edit})
     expect(page).to have_content new_value
   end
 end

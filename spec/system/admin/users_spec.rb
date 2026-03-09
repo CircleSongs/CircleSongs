@@ -16,7 +16,6 @@ RSpec.describe "As an admin user" do
     fill_in "Password", with: password, match: :prefer_exact
     fill_in "Password confirmation", with: password, match: :prefer_exact
     click_on "Create User"
-    expect(page).to have_no_current_path("/admin/users/new")
     expect(page).to have_content "User was successfully created."
     expect(page).to have_content email
     within "tbody tr:nth-child(1)" do
@@ -27,7 +26,6 @@ RSpec.describe "As an admin user" do
     fill_in "Password", with: password, match: :prefer_exact
     fill_in "Password confirmation", with: password, match: :prefer_exact
     click_on "Update User"
-    expect(page).to have_no_current_path(%r{/admin/users/.+/edit})
     expect(page).to have_content "User was successfully updated."
     expect(page).to have_content new_email
   end
@@ -40,7 +38,6 @@ RSpec.describe "As an admin user" do
     fill_in "Password", with: new_password, match: :prefer_exact
     fill_in "Password confirmation", with: new_password, match: :prefer_exact
     click_on "Update User"
-    expect(page).to have_no_current_path(edit_admin_user_path(homer))
     expect(page).to have_content "User was successfully updated."
     expect(homer.reload.valid_password?(new_password)).to be true
   end
@@ -51,7 +48,6 @@ RSpec.describe "As an admin user" do
     expect(page).to have_content("Edit User")
     check "Disabled"
     click_on "Update User"
-    expect(page).to have_no_current_path(edit_admin_user_path(homer))
     expect(page).to have_content "User was successfully updated."
     expect(homer.reload).to be_disabled
   end

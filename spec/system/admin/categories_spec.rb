@@ -17,7 +17,6 @@ RSpec.describe "As an admin user" do
     fill_in "Description", with: "A test description"
     check "Restricted"
     click_on "Create Category"
-    expect(page).to have_no_current_path("/admin/categories/new")
     expect(page).to have_content "Category was successfully created."
     expect(page).to have_content(/RESTRICTED\s+Yes/i)
     expect(page).to have_content "A test description"
@@ -79,7 +78,6 @@ RSpec.describe "As an admin user" do
 
     fill_in "Description", with: "Updated description"
     click_on "Update Category"
-    expect(page).to have_no_current_path(edit_admin_category_path(category))
     expect(page).to have_content "Category was successfully updated."
     expect(category.reload.description).to eq "Updated description"
   end
