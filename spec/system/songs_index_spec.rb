@@ -99,6 +99,15 @@ RSpec.describe "As a guest" do
     expect(page).to have_select("per_page", selected: "25")
   end
 
+  scenario "clicking a composer name fills the search bar with their name" do
+    within("tbody") do
+      click_on hotel_california.composer.name
+    end
+
+    expect(page).to have_field("song-search", with: hotel_california.composer.name)
+    expect(page).to have_content hotel_california.title
+  end
+
   scenario "I do not see an edit link" do
     expect(page).to have_no_css "a.edit"
     expect(page).to have_no_css ".has_recording"
