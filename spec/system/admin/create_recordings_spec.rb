@@ -11,10 +11,12 @@ RSpec.describe "As an admin user" do
   scenario "I can create Recordings with SoundCloud URL", :js do
     visit admin_songs_path
     click_on "New Song"
+    expect(page).to have_content("New Song")
 
     attach_file "Image", Rails.root.join("spec/fixtures/files/image.jpeg")
     fill_in "Title", with: title
     click_on "Add New Recording"
+    expect(page).to have_field("External media url")
     fill_in "External media url", with: soundcloud_link
     click_on "Create Song"
 
@@ -28,10 +30,12 @@ RSpec.describe "As an admin user" do
   scenario "I can create Recordings with YouTube URL", :js do
     visit admin_songs_path
     click_on "New Song"
+    expect(page).to have_content("New Song")
 
     attach_file "Image", Rails.root.join("spec/fixtures/files/image.jpeg")
     fill_in "Title", with: title
     click_on "Add New Recording"
+    expect(page).to have_field("External media url")
     fill_in "External media url", with: youtube_link
     click_on "Create Song"
 
@@ -45,10 +49,12 @@ RSpec.describe "As an admin user" do
   scenario "I can create and delete Recordings", :js do
     visit admin_songs_path
     click_on "New Song"
+    expect(page).to have_content("New Song")
 
     attach_file "Image", Rails.root.join("spec/fixtures/files/image.jpeg")
     fill_in "Title", with: title
     click_on "Add New Recording"
+    expect(page).to have_field("External media url")
     click_on "Create Song"
     expect(page).to have_content("Song was successfully created")
 
