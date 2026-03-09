@@ -69,8 +69,8 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 
-  # Use Sidekiq for Active Job
-  config.active_job.queue_adapter = :sidekiq
+  # Use inline queue adapter (no background job processor)
+  config.active_job.queue_adapter = :inline
 
   # Preview emails in browser instead of sending
   config.action_mailer.delivery_method = :letter_opener

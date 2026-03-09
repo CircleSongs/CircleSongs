@@ -12,6 +12,7 @@ RSpec.describe "As an admin user" do
     visit admin_categories_path
 
     click_on "New Category"
+    expect(page).to have_content("New Category")
     fill_in "Name", with: name
     fill_in "Description", with: "A test description"
     check "Restricted"
@@ -73,6 +74,7 @@ RSpec.describe "As an admin user" do
 
   scenario "I can edit a category description" do
     visit edit_admin_category_path(category)
+    expect(page).to have_content("Edit Category")
 
     fill_in "Description", with: "Updated description"
     click_on "Update Category"
