@@ -19,6 +19,8 @@ RSpec.describe "As an admin user" do
   scenario "I can create a Song", :js do
     visit admin_songs_path
     click_on "New Song"
+    expect(page).to have_content("New Song")
+    expect(page).to have_css(".ts-control")
 
     attach_file "Image", Rails.root.join("spec/fixtures/files/image.jpeg")
     fill_in "Title", with: title
@@ -53,6 +55,7 @@ RSpec.describe "As an admin user" do
   scenario "I can underline text in Song#lyrics and Song#translation" do
     visit admin_songs_path
     click_on "New Song"
+    expect(page).to have_content("New Song")
     click_on "Create Song"
 
     within "#song_title_input" do
