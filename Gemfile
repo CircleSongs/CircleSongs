@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.4.8"
 
 gem "aws-sdk-s3", "~> 1.208"
-gem "activeadmin", "4.0.0.beta21"
+gem "activeadmin", "4.0.0.beta22"
 gem "acts_as_list", "~> 1.2"
 gem "acts-as-taggable-on", "~> 13.0"
 gem "benchmark"
