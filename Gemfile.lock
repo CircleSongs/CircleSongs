@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    action_text-trix (2.1.16)
+    action_text-trix (2.1.17)
       railties
     actioncable (8.1.2)
       actionpack (= 8.1.2)
@@ -47,10 +47,10 @@ GEM
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
-    activeadmin (4.0.0.beta21)
+    activeadmin (4.0.0.beta22)
       arbre (~> 2.0)
       csv
-      formtastic (>= 5.0)
+      formtastic (>= 6.0)
       formtastic_i18n (>= 0.7)
       inherited_resources (~> 2.0)
       kaminari (>= 1.2.1)
@@ -565,7 +565,7 @@ GEM
     temple (0.10.4)
     thor (1.5.0)
     tilt (2.7.0)
-    timeout (0.6.0)
+    timeout (0.6.1)
     tsort (0.2.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
@@ -610,7 +610,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
-  activeadmin (= 4.0.0.beta21)
+  activeadmin (= 4.0.0.beta22)
   acts-as-taggable-on (~> 13.0)
   acts_as_list (~> 1.2)
   aws-sdk-s3 (~> 1.208)
