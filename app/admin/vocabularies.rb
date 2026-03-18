@@ -1,5 +1,6 @@
 ActiveAdmin.register Vocabulary do
   include TrackableShow
+
   menu parent: "Site", priority: 2, label: "Quechua"
 
   filter :text

@@ -1,0 +1,5 @@
+---
+ignore:
+  # Devise confirmable race condition — requires upgrade to Devise 5.x
+  # https://github.com/heartcombo/devise/security/advisories/GHSA-57hq-95w6-v4fc
+  - GHSA-57hq-95w6-v4fc

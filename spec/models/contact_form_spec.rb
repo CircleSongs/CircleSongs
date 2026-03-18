@@ -4,10 +4,10 @@ RSpec.describe ContactForm do
     { name: name }
   end
 
-  describe "::DEFAULT_FROM_EMAIL" do
+  describe ".default_from_email" do
     it "returns a sensible default" do
-      expect(described_class::DEFAULT_FROM_EMAIL).to eq(
-        Rails.application.credentials.from_email
+      expect(described_class.default_from_email).to eq(
+        Rails.application.credentials.contact_email
       )
     end
   end
