@@ -1,9 +1,8 @@
-def uuid
+def uuid # rubocop:disable Rails/Delegate
   SecureRandom.uuid
 end
 
 def pause
-  puts "pausing..."
   STDIN.gets
 end
 

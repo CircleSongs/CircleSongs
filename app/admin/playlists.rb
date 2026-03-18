@@ -1,8 +1,10 @@
 ActiveAdmin.register Playlist do
   include TrackableShow
+
   menu priority: 5
 
   include SortableIndex
+
   config.sort_order = "position_asc"
   config.paginate = false
   permit_params :title, :description, :url
