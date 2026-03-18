@@ -1,5 +1,6 @@
 ActiveAdmin.register ChordForm do
   include TrackableShow
+
   menu priority: 3
 
   filter :chord

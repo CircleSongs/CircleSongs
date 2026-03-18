@@ -54,6 +54,7 @@ RSpec.describe "As an admin user" do
 
   scenario "I cannot delete a user" do
     visit admin_users_path
+    expect(page).to have_content("Users")
     expect(page).to have_no_link "Delete"
   end
 end

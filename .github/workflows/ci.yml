@@ -1,4 +1,4 @@
-name: Tests
+name: CI
 
 on:
   push:
@@ -7,7 +7,89 @@ on:
     branches: [main]
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4.8'
+          bundler-cache: true
+
+      - name: Style
+        run: bundle exec rubocop
+
+  audit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4.8'
+          bundler-cache: true
+
+      - name: Gem audit
+        run: bundle exec bundler-audit check --update
+
+      - name: Brakeman
+        run: bundle exec brakeman --no-pager --no-exit-on-warn
+
   test:
+    runs-on: ubuntu-latest
+
+    env:
+      RAILS_ENV: test
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      DATABASE_URL: postgres://circle-songs:password@localhost:5432/circle-songs_test
+
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: circle-songs
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: circle-songs_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4.8'
+          bundler-cache: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.13.1'
+          cache: yarn
+
+      - name: Install JS dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Install ImageMagick
+        run: sudo apt-get install -y imagemagick
+
+      - name: Load schema
+        run: bin/rails db:schema:load
+
+      - name: Build Vite assets
+        run: bundle exec vite build
+
+      - name: Unit and request specs
+        run: bundle exec rspec --exclude-pattern 'spec/system/**/*_spec.rb'
+
+  system-test:
     runs-on: ubuntu-latest
 
     env:
@@ -47,19 +129,19 @@ jobs:
       - name: Install JS dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Build Vite assets
-        run: bundle exec vite build
-
       - uses: browser-actions/setup-chrome@v1
 
       - name: Install ImageMagick
         run: sudo apt-get install -y imagemagick
 
-      - name: Set up database
+      - name: Load schema
         run: bin/rails db:schema:load
 
-      - name: Run tests
-        run: bundle exec rspec
+      - name: Build Vite assets
+        run: bundle exec vite build
+
+      - name: System specs
+        run: bundle exec rspec spec/system
 
       - name: Upload Capybara screenshots
         uses: actions/upload-artifact@v4
@@ -70,7 +152,7 @@ jobs:
           retention-days: 7
 
   deploy:
-    needs: test
+    needs: [lint, audit, test, system-test]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     steps:

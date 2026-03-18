@@ -4,6 +4,7 @@ class Song < ApplicationRecord
   self.ignored_columns += %i[composer_name composer_url]
 
   extend FriendlyId
+
   friendly_id :title, use: :slugged
 
   include ImageUploader::Attachment.new(:image)
