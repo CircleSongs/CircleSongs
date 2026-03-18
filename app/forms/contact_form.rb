@@ -1,7 +1,10 @@
 class ContactForm < MailForm::Base
   DEFAULT_FROM_NAME = "Contact Form".freeze
-  DEFAULT_FROM_EMAIL = Rails.application.credentials.contact_email
   DEFAULT_SUBJECT = "Medicine Songs - Contact Form".freeze
+
+  def self.default_from_email
+    Rails.application.credentials.contact_email
+  end
 
   attribute :name
   attribute :email, validate: /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i, allow_blank: true
@@ -23,7 +26,7 @@ class ContactForm < MailForm::Base
     end
 
     def from_email
-      email.presence || DEFAULT_FROM_EMAIL
+      email.presence || self.class.default_from_email
     end
 
     def subject_text

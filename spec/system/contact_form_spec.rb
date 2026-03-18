@@ -27,7 +27,7 @@ RSpec.describe "As a guest" do
     fill_in "Message...", with: message
     click_on "Submit"
     expect(page).to have_content I18n.t("contact_forms.create.success")
-    expect(last_email.from).to include ContactForm::DEFAULT_FROM_EMAIL
+    expect(last_email.from).to include ContactForm.default_from_email
     expect(last_email.subject).to eq ContactForm::DEFAULT_SUBJECT
   end
 

@@ -1,8 +1,10 @@
 ActiveAdmin.register Language do
   include TrackableShow
+
   menu parent: "Taxonomy", priority: 2
 
   include SortableIndex
+
   config.sort_order = "position_asc"
   config.paginate = false
 
