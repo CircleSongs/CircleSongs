@@ -803,10 +803,10 @@ chokidar@^4.0.0:
   dependencies:
     readdirp "^4.0.1"
 
-chordsheetjs@^14.0.0:
-  version "14.0.0"
-  resolved "https://registry.yarnpkg.com/chordsheetjs/-/chordsheetjs-14.0.0.tgz#af917a8665b7ebe80b98ca054fff6a8b3c26ee9e"
-  integrity sha512-JDSgKxw/+DSXhMOMb9g5jNLgL5/NPYHQDPW9av56iJqXhXzAMKPKbfZRgFWE/g74ZZNq8K8EagxaJms3XfRHkA==
+chordsheetjs@^14.2.1:
+  version "14.2.1"
+  resolved "https://registry.yarnpkg.com/chordsheetjs/-/chordsheetjs-14.2.1.tgz#2ac71c7e00b4901d5992a8a95612062acef8897a"
+  integrity sha512-lvTXY/rX1tWc1TaI4G9MVuUIU8Z0W0LfIWHgCD1rZfaIdA6jaKXNduA4rkpH2StGJDzQqcc8AQTmEUZbHRKGtw==
   dependencies:
     jspdf "^4.0.0"
 
