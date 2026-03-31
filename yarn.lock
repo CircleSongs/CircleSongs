@@ -803,10 +803,10 @@ chokidar@^4.0.0:
   dependencies:
     readdirp "^4.0.1"
 
-chordsheetjs@^14.0.0:
-  version "14.0.0"
-  resolved "https://registry.yarnpkg.com/chordsheetjs/-/chordsheetjs-14.0.0.tgz#af917a8665b7ebe80b98ca054fff6a8b3c26ee9e"
-  integrity sha512-JDSgKxw/+DSXhMOMb9g5jNLgL5/NPYHQDPW9av56iJqXhXzAMKPKbfZRgFWE/g74ZZNq8K8EagxaJms3XfRHkA==
+chordsheetjs@^14.2.1:
+  version "14.2.1"
+  resolved "https://registry.yarnpkg.com/chordsheetjs/-/chordsheetjs-14.2.1.tgz#2ac71c7e00b4901d5992a8a95612062acef8897a"
+  integrity sha512-lvTXY/rX1tWc1TaI4G9MVuUIU8Z0W0LfIWHgCD1rZfaIdA6jaKXNduA4rkpH2StGJDzQqcc8AQTmEUZbHRKGtw==
   dependencies:
     jspdf "^4.0.0"
 
@@ -1073,6 +1073,20 @@ jiti@^2.6.1:
   integrity sha512-ekilCSN1jwRvIbgeg/57YFh8qQDNbwDb9xT/qu2DAHbFFZUicIl4ygVaAvzveMhMVr3LnpSKTNnwt8PoOfmKhQ==
 
 jspdf@^4.0.0:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/jspdf/-/jspdf-4.2.1.tgz#6ba0d263999313f91f369ee80ecf235046b2acd8"
+  integrity sha512-YyAXyvnmjTbR4bHQRLzex3CuINCDlQnBqoSYyjJwTP2x9jDLuKDzy7aKUl0hgx3uhcl7xzg32agn5vlie6HIlQ==
+  dependencies:
+    "@babel/runtime" "^7.28.6"
+    fast-png "^6.2.0"
+    fflate "^0.8.1"
+  optionalDependencies:
+    canvg "^3.0.11"
+    core-js "^3.6.0"
+    dompurify "^3.3.1"
+    html2canvas "^1.0.0-rc.5"
+
+jspdf@^4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/jspdf/-/jspdf-4.2.1.tgz#6ba0d263999313f91f369ee80ecf235046b2acd8"
   integrity sha512-YyAXyvnmjTbR4bHQRLzex3CuINCDlQnBqoSYyjJwTP2x9jDLuKDzy7aKUl0hgx3uhcl7xzg32agn5vlie6HIlQ==

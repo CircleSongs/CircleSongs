@@ -48,7 +48,7 @@ group :development, :test do
   gem "rubocop", "~> 1.71"
   gem "rubocop-rspec", "~> 3.4"
   gem "rubocop-rails", "~> 2.29"
-  gem "ruby-lsp", "~> 0.23.11"
+  gem "ruby-lsp", "~> 0.26.9"
   gem "guard", "~> 2.19"
   gem "guard-rspec", "~> 4.7"
 end
