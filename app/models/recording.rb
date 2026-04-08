@@ -58,7 +58,7 @@ class Recording < ApplicationRecord
       match = external_media_url.match(%r{youtube\.com/watch\?v=([\w-]+)})
       return external_media_url unless match
 
-      "https://www.youtube.com/embed/#{match[1]}"
+      "https://www.youtube-nocookie.com/embed/#{match[1]}"
     end
 
     def format_soundcloud_url
