@@ -1,0 +1,9 @@
+.cookie-consent{ data: { controller: "cookie-consent", cookie_consent_target: "banner" }, role: "dialog", "aria-label" => "Cookie consent", "aria-describedby" => "cookie-consent-message", hidden: true, tabindex: "-1" }
+  .cookie-consent__inner.container
+    %p#cookie-consent-message.cookie-consent__text
+      We use cookies to understand how visitors use this site. Embedded media
+      players from third-party services may also set cookies for playback
+      functionality. By accepting, you allow analytics cookies.
+    .cookie-consent__actions
+      %button.btn{ data: { action: "cookie-consent#accept" }, type: "button" } Accept All
+      %button.btn.btn--secondary{ data: { action: "cookie-consent#decline" }, type: "button" } Necessary Only

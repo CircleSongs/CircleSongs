@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    = render 'layouts/google_analytics'
+    -# Google Analytics is loaded dynamically by the cookie consent controller
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}/
     %title Medicine Songs
@@ -42,6 +42,7 @@
     = yield
 
     = render 'layouts/footer'
-    
+    = render 'layouts/cookie_consent'
+
     -# Swiper JS
     %script{src: "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"}

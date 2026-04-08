@@ -104,7 +104,7 @@ RSpec.describe Recording do
       let(:external_media_url) { "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
 
       it "returns the embed URL" do
-        expect(recording.formatted_external_media_url).to eq("https://www.youtube.com/embed/dQw4w9WgXcQ")
+        expect(recording.formatted_external_media_url).to eq("https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ")
       end
     end
 
@@ -112,7 +112,7 @@ RSpec.describe Recording do
       let(:external_media_url) { "https://youtube.com/watch?v=dQw4w9WgXcQ" }
 
       it "returns the embed URL" do
-        expect(recording.formatted_external_media_url).to eq("https://www.youtube.com/embed/dQw4w9WgXcQ")
+        expect(recording.formatted_external_media_url).to eq("https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ")
       end
     end
 
