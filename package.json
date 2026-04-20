@@ -24,7 +24,7 @@
     "sortablejs": "^1.15.6",
     "stimulus-vite-helpers": "^3.1.0",
     "tailwindcss": "^4",
-    "tom-select": "^2.4.3",
+    "tom-select": "^2.6.0",
     "vexchords": "^1.2.0",
     "vite-plugin-stimulus-hmr": "^3.0.0"
   }
