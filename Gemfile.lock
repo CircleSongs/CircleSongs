@@ -163,7 +163,7 @@ GEM
       addressable (~> 2.8)
     drb (2.2.3)
     dry-cli (1.4.1)
-    erb (6.0.2)
+    erb (6.0.4)
     erubi (1.13.1)
     faker (3.6.1)
       i18n (>= 1.8.11, < 2)
