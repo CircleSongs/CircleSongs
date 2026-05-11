@@ -6,7 +6,7 @@
   },
   "devDependencies": {
     "vite": "^8.0.10",
-    "vite-plugin-ruby": "^5.2.1"
+    "vite-plugin-ruby": "^5.2.2"
   },
   "dependencies": {
     "@activeadmin/activeadmin": "4.0.0-beta22",
