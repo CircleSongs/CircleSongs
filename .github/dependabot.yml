@@ -9,3 +9,10 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
+    ignore:
+      # 2.6.1 added a focus-stealing guard (fix for Edge autofill issue #806)
+      # that prevents the dropdown from opening under Capybara when another
+      # field already holds focus. Skip 2.6.1; revisit when a later version
+      # lands.
+      - dependency-name: "tom-select"
+        versions: ["2.6.1"]
