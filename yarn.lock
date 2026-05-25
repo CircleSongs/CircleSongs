@@ -641,12 +641,10 @@ chokidar@^5.0.0:
   dependencies:
     readdirp "^5.0.0"
 
-chordsheetjs@^14.6.1:
-  version "14.6.1"
-  resolved "https://registry.yarnpkg.com/chordsheetjs/-/chordsheetjs-14.6.1.tgz#1c4381e570918bae10ab436f23e7caaea14336cf"
-  integrity sha512-rWR75AgOdoIcp41lBmdnhHU9b/if086oLdUFifw7VXsvz3jzb5osfMLWl1WfSyINELdA128IjDbzttBTtJpVSQ==
-  dependencies:
-    jspdf "^4.0.0"
+chordsheetjs@^15.2.0:
+  version "15.2.0"
+  resolved "https://registry.yarnpkg.com/chordsheetjs/-/chordsheetjs-15.2.0.tgz#f623fdb66ba6b82ce9ccf232d1923d92c355e862"
+  integrity sha512-rUNs5/A9o6kMPbTnhv6VRx+OII+Es0oovd0VDILrkt6IcoEWktkdmKCZOKMGQmNII/GEcXYj8HvQhJqXszcTsQ==
 
 colorjs.io@^0.5.0:
   version "0.5.2"
@@ -849,7 +847,7 @@ jiti@^2.6.1:
   resolved "https://registry.yarnpkg.com/jiti/-/jiti-2.6.1.tgz#178ef2fc9a1a594248c20627cd820187a4d78d92"
   integrity sha512-ekilCSN1jwRvIbgeg/57YFh8qQDNbwDb9xT/qu2DAHbFFZUicIl4ygVaAvzveMhMVr3LnpSKTNnwt8PoOfmKhQ==
 
-jspdf@^4.0.0, jspdf@^4.2.1:
+jspdf@^4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/jspdf/-/jspdf-4.2.1.tgz#6ba0d263999313f91f369ee80ecf235046b2acd8"
   integrity sha512-YyAXyvnmjTbR4bHQRLzex3CuINCDlQnBqoSYyjJwTP2x9jDLuKDzy7aKUl0hgx3uhcl7xzg32agn5vlie6HIlQ==
