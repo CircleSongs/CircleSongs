@@ -648,10 +648,10 @@ chokidar@^5.0.0:
   dependencies:
     readdirp "^5.0.0"
 
-chordsheetjs@^15.5.0:
-  version "15.5.0"
-  resolved "https://registry.yarnpkg.com/chordsheetjs/-/chordsheetjs-15.5.0.tgz#f3c5e39bf8f734993eed8c782dc8fff1386d7e9e"
-  integrity sha512-ei2E1NmDpx7D2sgGazhnBNaz+Nn/L3pfMQKnKotC1G9+GrIiPkfyl+/F2B/HEp2uAULpdP09dtochWN6DASFGA==
+chordsheetjs@^15.5.2:
+  version "15.5.2"
+  resolved "https://registry.yarnpkg.com/chordsheetjs/-/chordsheetjs-15.5.2.tgz#ee9c74ddb6625ec9953b61cf0d438fcc73856961"
+  integrity sha512-ckM85eD5uRT9lWMQUfQpWFSCU5ZbwP3ROGpLvgFEzalHd08gjPhoe4wPHo2okjFeRF4rMJI29YY3tBuZGlw33A==
 
 colorjs.io@^0.5.0:
   version "0.5.2"
