@@ -1332,10 +1332,10 @@ tinyglobby@^0.2.12, tinyglobby@^0.2.17:
     fdir "^6.5.0"
     picomatch "^4.0.4"
 
-tom-select@^2.6.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/tom-select/-/tom-select-2.6.0.tgz#8582363389dd17157ed11692320530bcd4111fbf"
-  integrity sha512-o2ToBjhUAnrrQvW/hrY9c//TpOpAKYSlfuFnf0DIwNy+ua+mmYnsF4PxN/PpzBfUIfEFkNYAngeGBfOAZWF3tw==
+tom-select@^2.6.2:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/tom-select/-/tom-select-2.6.2.tgz#07693442309eefa5b57c6beee6005195f3f956a4"
+  integrity sha512-eiXIkk82XzzUTOVQDFpy+ZGejuqdTvMukyUyeZBQaKnqW42UoTiTZnrod/eX0rkqJEc4rZY9DZ3zdjV07i29wQ==
   dependencies:
     "@orchidjs/sifter" "^1.1.0"
     "@orchidjs/unicode-variants" "^1.1.2"
