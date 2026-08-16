@@ -8,10 +8,22 @@
     display: inline-block !important;
   }
 
-  /* Fix for single select - remove extra whitespace/newline after selection */
+  /* Fix for single select - remove extra whitespace/newline after selection.
+     The input must stay focusable: tom-select >= 2.6.1 only opens the dropdown
+     when the control input actually receives focus, and a display:none element
+     cannot be focused. Collapse it to zero width instead of removing it. */
   &.single .ts-control {
+    position: relative;
+
     input {
-      display: none !important;
+      position: absolute;
+      inset: 0;
+      width: 100% !important;
+      height: 100%;
+      opacity: 0;
+      padding: 0 !important;
+      margin: 0 !important;
+      border: 0;
     }
   }
 }
