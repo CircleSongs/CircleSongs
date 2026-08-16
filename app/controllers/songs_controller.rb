@@ -12,7 +12,7 @@ class SongsController < ApplicationController
   end
 
   def show
-    @song = Song.friendly.find params[:id]
+    @song = Song.friendly.find params.expect(:id)
   end
 
   private

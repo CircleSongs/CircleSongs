@@ -11,50 +11,50 @@ RSpec.describe "As an admin user" do
   scenario "I can create a user", :js do
     visit admin_users_path
     click_on "New User"
-    expect(page).to have_content("New User")
+    expect(page).to have_text("New User")
     fill_in "Email", with: email
     fill_in "Password", with: password, match: :prefer_exact
     fill_in "Password confirmation", with: password, match: :prefer_exact
     click_on "Create User"
-    expect(page).to have_content "User was successfully created."
-    expect(page).to have_content email
+    expect(page).to have_text "User was successfully created."
+    expect(page).to have_text email
     within "tbody tr:nth-child(1)" do
       click_on "Edit"
     end
-    expect(page).to have_content("Edit User")
+    expect(page).to have_text("Edit User")
     fill_in "Email", with: new_email
     fill_in "Password", with: password, match: :prefer_exact
     fill_in "Password confirmation", with: password, match: :prefer_exact
     click_on "Update User"
-    expect(page).to have_content "User was successfully updated."
-    expect(page).to have_content new_email
+    expect(page).to have_text "User was successfully updated."
+    expect(page).to have_text new_email
   end
 
   scenario "I can change a user's password" do
     homer = users(:homer)
     new_password = FFaker::Internet.password
     visit edit_admin_user_path(homer)
-    expect(page).to have_content("Edit User")
+    expect(page).to have_text("Edit User")
     fill_in "Password", with: new_password, match: :prefer_exact
     fill_in "Password confirmation", with: new_password, match: :prefer_exact
     click_on "Update User"
-    expect(page).to have_content "User was successfully updated."
+    expect(page).to have_text "User was successfully updated."
     expect(homer.reload.valid_password?(new_password)).to be true
   end
 
   scenario "I can disable a user without changing their password" do
     homer = users(:homer)
     visit edit_admin_user_path(homer)
-    expect(page).to have_content("Edit User")
+    expect(page).to have_text("Edit User")
     check "Disabled"
     click_on "Update User"
-    expect(page).to have_content "User was successfully updated."
+    expect(page).to have_text "User was successfully updated."
     expect(homer.reload).to be_disabled
   end
 
   scenario "I cannot delete a user" do
     visit admin_users_path
-    expect(page).to have_content("Users")
+    expect(page).to have_text("Users")
     expect(page).to have_no_link "Delete"
   end
 end

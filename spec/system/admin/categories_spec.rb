@@ -12,31 +12,31 @@ RSpec.describe "As an admin user" do
     visit admin_categories_path
 
     click_on "New Category"
-    expect(page).to have_content("New Category")
+    expect(page).to have_text("New Category")
     fill_in "Name", with: name
     fill_in "Description", with: "A test description"
     check "Restricted"
     click_on "Create Category"
-    expect(page).to have_content "Category was successfully created."
-    expect(page).to have_content(/RESTRICTED\s+Yes/i)
-    expect(page).to have_content "A test description"
+    expect(page).to have_text "Category was successfully created."
+    expect(page).to have_text(/RESTRICTED\s+Yes/i)
+    expect(page).to have_text "A test description"
   end
 
   scenario "I can view the index page" do
     visit admin_categories_path
 
     within "#category_#{restricted_category.id}" do
-      expect(page).to have_content restricted_category.name
+      expect(page).to have_text restricted_category.name
       expect(page).to have_css "i.fa-check.has-yes"
     end
-    expect(page).to have_content category.name
+    expect(page).to have_text category.name
   end
 
   scenario "I can see drag handles on the index page" do
     visit admin_categories_path
 
     expect(page).to have_css "td.handle", minimum: 1
-    expect(page).to have_content "☰"
+    expect(page).to have_text "☰"
   end
 
   scenario "I can reorder categories via drag and drop", :js do
@@ -74,18 +74,18 @@ RSpec.describe "As an admin user" do
 
   scenario "I can edit a category description" do
     visit edit_admin_category_path(category)
-    expect(page).to have_content("Edit Category")
+    expect(page).to have_text("Edit Category")
 
     fill_in "Description", with: "Updated description"
     click_on "Update Category"
-    expect(page).to have_content "Category was successfully updated."
+    expect(page).to have_text "Category was successfully updated."
     expect(category.reload.description).to eq "Updated description"
   end
 
   scenario "I can see description on the index page" do
     visit admin_categories_path
 
-    expect(page).to have_content category.description
+    expect(page).to have_text category.description
   end
 
   scenario "name links to show page" do
@@ -115,7 +115,7 @@ RSpec.describe "As an admin user" do
         click_on "Delete"
       end
     end
-    expect(page).to have_content "Category was successfully destroyed."
+    expect(page).to have_text "Category was successfully destroyed."
   end
 
   scenario "I can delete a category from the show page" do
@@ -123,6 +123,6 @@ RSpec.describe "As an admin user" do
     accept_confirm do
       click_on "Delete Category"
     end
-    expect(page).to have_content "Category was successfully destroyed."
+    expect(page).to have_text "Category was successfully destroyed."
   end
 end

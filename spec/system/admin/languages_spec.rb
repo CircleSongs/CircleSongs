@@ -9,14 +9,14 @@ RSpec.describe "Admin Languages" do
   scenario "I can view the languages index page" do
     visit admin_languages_path
 
-    expect(page).to have_content language.name
+    expect(page).to have_text language.name
   end
 
   scenario "I can see drag handles on the index page" do
     visit admin_languages_path
 
     expect(page).to have_css "td.handle", minimum: 1
-    expect(page).to have_content "☰"
+    expect(page).to have_text "☰"
   end
 
   scenario "I can reorder languages via drag and drop", :js do

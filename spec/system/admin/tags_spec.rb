@@ -10,7 +10,7 @@ RSpec.describe "Admin Tags" do
   scenario "I can view the tags index page" do
     visit admin_tags_path
 
-    expect(page).to have_content "classic rock"
+    expect(page).to have_text "classic rock"
   end
 
   scenario "name links to show page" do
@@ -30,13 +30,13 @@ RSpec.describe "Admin Tags" do
     click_on tag.taggings_count.to_s
 
     expect(page).to have_current_path(admin_songs_path(q: { themes_name_in: ["classic rock"] }))
-    expect(page).to have_content song.title
+    expect(page).to have_text song.title
   end
 
   scenario "I can view a tag show page" do
     visit admin_tag_path(ActsAsTaggableOn::Tag.find_by!(name: "classic rock"))
 
-    expect(page).to have_content "classic rock"
-    expect(page).to have_content song.title
+    expect(page).to have_text "classic rock"
+    expect(page).to have_text song.title
   end
 end

@@ -16,8 +16,8 @@ RSpec.describe "As a guest" do
     select "traditional", from: "theme"
     click_on "Search Songs"
 
-    expect(page).to have_content el_condor_pasa.title
-    expect(page).to have_content taki_taki.title
-    expect(page).to have_no_content non_traditional_song.title
+    expect(page).to have_text el_condor_pasa.title
+    expect(page).to have_text taki_taki.title
+    expect(page).to have_no_text non_traditional_song.title
   end
 end

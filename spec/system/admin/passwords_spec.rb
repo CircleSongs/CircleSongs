@@ -11,13 +11,13 @@ RSpec.describe "As an Admin user" do
   scenario "I can manage Passwords" do
     visit admin_passwords_path
     click_on "New Password"
-    expect(page).to have_content("New Password")
+    expect(page).to have_text("New Password")
     fill_in "Name", with: name
     fill_in "Value", with: value
     click_on "Create Password"
-    expect(page).to have_content "Password was successfully created."
-    expect(page).to have_content name
-    expect(page).to have_content value
+    expect(page).to have_text "Password was successfully created."
+    expect(page).to have_text name
+    expect(page).to have_text value
     within "table" do
       expect(page).to have_no_link "Delete"
       expect(page).to have_no_link "Show"
@@ -29,6 +29,6 @@ RSpec.describe "As an Admin user" do
     expect(page).to have_field "Value", with: value
     fill_in "Value", with: new_value
     click_on "Update Password"
-    expect(page).to have_content new_value
+    expect(page).to have_text new_value
   end
 end

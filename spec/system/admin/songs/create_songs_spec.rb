@@ -19,7 +19,7 @@ RSpec.describe "As an admin user" do
   scenario "I can create a Song", :js do
     visit admin_songs_path
     click_on "New Song"
-    expect(page).to have_content("New Song")
+    expect(page).to have_text("New Song")
     expect(page).to have_css(".ts-control")
 
     attach_file "Image", Rails.root.join("spec/fixtures/files/image.jpeg")
@@ -39,27 +39,27 @@ RSpec.describe "As an admin user" do
 
     click_on "Create Song"
 
-    expect(page).to have_content "Song was successfully created."
-    expect(page).to have_content title
-    expect(page).to have_content alternate_title
+    expect(page).to have_text "Song was successfully created."
+    expect(page).to have_text title
+    expect(page).to have_text alternate_title
     expect(page).to have_link(composer.name, href: composer.url)
-    expect(page).to have_content lyrics
-    expect(page).to have_content translation
-    expect(page).to have_content description
-    expect(page).to have_content "Traditional"
-    expect(page).to have_content "English and Spanish"
-    expect(page).to have_no_content chords
-    expect(page).to have_content formatted_chords
+    expect(page).to have_text lyrics
+    expect(page).to have_text translation
+    expect(page).to have_text description
+    expect(page).to have_text "Traditional"
+    expect(page).to have_text "English and Spanish"
+    expect(page).to have_no_text chords
+    expect(page).to have_text formatted_chords
   end
 
   scenario "I can underline text in Song#lyrics and Song#translation" do
     visit admin_songs_path
     click_on "New Song"
-    expect(page).to have_content("New Song")
+    expect(page).to have_text("New Song")
     click_on "Create Song"
 
     within "#song_title_input" do
-      expect(page).to have_content "can't be blank"
+      expect(page).to have_text "can't be blank"
     end
 
     attach_file "Image", Rails.root.join("spec/fixtures/files/image.jpeg")
@@ -68,7 +68,7 @@ RSpec.describe "As an admin user" do
     fill_in "Translation", with: underlined_translation
 
     click_on "Create Song"
-    expect(page).to have_content "Song was successfully created."
+    expect(page).to have_text "Song was successfully created."
     within "[data-row='lyrics']" do
       expect(page).to have_css "u"
     end

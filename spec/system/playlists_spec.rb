@@ -7,11 +7,11 @@ RSpec.describe "Playlists" do
   scenario "As a guest I can view playlists" do
     visit playlists_path
 
-    expect(page).to have_content spotify.title
+    expect(page).to have_text spotify.title
     expect(page).to have_link spotify.title, href: spotify.url
 
-    expect(page).to have_content youtube.title
-    expect(page).to have_content soundcloud.title
-    expect(page).to have_content bandcamp.title
+    expect(page).to have_text youtube.title
+    expect(page).to have_text soundcloud.title
+    expect(page).to have_text bandcamp.title
   end
 end

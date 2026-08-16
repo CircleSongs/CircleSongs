@@ -10,8 +10,8 @@ RSpec.describe "Admin Playlists" do
   scenario "I can view the playlists index page" do
     visit admin_playlists_path
 
-    expect(page).to have_content spotify.title
-    expect(page).to have_content youtube.title
+    expect(page).to have_text spotify.title
+    expect(page).to have_text youtube.title
   end
 
   scenario "title links to show page" do
@@ -28,7 +28,7 @@ RSpec.describe "Admin Playlists" do
     visit admin_playlists_path
 
     expect(page).to have_css "td.handle", minimum: 1
-    expect(page).to have_content "☰"
+    expect(page).to have_text "☰"
   end
 
   scenario "I can reorder playlists via drag and drop", :js do
@@ -65,8 +65,8 @@ RSpec.describe "Admin Playlists" do
   scenario "I can view a playlist show page" do
     visit admin_playlist_path(spotify)
 
-    expect(page).to have_content spotify.title
-    expect(page).to have_content spotify.description
+    expect(page).to have_text spotify.title
+    expect(page).to have_text spotify.description
     expect(page).to have_link spotify.url, href: spotify.url
   end
 
@@ -78,8 +78,8 @@ RSpec.describe "Admin Playlists" do
     fill_in "Description", with: "A great new playlist"
     fill_in "Url", with: "https://open.spotify.com/playlist/123456"
     click_on "Create Playlist"
-    expect(page).to have_content "Playlist was successfully created."
-    expect(page).to have_content "New Playlist"
+    expect(page).to have_text "Playlist was successfully created."
+    expect(page).to have_text "New Playlist"
   end
 
   scenario "I can edit a playlist" do
@@ -88,8 +88,8 @@ RSpec.describe "Admin Playlists" do
     click_on "Edit Playlist"
     fill_in "Title", with: "Updated Title"
     click_on "Update Playlist"
-    expect(page).to have_content "Playlist was successfully updated."
-    expect(page).to have_content "Updated Title"
+    expect(page).to have_text "Playlist was successfully updated."
+    expect(page).to have_text "Updated Title"
   end
 
   scenario "I can delete a playlist from the show page" do
@@ -99,6 +99,6 @@ RSpec.describe "Admin Playlists" do
       click_on "Delete Playlist"
     end
 
-    expect(page).to have_content "Playlist was successfully destroyed."
+    expect(page).to have_text "Playlist was successfully destroyed."
   end
 end

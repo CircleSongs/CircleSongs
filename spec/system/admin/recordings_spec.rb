@@ -10,7 +10,7 @@ RSpec.describe "Admin Recordings" do
   scenario "I can view the recordings index page" do
     visit admin_recordings_path
 
-    expect(page).to have_content recording.title
+    expect(page).to have_text recording.title
     expect(page).to have_link song.title, href: admin_song_path(song)
   end
 
@@ -27,8 +27,8 @@ RSpec.describe "Admin Recordings" do
   scenario "I can view a recording show page" do
     visit admin_recording_path(recording)
 
-    expect(page).to have_content recording.title
+    expect(page).to have_text recording.title
     expect(page).to have_link song.title, href: admin_song_path(song)
-    expect(page).to have_content "POSITION"
+    expect(page).to have_text "POSITION"
   end
 end
