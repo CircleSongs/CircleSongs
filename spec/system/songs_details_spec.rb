@@ -12,13 +12,13 @@ RSpec.describe "As a guest" do
 
     scenario "if I do not add a #composer_link there is no link" do
       expect(page).to have_no_link(song.composer.name, href: "")
-      expect(page).to have_content song.composer.name
+      expect(page).to have_text song.composer.name
     end
   end
 
   scenario "I can visit a song via its slug" do
     visit "/songs/#{song.slug}"
-    expect(page).to have_content song.title
+    expect(page).to have_text song.title
     visit songs_path
     click_on song.title
     expect(page).to have_current_path(song_path(song))

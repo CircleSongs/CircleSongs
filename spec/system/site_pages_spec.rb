@@ -9,11 +9,11 @@ RSpec.describe "As a User" do
   scenario "I see the new navigation" do
     visit root_path
 
-    expect(page).to have_content(/Song Search/i)
-    expect(page).to have_content(/About Us/i)
-    expect(page).to have_content(/Resources/i)
-    expect(page).to have_content(/Songbook/i)
-    expect(page).to have_content(/Support Us/i)
-    expect(page).to have_no_content(/Ikaros/i)
+    expect(page).to have_text(/Song Search/i)
+    expect(page).to have_text(/About Us/i)
+    expect(page).to have_text(/Resources/i)
+    expect(page).to have_text(/Songbook/i)
+    expect(page).to have_text(/Support Us/i)
+    expect(page).to have_no_text(/Ikaros/i)
   end
 end

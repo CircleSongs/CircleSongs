@@ -15,7 +15,7 @@ RSpec.describe "As a guest" do
     fill_in "Subject...", with: subject_text
     fill_in "Message...", with: message
     click_on "Submit"
-    expect(page).to have_content I18n.t("contact_forms.create.success")
+    expect(page).to have_text I18n.t("contact_forms.create.success")
     expect(last_email.to).to include Rails.application.credentials.contact_email
     expect(last_email.from).to include email
     expect(page).to have_current_path songs_path
@@ -23,10 +23,10 @@ RSpec.describe "As a guest" do
 
   scenario "with incomplete ContactForm data" do
     click_on "Submit"
-    expect(page).to have_content "Message can't be blank"
+    expect(page).to have_text "Message can't be blank"
     fill_in "Message...", with: message
     click_on "Submit"
-    expect(page).to have_content I18n.t("contact_forms.create.success")
+    expect(page).to have_text I18n.t("contact_forms.create.success")
     expect(last_email.from).to include ContactForm.default_from_email
     expect(last_email.subject).to eq ContactForm::DEFAULT_SUBJECT
   end
@@ -35,7 +35,7 @@ RSpec.describe "As a guest" do
     fill_in "Message...", with: message
     page.execute_script("document.querySelector('#contact_form_nickname').value = 'foo'")
     click_on "Submit"
-    expect(page).to have_content I18n.t("contact_forms.create.success")
+    expect(page).to have_text I18n.t("contact_forms.create.success")
     expect(last_email).to be_nil
   end
 end

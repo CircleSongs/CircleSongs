@@ -49,11 +49,11 @@ RSpec.describe "As an admin user" do
 
   scenario "I can manage ChordForms", :js do
     click_on "New Chord Form"
-    expect(page).to have_content("New Chord Form")
+    expect(page).to have_text("New Chord Form")
     fill_in "Chord", with: chord
     fill_in "Fingering", with: valid_fingering
     click_on "Create Chord form"
-    expect(page).to have_content "Chord form was successfully created."
+    expect(page).to have_text "Chord form was successfully created."
     expect(page).to have_css "div.chord-form svg"
     visit admin_chord_forms_path
     expect(page).to have_css "div.chord-form svg"

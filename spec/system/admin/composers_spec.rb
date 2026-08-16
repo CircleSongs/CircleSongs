@@ -9,7 +9,7 @@ RSpec.describe "Admin Composers" do
   scenario "I can view the composers index page" do
     visit admin_composers_path
 
-    expect(page).to have_content composer.name
+    expect(page).to have_text composer.name
   end
 
   scenario "name links to show page" do
@@ -35,6 +35,6 @@ RSpec.describe "Admin Composers" do
   scenario "I can view a composer show page" do
     visit admin_composer_path(composer)
 
-    expect(page).to have_content composer.name
+    expect(page).to have_text composer.name
   end
 end

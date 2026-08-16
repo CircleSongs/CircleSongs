@@ -14,7 +14,7 @@ RSpec.describe "As an" do
         options: unrestricted_categories.map(&:name_and_count).unshift("Category"),
         visible: :all
       )
-      expect(page).to have_no_content restricted_song.title
+      expect(page).to have_no_text restricted_song.title
     end
   end
 
@@ -27,7 +27,7 @@ RSpec.describe "As an" do
 
         fill_in I18n.t("restricted_categories.password_label"), with: password
         click_on "Submit"
-        expect(page).to have_content I18n.t("restricted_category_sessions.create.invalid_credentials")
+        expect(page).to have_text I18n.t("restricted_category_sessions.create.invalid_credentials")
       end
     end
 
@@ -54,7 +54,7 @@ RSpec.describe "As an" do
       select(restricted_categories.first.name_and_count, from: "category")
       click_on "Search Songs"
 
-      expect(page).to have_content restricted_song.title
+      expect(page).to have_text restricted_song.title
     end
   end
 

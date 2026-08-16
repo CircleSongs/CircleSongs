@@ -11,7 +11,7 @@ RSpec.describe "As an admin user" do
   scenario "I can create Recordings with SoundCloud URL", :js do
     visit admin_songs_path
     click_on "New Song"
-    expect(page).to have_content("New Song")
+    expect(page).to have_text("New Song")
 
     attach_file "Image", Rails.root.join("spec/fixtures/files/image.jpeg")
     fill_in "Title", with: title
@@ -19,7 +19,7 @@ RSpec.describe "As an admin user" do
     expect(page).to have_field("External media url")
     fill_in "External media url", with: soundcloud_link
     click_on "Create Song"
-    expect(page).to have_content("Song was successfully created")
+    expect(page).to have_text("Song was successfully created")
 
     song = Song.find_by(title: title)
     expect(song.recordings.count).to eq(1)
@@ -29,7 +29,7 @@ RSpec.describe "As an admin user" do
   scenario "I can create Recordings with YouTube URL", :js do
     visit admin_songs_path
     click_on "New Song"
-    expect(page).to have_content("New Song")
+    expect(page).to have_text("New Song")
 
     attach_file "Image", Rails.root.join("spec/fixtures/files/image.jpeg")
     fill_in "Title", with: title
@@ -37,7 +37,7 @@ RSpec.describe "As an admin user" do
     expect(page).to have_field("External media url")
     fill_in "External media url", with: youtube_link
     click_on "Create Song"
-    expect(page).to have_content("Song was successfully created")
+    expect(page).to have_text("Song was successfully created")
 
     song = Song.find_by(title: title)
     expect(song.recordings.count).to eq(1)
@@ -47,24 +47,24 @@ RSpec.describe "As an admin user" do
   scenario "I can create and delete Recordings", :js do
     visit admin_songs_path
     click_on "New Song"
-    expect(page).to have_content("New Song")
+    expect(page).to have_text("New Song")
 
     attach_file "Image", Rails.root.join("spec/fixtures/files/image.jpeg")
     fill_in "Title", with: title
     click_on "Add New Recording"
     expect(page).to have_field("External media url")
     click_on "Create Song"
-    expect(page).to have_content("Song was successfully created")
+    expect(page).to have_text("Song was successfully created")
 
     song = Song.find_by(title: title)
     visit edit_admin_song_path(song)
-    expect(page).to have_content("Edit Song")
+    expect(page).to have_text("Edit Song")
 
     click_on "Add New Recording"
     expect(page).to have_field("External media url")
     fill_in "External media url", with: soundcloud_link
     click_on "Update Song"
-    expect(page).to have_content("Song was successfully updated")
+    expect(page).to have_text("Song was successfully updated")
     expect(song.recordings.count).to eq(1)
 
     visit edit_admin_song_path(song)

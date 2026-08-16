@@ -30,18 +30,18 @@ RSpec.describe "As an admin user" do
     accept_confirm do
       click_on "Delete"
     end
-    expect(page).to have_content "Song was successfully destroyed."
+    expect(page).to have_text "Song was successfully destroyed."
   end
 
   scenario "I can edit a Song that has no image" do
     visit admin_song_path(song)
     click_on "Edit"
-    expect(page).to have_content("Edit Song")
+    expect(page).to have_text("Edit Song")
     within "#song_title_input" do
       fill_in "Title", with: "New Title"
     end
     click_on "Update Song"
-    expect(page).to have_content "Song was successfully updated."
+    expect(page).to have_text "Song was successfully updated."
     expect(song.reload.title).to eq "New Title"
   end
 
@@ -50,7 +50,7 @@ RSpec.describe "As an admin user" do
 
     within ".panel" do
       expect(page).to have_css "td.handle", minimum: 1
-      expect(page).to have_content "☰"
+      expect(page).to have_text "☰"
     end
   end
 
@@ -109,17 +109,17 @@ RSpec.describe "As an admin user" do
 
   scenario "I can mark a song as featured" do
     visit edit_admin_song_path(song)
-    expect(page).to have_content("Edit Song")
+    expect(page).to have_text("Edit Song")
     check "Featured"
     click_on "Update Song"
-    expect(page).to have_content "Song was successfully updated."
+    expect(page).to have_text "Song was successfully updated."
     expect(song.reload.featured).to be true
     visit admin_songs_path
     select "Yes", from: "Featured"
     click_on "Filter"
-    expect(page).to have_content song.title
+    expect(page).to have_text song.title
     select "No", from: "Featured"
     click_on "Filter"
-    expect(page).to have_no_content song.title
+    expect(page).to have_no_text song.title
   end
 end
