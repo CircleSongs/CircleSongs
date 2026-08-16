@@ -25,17 +25,9 @@ RSpec.describe "As an admin user" do
     attach_file "Image", Rails.root.join("spec/fixtures/files/image.jpeg")
     fill_in "Title", with: title
     fill_in "Alternate title", with: alternate_title
-    # Since tom-select 2.6.1 the dropdown only opens if the control input is the
-    # document's activeElement shortly after the click. Headless Chrome does not
-    # hold window focus, so a synthetic click leaves activeElement on <body> and
-    # the dropdown stays closed. Open it through tom-select's own API instead.
-    page.execute_script(<<~JS)
-      var ts = document.getElementById('song_composer_id').tomselect;
-      ts.open();
-      ts.refreshOptions(false);
-    JS
     within "#song_composer_id_input" do
-      find(".option", text: "#{composer.name} | #{composer.url}").click
+      find(".ts-control").click
+      find('.option', text: "#{composer.name} | #{composer.url}").click
     end
     fill_in "Lyrics", with: lyrics
     fill_in "Translation", with: translation
