@@ -107,6 +107,10 @@ The source lives at `maintenance/index.html` and is published to S3 with
 config var. Keep it self-contained (inline CSS, inlined logo, absolute URLs) —
 anything it links to on `medicinesongs.net` is unreachable during maintenance.
 
+Publish **immediately before** `heroku maintenance:on`: the task stamps the current
+time into the page so it can report when maintenance began. A stamp older than six
+hours is ignored and the line is hidden, rather than showing a stale time.
+
 ## Deployment
 
 - GitHub Actions CI: PostgreSQL 14 service, RSpec + Vite build

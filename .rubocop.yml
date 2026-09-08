@@ -47,6 +47,7 @@ Metrics/BlockLength:
   Exclude:
     - app/admin/**/*
     - config/environments/*
+    - lib/tasks/**/*.rake
 
 Layout/LineLength:
   Exclude:
