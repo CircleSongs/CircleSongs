@@ -48,7 +48,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:14
+        image: postgres:18
         env:
           POSTGRES_USER: circle-songs
           POSTGRES_PASSWORD: password
@@ -100,7 +100,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:14
+        image: postgres:18
         env:
           POSTGRES_USER: circle-songs
           POSTGRES_PASSWORD: password
