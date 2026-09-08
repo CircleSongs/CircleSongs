@@ -86,7 +86,7 @@ bundle exec rspec spec/models # run model specs only
 bundle exec rubocop           # lint
 bin/rails db:migrate          # run migrations
 bin/rails db:schema:load      # load schema (faster for fresh setup)
-docker compose up -d          # start postgres + redis
+docker compose up -d          # start postgres 18 + redis
 ```
 
 ## Test Conventions
