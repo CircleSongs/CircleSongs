@@ -79,13 +79,21 @@
     (function () {
       var el = document.getElementById("status");
       var key = "ms-offline-since";
+      var STALE_MS = 30 * 60 * 1000;
+      var now = Date.now();
       var since;
 
+      // A stored stamp older than STALE_MS is from an earlier maintenance
+      // window (sessionStorage outlives one), so start over rather than
+      // report hours of "elapsed" time.
       try {
         since = parseInt(sessionStorage.getItem(key), 10);
-        if (!since) { since = Date.now(); sessionStorage.setItem(key, String(since)); }
+        if (!since || now - since > STALE_MS || since > now) {
+          since = now;
+          sessionStorage.setItem(key, String(since));
+        }
       } catch (e) {
-        since = Date.now();
+        since = now;
       }
 
       var stamp = new Date(since).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
