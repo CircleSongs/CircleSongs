@@ -85,18 +85,9 @@
       // say nothing rather than report a misleading time.
       if (isNaN(since) || Date.now() - since > 6 * 60 * 60 * 1000) return;
 
-      var stamp = new Date(since).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
-
-      function tick() {
-        var secs = Math.max(0, Math.floor((Date.now() - since) / 1000));
-        var mm = Math.floor(secs / 60);
-        var ss = String(secs % 60).padStart(2, "0");
-        el.textContent = "Offline as of " + stamp + " \u2014 " + mm + ":" + ss + " elapsed";
-      }
-
+      el.textContent = "Offline as of " + new Date(since)
+        .toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
       el.hidden = false;
-      tick();
-      setInterval(tick, 1000);
     })();
   </script>
 </body>
