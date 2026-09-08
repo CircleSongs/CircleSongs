@@ -98,6 +98,15 @@ docker compose up -d          # start postgres 18 + redis
 - Capybara + headless Chrome for system tests
 - SimpleCov for coverage
 
+## Maintenance Page
+
+Heroku's router serves a static page while `heroku maintenance:on` is active, and
+requests never reach the dynos — so the page **cannot** be served from this app.
+The source lives at `maintenance/index.html` and is published to S3 with
+`bin/rails maintenance:publish`; Heroku uses it via the `MAINTENANCE_PAGE_URL`
+config var. Keep it self-contained (inline CSS, inlined logo, absolute URLs) —
+anything it links to on `medicinesongs.net` is unreachable during maintenance.
+
 ## Deployment
 
 - GitHub Actions CI: PostgreSQL 14 service, RSpec + Vite build
