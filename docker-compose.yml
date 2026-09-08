@@ -1,11 +1,9 @@
-version: "3.8"
-
 # Versions for services should mirror those in production
 
 services:
   database:
     container_name: "${APP_NAME}-postgres"
-    image: "postgres:15-alpine"
+    image: "postgres:18-alpine"
     mem_limit: 256m
     ports:
       - "127.0.0.1:5432:5432"
@@ -13,7 +11,7 @@ services:
       POSTGRES_USER: ${APP_NAME}
       POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
-      - database:/var/lib/postgresql/data:delegated
+      - database:/var/lib/postgresql:delegated
 
   redis:
     container_name: "${APP_NAME}-redis"
