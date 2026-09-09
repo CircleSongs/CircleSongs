@@ -85,8 +85,12 @@
       // say nothing rather than report a misleading time.
       if (isNaN(since) || Date.now() - since > 6 * 60 * 60 * 1000) return;
 
-      el.textContent = "Offline as of " + new Date(since)
-        .toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+      // timeZoneName makes the zone explicit: the stamp is UTC, rendered in
+      // the visitor's local zone, so "7:35 PM" alone is ambiguous to anyone
+      // comparing notes across timezones.
+      el.textContent = "Offline as of " + new Date(since).toLocaleTimeString([], {
+        hour: "numeric", minute: "2-digit", timeZoneName: "short"
+      });
       el.hidden = false;
     })();
   </script>
