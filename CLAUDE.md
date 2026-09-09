@@ -113,6 +113,6 @@ hours is ignored and the line is hidden, rather than showing a stale time.
 
 ## Deployment
 
-- GitHub Actions CI: PostgreSQL 14 service, RSpec + Vite build
+- GitHub Actions CI: PostgreSQL 18 service, RSpec + Vite build
 - Heroku deployment (triggered on main branch push after CI passes)
 - `app.json` for Heroku config
