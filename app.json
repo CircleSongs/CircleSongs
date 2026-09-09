@@ -20,6 +20,11 @@
     "RAILS_ENV": "production"
   },
   "addons": [
-    "heroku-postgresql"
+    {
+      "plan": "heroku-postgresql",
+      "options": {
+        "version": "18"
+      }
+    }
   ]
 }
