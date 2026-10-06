@@ -321,7 +321,8 @@ GEM
       timeout
     net-smtp (0.5.2)
       net-protocol
-    newrelic_rpm (9.24.0)
+    newrelic_rpm (10.9.0)
+      logger
     nio4r (2.7.5)
     nokogiri (1.19.4-aarch64-linux-gnu)
       racc (~> 1.4)
@@ -630,7 +631,7 @@ DEPENDENCIES
   listen (~> 3.9)
   mail_form (~> 1.10)
   net-smtp (~> 0.5)
-  newrelic_rpm (~> 9.17)
+  newrelic_rpm (~> 10.0)
   pg (~> 1.5)
   pghero
   puma
