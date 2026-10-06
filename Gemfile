@@ -68,6 +68,6 @@ group :test do
   gem "rspec_junit_formatter", "~> 0.6.0"
   gem "rspec-rails", "~> 7.1"
   gem "selenium-webdriver", "~> 4.28"
-  gem "shoulda-matchers", "~> 6.4"
+  gem "shoulda-matchers", "~> 8.0"
   gem "simplecov", "~> 0.22"
 end
