@@ -42,7 +42,7 @@ gem "vite_rails", "~> 3.0"
 group :development, :test do
   gem "bullet"
   gem "bundler-audit", require: false
-  gem "rubocop-capybara", "~> 2.21"
+  gem "rubocop-capybara", "~> 3.0"
   gem "rubocop-rspec_rails", "~> 2.30"
   gem "rubocop", "~> 1.71"
   gem "rubocop-rspec", "~> 3.4"
