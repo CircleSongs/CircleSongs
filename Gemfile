@@ -53,7 +53,7 @@ group :development, :test do
 end
 
 group :development do
-  gem "brakeman", "~> 7.0"
+  gem "brakeman", "~> 8.0"
   gem "letter_opener"
   gem "foreman", "~> 0.88"
   gem "listen", "~> 3.9"
