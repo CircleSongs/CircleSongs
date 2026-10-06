@@ -70,5 +70,5 @@ group :test do
   gem "rspec-rails", "~> 8.0"
   gem "selenium-webdriver", "~> 4.28"
   gem "shoulda-matchers", "~> 8.0"
-  gem "simplecov", "~> 0.22"
+  gem "simplecov", "~> 1.3"
 end
