@@ -6,7 +6,7 @@ Online song repository for circle singing communities. Public-facing catalog of 
 
 ## Stack
 
-- Ruby 3.4.8 / Rails 8.0
+- Ruby 3.4.11 / Rails 8.1
 - PostgreSQL (UUID primary keys everywhere)
 - RSpec (test framework)
 - Vite + Stimulus + Bootstrap 5 / Bootswatch
@@ -73,7 +73,7 @@ Online song repository for circle singing communities. Public-facing catalog of 
 bin/dev                       # start dev server (foreman: rails + vite)
 bin/rails server              # start rails only
 bin/vite dev                  # start vite dev server only
-CI=true bundle exec rspec     # run full test suite (see note below)
+bundle exec rspec             # run full test suite
 bundle exec rspec spec/models # run model specs only
 bundle exec rubocop           # lint
 bin/rails db:migrate          # run migrations
@@ -83,7 +83,6 @@ docker compose up -d          # start postgres 18
 
 ## Test Conventions
 
-- Run specs with `CI=true`. On Ruby 3.4.8 / macOS 27, `Socket.tcp` with `connect_timeout` reports closed ports as open, so vite_ruby thinks a dev server is on 3037 and proxies assets (502s).
 - RSpec with fixtures (in `spec/fixtures/`)
 - Spec directories: `models/`, `requests/`, `system/`, `helpers/`
 - Devise test helpers included
