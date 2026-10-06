@@ -45,11 +45,10 @@ RSpec.describe "Admin sortable endpoints" do
     let(:bandcamp_rec) { recordings(:hotel_california_bandcamp) }
 
     before do
-      # rubocop:disable Rails/SkipsModelValidations
+      # rubocop:disable-next Rails/SkipsModelValidations
       [soundcloud_rec, eagles_rec, spotify_rec, bandcamp_rec].each_with_index do |r, i|
         r.update_column(:position, i + 1)
       end
-      # rubocop:enable Rails/SkipsModelValidations
     end
 
     it "reorders recordings by position", :aggregate_failures do
