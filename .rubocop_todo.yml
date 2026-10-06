@@ -128,12 +128,6 @@ Style/GlobalStdStream:
     - 'config/environments/production.rb'
     - 'spec/support/helper_methods.rb'
 
-# Offense count: 1
-# Configuration parameters: AllowedVariables.
-Style/GlobalVars:
-  Exclude:
-    - 'config/initializers/redis.rb'
-
 # Offense count: 2
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: SafeForConstants.
