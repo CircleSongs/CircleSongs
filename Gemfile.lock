@@ -227,7 +227,7 @@ GEM
       temple (>= 0.8.2)
       thor
       tilt
-    haml-rails (2.1.0)
+    haml-rails (3.1.0)
       actionpack (>= 5.1)
       activesupport (>= 5.1)
       haml (>= 4.0.6)
@@ -622,7 +622,7 @@ DEPENDENCIES
   friendly_id (~> 5.5)
   guard (~> 2.19)
   guard-rspec (~> 4.7)
-  haml-rails (~> 2.1)
+  haml-rails (~> 3.1)
   image_processing (~> 1.13)
   importmap-rails
   jbuilder (~> 2.13)
