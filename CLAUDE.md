@@ -6,9 +6,8 @@ Online song repository for circle singing communities. Public-facing catalog of 
 
 ## Stack
 
-- Ruby 3.4.8 / Rails 8.0
+- Ruby 3.4.11 / Rails 8.1
 - PostgreSQL (UUID primary keys everywhere)
-- Redis + Sidekiq (background jobs)
 - RSpec (test framework)
 - Vite + Stimulus + Bootstrap 5 / Bootswatch
 - Devise (auth, admin-only) + ActiveAdmin (admin UI)
@@ -35,12 +34,10 @@ Online song repository for circle singing communities. Public-facing catalog of 
 - **Admin**: ActiveAdmin at `/admin` — full CRUD for all models. Devise auth scoped to admin users.
 - **Restricted categories**: Password-gated via `RestrictedCategorySessionsController` (stored in session). The "Sacred" category requires a password.
 - **Feature flags**: Flipper (ActiveRecord adapter), UI at `/admin/flipper`.
-- **Background jobs**: Sidekiq, mounted at `/admin/sidekiq`.
 - **Search**: Ransack on songs (by title, composer, language, etc.).
 - **Pagination**: Kaminari with custom Haml partials.
 - **Chords**: ChordPro format parsed via `chordpro` gem, rendered as HTML. Chord diagram rendering via `vexchords` JS library.
 - **Forms**: `MailForm`-based contact form and broken link report form.
-- **Services**: `Recordings::BrokenLinkDetector`, `Recordings::UrlChecker` for link health monitoring.
 
 ## Frontend
 
@@ -70,11 +67,6 @@ Online song repository for circle singing communities. Public-facing catalog of 
 - Sentence case, present tense imperative: "Add feature", "Fix bug", "Update styling"
 - Headline <= 70 characters
 
-### Service Objects
-
-- Follow the pattern in `app/services/` — namespaced by domain (e.g., `Recordings::BrokenLinkDetector`)
-- Single responsibility, standard `call` interface
-
 ## Commands
 
 ```sh
@@ -86,13 +78,13 @@ bundle exec rspec spec/models # run model specs only
 bundle exec rubocop           # lint
 bin/rails db:migrate          # run migrations
 bin/rails db:schema:load      # load schema (faster for fresh setup)
-docker compose up -d          # start postgres 18 + redis
+docker compose up -d          # start postgres 18
 ```
 
 ## Test Conventions
 
 - RSpec with fixtures (in `spec/fixtures/`)
-- Spec directories: `models/`, `requests/`, `system/`, `forms/`, `helpers/`, `services/`
+- Spec directories: `models/`, `requests/`, `system/`, `helpers/`
 - Devise test helpers included
 - Shoulda matchers for model validations
 - Capybara + headless Chrome for system tests
