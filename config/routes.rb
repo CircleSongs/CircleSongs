@@ -15,7 +15,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   root to: "home#index"
 
   resources :contact_forms, only: %i[new create]
-  resources :songs
+  resources :songs, only: %i[index show]
   resources :restricted_category_sessions, only: %i[new create], path: "sacred"
   resources :playlists, only: %i[index]
 

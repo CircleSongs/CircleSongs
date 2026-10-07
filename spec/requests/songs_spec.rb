@@ -20,4 +20,12 @@ RSpec.describe "Songs" do
       expect(response).to have_http_status(:ok)
     end
   end
+
+  describe "unsupported routes" do
+    it "does not route to actions the controller lacks" do
+      expect(get: "/songs/new").not_to be_routable
+      expect(post: "/songs").not_to be_routable
+      expect(delete: "/songs/some-song").not_to be_routable
+    end
+  end
 end
