@@ -22,10 +22,16 @@ RSpec.describe "Songs" do
   end
 
   describe "unsupported routes" do
-    it "does not route to actions the controller lacks" do
-      expect(get: "/songs/new").not_to be_routable
-      expect(post: "/songs").not_to be_routable
-      expect(delete: "/songs/some-song").not_to be_routable
+    {
+      post: "/songs",
+      get: "/songs/some-song/edit",
+      patch: "/songs/some-song",
+      delete: "/songs/some-song"
+    }.each do |verb, path|
+      it "does not route #{verb.upcase} #{path}" do
+        expect { Rails.application.routes.recognize_path(path, method: verb) }
+          .to raise_error(ActionController::RoutingError)
+      end
     end
   end
 end
