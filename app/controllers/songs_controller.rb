@@ -1,4 +1,11 @@
 class SongsController < ApplicationController
+  IN_PREDICATES = %i[themes_name_in languages_id_in categories_id_in].freeze
+  SEARCH_PREDICATES = [
+    :title_cont, :composer_name_cont, :title_or_lyrics_or_composer_name_cont,
+    :title_start, :s, :chords_present,
+    *IN_PREDICATES, IN_PREDICATES.index_with { [] }
+  ].freeze
+
   before_action :set_categories, only: :index
   before_action :set_themes, only: :index
   before_action :set_playlists, only: :index
@@ -16,20 +23,8 @@ class SongsController < ApplicationController
   end
 
   private
-    def raw_search_params # rubocop:disable Metrics/MethodLength
-      return {} unless params[:q]
-
-      params.expect(
-        q: %i[title_cont
-              composer_name_cont
-              title_or_lyrics_or_composer_name_cont
-              title_start
-              s
-              chords_present
-              themes_name_in
-              languages_id_in
-              categories_id_in]
-      )
+    def raw_search_params
+      params.permit(q: SEARCH_PREDICATES).fetch(:q, {})
     end
 
     def search_params
