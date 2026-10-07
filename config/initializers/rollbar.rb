@@ -30,6 +30,8 @@ Rollbar.configure do |config|
   # config.exception_level_filters.merge!('MyCriticalException' => 'critical')
   config.exception_level_filters.merge!(
     "ActionController::RoutingError" => "ignore",
+    # Stale tabs, expired sessions and bots; Rails already responds with a 422.
+    "ActionController::InvalidAuthenticityToken" => "ignore",
     "NoMethodError" => "critical"
   )
 
