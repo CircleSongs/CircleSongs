@@ -9,8 +9,7 @@ class HomeController < ApplicationController
   def index; end
 
   private
-
-  def require_html
-    head :not_acceptable unless request.format.html?
-  end
+    def require_html
+      head :not_acceptable unless request.format.html?
+    end
 end
