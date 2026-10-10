@@ -22,7 +22,6 @@ RSpec.describe "As an admin user" do
     expect(page).to have_text("New Song")
     expect(page).to have_css(".ts-control")
 
-    attach_file "Image", Rails.root.join("spec/fixtures/files/image.jpeg")
     fill_in "Title", with: title
     fill_in "Alternate title", with: alternate_title
     within "#song_composer_id_input" do
@@ -62,7 +61,6 @@ RSpec.describe "As an admin user" do
       expect(page).to have_text "can't be blank"
     end
 
-    attach_file "Image", Rails.root.join("spec/fixtures/files/image.jpeg")
     fill_in "Title", with: title
     fill_in "Lyrics", with: underlined_lyric
     fill_in "Translation", with: underlined_translation

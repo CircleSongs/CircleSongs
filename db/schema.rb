@@ -171,7 +171,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_20_120000) do
     t.uuid "created_by_id"
     t.text "description"
     t.boolean "featured", default: false, null: false
-    t.text "image_data"
     t.text "lyrics"
     t.string "slug"
     t.string "title"

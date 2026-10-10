@@ -33,7 +33,7 @@ RSpec.describe "As an admin user" do
     expect(page).to have_text "Song was successfully destroyed."
   end
 
-  scenario "I can edit a Song that has no image" do
+  scenario "I can edit a Song" do
     visit admin_song_path(song)
     click_on "Edit"
     expect(page).to have_text("Edit Song")
