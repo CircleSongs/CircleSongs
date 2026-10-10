@@ -6,7 +6,8 @@ Online song repository for circle singing communities. Public-facing catalog of 
 
 ## Stack
 
-- Ruby 3.4.11 / Rails 8.1
+- Ruby 4.0.7 / Rails 8.1
+- Node 26.11.1 / Yarn 1.22
 - PostgreSQL (UUID primary keys everywhere)
 - RSpec (test framework)
 - Vite + Stimulus + Bootstrap 5 / Bootswatch
@@ -104,6 +105,6 @@ hours is ignored and the line is hidden, rather than showing a stale time.
 
 ## Deployment
 
-- GitHub Actions CI: PostgreSQL 14 service, RSpec + Vite build
+- GitHub Actions CI: PostgreSQL 18 service, RSpec + Vite build
 - Heroku deployment (triggered on main branch push after CI passes)
 - `app.json` for Heroku config

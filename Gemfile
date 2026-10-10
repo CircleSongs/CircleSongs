@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.4.11"
+ruby "4.0.7"
 
 gem "aws-sdk-s3", "~> 1.208"
 gem "activeadmin", "4.0.0.beta23"
@@ -26,7 +26,7 @@ gem "newrelic_rpm", "~> 10.0"
 gem "pg", "~> 1.5"
 gem "puma"
 gem "rails", "~> 8.0"
-gem "ransack", "~> 5.0"
+gem "ransack", "~> 6.0"
 gem "rollbar", "~> 3.6"
 gem "sassc-rails", "~> 2.1"
 gem "simple_form", "~> 5.3"

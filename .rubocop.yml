@@ -11,7 +11,7 @@ Style/Documentation:
 
 AllCops:
   NewCops: enable
-  TargetRubyVersion: 3.4
+  TargetRubyVersion: 4.0
   Exclude:
     - db/**/*
     - bin/**/*
