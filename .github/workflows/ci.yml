@@ -71,7 +71,7 @@ jobs:
 
       - uses: actions/setup-node@v7
         with:
-          node-version: '26.11.1'
+          node-version: '24.21.0'
           cache: yarn
 
       - name: Install JS dependencies
@@ -120,7 +120,7 @@ jobs:
 
       - uses: actions/setup-node@v7
         with:
-          node-version: '26.11.1'
+          node-version: '24.21.0'
           cache: yarn
 
       - name: Install JS dependencies
