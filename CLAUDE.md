@@ -7,7 +7,7 @@ Online song repository for circle singing communities. Public-facing catalog of 
 ## Stack
 
 - Ruby 4.0.7 / Rails 8.1
-- Node 26.11.1 / Yarn 1.22
+- Node 24.21.0 (LTS) / Yarn 1.22
 - PostgreSQL (UUID primary keys everywhere)
 - RSpec (test framework)
 - Vite + Stimulus + Bootstrap 5 / Bootswatch
@@ -61,6 +61,7 @@ Online song repository for circle singing communities. Public-facing catalog of 
 - **Run `bundle exec rubocop` before finishing work.**
 - **Views use Haml**, not ERB.
 - **All IDs are UUIDs** — never use integer IDs.
+- **Node stays on LTS releases** — don't move to a new Node major until it reaches LTS. Keep `package.json` engines, `.tool-versions`, and CI in sync.
 
 ### Git Commits
 
