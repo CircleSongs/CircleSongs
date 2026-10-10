@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_01_011722) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_10_000000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -171,7 +171,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_01_011722) do
     t.uuid "created_by_id"
     t.text "description"
     t.boolean "featured", default: false, null: false
-    t.text "image_data"
     t.text "lyrics"
     t.string "slug"
     t.string "title"

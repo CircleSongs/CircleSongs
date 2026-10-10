@@ -13,7 +13,6 @@ RSpec.describe "As an admin user" do
     click_on "New Song"
     expect(page).to have_text("New Song")
 
-    attach_file "Image", Rails.root.join("spec/fixtures/files/image.jpeg")
     fill_in "Title", with: title
     click_on "Add New Recording"
     expect(page).to have_field("External media url")
@@ -31,7 +30,6 @@ RSpec.describe "As an admin user" do
     click_on "New Song"
     expect(page).to have_text("New Song")
 
-    attach_file "Image", Rails.root.join("spec/fixtures/files/image.jpeg")
     fill_in "Title", with: title
     click_on "Add New Recording"
     expect(page).to have_field("External media url")
@@ -49,7 +47,6 @@ RSpec.describe "As an admin user" do
     click_on "New Song"
     expect(page).to have_text("New Song")
 
-    attach_file "Image", Rails.root.join("spec/fixtures/files/image.jpeg")
     fill_in "Title", with: title
     click_on "Add New Recording"
     expect(page).to have_field("External media url")
