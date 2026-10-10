@@ -11,13 +11,12 @@ Online song repository for circle singing communities. Public-facing catalog of 
 - RSpec (test framework)
 - Vite + Stimulus + Bootstrap 5 / Bootswatch
 - Devise (auth, admin-only) + ActiveAdmin (admin UI)
-- Shrine (file uploads, image derivatives)
 - Haml (views)
 - SCSS with CSS custom properties (design tokens)
 
 ## Domain Model
 
-- **Song** — the core model. Has title (unique), lyrics, chords (ChordPro format), description, translation, image (Shrine). FriendlyId slugs. `featured` boolean. Belongs to composer. HABTM categories, languages. Has many recordings, song_chord_forms, tags (themes via acts-as-taggable-on). Ransack search enabled.
+- **Song** — the core model. Has title (unique), lyrics, chords (ChordPro format), description, translation. FriendlyId slugs. `featured` boolean. Belongs to composer. HABTM categories, languages. Has many recordings, song_chord_forms, tags (themes via acts-as-taggable-on). Ransack search enabled.
 - **Recording** — belongs to song. Supports SoundCloud, YouTube, Spotify, Bandcamp embeds via `external_media_url`. Has `source` detection and `formatted_external_media_url` for embedding. Ordered by position.
 - **Composer** — has many songs (counter cache). Name, URL, description.
 - **Category** — HABTM songs. Has `restricted` flag (password-protected categories like "Sacred").
