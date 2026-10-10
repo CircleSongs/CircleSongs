@@ -6,18 +6,18 @@ Online song repository for circle singing communities. Public-facing catalog of 
 
 ## Stack
 
-- Ruby 3.4.11 / Rails 8.1
+- Ruby 4.0.7 / Rails 8.1
+- Node 24.21.0 (LTS) / Yarn 1.22
 - PostgreSQL (UUID primary keys everywhere)
 - RSpec (test framework)
 - Vite + Stimulus + Bootstrap 5 / Bootswatch
 - Devise (auth, admin-only) + ActiveAdmin (admin UI)
-- Shrine (file uploads, image derivatives)
 - Haml (views)
 - SCSS with CSS custom properties (design tokens)
 
 ## Domain Model
 
-- **Song** — the core model. Has title (unique), lyrics, chords (ChordPro format), description, translation, image (Shrine). FriendlyId slugs. `featured` boolean. Belongs to composer. HABTM categories, languages. Has many recordings, song_chord_forms, tags (themes via acts-as-taggable-on). Ransack search enabled.
+- **Song** — the core model. Has title (unique), lyrics, chords (ChordPro format), description, translation. FriendlyId slugs. `featured` boolean. Belongs to composer. HABTM categories, languages. Has many recordings, song_chord_forms, tags (themes via acts-as-taggable-on). Ransack search enabled.
 - **Recording** — belongs to song. Supports SoundCloud, YouTube, Spotify, Bandcamp embeds via `external_media_url`. Has `source` detection and `formatted_external_media_url` for embedding. Ordered by position.
 - **Composer** — has many songs (counter cache). Name, URL, description.
 - **Category** — HABTM songs. Has `restricted` flag (password-protected categories like "Sacred").
@@ -61,6 +61,7 @@ Online song repository for circle singing communities. Public-facing catalog of 
 - **Run `bundle exec rubocop` before finishing work.**
 - **Views use Haml**, not ERB.
 - **All IDs are UUIDs** — never use integer IDs.
+- **Node stays on LTS releases** — don't move to a new Node major until it reaches LTS. Keep `package.json` engines, `.tool-versions`, and CI in sync.
 
 ### Git Commits
 
@@ -105,6 +106,6 @@ hours is ignored and the line is hidden, rather than showing a stale time.
 
 ## Deployment
 
-- GitHub Actions CI: PostgreSQL 14 service, RSpec + Vite build
+- GitHub Actions CI: PostgreSQL 18 service, RSpec + Vite build
 - Heroku deployment (triggered on main branch push after CI passes)
 - `app.json` for Heroku config

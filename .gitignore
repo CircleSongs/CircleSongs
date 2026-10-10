@@ -32,7 +32,6 @@ yarn-debug.log*
 
 # Ignore application configuration
 /config/application.yml
-/public/uploads
 
 .DS_store
 
@@ -50,3 +49,6 @@ node_modules
 # https://vitejs.dev/guide/env-and-mode.html#env-files
 *.local
 spec/examples.txt
+
+# SimpleCov output
+/coverage

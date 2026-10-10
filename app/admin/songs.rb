@@ -8,7 +8,6 @@ ActiveAdmin.register Song do
   filter :languages, multiple: true
   filter :categories, multiple: true
   filter :featured, as: :boolean
-  filter :image_data_not_null, label: "Has Image", as: :boolean
   filter :chords_present, as: :boolean, label: "Has Chords Text"
   filter :chord_forms_id_not_null, label: "Has Chord Diagrams", as: :boolean
   filter :composer_id_not_null, label: "Has Composer", as: :boolean
@@ -36,9 +35,9 @@ ActiveAdmin.register Song do
   end
 
   # Permitted parameters
-  permit_params :alternate_title, :image,
+  permit_params :alternate_title,
                 :description, :lyrics, :title, :translation,
-                :chords, :remove_image,
+                :chords,
                 :composer_id,
                 :featured,
                 recordings_attributes: %i[
@@ -55,9 +54,6 @@ ActiveAdmin.register Song do
   # Index page configuration
 
   index do
-    column :image do |song|
-      image_tag song.image_url(:thumb) if song.image_url(:thumb)
-    end
     column :title, sortable: true do |song|
       link_to song.title, admin_song_path(song)
     end
@@ -93,9 +89,6 @@ ActiveAdmin.register Song do
   # Form configuration
   form do |f|
     f.inputs "Details" do
-      f.input :image, as: :file,
-                      hint: (image_tag f.object.image_url(:thumb) if f.object.image_url(:thumb))
-      f.input :remove_image, as: :boolean
       f.input :title
       f.input :alternate_title
       f.input :featured, as: :boolean
@@ -247,9 +240,6 @@ ActiveAdmin.register Song do
 
   show do
     attributes_table do
-      row :image do |song|
-        image_tag song.image_url(:thumb) if song.image_url(:thumb)
-      end
       row :title
       row :alternate_title
       row :composer do |song|
