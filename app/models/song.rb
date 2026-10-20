@@ -5,7 +5,7 @@ class Song < ApplicationRecord
 
   extend FriendlyId
 
-  friendly_id :title, use: :slugged
+  friendly_id :title, use: %i[slugged history]
 
   include ImageUploader::Attachment.new(:image)
 
@@ -29,6 +29,11 @@ class Song < ApplicationRecord
 
   def formatted_chords
     @formatted_chords ||= Chordpro.html(chords)
+  end
+
+  # Keep URLs in step with titles; history redirects the old slugs.
+  def should_generate_new_friendly_id?
+    title_changed? || super
   end
 
   def image_url(derivative = :large)

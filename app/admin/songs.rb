@@ -23,7 +23,9 @@ ActiveAdmin.register Song do
   # Controller customization
   controller do
     def find_resource
-      scoped_collection.friendly.find(params[:id])
+      # Resolve the slug (or a historical one) outside the grouped collection,
+      # since friendly_id's history join breaks its GROUP BY.
+      scoped_collection.find(Song.friendly.find(params[:id]).id)
     end
 
     def scoped_collection

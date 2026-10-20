@@ -20,6 +20,7 @@ class SongsController < ApplicationController
 
   def show
     @song = Song.friendly.find params.expect(:id)
+    redirect_to @song, status: :moved_permanently if params[:id] != @song.to_param
   end
 
   private

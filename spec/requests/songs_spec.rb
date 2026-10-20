@@ -21,6 +21,28 @@ RSpec.describe "Songs" do
     end
   end
 
+  describe "GET /songs/:id" do
+    let(:song) { Song.create!(title: "El Condor Pasa Again") }
+
+    it "permanently redirects a previous slug to the current one" do
+      old_slug = song.slug
+      song.update!(title: "El Condor Vuela")
+
+      get song_path(old_slug)
+
+      expect(response).to redirect_to(song_path("el-condor-vuela"))
+      expect(response).to have_http_status(:moved_permanently)
+    end
+
+    it "serves a song that has no slug at its id" do
+      song = songs(:el_condor_pasa)
+
+      get song_path(song)
+
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
   describe "unsupported routes" do
     {
       post: "/songs",
