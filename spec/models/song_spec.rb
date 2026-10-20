@@ -47,4 +47,21 @@ RSpec.describe Song do
       expect(song.formatted_chords).to match "<table>"
     end
   end
+
+  describe "slugs" do
+    let(:song) { described_class.create!(title: "El Condor Pasa Again") }
+
+    it "regenerates the slug when the title changes" do
+      song.update!(title: "El Condor Vuela")
+
+      expect(song.slug).to eq("el-condor-vuela")
+    end
+
+    it "still finds the song by its previous slug" do
+      old_slug = song.slug
+      song.update!(title: "El Condor Vuela")
+
+      expect(described_class.friendly.find(old_slug)).to eq(song)
+    end
+  end
 end
