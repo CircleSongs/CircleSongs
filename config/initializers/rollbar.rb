@@ -32,6 +32,12 @@ Rollbar.configure do |config|
     "ActionController::RoutingError" => "ignore",
     # Stale tabs, expired sessions and bots; Rails already responds with a 422.
     "ActionController::InvalidAuthenticityToken" => "ignore",
+    # Bad slugs, non-HTML Accept headers (scanners, API clients) and malformed
+    # params or MIME types from spam/probes; Rails answers each with a 4xx.
+    "ActiveRecord::RecordNotFound" => "ignore",
+    "ActionController::UnknownFormat" => "ignore",
+    "ActionController::BadRequest" => "ignore",
+    "ActionDispatch::Http::MimeNegotiation::InvalidType" => "ignore",
     "NoMethodError" => "critical"
   )
 
