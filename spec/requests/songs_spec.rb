@@ -14,6 +14,14 @@ RSpec.describe "Songs" do
       expect(response).to have_http_status(:ok)
     end
 
+    it "ignores non-UUID values for the id _in predicates" do
+      probe = "#{categories(:sacred).id}%' AND EXTRACTVALUE(1201,CONCAT(0x7e,1,0x7e))-- -"
+
+      get songs_path, params: { q: { categories_id_in: probe, languages_id_in: [probe, languages(:english).id] } }
+
+      expect(response).to have_http_status(:ok)
+    end
+
     it "ignores unpermitted q keys" do
       get songs_path, params: { q: { lyrics_cont: "x" } }
 
