@@ -1,5 +1,7 @@
 class SongsController < ApplicationController
   IN_PREDICATES = %i[themes_name_in languages_id_in categories_id_in].freeze
+  UUID_PREDICATES = %w[languages_id_in categories_id_in].freeze
+  UUID_FORMAT = /\A\h{8}-\h{4}-\h{4}-\h{4}-\h{12}\z/
   SEARCH_PREDICATES = [
     :title_cont, :composer_name_cont, :title_or_lyrics_or_composer_name_cont,
     :title_start, :s, :chords_present,
@@ -25,7 +27,12 @@ class SongsController < ApplicationController
 
   private
     def raw_search_params
-      params.permit(q: SEARCH_PREDICATES).fetch(:q, {})
+      params.permit(q: SEARCH_PREDICATES).fetch(:q, {}).tap do |q|
+        # Postgres raises on malformed UUIDs, so drop them (e.g. injection probes)
+        UUID_PREDICATES.each do |key|
+          q[key] = Array(q[key]).grep(UUID_FORMAT) if q.key?(key)
+        end
+      end
     end
 
     def search_params
