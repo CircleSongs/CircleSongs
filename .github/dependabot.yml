@@ -16,3 +16,13 @@ updates:
       # lands.
       - dependency-name: "tom-select"
         versions: ["2.6.1"]
+
+  - package-ecosystem: "bundler"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
