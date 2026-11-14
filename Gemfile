@@ -42,7 +42,7 @@ group :development, :test do
   gem "bundler-audit", require: false
   gem "rubocop-capybara", "~> 3.0"
   gem "rubocop-rspec_rails", "~> 2.30"
-  gem "rubocop", "~> 1.71"
+  gem "rubocop", "~> 1.92"
   gem "rubocop-rspec", "~> 3.4"
   gem "rubocop-rails", "~> 2.29"
   gem "ruby-lsp", "~> 0.26.9"
