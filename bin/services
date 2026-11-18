@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+# Starts (or reuses) this checkout's Docker data stores and writes their
+# connection settings to .env.local. Safe to rerun.
+#
+#   bin/services        start stack, write .env.local, run db:prepare
+#   bin/services down   stop the stack; in a linked worktree also remove volumes
+set -euo pipefail
+
+APP=circlesongs
+MAX_STACKS=3
+ROOT="$(cd "$(dirname "$0")/.." && pwd -P)"
+ENV_FILE="$ROOT/.env.local"
+cd "$ROOT"
+
+git_dir="$(git rev-parse --path-format=absolute --git-dir)"
+common_dir="$(git rev-parse --path-format=absolute --git-common-dir)"
+dir_name="$(basename "$ROOT")"
+
+if [ "$git_dir" = "$common_dir" ]; then
+  # Main checkout: keep the project name and volume Compose used before
+  # (directory basename, normalised like Compose does).
+  MAIN=1
+  PROJECT="$(printf '%s' "$dir_name" | tr 'A-Z' 'a-z' | tr -cd 'a-z0-9_-')"
+  export DB_VOLUME="circle-songs-postgres"
+else
+  MAIN=0
+  suffix="$(printf '%s' "$dir_name" | tr 'A-Z' 'a-z' | tr -c 'a-z0-9_\n-' '-')"
+  PROJECT="$APP-$suffix"
+  export DB_VOLUME="$PROJECT-postgres"
+fi
+export COMPOSE_PROJECT_NAME="$PROJECT"
+
+compose() { docker compose -p "$PROJECT" "$@"; }
+
+set_key() { # set_key KEY VALUE: update one key, preserve everything else
+  local tmp
+  tmp="$(mktemp)"
+  { [ -f "$ENV_FILE" ] && grep -v "^$1=" "$ENV_FILE" || true; } > "$tmp"
+  printf '%s=%s\n' "$1" "$2" >> "$tmp"
+  mv "$tmp" "$ENV_FILE"
+}
+
+if [ "${1:-}" = "down" ]; then
+  if [ "$MAIN" = 1 ]; then
+    compose down
+    echo "Stopped $PROJECT (main checkout: volume $DB_VOLUME kept)."
+  else
+    compose down -v
+    echo "Removed stack $PROJECT and its volumes."
+  fi
+  exit 0
+fi
+
+running="$(docker ps --filter "label=dev.app=$APP" --format '{{.Label "com.docker.compose.project"}}' | sort -u)"
+count="$(printf '%s' "$running" | grep -c . || true)"
+if [ "$count" -ge "$MAX_STACKS" ] && ! printf '%s\n' "$running" | grep -qx "$PROJECT"; then
+  echo "Refusing to start '$PROJECT': $count $APP stacks already running (max $MAX_STACKS):" >&2
+  printf '  %s\n' $running >&2
+  echo "Stop one with: docker compose -p <project> down   (or bin/services down in that checkout)" >&2
+  exit 1
+fi
+
+compose up -d --wait
+
+db_port="$(compose port database 5432 | sed 's/.*://')"
+set_key COMPOSE_PROJECT_NAME "$PROJECT"
+set_key DB_VOLUME "$DB_VOLUME"
+set_key DB_HOST 127.0.0.1
+set_key DB_PORT "$db_port"
+echo "Stack $PROJECT: postgres on 127.0.0.1:$db_port (written to .env.local)"
+
+# config/boot.rb loads .env.local, so this and the test env use this stack.
+# Seeds on main are currently broken (Song#image=), so a seed failure is only
+# a warning; schema errors still show in the output above it.
+bin/rails db:prepare || echo "warning: db:prepare exited non-zero (see above)" >&2

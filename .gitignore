@@ -52,3 +52,6 @@ spec/examples.txt
 
 # SimpleCov output
 /coverage
+
+# Per-checkout settings written by bin/services and bin/dev
+/.env.local

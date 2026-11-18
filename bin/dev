@@ -1,8 +1,39 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
+# Starts this checkout's data stores, picks free Rails/Vite ports, then runs
+# Procfile.dev. Ports are written to .env.local.
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd -P)"
+ENV_FILE="$ROOT/.env.local"
+cd "$ROOT"
 
 if ! gem list foreman -i --silent; then
   echo "Installing foreman..."
   gem install foreman
 fi
 
-exec foreman start -f Procfile.dev "$@"
+"$ROOT/bin/services"
+
+port_free() { ruby -rsocket -e 'begin; TCPServer.new("127.0.0.1", ARGV[0].to_i).close; rescue SystemCallError; exit 1; end' "$1"; }
+random_port() { ruby -rsocket -e 's = TCPServer.new("127.0.0.1", 0); puts s.addr[1]; s.close'; }
+get_key() { [ -f "$ENV_FILE" ] && grep "^$1=" "$ENV_FILE" | tail -1 | cut -d= -f2- || true; }
+set_key() {
+  local tmp
+  tmp="$(mktemp)"
+  { grep -v "^$1=" "$ENV_FILE" || true; } > "$tmp"
+  printf '%s=%s\n' "$1" "$2" >> "$tmp"
+  mv "$tmp" "$ENV_FILE"
+}
+pick_port() { # pick_port KEY DEFAULT: reuse saved, else default (main only), else random
+  local cur
+  cur="$(get_key "$1")"
+  if [ -n "$cur" ] && port_free "$cur"; then echo "$cur"; return; fi
+  if [ "$(git rev-parse --path-format=absolute --git-dir)" = "$(git rev-parse --path-format=absolute --git-common-dir)" ] && port_free "$2"; then echo "$2"; return; fi
+  random_port
+}
+
+set_key PORT "$(pick_port PORT 3000)"
+set_key VITE_RUBY_PORT "$(pick_port VITE_RUBY_PORT 3036)"
+echo "Rails: http://localhost:$(get_key PORT)  Vite: $(get_key VITE_RUBY_PORT)"
+
+exec foreman start -f Procfile.dev -e "$ENV_FILE" "$@"
