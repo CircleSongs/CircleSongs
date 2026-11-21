@@ -64,7 +64,7 @@ group :test do
   gem "capybara", "~> 3.40"
   gem "ffaker", "~> 2.24"
   gem "rspec_junit_formatter", "~> 0.6.0"
-  gem "rspec-rails", "~> 8.0"
+  gem "rspec-rails", "~> 8.1"
   gem "selenium-webdriver", "~> 4.28"
   gem "shoulda-matchers", "~> 8.0"
   gem "simplecov", "~> 1.3"
