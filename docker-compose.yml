@@ -1,25 +1,39 @@
-# Versions for services should mirror those in production
+# Versions for services should mirror those in production.
+#
+# Host ports are assigned by Docker (container ports only are published), so
+# several checkouts can run side by side. Start the stack with bin/services,
+# which picks the Compose project name and records the assigned ports.
 
 services:
   database:
-    container_name: "${APP_NAME}-postgres"
     image: "postgres:18-alpine"
     mem_limit: 256m
+    labels:
+      dev.app: circlesongs
     ports:
-      - "127.0.0.1:5432:5432"
+      - "127.0.0.1::5432"
     environment:
       POSTGRES_USER: ${APP_NAME}
       POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
       - database:/var/lib/postgresql:delegated
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${APP_NAME}"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
 
   # memcached:
   #   image: memcached:1-alpine
   #   mem_limit: 64m
+  #   labels:
+  #     dev.app: circlesongs
   #   ports:
-  #     - "127.0.0.1:11211:11211"
+  #     - "127.0.0.1::11211"
 
 volumes:
   database:
-    name: "${APP_NAME}-postgres"
+    # The main checkout keeps its original volume; bin/services sets DB_VOLUME
+    # to a per-project name for linked worktrees.
+    name: "${DB_VOLUME:-circle-songs-postgres}"
   # storage:

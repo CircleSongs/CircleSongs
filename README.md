@@ -5,14 +5,32 @@ Online song repository for circle singing communities. Browse songs with lyrics,
 ## Setup
 
 ```sh
-# Prerequisites: Ruby 3.4.11, Node 24.21.0, PostgreSQL
-cp .envrc.sample .envrc  # configure environment variables
-docker compose up -d     # start postgres
+# Prerequisites: Ruby and Node (see .tool-versions), Docker
 bundle install
 yarn install
-bin/rails db:setup
-bin/dev                  # starts rails + vite dev servers
+bin/dev                  # starts postgres, prepares the db, runs rails + vite
 ```
+
+### Parallel checkouts
+
+`bin/dev` (and `bin/services`) give every checkout, including each git
+worktree, its own Docker Postgres on a Docker-assigned host port, plus free
+Rails and Vite ports. Settings land in the gitignored `.env.local`, which
+`config/boot.rb` and `bin/dev` load, so `bundle exec rspec` in a checkout uses
+that checkout's database. At most 3 stacks run at once.
+
+The Compose project is `circlesongs-<directory name>` in a worktree. The main
+checkout keeps the plain `circlesongs` project and its existing
+`circle-songs-postgres` volume.
+
+When removing a worktree, delete its stack first:
+
+```sh
+bin/services down        # in the worktree: docker compose -p <project> down -v
+git worktree remove <path>
+```
+
+In the main checkout `bin/services down` stops the stack but keeps the data.
 
 ## Development
 
