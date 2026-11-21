@@ -15,7 +15,7 @@
     "@popperjs/core": "^2.11.8",
     "@rails/ujs": "^7.1.3-4",
     "@tailwindcss/vite": "^4",
-    "bootstrap": "^5.3.8",
+    "bootstrap": "^5.3.9",
     "bootswatch": "^5.3.3",
     "chordsheetjs": "^18.0.0",
     "flowbite": "^4.0.2",
